@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 3 — Analyse technique</title>
+  <meta name="description" content="Chapitre 3 : structurer son analyse technique avec tendance, patterns, weekly, entrées 4H, backtesting et setup." />
+
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/analyse-technique.css" />
+
+  <!-- Petits patches a11y/UX -->
+  <style>
+    .acc-btn:focus-visible { outline:2px solid currentColor; outline-offset:4px; }
+    @media (prefers-reduced-motion: reduce){
+      .reveal { transition:none !important; transform:none !important; opacity:1 !important; }
+    }
+  </style>
+</head>
+
+<body class="page-analyse" data-header-height="90">
+
+  <!-- Sprite SVG (icônes réutilisables) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="14 7 21 7 21 14"></polyline>
+    </symbol>
+    <symbol id="i-triangle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="12 2 19 21 12 17 5 21 12 2"></polygon>
+    </symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line>
+      <line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+    </symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 3v18h18"></path><path d="M19 9l-5 5-4-4-3 3"></path>
+    </symbol>
+    <symbol id="i-checkcircle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle><path d="M8 12l2 2 4-4"></path>
+    </symbol>
+    <symbol id="i-setup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 20v-4m0-4V4m0 8h8M4 12h8"></path>
+    </symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+      <line x1="3"  y1="9"  x2="21" y2="9"></line><line x1="3"  y1="15" x2="21" y2="15"></line>
+      <line x1="9"  y1="3"  x2="9"  y2="21"></line><line x1="15" y1="3"  x2="15" y2="21"></line>
+    </symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+      <polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+    </symbol>
+  </svg>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <h1>Chapitre 3 — Analyse technique</h1>
+    <div class="header-actions">
+      <a href="/index.html#chapters" class="btn btn-ghost" title="Retour à l’accueil">← Sommaire</a>
+    </div>
+  </header>
+
+  <main class="container chapter" id="content">
+
+    <!-- SOMMAIRE -->
+    <section id="sommaire" class="accordion reveal" aria-labelledby="sommaireTitle" data-accordion="chap3">
+      <div class="card">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="sommairePanel" id="sommaireTitle">
+          Sous Chapitres
+          <span class="chev" aria-hidden="true"></span>
+        </button>
+
+        <div id="sommairePanel" class="acc-panel" role="region" aria-labelledby="sommaireTitle" hidden>
+          <nav aria-labelledby="sommaireTitle">
+            <ul class="sub-list">
+              <li><a href="#tendance"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trend"/></svg> Tendance</a></li>
+              <li><a href="#pattern"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-triangle"/></svg> Patterns</a></li>
+              <li><a href="#weekly"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg> Weekly</a></li>
+              <li><a href="#entree4h"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg> Entrée 4H</a></li>
+              <li><a href="#pattern-technique"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-checkcircle"/></svg> Pattern technique</a></li>
+              <li><a href="#backtesting"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chart"/></svg> Backtesting</a></li>
+              <li>
+                <a href="https://docs.google.com/spreadsheets/d/1H90w1JHG0bonCXjFuaXH0MhARKaqZFsgtSQAiLitjT8/edit?gid=887628254#gid=887628254" target="_blank" rel="noopener noreferrer">
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg> Bonus — Exercices Google Sheets
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION TENDANCE -->
+    <section id="tendance" class="reveal">
+      <h2>Tendance</h2>
+
+      <figure class="video-wrap mt-20">
+        <div class="video-frame">
+          <video width="960" height="540" controls preload="metadata" playsinline poster="/assets/images/posters/tendance.png">
+            <source src="/assets/videos/tendance.mp4" type="video/mp4">
+            <track kind="captions" srclang="fr" src="/assets/captions/tendance.vtt" label="Français">
+          </video>
+        </div>
+        <figcaption class="video-caption"><span aria-hidden="true">🎥</span> Vidéo d’introduction — règles pour valider HH/LL.</figcaption>
+      </figure>
+
+      <div class="rules-block tendance-guidelines">
+        <h3 class="rules-title">Règles importantes</h3>
+        <ul class="trend-grid">
+          <li class="trend-card">
+            <h4 class="trend-title">Validation HH/LL</h4>
+            <a class="trend-thumb" href="/assets/images/tendance/regle-1.png" target="_blank" rel="noopener">
+              <img src="/assets/images/tendance/regle-1.png" alt="Règle 1 — Validation HH/LL" loading="lazy" width="960" height="540">
+            </a>
+            <p class="trend-text">Pour faire un nouveau plus haut/bas, le <strong>corps</strong> doit casser la <strong>mèche</strong> de l’ancien plus haut/bas.</p>
+          </li>
+
+          <li class="trend-card">
+            <h4 class="trend-title">Alternance des points</h4>
+            <a class="trend-thumb" href="/assets/images/tendance/regle-2.png" target="_blank" rel="noopener">
+              <img src="/assets/images/tendance/regle-2.png" alt="Règle 2 — Alternance des points" loading="lazy" width="960" height="540">
+            </a>
+            <p class="trend-text">Jamais 2 points haut/bas <strong>successifs</strong> : toujours un sur deux.</p>
+          </li>
+
+          <li class="trend-card">
+            <h4 class="trend-title">Choix du pivot</h4>
+            <a class="trend-thumb" href="/assets/images/tendance/regle-3.png" target="_blank" rel="noopener">
+              <img src="/assets/images/tendance/regle-3.png" alt="Règle 3 — Choix du pivot" loading="lazy" width="960" height="540">
+            </a>
+            <p class="trend-text">Toujours prendre le point <strong>le plus haut/bas</strong> entre deux points haut/bas.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECTION PATTERN -->
+    <section id="pattern" class="reveal">
+      <header class="section-head">
+        <h2>Patterns</h2>
+        <p class="section-sub">Figures chartistes — définitions rapides + visuels</p>
+      </header>
+
+      <figure class="video-wrap mt-20">
+        <div class="video-frame">
+          <video width="960" height="540" controls preload="metadata" playsinline poster="/assets/images/posters/pattern.png">
+            <source src="/assets/videos/pattern.mp4" type="video/mp4">
+            <track kind="captions" srclang="fr" src="/assets/captions/pattern.vtt" label="Français">
+          </video>
+        </div>
+        <figcaption class="video-caption"><span aria-hidden="true">🎥</span> Vidéo — Patterns (figures chartistes).</figcaption>
+      </figure>
+
+      <div class="rules-wrapper pattern-grid">
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">IETE</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern/IETE.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern/IETE.png" alt="Pattern IETE" loading="lazy">
+          </a>
+          <p class="pattern-text">L’<strong>IETE</strong> est un pattern haussier. Il sera détaillé dans le chapitre <strong>Pattern technique</strong>.</p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">M</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern/M.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern/M.png" alt="Pattern M" loading="lazy">
+          </a>
+          <p class="pattern-text">Le <strong>M</strong> est un pattern haussier. D’autres variantes sont présentées dans <strong>Pattern technique</strong>.</p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">W</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern/W.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern/W.png" alt="Pattern W" loading="lazy">
+          </a>
+          <p class="pattern-text">Le <strong>W</strong> est un pattern baissier. D’autres variantes sont présentées dans <strong>Pattern technique</strong>.</p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">ETE</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern/ETE.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern/ETE.png" alt="Pattern ETE" loading="lazy">
+          </a>
+          <p class="pattern-text">L’<strong>ETE</strong> (Épaule–Tête–Épaule) est un pattern de retournement majeur. Variations et implications dans <strong>Pattern technique</strong>.</p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION WEEKLY -->
+    <section id="weekly" class="reveal">
+      <header class="section-head">
+        <h2>Weekly</h2>
+        <p class="section-sub">Routine hebdo — analyse weekly</p>
+      </header>
+
+      <figure class="video-wrap mt-20">
+        <div class="video-frame">
+          <video width="960" height="540" controls preload="metadata" playsinline poster="/assets/images/posters/weekly.png">
+            <source src="/assets/videos/weekly.mp4" type="video/mp4">
+            <track kind="captions" srclang="fr" src="/assets/captions/weekly.vtt" label="Français">
+          </video>
+        </div>
+        <figcaption class="video-caption"><span aria-hidden="true">🎥</span> Vidéo — L'analyse Weekly</figcaption>
+      </figure>
+
+      <div class="weekly-guidelines">
+        <ul class="wg-grid">
+          <li class="wg-card">
+            <h4 class="wg-title">Tendance</h4>
+            <a class="wg-thumb" href="/assets/images/weekly/tendance.png" target="_blank" rel="noopener">
+              <img src="/assets/images/weekly/tendance.png" alt="Weekly — Tendance" loading="lazy">
+            </a>
+            <p class="wg-text">Identifier la tendance dominante.</p>
+          </li>
+
+          <li class="wg-card">
+            <h4 class="wg-title">Candle Close</h4>
+            <a class="wg-thumb" href="/assets/images/weekly/cc.png" target="_blank" rel="noopener">
+              <img src="/assets/images/weekly/cc.png" alt="Weekly — Candle Close" loading="lazy">
+            </a>
+            <p class="wg-text">Analyser la clôture de la dernière bougie.</p>
+          </li>
+
+          <li class="wg-card">
+            <h4 class="wg-title">S&amp;D Zone</h4>
+            <a class="wg-thumb" href="/assets/images/weekly/s-and-d-zone.png" target="_blank" rel="noopener">
+              <img src="/assets/images/weekly/s-and-d-zone.png" alt="Weekly — S&amp;D Zone" loading="lazy">
+            </a>
+            <p class="wg-text">Zone clé testée et réactive.</p>
+          </li>
+
+          <li class="wg-card">
+            <h4 class="wg-title">Pattern</h4>
+            <a class="wg-thumb" href="/assets/images/weekly/pattern.png" target="_blank" rel="noopener">
+              <img src="/assets/images/weekly/pattern.png" alt="Weekly — Pattern" loading="lazy">
+            </a>
+            <p class="wg-text">Valider IETE/M/W/ETE sur clôture weekly.</p>
+          </li>
+        </ul>
+      </div>
+
+      <ul class="weekly-specials">
+        <li class="special-item">
+          <h4>🚫 Bougie neutre</h4>
+          <a class="special-thumb" href="/assets/images/weekly/bougie-neutre.png" target="_blank" rel="noopener">
+            <img src="/assets/images/weekly/bougie-neutre.png" alt="Cas spécial : Bougie neutre" loading="lazy" width="960" height="540">
+          </a>
+          <p>Indécision → mettre neutre « / ».</p>
+        </li>
+
+        <li class="special-item">
+          <h4>🔄 Double Pattern</h4>
+          <div class="special-thumbs">
+            <a class="special-thumb" href="/assets/images/weekly/double-pattern.png" target="_blank" rel="noopener">
+              <img src="/assets/images/weekly/double-pattern.png" alt="Double pattern — variante 1" loading="lazy" width="480" height="270">
+            </a>
+            <a class="special-thumb" href="/assets/images/weekly/double-pattern2.png" target="_blank" rel="noopener">
+              <img src="/assets/images/weekly/double-pattern2.png" alt="Double pattern — variante 2" loading="lazy" width="480" height="270">
+            </a>
+          </div>
+          <p>Si 2 patterns valides → neutre « / ».</p>
+        </li>
+
+        <li class="special-item">
+          <h4>📊 Zone S/R</h4>
+          <a class="special-thumb" href="/assets/images/weekly/zone-avant.png" target="_blank" rel="noopener">
+            <img src="/assets/images/weekly/zone-avant.png" alt="Zone testée ≥ 3 fois" loading="lazy" width="960" height="540">
+          </a>
+          <p>Zone testée ≥ 3 fois.</p>
+        </li>
+      </ul>
+
+      <div class="weekly-keys">
+        <div class="key-item"><h4>📈 TENDANCE</h4><p>Noter haussier / baissier / range.</p></div>
+        <div class="key-item"><h4>🕯️ CANDLE CLOSE</h4><p>Corps fin et centré → neutre « / ».</p></div>
+        <div class="key-item"><h4>🟩/🟥 S&amp;D ZONE</h4><p>Zone validée si ≥ 3 tests.</p></div>
+        <div class="key-item"><h4>🔺 PATTERN</h4><p>2 patterns valides → neutre « / ».</p></div>
+      </div>
+    </section>
+
+    <!-- SECTION ENTREE 4H -->
+    <section id="entree4h" class="reveal">
+      <header class="section-head">
+        <h2>Entrée 4H</h2>
+        <p class="section-sub">Affiner ses entrées avec Décélération et FC-27</p>
+      </header>
+
+      <figure class="video-wrap mt-20">
+        <div class="video-frame">
+          <video width="960" height="540" controls preload="metadata" playsinline poster="/assets/images/posters/entree4h.png">
+            <source src="/assets/videos/entree4h.mp4" type="video/mp4">
+            <track kind="captions" srclang="fr" src="/assets/captions/entree4h.vtt" label="Français">
+          </video>
+        </div>
+        <figcaption class="video-caption"><span aria-hidden="true">🎥</span> Vidéo — Entrée 4H (Décélération + FC-27)</figcaption>
+      </figure>
+
+      <!-- Décélération -->
+      <div class="entree4h-grid">
+        <div class="rules-block">
+          <h3 class="rules-title">Ralentissement (Décélération)</h3>
+          <ul class="rules rules--analyse-technique">
+            <li class="rule-item"><p class="rule-text">⚡ <strong>Prix impulsif</strong> avant la zone.</p></li>
+            <li class="rule-item"><p class="rule-text">🕯️ <strong>Mèche de rejet</strong> sur la 1<sup>ère</sup> bougie.</p></li>
+            <li class="rule-item"><p class="rule-text">〰️ <strong>3 mèches</strong> dans la zone de ralentissement.</p></li>
+            <li class="rule-item"><p class="rule-text">✅ <strong>1 bougie</strong> dans le sens du trade.</p></li>
+            <li class="rule-item"><p class="rule-text">🎯 <strong>Entrée</strong> sur la 4<sup>ᵉ</sup> bougie (validation).</p></li>
+            <li class="rule-item"><p class="rule-text">🔒 <strong>Stop Loss</strong> sous la mèche la plus basse + arrondi à 10 pips.</p></li>
+            <li class="rule-item"><p class="rule-text">📈 Si <strong>RR &gt; 10</strong> → doubler la distance du SL.</p></li>
+            <li class="rule-item"><p class="rule-text">🚫 <strong>Pas de M1/W1 Big</strong>.</p></li>
+          </ul>
+        </div>
+
+        <div class="examples-block">
+          <h3 class="rules-title">Exemples visuels</h3>
+          <div class="examples-grid">
+            <a class="example" href="/assets/images/4h/Rallentissement/rall.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Rallentissement/rall.png" alt="Décélération — Exemple 1" loading="lazy" width="480" height="270">
+            </a>
+            <a class="example" href="/assets/images/4h/Rallentissement/rall2.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Rallentissement/rall2.png" alt="Décélération — Exemple 2" loading="lazy" width="480" height="270">
+            </a>
+            <a class="example" href="/assets/images/4h/Rallentissement/rall3.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Rallentissement/rall3.png" alt="Décélération — Exemple 3" loading="lazy" width="480" height="270">
+            </a>
+            <a class="example" href="/assets/images/4h/Rallentissement/rall5.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Rallentissement/rall5.png" alt="Décélération — Exemple 4" loading="lazy" width="480" height="270">
+            </a>
+          </div>
+          <div class="example-full">
+            <a class="example" href="/assets/images/4h/Rallentissement/exemple.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Rallentissement/exemple.png" alt="Décélération — Cas particulier" loading="lazy" width="960" height="540">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FC-27 -->
+      <div class="entree4h-grid">
+        <div class="rules-block fc27">
+          <h3 class="rules-title">FC-27</h3>
+          <ul class="rules rules--analyse-technique">
+            <li class="rule-item"><p class="rule-text">Uniquement en <strong>4H</strong>.</p></li>
+            <li class="rule-item"><p class="rule-text">Pas de <strong>M1/W1 Big</strong> ni <strong>M5/W5</strong>.</p></li>
+            <li class="rule-item"><p class="rule-text">Le <strong>P3</strong> ne doit pas toucher la ZOI avant le <strong>P5</strong>.</p></li>
+            <li class="rule-item"><p class="rule-text">Le prix doit être <strong>correctif</strong>.</p></li>
+            <li class="rule-item"><p class="rule-text">Avoir les niveaux <strong>-0.27</strong> / <strong>-0.68</strong> dans la zone daily.</p></li>
+            <li class="rule-item"><p class="rule-text"><strong>PE</strong> sur <strong>-0.27</strong> et <strong>SL</strong> sous <strong>-0.68</strong>.</p></li>
+            <li class="rule-item"><p class="rule-text"><strong>PE</strong> sur <strong>-0.68</strong> et <strong>SL</strong> sous <strong>100%</strong> daily.</p></li>
+            <li class="rule-item"><p class="rule-text"><strong>TP1 4H</strong> au <strong>61.8%</strong>.</p></li>
+          </ul>
+        </div>
+
+        <div class="examples-block">
+          <h3 class="rules-title">Exemples visuels</h3>
+          <div class="examples-grid">
+            <a class="example" href="/assets/images/4h/Fibonacci/FC1.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Fibonacci/FC1.png" alt="FC-27 — Exemple 1" loading="lazy" width="480" height="270">
+            </a>
+            <a class="example" href="/assets/images/4h/Fibonacci/FC2.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Fibonacci/FC2.png" alt="FC-27 — Exemple 2" loading="lazy" width="480" height="270">
+            </a>
+            <a class="example" href="/assets/images/4h/Fibonacci/FC3.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Fibonacci/FC3.png" alt="FC-27 — Exemple 3" loading="lazy" width="480" height="270">
+            </a>
+            <a class="example" href="/assets/images/4h/Fibonacci/FC4.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Fibonacci/FC4.png" alt="FC-27 — Exemple 4" loading="lazy" width="480" height="270">
+            </a>
+          </div>
+          <div class="example-full">
+            <a class="example" href="/assets/images/4h/Fibonacci/exemple.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Fibonacci/exemple.png" alt="FC-27 — Cas particulier" loading="lazy" width="960" height="540">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- M/W cassure -->
+    <section id="video-mw-cassure" class="reveal">
+      <header class="section-head">
+        <h2>Patterns M/W — avec et sans cassure</h2>
+        <p class="section-sub">Exemples concrets et check-list de validation</p>
+      </header>
+
+      <figure class="video-wrap mt-20">
+        <div class="video-frame">
+          <video width="960" height="540" controls preload="metadata" playsinline poster="/assets/images/posters/mw-cassure.png">
+            <!-- IMPORTANT : renommer "m,w 4h.mp4" -> "mw-4h.mp4" -->
+            <source src="/assets/videos/mw-4h.mp4" type="video/mp4">
+            <track kind="captions" srclang="fr" src="/assets/captions/mw-4h.vtt" label="Français">
+          </video>
+        </div>
+        <figcaption class="video-caption">
+          <span aria-hidden="true">🎥</span>
+          Différence entre <strong>M/W avec cassure (BOS)</strong> et <strong>sans cassure</strong> :
+          critères, erreurs fréquentes, et exemples 4H.
+        </figcaption>
+      </figure>
+
+      <div class="mw-grid">
+        <div class="mw-block">
+          <h3 class="mw-title">M avec cassure</h3>
+          <div class="mw-pair">
+            <a href="/assets/images/4h/Pattern M,W/M with BOS.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Pattern M,W/M with BOS.png" alt="M avec cassure — exemple 1" width="480" height="270" loading="lazy">
+            </a>
+            <a href="/assets/images/4h/Pattern M,W/M with BOS exemple.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Pattern M,W/M with BOS exemple.png" alt="M avec cassure — exemple 2" width="480" height="270" loading="lazy">
+            </a>
+          </div>
+
+          <h4 class="rules-title">Règles importantes</h4>
+          <ul class="rules rules--analyse-technique rules--flat mw-rules">
+            <li class="rule-item"><p class="rule-text">📏 Fibonacci mèches P3 et corps P2.</p></li>
+            <li class="rule-item"><p class="rule-text">💥 Nécessite une cassure du dernier plus haut.</p></li>
+            <li class="rule-item"><p class="rule-text">🔒 Stop Loss sous la mèche la plus basse.</p></li>
+          </ul>
+        </div>
+
+        <div class="mw-block">
+          <h3 class="mw-title">M sans cassure</h3>
+          <div class="mw-pair">
+            <a href="/assets/images/4h/Pattern M,W/M without BOS.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Pattern M,W/M without BOS.png" alt="M sans cassure — exemple 1" width="480" height="270" loading="lazy">
+            </a>
+            <a href="/assets/images/4h/Pattern M,W/M without BOS exemple.png" target="_blank" rel="noopener">
+              <img src="/assets/images/4h/Pattern M,W/M without BOS exemple.png" alt="M sans cassure — exemple 2" width="480" height="270" loading="lazy">
+            </a>
+          </div>
+
+          <h4 class="rules-title">Règles importantes</h4>
+          <ul class="rules rules--analyse-technique rules--flat mw-rules">
+            <li class="rule-item"><p class="rule-text">📏 Fibonacci mèches P3 et corps P0.</p></li>
+            <li class="rule-item"><p class="rule-text">🚫 Ne casse pas le dernier plus haut.</p></li>
+            <li class="rule-item"><p class="rule-text">🔒 Stop Loss sous la mèche la plus basse.</p></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="rules-block highlight">
+      <h3 class="rules-title">📌 À retenir — Entrée 4H</h3>
+      <ol class="rules rules--analyse-technique">
+        <li class="rule-item"><p class="rule-text">⚡ Toujours un <strong>mouvement impulsif clair</strong> avant toute décélération.</p></li>
+        <li class="rule-item"><p class="rule-text">💥 Privilégier les <strong>M/W avec cassure (BOS)</strong> pour plus de fiabilité.</p></li>
+        <li class="rule-item"><p class="rule-text">🎯 Entrer uniquement quand tous les <strong>critères 4H</strong> sont réunis.</p></li>
+      </ol>
+    </div>
+
+    <div class="example-wrap google-sheets-link">
+      <h3 class="rules-title">📊 Backtest Analytics — 2022–2025</h3>
+      <p class="section-sub">Voici mes Datas de backtesting</p>
+      <a href="https://docs.google.com/spreadsheets/d/1H90w1JHG0bonCXjFuaXH0MhARKaqZFsgtSQAiLitjT8/edit?gid=782811695#gid=782811695"
+         target="_blank" rel="noopener noreferrer" class="btn-sheets">
+        <img src="https://www.gstatic.com/images/branding/product/1x/sheets_48dp.png" alt="" class="sheets-logo" width="28" height="28">
+        <span>Ouvrir la feuille Google Sheets</span>
+      </a>
+    </div>
+
+    <!-- PATTERN TECHNIQUE -->
+    <section id="pattern-technique" class="reveal">
+      <header class="section-head">
+        <h2>Pattern technique</h2>
+        <p class="section-sub">Variantes avancées, critères de validation et erreurs fréquentes</p>
+      </header>
+
+      <figure class="video-wrap mt-20">
+        <div class="video-frame">
+          <video width="960" height="540" controls preload="metadata" playsinline
+                 poster="/assets/images/posters/pattern-technique.png"
+                 aria-label="Pattern technique — variantes avancées et checklist">
+            <!-- IMPORTANT : renommer "pattern technique.mp4" -> "pattern-technique.mp4" -->
+            <source src="/assets/videos/pattern-technique.mp4" type="video/mp4">
+            <track kind="captions" srclang="fr" src="/assets/captions/pattern-technique.vtt" label="Français">
+          </video>
+        </div>
+        <figcaption class="video-caption">
+          <span aria-hidden="true">🎥</span> Patterns avancés — lecture, validation, gestion du risque.
+        </figcaption>
+      </figure>
+
+      <div class="rules-wrapper pattern-grid">
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">M1 Small/Big</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/m1small-m1big.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern-technique/m1small-m1big.png" alt="M1 small / M1 big" loading="lazy">
+          </a>
+          <p class="pattern-text">Pour le M1 big, <strong>les ralentissements et Fibonacci inversés</strong> sont déconseillés en 4h.</p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">W1 Small/Big</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/w1small-w1big.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern-technique/w1small-w1big.png" alt="W1 small / W1 big" loading="lazy">
+          </a>
+          <p class="pattern-text">Le W1 big ne fait plus partie de mon plan, trop de perte sur ce pattern. Je t’invite à le backtester.</p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">M2</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/m2.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern-technique/m2.png" alt="Pattern M2" loading="lazy">
+          </a>
+          <p class="pattern-text">Il faut au <strong>minimum 2 bougies inverses</strong> dans la <strong>correction du P3 au P4</strong>.</p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">W2</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/w2.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern-technique/w2.png" alt="Pattern W2" loading="lazy">
+          </a>
+          <p class="pattern-text">Il faut au <strong>minimum 2 bougies inverses</strong> dans la <strong>correction du P3 au P4</strong>.</p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">M3</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/m3.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern-technique/m3.png" alt="Pattern M3" loading="lazy">
+          </a>
+          <p class="pattern-text">
+            Une fois le corps de la bougie aimant touché, <strong>mettre son SL au PE</strong>.<br>
+            <strong>Ne pas rentrer</strong> sur une bougie aimant.<br>
+            <strong>Si mon pattern 4h a dépassé le corps de ma bougie aimant</strong>, j’annule le trade.
+          </p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">W3</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/w3.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern-technique/w3.png" alt="Pattern W3" loading="lazy">
+          </a>
+          <p class="pattern-text">
+            Une fois le corps de la bougie aimant touché, <strong>mettre son SL au PE</strong>.<br>
+            <strong>Ne pas rentrer</strong> sur une bougie aimant.<br>
+            <strong>Si mon pattern 4h a dépassé le corps de ma bougie aimant</strong>, j’annule le trade.
+          </p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">M4</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/m4.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern-technique/m4.png" alt="Pattern M4" loading="lazy">
+          </a>
+          <p class="pattern-text">Si le <strong>P1 et P3 sont au même niveau</strong>, automatiquement cela devient un M4. La <strong>zone d'intérêt</strong> est au <strong>même niveau que le P2</strong>.</p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">W4</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/w4.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern-technique/w4.png" alt="Pattern W4" loading="lazy">
+          </a>
+          <p class="pattern-text">Si le <strong>P1 et P3 sont au même niveau</strong>, automatiquement cela devient un W4. La <strong>zone d'intérêt</strong> est au <strong>même niveau que le P2</strong>.</p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">M5</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/m5.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern-technique/m5.png" alt="Pattern M5" loading="lazy">
+          </a>
+          <p class="pattern-text">Le P4 doit clôturer <strong>entre le corps du P2 et la mèche du P2</strong>.</p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+
+        <div class="rules-block pattern-card">
+          <h3 class="rules-title">W5</h3>
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/w5.png" target="_blank" rel="noopener">
+            <img src="/assets/images/pattern-technique/w5.png" alt="Pattern W5" loading="lazy">
+          </a>
+          <p class="pattern-text">Le P4 doit clôturer <strong>en dehors de la zone d’intérêt</strong>.</p>
+          <span class="pattern-ring" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- BACKTESTING -->
+    <section id="backtesting" class="reveal">
+      <h2>Backtesting</h2>
+
+      <figure class="video-wrap mt-20">
+        <div class="video-frame">
+          <video width="960" height="540" controls preload="metadata" playsinline poster="/assets/images/posters/backtesting.png" aria-label="Tutoriel de backtesting — méthodologie et bonnes pratiques">
+            <source src="/assets/videos/backtesting.mp4" type="video/mp4">
+            <track kind="captions" srclang="fr" src="/assets/captions/backtesting.vtt" label="Français" default>
+            Votre navigateur ne supporte pas la vidéo HTML5.
+            <a href="/assets/videos/backtesting.mp4" download>Télécharger la vidéo</a>.
+          </video>
+        </div>
+        <figcaption class="video-caption">
+          <span aria-hidden="true">🎥</span>
+          Backtesting — méthode pas à pas (jeu de données, règles de validation, journal de trades).
+        </figcaption>
+      </figure>
+
+      <div class="example-wrap google-sheets-link" role="region" aria-labelledby="gs-backtesting-title">
+        <h3 class="rules-title" id="gs-backtesting-title">📊 Workspace Trading — Google Sheets</h3>
+        <p class="section-sub">Backteste aujourd’hui, performe demain.</p>
+
+        <a class="btn-sheets"
+           href="https://docs.google.com/spreadsheets/d/1H90w1JHG0bonCXjFuaXH0MhARKaqZFsgtSQAiLitjT8/edit?gid=887628254#gid=887628254"
+           target="_blank" rel="noopener noreferrer">
+          <img src="https://www.gstatic.com/images/branding/product/1x/sheets_48dp.png" alt="" class="sheets-logo" width="28" height="28" loading="lazy" decoding="async">
+          <span>Ouvrir la feuille Google Sheets (Backtesting)</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- NOTE DU COACH -->
+    <section id="coach-note" class="reveal" aria-labelledby="coachNoteTitle">
+      <div class="coach-card">
+        <header class="coach-head">
+          <h2 id="coachNoteTitle">Note du coach</h2>
+          <button type="button" class="coach-btn" id="coachEditBtn" aria-pressed="false" aria-controls="coachEditor">
+            ✏️ Éditer
+          </button>
+        </header>
+
+        <div id="coachPreview" class="coach-preview" role="region" aria-live="polite">
+          <p>Ajoute ici ton message de fin de chapitre. Clique sur “Éditer” pour modifier.</p>
+        </div>
+
+        <form id="coachEditor" class="coach-editor" hidden novalidate>
+          <label for="coachTextarea" class="sr-only">Écrire le commentaire</label>
+          <textarea id="coachTextarea" maxlength="1000" rows="5" placeholder="Ton commentaire aux élèves… (1000 caractères max)"></textarea>
+
+          <div class="coach-bar">
+            <span id="coachCount" aria-live="polite">0 / 1000</span>
+            <div class="coach-actions">
+              <button type="button" class="coach-btn ghost" id="coachCancelBtn">Annuler</button>
+              <button type="submit" class="coach-btn primary" id="coachSaveBtn">Enregistrer</button>
+            </div>
+          </div>
+
+          <input type="text" name="website" autocomplete="off" tabindex="-1" class="hp" aria-hidden="true">
+        </form>
+      </div>
+    </section>
+
+    <!-- NAV CHAPITRES -->
+    <div class="hero-cta mt-20" aria-label="Navigation chapitres">
+      <a href="/pages/tradingview.html" class="btn btn-ghost">Revenir au Chapitre 2 — Configuration TradingView</a>
+      <a href="/pages/money-management.html" class="btn btn-primary">Passer au Chapitre 4 — Money management</a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p id="footerText">© 2026 — Wavest | Tous droits réservés</p>
+
+    <nav class="footer-links" aria-label="Liens légaux">
+      <a id="linkMentions" href="/Legal/mentions-legales.html">Mentions légales</a>
+      <a id="linkPrivacy"  href="/Legal/confidentialite.html">Confidentialité</a>
+      <a id="linkCookies" href="/Legal/cookies.html">Cookies</a>
+      <a id="linkCgv" href="/Legal/cgv.html">CGV</a>
+      <a href="#" data-open-cookie-banner="true" aria-label="Ouvrir les préférences cookies">Gérer les cookies</a>
+    </nav>
+
+    <p>
+      <a href="mailto:contact@wavest.fr" class="mail-link" id="footerMail" title="Envoyer un email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 12h16V8l-8 7-8-7v10z"/>
+        </svg>
+        <span id="footerMailText">Contact</span>
+      </a>
+    </p>
+  </footer>
+
+  <script src="/js/app.js?v=6" defer></script>
+</body>
+</html>

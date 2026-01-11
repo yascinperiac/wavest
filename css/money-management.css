@@ -1,0 +1,470 @@
+/* ===================== Chapitre 4 — Money Management (optimisé) ===================== */
+/* Tokens page */
+.page-money{
+  --mm-accent: var(--accent, #6ea8fe);
+  --mm-text: var(--text, #0f172a);
+  --mm-soft: var(--text-soft, #6b7280);
+
+  --mm-card-bg: color-mix(in oklab, var(--glass-card, #fff) 92%, transparent);
+  --mm-card-br: color-mix(in oklab, var(--glass-card-border, rgba(0,0,0,.12)) 75%, transparent);
+
+  /* tokens d’ombre/ring pour homogénéiser */
+  --mm-shadow: 0 10px 28px rgba(0,0,0,.12);
+  --mm-shadow-lg: 0 12px 32px rgba(0,0,0,.45);
+  --mm-hover-ring: 0 0 0 3px color-mix(in oklab, var(--mm-accent) 18%, transparent);
+}
+
+/* En-tête */
+.page-money .section-head{
+  display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin:0 0 18px;
+}
+.page-money .section-head h2{ margin:0; font-size:clamp(18px,1.8vw,22px); font-weight:800; }
+.page-money .section-sub{ margin:0; color:var(--mm-soft); font-size:clamp(12px,1.2vw,13px); }
+
+/* Layout */
+.page-money .chapter{ max-width:1280px; margin-inline:auto; }
+.mm-grid{
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px; margin:24px auto 14px;
+}
+.mm-grid>.mm-card{ min-width:0; }
+
+/* Carte premium */
+.mm-card{
+  position:relative; background:var(--mm-card-bg); border-radius:18px;
+  box-shadow:var(--mm-shadow); overflow:clip; backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  padding:clamp(10px,1.2vw,14px);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.mm-card::before{
+  content:""; position:absolute; inset:0; padding:1px; border-radius:inherit;
+  background:conic-gradient(from 140deg,
+    color-mix(in oklab,var(--mm-accent) 55%,transparent),
+    transparent 22%,
+    color-mix(in oklab,var(--mm-accent) 35%,transparent) 55%,
+    transparent 78%,
+    color-mix(in oklab,var(--mm-accent) 55%,transparent) 100%);
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; opacity:.85;
+}
+.mm-card::after{
+  content:""; position:absolute; inset:0; border-radius:inherit;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06), inset 0 0 0 1px var(--mm-card-br);
+  pointer-events:none;
+}
+@media (hover:hover){
+  .mm-card:hover{ transform:translateY(-2px); box-shadow:0 14px 34px rgba(0,0,0,.14), var(--mm-hover-ring); }
+}
+
+.mm-title{
+  margin:2px 0 12px; font-size:clamp(13px,1.2vw,16px);
+  font-weight:800; letter-spacing:.1px; text-align:center; color:var(--mm-text);
+}
+
+/* Image */
+.mm-figure{ margin:0; }
+.mm-thumb{
+  display:block; width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden;
+  border:1px solid var(--glass-border, rgba(0,0,0,.08)); box-shadow:0 4px 12px rgba(0,0,0,.06);
+  margin:0 0 8px;
+}
+.mm-thumb img{ width:100%; height:auto; display:block; object-fit:cover; }
+.mm-thumb:focus-visible{ outline:3px solid color-mix(in oklab,var(--mm-accent) 55%,transparent); outline-offset:3px; border-radius:12px; }
+
+/* Règles (chips) — UNE SEULE LIGNE */
+.mm-rules{ list-style:none; padding:0; margin:12px 0 0; display:grid; gap:8px; }
+.mm-rule, .rule-item{
+  display:flex; align-items:center; gap:10px; padding:6px 8px; flex-wrap:nowrap;
+  border-radius:12px; background:rgba(255,255,255,.7); border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 4px 12px rgba(0,0,0,.06); transition:transform .2s ease, box-shadow .2s ease;
+}
+.mm-rules p, .rule-text{
+  margin:0; line-height:1.22; color:var(--mm-text);
+  white-space:nowrap; overflow:visible; text-overflow:clip;
+  font-size:11px; flex:1 1 auto; min-width:0;
+}
+.mm-badge, .mm-tag{
+  display:inline-flex; align-items:center; justify-content:center;
+  height:18px; min-width:0; padding:0 6px; border-radius:999px;
+  font-size:10px; font-weight:700; letter-spacing:.2px;
+  background:color-mix(in oklab, var(--mm-accent) 22%, #fff);
+  border:1px solid color-mix(in oklab, var(--mm-accent) 40%, transparent);
+  color:var(--mm-text); white-space:nowrap; flex:0 0 auto;
+}
+@media (hover:hover){
+  .mm-rule:hover, .rule-item:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.10); }
+}
+
+/* “À retenir” (tuiles) */
+.mm-remember{ margin:26px 0 18px; }
+.mm-remember-head{ margin-bottom:14px; }
+.mm-remember-head h4{
+  margin:0; font-size:14px; font-weight:800; color:var(--mm-text);
+  display:inline-flex; align-items:center; gap:8px;
+}
+.mm-remember-head .dot{ width:8px; height:8px; border-radius:999px; background:color-mix(in oklab,var(--mm-accent) 70%, transparent); }
+
+.mm-remember-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+@media (max-width:640px){ .mm-remember-grid{ grid-template-columns:1fr; } }
+
+.mm-remember-card{
+  border-radius:14px; background:rgba(255,255,255,.72); border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 10px 24px rgba(0,0,0,.10);
+  padding:14px 16px; display:grid; grid-template-columns:auto 1fr; align-items:center; gap:10px;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background-color .18s ease;
+  will-change:transform;
+}
+.mm-remember-icon{ font-size:18px; line-height:1; }
+.mm-remember-text{ margin:0; color:var(--mm-text); font-size:13px; line-height:1.35; }
+
+@media (hover:hover){
+  .mm-remember-card:hover, .mm-remember-card:focus-visible{
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(0,0,0,.14), var(--mm-hover-ring);
+    border-color:color-mix(in oklab,var(--mm-accent) 40%, rgba(0,0,0,.08));
+    background:color-mix(in oklab, #fff 82%, var(--mm-accent) 8%);
+    outline:none;
+  }
+  .mm-remember-icon{ transition:transform .18s ease, filter .18s ease; transform-origin:center; }
+  .mm-remember-card:hover .mm-remember-icon,
+  .mm-remember-card:focus-visible .mm-remember-icon{ transform:scale(1.08); filter:drop-shadow(0 1px 4px rgba(0,0,0,.15)); }
+}
+
+/* Séparateur animé (style Analyse technique) */
+.page-money section.mm-sep{
+  position:relative; padding-bottom:60px; scroll-margin-top:90px;
+}
+.page-money section.mm-sep::after{
+  content:""; position:absolute; left:50%; bottom:0; transform:translateX(-50%) scaleX(0); transform-origin:center;
+  width:60%; height:3px; border-radius:999px;
+  background:linear-gradient(to right, transparent, var(--mm-accent), transparent);
+  opacity:.85; box-shadow:0 0 12px color-mix(in oklab, var(--mm-accent) 60%, transparent);
+  transition:transform .8s ease; pointer-events:none;
+}
+.page-money section.mm-sep.reveal.visible::after{
+  transform:translateX(-50%) scaleX(1); animation:mmGlowPulse 3s ease-in-out infinite;
+}
+@keyframes mmGlowPulse{
+  0%,100%{ box-shadow:0 0 12px color-mix(in oklab,var(--mm-accent) 60%, transparent); opacity:.85; }
+  50%    { box-shadow:0 0 20px color-mix(in oklab,var(--mm-accent) 80%, transparent); opacity:1; }
+}
+
+/* Nav chapitres */
+.chapter-cta{ margin-top:22px; display:flex; gap:12px; }
+
+/* ————— Modes & préférences ————— */
+@media (prefers-color-scheme: dark){
+  .mm-card{ box-shadow:var(--mm-shadow-lg); }
+  .mm-rule, .rule-item{
+    background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.12); color:#eef2ff;
+  }
+  .mm-badge, .mm-tag{
+    background:color-mix(in oklab, var(--mm-accent) 28%, rgba(255,255,255,.08));
+    border-color:color-mix(in oklab, var(--mm-accent) 55%, rgba(255,255,255,.12));
+    color:#eef2ff;
+  }
+  .page-money section.mm-sep::after{
+    background:linear-gradient(to right, transparent, color-mix(in oklab, var(--mm-accent) 70%, #9ec8ff), transparent);
+    opacity:.75;
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  .mm-card, .mm-rule, .rule-item, .mm-remember-card{ transition:none !important; transform:none !important; }
+  .page-money section.mm-sep::after{ transition:none !important; animation:none !important; transform:translateX(-50%) scaleX(1); }
+}
+
+/* ===== Onglets (Avec / Sans palier) ===== */
+.mm-tabs{
+  display:flex; gap:8px; align-items:center; margin:8px 0 14px;
+}
+.mm-tab{
+  appearance:none;
+  border:1px solid var(--glass-card-border, rgba(0,0,0,.12));
+  background:rgba(255,255,255,.7);
+  color:var(--text, #0f172a);
+  padding:8px 12px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background-color .18s ease;
+}
+.mm-tab.is-active{
+  background:color-mix(in oklab, var(--mm-accent, #6ea8fe) 14%, #fff);
+  border-color:color-mix(in oklab, var(--mm-accent, #6ea8fe) 45%, rgba(0,0,0,.12));
+  box-shadow:0 6px 16px rgba(0,0,0,.10);
+}
+.mm-tab:focus-visible{ outline:none; box-shadow:0 0 0 3px rgba(110,168,254,.28); }
+@media (hover:hover){ .mm-tab:hover{ transform:translateY(-1px); } }
+
+/* Cacher le panneau non actif */
+.mm-variant[hidden]{ display:none !important; }
+
+
+/* ===== Tableau Avantages / Inconvénients (centré) ===== */
+.mm-proscons{
+  max-width: 960px;
+  margin: 18px auto 6px;
+}
+
+.mm-table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--mm-card-bg);
+  border: 1px solid var(--mm-card-br);
+  border-radius: 14px;
+  overflow: hidden;            /* arrondis visibles */
+  box-shadow: var(--mm-shadow);
+}
+
+.mm-table thead th{
+  background: color-mix(in oklab, var(--mm-accent) 12%, #fff);
+  font-weight: 800;
+  text-align: left;
+  padding: 12px 14px;
+  color: var(--mm-text);
+}
+
+.mm-table tbody td{
+  padding: 12px 14px;
+  color: var(--mm-text);
+  vertical-align: top;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.mm-table tbody tr + tr td{
+  border-top: 1px solid rgba(0,0,0,.08);
+}
+
+/* Hover doux ligne */
+@media (hover:hover){
+  .mm-table tbody tr:hover td{
+    background: color-mix(in oklab, #fff 88%, var(--mm-accent) 6%);
+  }
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark){
+  .mm-table{
+    box-shadow: var(--mm-shadow-lg);
+    border-color: rgba(255,255,255,.12);
+    background: color-mix(in oklab, #0b1220 78%, transparent);
+  }
+  .mm-table thead th{
+    background: color-mix(in oklab, var(--mm-accent) 22%, rgba(255,255,255,.06));
+    color: #eef2ff;
+  }
+  .mm-table tbody td{
+    color: #eef2ff;
+  }
+  .mm-table tbody tr + tr td{
+    border-top-color: rgba(255,255,255,.12);
+  }
+  @media (hover:hover){
+    .mm-table tbody tr:hover td{
+      background: color-mix(in oklab, rgba(255,255,255,.12) 70%, var(--mm-accent) 10%);
+    }
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .mm-table *{ transition: none !important; }
+}
+
+
+/* Masquer le séparateur visuel mais garder le padding de .mm-sep */
+.page-money section.mm-sep--no-line::after{
+  content: none !important;
+}
+
+
+/* ====== PATCH SOMBRE PILOTÉ PAR LA CLASSE .dark (override final) ====== */
+body.page-money.dark{
+  /* couleurs de base */
+  --mm-text: #eef2ff;          /* texte principal */
+  --mm-soft: #cbd5e1;          /* texte secondaire */
+  --mm-card-bg: rgba(18,18,18,.72);
+  --mm-card-br: rgba(255,255,255,.12);
+
+  /* effets */
+  --mm-shadow: 0 10px 28px rgba(0,0,0,.55);
+  --mm-shadow-lg: 0 12px 32px rgba(0,0,0,.7);
+}
+
+body.page-money.dark .mm-card{
+  box-shadow: var(--mm-shadow-lg);
+}
+
+body.page-money.dark .mm-rule,
+body.page-money.dark .rule-item{
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.16);
+  color: var(--mm-text);
+}
+
+body.page-money.dark .mm-badge,
+body.page-money.dark .mm-tag{
+  background: color-mix(in oklab, var(--mm-accent) 28%, rgba(255,255,255,.08));
+  border-color: color-mix(in oklab, var(--mm-accent) 55%, rgba(255,255,255,.12));
+  color: var(--mm-text);
+}
+
+body.page-money.dark .mm-remember-card{
+  background: rgba(18,18,18,.72);
+  border-color: rgba(255,255,255,.12);
+  box-shadow: var(--mm-shadow-lg);
+}
+body.page-money.dark .mm-remember-text{ color: var(--mm-text); }
+
+body.page-money.dark .mm-table{
+  background: color-mix(in oklab, #0b1220 78%, transparent);
+  border-color: rgba(255,255,255,.12);
+  box-shadow: var(--mm-shadow-lg);
+}
+body.page-money.dark .mm-table thead th{ color:#eef2ff; }
+body.page-money.dark .mm-table tbody td{ color:#eef2ff; }
+body.page-money.dark .mm-table tbody tr + tr td{ border-top-color: rgba(255,255,255,.12); }
+
+/* le séparateur animé en sombre */
+body.page-money.dark section.mm-sep::after{
+  background: linear-gradient(to right, transparent, color-mix(in oklab, var(--mm-accent) 70%, #9ec8ff), transparent);
+  opacity: .75;
+}
+
+
+
+
+/* ====== MONEY MANAGEMENT — OVERRIDES SOMBRE (contraste garanti) ====== */
+body.page-money.dark{
+  /* tokens de texte + surfaces en sombre */
+  --text: #eef2ff;
+  --text-soft: #cbd5e1;
+  --mm-text: var(--text);
+  --mm-soft: var(--text-soft);
+
+  --glass-card: #111417;                 /* fond des cartes/chips */
+  --glass-card-border: rgba(255,255,255,.14);
+  --mm-card-bg: rgba(18,18,18,.72);
+  --mm-card-br: rgba(255,255,255,.16);
+  --mm-shadow: 0 10px 28px rgba(0,0,0,.55);
+  --mm-shadow-lg: 0 12px 32px rgba(0,0,0,.7);
+}
+
+/* Couleur de texte partout (on écrase les règles globales) */
+body.page-money.dark,
+body.page-money.dark .section-sub,
+body.page-money.dark .mm-title,
+body.page-money.dark .mm-tab,
+body.page-money.dark .mm-rules p,
+body.page-money.dark .rule-text,
+body.page-money.dark .mm-badge,
+body.page-money.dark .mm-remember-text,
+body.page-money.dark .mm-table th,
+body.page-money.dark .mm-table td {
+  color: var(--mm-text) !important;
+}
+
+/* Cartes / tuiles / chips */
+body.page-money.dark .mm-card,
+body.page-money.dark .mm-remember-card{
+  background: var(--mm-card-bg) !important;
+  border-color: var(--mm-card-br) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+}
+body.page-money.dark .mm-rule,
+body.page-money.dark .rule-item{
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.16) !important;
+}
+
+/* Badges */
+body.page-money.dark .mm-badge{
+  background: color-mix(in oklab, var(--mm-accent) 28%, rgba(255,255,255,.08)) !important;
+  border-color: color-mix(in oklab, var(--mm-accent) 55%, rgba(255,255,255,.12)) !important;
+}
+
+/* Onglets */
+body.page-money.dark .mm-tab{
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.16) !important;
+}
+body.page-money.dark .mm-tab.is-active{
+  background: color-mix(in oklab, var(--mm-accent) 28%, rgba(255,255,255,.10)) !important;
+  border-color: color-mix(in oklab, var(--mm-accent) 55%, rgba(255,255,255,.16)) !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,.6) !important;
+}
+
+/* Miniatures */
+body.page-money.dark .mm-thumb{
+  border-color: rgba(255,255,255,.14) !important;
+}
+
+/* Table */
+body.page-money.dark .mm-table{
+  background: color-mix(in oklab, #0b1220 78%, transparent) !important;
+  border-color: rgba(255,255,255,.14) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+}
+body.page-money.dark .mm-table tbody tr + tr td{
+  border-top-color: rgba(255,255,255,.12) !important;
+}
+
+/* Séparateur animé */
+body.page-money.dark section.mm-sep::after{
+  background: linear-gradient(to right, transparent, color-mix(in oklab, var(--mm-accent) 70%, #9ec8ff), transparent) !important;
+  opacity: .8 !important;
+}
+
+
+/* ===== Patch contraste hover — tableau en sombre ===== */
+body.page-money.dark .mm-table tbody tr:hover td{
+  /* Fond un peu relevé mais sombre */
+  background: color-mix(in oklab, #0b1220 85%, var(--mm-accent) 12%) !important;
+  color: var(--mm-text) !important;
+}
+
+/* (optionnel) désactive tout hover clair hérité */
+@media (hover:hover){
+  body.page-money.dark .mm-table tbody tr:hover td{
+    border-top-color: rgba(255,255,255,.16) !important;
+  }
+}
+
+
+/* === Fix : la phrase coupe dans les "pills" === */
+.mm-rules .rule-item,
+.mm-rule{
+  flex-wrap: wrap !important;      /* autorise le retour à la ligne */
+  align-items: flex-start;
+  overflow: visible;               /* aucune coupe latérale */
+  padding-right: 12px;             /* un peu d'air côté droit */
+}
+
+.mm-rules .mm-badge{
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* le texte peut s'étaler et se casser proprement */
+.mm-rules .rule-text,
+.mm-rules p{
+  white-space: normal !important;  /* au lieu de nowrap */
+  overflow: visible !important;
+  text-overflow: initial !important;
+  word-break: break-word;          /* si un mot (ou nombre) est trop long */
+  overflow-wrap: anywhere;         /* casse au besoin (navigateurs modernes) */
+  line-height: 1.35;
+}
+
+
+
+
+
+
+
+
+

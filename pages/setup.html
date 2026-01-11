@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapitre 5 — Setup | Wavest</title>
+  <meta name="description" content="Chapitre 5 — Setup : Fibonacci inversé, Pattern 4H et Ralentissement. Trois setups complets illustrés, règles, vidéos, et rappels. Gestion du risque et confirmations multi-UT.">
+
+  <!-- SEO / Social -->
+  <meta property="og:title" content="Chapitre 5 — Setup | Wavest">
+  <meta property="og:description" content="Setups complets : Fibonacci inversé, Pattern 4H, Ralentissement. Règles d’entrée, gestion du risque, vidéos et rappels clés.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="/assets/images/posters/setup.png">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chapitre 5 — Setup | Wavest">
+  <meta name="twitter:description" content="Structure de setups : Fibonacci, multi-UT, money management.">
+  <meta name="twitter:image" content="/assets/images/posters/setup.png">
+
+  <!-- Thème navigateur -->
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f0f10" media="(prefers-color-scheme: dark)">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/analyse-technique.css" />
+  <link rel="stylesheet" href="/css/setup.css" />
+
+  <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
+</head>
+
+<body class="page-setup">
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner" aria-label="En-tête du chapitre Setup">
+    <h1>Chapitre 5 — Setup</h1>
+    <div class="header-actions">
+      <a href="/index.html#chapters" class="btn btn-ghost" title="Retour au sommaire">← Sommaire</a>
+    </div>
+  </header>
+
+  <main class="container chapter" id="content" role="main">
+
+    <!-- SOMMAIRE -->
+    <section id="sommaire" class="accordion reveal" aria-labelledby="sommaireTitle" data-accordion="chap5">
+      <div class="card">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="sommairePanel" id="sommaireTitle">
+          Sous-chapitres
+          <span class="chev" aria-hidden="true"></span>
+        </button>
+        <div id="sommairePanel" class="acc-panel" hidden>
+          <ul class="sub-list">
+            <li><a href="#fibonacci">Fibonacci inversé</a></li>
+            <li><a href="#pattern4h">Pattern 4H</a></li>
+            <li><a href="#ralentissement">Ralentissement</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================
+         SETUP 1 — FIBONACCI INVERSÉ
+    ==================================== -->
+    <section id="fibonacci" class="reveal stp-sep" aria-labelledby="fiboVideoTitle">
+      <header class="section-head">
+        <h2 id="fiboVideoTitle">Vidéo — Setup (Fibonacci inversé)</h2>
+        <p class="section-sub">Introduction : logique d’entrée, confirmations multi-UT, gestion du risque.</p>
+      </header>
+
+      <div class="video-wrap" aria-label="Vidéo explicative du setup Fibonacci inversé">
+        <div class="video-frame">
+          <video controls preload="metadata" playsinline poster="/assets/images/posters/setup.png">
+            <source src="/assets/videos/setup-fibonacci-inverse.mp4" type="video/mp4">
+            <source src="/assets/videos/setup-fibonacci-inverse.webm" type="video/webm">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+          </video>
+        </div>
+        <p class="video-caption">Synthèse : critères d’entrée, confirmations multi-UT et alignement avec le money management.</p>
+      </div>
+    </section>
+
+    <header class="section-head stp-sep stp-sep--no-line">
+      <h2 id="fiboTitle">Les 7 parties du Setup — Fibonacci inversé</h2>
+      <p class="section-sub">Cas pour une entrée Fibonacci inversé.</p>
+    </header>
+
+    <section id="fibo-parts" class="reveal stp-sep stp-one-per-line" aria-labelledby="fiboTitle">
+      <div class="stp-grid" aria-label="Grille des 7 parties — Fibonacci inversé">
+
+        <article class="stp-card" aria-labelledby="fibo-p1-title">
+          <figure class="stp-figure">
+            <a class="stp-thumb" href="/assets/images/setup/fibonacci-inverse/tendance-daily.png" target="_blank" rel="noopener">
+              <img src="/assets/images/setup/fibonacci-inverse/tendance-daily.png" alt="Tendance Daily — Fibonacci inversé" loading="lazy" width="1600" height="1000">
+            </a>
+          </figure>
+          <div class="stp-content">
+            <h3 id="fibo-p1-title" class="stp-title">Partie 1 — Déterminer la tendance Daily</h3>
+            <ul class="stp-rules --plain" data-list>
+              <li class="stp-item"><p class="stp-text">Analyser la tendance sur ~5 derniers mois.</p></li>
+              <li class="stp-item"><p class="stp-text">Le dernier plus bas est plus récent que le dernier plus haut.</p></li>
+              <li class="stp-item"><p class="stp-text">Le dernier plus haut n’est pas cassé par le corps (mèches ignorées).</p></li>
+              <li class="stp-item"><p class="stp-text">Conclusion : tendance baissière.</p></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="stp-card" aria-labelledby="fibo-p2-title">
+          <figure class="stp-figure">
+            <a class="stp-thumb" href="/assets/images/setup/fibonacci-inverse/pattern-daily.png" target="_blank" rel="noopener">
+              <img src="/assets/images/setup/fibonacci-inverse/pattern-daily.png" alt="Pattern Daily — Fibonacci inversé" loading="lazy" width="1600" height="1000">
+            </a>
+          </figure>
+          <div class="stp-content">
+            <h3 id="fibo-p2-title" class="stp-title">Partie 2 — Pattern baissier en Daily</h3>
+            <ul class="stp-rules --plain --compact" data-list>
+              <li class="stp-item"><p class="stp-text">Identifier un pattern dans le sens de la tendance.</p></li>
+              <li class="stp-item"><p class="stp-text">Tracer le Fibonacci.</p></li>
+              <li class="stp-item"><p class="stp-text">ZOI : première zone touchée entre 0.618 et 1 du Fibo.</p></li>
+              <li class="stp-item"><p class="stp-text">Attendre un W2 : retour correctif du prix dans la ZOI Daily.</p></li>
+              <li class="stp-item"><p class="stp-text">Vérifier que le pattern respecte les DATAs.</p></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="stp-card" aria-labelledby="fibo-p3-title">
+          <figure class="stp-figure">
+            <a class="stp-thumb" href="/assets/images/setup/fibonacci-inverse/weekly.png" target="_blank" rel="noopener">
+              <img src="/assets/images/setup/fibonacci-inverse/weekly.png" alt="Weekly — Fibonacci inversé" loading="lazy" width="1600" height="1000">
+            </a>
+          </figure>
+          <div class="stp-content">
+            <h3 id="fibo-p3-title" class="stp-title">Partie 3 — Analyse Weekly</h3>
+            <ul class="stp-rules --plain --compact" data-list>
+              <li class="stp-item"><p class="stp-text"><strong>S&amp;D Zone :</strong> mèche sur un support ⇒ (−).</p></li>
+              <li class="stp-item"><p class="stp-text"><strong>Tendance :</strong> baissière ⇒ (−).</p></li>
+              <li class="stp-item"><p class="stp-text"><strong>CC :</strong> corps bleu ⇒ (+).</p></li>
+              <li class="stp-item"><p class="stp-text"><strong>Pattern :</strong> proche des 0.618 Weekly, potentiel −0.27 Weekly ⇒ (−).</p></li>
+              <li class="stp-item"><p class="stp-text">Résultat : 3/4 à la vente. Setup validé.</p></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="stp-card" aria-labelledby="fibo-p4-title">
+          <figure class="stp-figure">
+            <a class="stp-thumb" href="/assets/images/setup/fibonacci-inverse/entree-4h.png" target="_blank" rel="noopener">
+              <img src="/assets/images/setup/fibonacci-inverse/entree-4h.png" alt="Entrée 4H — Fibonacci inversé" loading="lazy" width="1600" height="1000">
+            </a>
+          </figure>
+          <div class="stp-content">
+            <h3 id="fibo-p4-title" class="stp-title">Partie 4 — Entrée 4H</h3>
+            <ul class="stp-rules --plain" data-list>
+              <li class="stp-item"><p class="stp-text">Basculer 4H une fois le prix dans la ZOI Daily.</p></li>
+              <li class="stp-item"><p class="stp-text">Anticiper via Fibonacci inversé : W2 corrige dans la ZOI.</p></li>
+              <li class="stp-item"><p class="stp-text">0.68 du Fibo inversé dans la ZOI : FC-68 validé.</p></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="stp-card" aria-labelledby="fibo-p5-title">
+          <figure class="stp-figure">
+            <a class="stp-thumb" href="/assets/images/setup/fibonacci-inverse/limite.png" target="_blank" rel="noopener">
+              <img src="/assets/images/setup/fibonacci-inverse/limite.png" alt="Placer la limite — Fibonacci inversé" loading="lazy" width="1600" height="1000">
+            </a>
+          </figure>
+          <div class="stp-content">
+            <h3 id="fibo-p5-title" class="stp-title">Partie 5 — Placer la limite</h3>
+            <ul class="stp-rules --plain" data-list>
+              <li class="stp-item"><p class="stp-text">Paramétrer PE, SL, Target (arrondir les pips en défaveur).</p></li>
+              <li class="stp-item"><p class="stp-text">Calculer la taille de position et placer l’ordre limite (MT4, cTrader).</p></li>
+              <li class="stp-item"><p class="stp-text">Alerte sur le PE (éviter de surveiller H24).</p></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="stp-card" aria-labelledby="fibo-p6-title">
+          <figure class="stp-figure">
+            <a class="stp-thumb" href="/assets/images/setup/fibonacci-inverse/declenche.png" target="_blank" rel="noopener">
+              <img src="/assets/images/setup/fibonacci-inverse/declenche.png" alt="Déclenché — Fibonacci inversé" loading="lazy" width="1600" height="1000">
+            </a>
+          </figure>
+          <div class="stp-content">
+            <h3 id="fibo-p6-title" class="stp-title">Partie 6 — Déclenché</h3>
+            <ul class="stp-rules --plain" data-list>
+              <li class="stp-item"><p class="stp-text">Alerte sur 1 % et passage au BreakEven à ce seuil.</p></li>
+              <li class="stp-item"><p class="stp-text">Alerte sur 0.618 : clôturer 1/3.</p></li>
+              <li class="stp-item"><p class="stp-text">Patienter…</p></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="stp-card" aria-labelledby="fibo-p7-title">
+          <figure class="stp-figure">
+            <a class="stp-thumb" href="/assets/images/setup/fibonacci-inverse/tp.png" target="_blank" rel="noopener">
+              <img src="/assets/images/setup/fibonacci-inverse/tp.png" alt="Encaisser — Fibonacci inversé" loading="lazy" width="1600" height="1000">
+            </a>
+          </figure>
+          <div class="stp-content">
+            <h3 id="fibo-p7-title" class="stp-title">Partie 7 — Encaisser</h3>
+            <ul class="stp-rules --plain" data-list>
+              <li class="stp-item"><p class="stp-text"><strong>1 % touché :</strong> descendre le SL au PE.</p></li>
+              <li class="stp-item"><p class="stp-text"><strong>0.618 touché :</strong> clôturer 1/3 et laisser courir.</p></li>
+              <li class="stp-item"><p class="stp-text"><strong>−0.27 touché :</strong> TP auto.</p></li>
+              <li class="stp-item"><p class="stp-text">Remplir le journal et faire le rapport mensuel.</p></li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- À RETENIR (fibo) -->
+    <section id="fibo-remember" class="reveal stp-sep" aria-labelledby="fiboRememberTitle">
+      <header class="section-head">
+        <h2 id="fiboRememberTitle">📌 À retenir — Fibonacci inversé</h2>
+        <p class="section-sub">Rappels rapides pour ce setup.</p>
+      </header>
+      <div class="mm-remember-grid">
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🧭</div><p class="mm-remember-text">Pas de M1/W1 big ou M5 en Daily.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🗺️</div><p class="mm-remember-text">Le P3 ne doit pas toucher la ZOI Daily avant le P5.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🧩</div><p class="mm-remember-text">Le prix doit être correctif.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">📐</div><p class="mm-remember-text">Avoir −0.27 ou −0.68 dans la ZOI Daily.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">⚖️</div><p class="mm-remember-text">PE −0.27 ⇒ SL sous/dessus −0.68 ou 1 % Daily.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🎯</div><p class="mm-remember-text">TP1 4H au 0.618 : clôturer 1/3.</p></article>
+      </div>
+    </section>
+
+    <!-- ===================================
+         SETUP 2 — PATTERN 4H
+    ==================================== -->
+    <section id="pattern4h" class="reveal stp-sep" aria-labelledby="patVideoTitle">
+      <header class="section-head">
+        <h2 id="patVideoTitle">Vidéo — Setup (Pattern 4H)</h2>
+        <p class="section-sub">Logique d’entrée, confirmations multi-UT, gestion du risque.</p>
+      </header>
+
+      
+
+      <div class="video-wrap" aria-label="Vidéo explicative du setup Pattern 4H">
+        <div class="video-frame">
+          <video controls preload="metadata" playsinline poster="/assets/images/posters/setup.png">
+            <source src="/assets/videos/setup-pattern-4h.mp4" type="video/mp4">
+            <source src="/assets/videos/setup-pattern-4h.webm" type="video/webm">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+          </video>
+        </div>
+        <p class="video-caption">Synthèse : critères d’entrée, confirmations multi-UT et alignement avec le money management.</p>
+      </div>
+    </section>
+
+    <header class="section-head stp-sep stp-sep--no-line">
+      <h2 id="patTitle">Les 7 parties du Setup — Pattern 4H (avec / sans cassure)</h2>
+      <p class="section-sub">Cas pour une entrée avec pattern avec et sans cassure.</p>
+    </header>
+
+    <section id="pat-parts" class="reveal stp-sep stp-one-per-line" aria-labelledby="patTitle">
+      <div class="stp-grid" aria-label="Grille des 7 parties — Pattern 4H">
+
+        <!-- P1 -->
+<article class="stp-card" aria-labelledby="pat-p1-title">
+  <figure class="stp-figure">
+    <a class="stp-thumb" href="/assets/images/setup/mw-with-without-bos/tendance-daily.png" target="_blank" rel="noopener" aria-label="Illustration Tendance Daily (Pattern 4H)">
+      <img src="/assets/images/setup/mw-with-without-bos/tendance-daily.png" alt="Tendance Daily — Pattern 4H" loading="lazy" width="1600" height="1000">
+    </a>
+  </figure>
+  <div class="stp-content">
+    <h3 id="pat-p1-title" class="stp-title">Partie 1 — Déterminer la tendance Daily</h3>
+    <ul class="stp-rules --plain" data-list>
+      <li class="stp-item"><p class="stp-text">Analyser la tendance sur ~5 derniers mois.</p></li>
+      <li class="stp-item"><p class="stp-text">Le dernier plus haut est plus récent que le dernier plus bas.</p></li>
+      <li class="stp-item"><p class="stp-text">Le dernier plus bas n’est pas cassé par le corps (mèches ignorées).</p></li>
+      <li class="stp-item"><p class="stp-text">Conclusion : tendance haussière.</p></li>
+    </ul>
+  </div>
+</article>
+
+<!-- P2 -->
+<article class="stp-card" aria-labelledby="pat-p2-title">
+  <figure class="stp-figure">
+    <a class="stp-thumb" href="/assets/images/setup/mw-with-without-bos/pattern-daily.png" target="_blank" rel="noopener" aria-label="Illustration Pattern Daily (Pattern 4H)">
+      <img src="/assets/images/setup/mw-with-without-bos/pattern-daily.png" alt="Pattern Daily — Pattern 4H" loading="lazy" width="1600" height="1000">
+    </a>
+  </figure>
+  <div class="stp-content">
+    <h3 id="pat-p2-title" class="stp-title">Partie 2 — Pattern haussier en Daily</h3>
+    <ul class="stp-rules --plain --compact" data-list>
+      <li class="stp-item"><p class="stp-text">Identifier un pattern dans le sens de la tendance.</p></li>
+      <li class="stp-item"><p class="stp-text">Tracer le Fibonacci.</p></li>
+      <li class="stp-item"><p class="stp-text">ZOI : première zone touchée entre 0.618 et 1.</p></li>
+      <li class="stp-item"><p class="stp-text">Ici, M1 small : M inférieur à 9/10 bougies.</p></li>
+      <li class="stp-item"><p class="stp-text">Vérifier les DATAs du tableau.</p></li>
+    </ul>
+  </div>
+</article>
+
+<!-- P3 -->
+<article class="stp-card" aria-labelledby="pat-p3-title">
+  <figure class="stp-figure">
+    <a class="stp-thumb" href="/assets/images/setup/mw-with-without-bos/weekly.png" target="_blank" rel="noopener" aria-label="Illustration Weekly (Pattern 4H)">
+      <img src="/assets/images/setup/mw-with-without-bos/weekly.png" alt="Weekly — Pattern 4H" loading="lazy" width="1600" height="1000">
+    </a>
+  </figure>
+  <div class="stp-content">
+    <h3 id="pat-p3-title" class="stp-title">Partie 3 — Analyse Weekly</h3>
+    <ul class="stp-rules --plain --compact" data-list>
+      <li class="stp-item"><p class="stp-text"><strong>S&amp;D Zone :</strong> neutre (ancienne zone trop loin) ⇒ (/).</p></li>
+      <li class="stp-item"><p class="stp-text"><strong>Tendance :</strong> haussière ⇒ (+).</p></li>
+      <li class="stp-item"><p class="stp-text"><strong>CC :</strong> corps bleu ⇒ (+).</p></li>
+      <li class="stp-item"><p class="stp-text"><strong>Pattern :</strong> pas de pattern actif ⇒ (/).</p></li>
+      <li class="stp-item"><p class="stp-text">Résultat : 2/4 à l’achat. Setup validé.</p></li>
+    </ul>
+  </div>
+</article>
+
+<!-- P4 -->
+<article class="stp-card" aria-labelledby="pat-p4-title">
+  <figure class="stp-figure">
+    <a class="stp-thumb" href="/assets/images/setup/mw-with-without-bos/entree-4h.png" target="_blank" rel="noopener" aria-label="Illustration Entrée 4H (Pattern 4H)">
+      <img src="/assets/images/setup/mw-with-without-bos/entree-4h.png" alt="Entrée 4H — Pattern 4H" loading="lazy" width="1600" height="1000">
+    </a>
+  </figure>
+  <div class="stp-content">
+    <h3 id="pat-p4-title" class="stp-title">Partie 4 — Entrée 4H (sans cassure)</h3>
+    <ul class="stp-rules --plain" data-list>
+      <li class="stp-item"><p class="stp-text">Attendre d’être dans la ZOI Daily avant 4H.</p></li>
+      <li class="stp-item"><p class="stp-text">Tracer Fibo : mèche P3 ↔ corps P0.</p></li>
+      <li class="stp-item"><p class="stp-text">Chercher le PE dans la zone 4H.</p></li>
+    </ul>
+  </div>
+</article>
+
+<!-- P5 -->
+<article class="stp-card" aria-labelledby="pat-p5-title">
+  <figure class="stp-figure">
+    <a class="stp-thumb" href="/assets/images/setup/mw-with-without-bos/limite.png" target="_blank" rel="noopener" aria-label="Illustration Limite (Pattern 4H)">
+      <img src="/assets/images/setup/mw-with-without-bos/limite.png" alt="Placer la limite — Pattern 4H" loading="lazy" width="1600" height="1000">
+    </a>
+  </figure>
+  <div class="stp-content">
+    <h3 id="pat-p5-title" class="stp-title">Partie 5 — Placer la limite</h3>
+    <ul class="stp-rules --plain" data-list>
+      <li class="stp-item"><p class="stp-text">PE, SL, Target (arrondir défavorablement).</p></li>
+      <li class="stp-item"><p class="stp-text">Calcul du lot, ordre limite (MT4, cTrader).</p></li>
+      <li class="stp-item"><p class="stp-text">Alerte sur le PE.</p></li>
+    </ul>
+  </div>
+</article>
+
+<!-- P6 -->
+<article class="stp-card" aria-labelledby="pat-p6-title">
+  <figure class="stp-figure">
+    <a class="stp-thumb" href="/assets/images/setup/mw-with-without-bos/declenche.png" target="_blank" rel="noopener" aria-label="Illustration Déclenché (Pattern 4H)">
+      <img src="/assets/images/setup/mw-with-without-bos/declenche.png" alt="Déclenché — Pattern 4H" loading="lazy" width="1600" height="1000">
+    </a>
+  </figure>
+  <div class="stp-content">
+    <h3 id="pat-p6-title" class="stp-title">Partie 6 — Déclenché</h3>
+    <ul class="stp-rules --plain" data-list>
+      <li class="stp-item"><p class="stp-text">Alerte 1 % → BreakEven.</p></li>
+      <li class="stp-item"><p class="stp-text">Alerte −0.27 : clôturer 1/3.</p></li>
+      <li class="stp-item"><p class="stp-text"><strong>BE 3 % touché :</strong> protection par palier (atteint 4 %, revient 3 %).</p></li>
+      <li class="stp-item"><p class="stp-text">Patienter…</p></li>
+    </ul>
+  </div>
+</article>
+
+<!-- P7 -->
+<article class="stp-card" aria-labelledby="pat-p7-title">
+  <figure class="stp-figure">
+    <a class="stp-thumb" href="/assets/images/setup/mw-with-without-bos/tp.png" target="_blank" rel="noopener" aria-label="Illustration TP (Pattern 4H)">
+      <img src="/assets/images/setup/mw-with-without-bos/tp.png" alt="Encaisser — Pattern 4H" loading="lazy" width="1600" height="1000">
+    </a>
+  </figure>
+  <div class="stp-content">
+    <h3 id="pat-p7-title" class="stp-title">Partie 7 — Encaisser</h3>
+    <ul class="stp-rules --plain" data-list>
+      <li class="stp-item"><p class="stp-text"><strong>1 % touché :</strong> SL au PE.</p></li>
+      <li class="stp-item"><p class="stp-text"><strong>−0.27 touché :</strong> clôturer 1/3, laisser tourner.</p></li>
+      <li class="stp-item"><p class="stp-text"><strong>BE 3 % :</strong> protection par palier (4 % → 3 %).</p></li>
+      <li class="stp-item"><p class="stp-text">Journal + rapport mensuel.</p></li>
+    </ul>
+  </div>
+</article>
+
+      </div>
+    </section>
+
+    <!-- À RETENIR (pattern 4H) -->
+    <section id="pat-remember" class="reveal stp-sep" aria-labelledby="patRememberTitle">
+      <header class="section-head">
+        <h2 id="patRememberTitle">📌 À retenir — Pattern 4H</h2>
+        <p class="section-sub">Rappels rapides.</p>
+      </header>
+      <div class="mm-remember-grid">
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🧭</div><p class="mm-remember-text">Pas de contre-tendance. Tendance claire.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🗺️</div><p class="mm-remember-text">ZOI Daily : 1ʳᵉ zone entre 0.618–1.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">⚖️</div><p class="mm-remember-text">Risque 1 % • RR ≥ 3,8 • BE à 1 %.</p></article>
+      </div>
+    </section>
+
+    <!-- ===================================
+         SETUP 3 — RALENTISSEMENT
+    ==================================== -->
+    <section id="ralentissement" class="reveal stp-sep" aria-labelledby="ralVideoTitle">
+      <header class="section-head">
+        <h2 id="ralVideoTitle">Vidéo — Setup (Ralentissement)</h2>
+        <p class="section-sub">Logique d’entrée, confirmations multi-UT, gestion du risque.</p>
+      </header>
+
+      <div class="video-wrap" aria-label="Vidéo explicative du setup Ralentissement">
+        <div class="video-frame">
+          <video controls preload="metadata" playsinline poster="/assets/images/posters/setup.png">
+            <source src="/assets/videos/setup-ralentissement.mp4" type="video/mp4">
+            <source src="/assets/videos/setup-ralentissement.webm" type="video/webm">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+          </video>
+        </div>
+        <p class="video-caption">Synthèse : critères d’entrée, confirmations multi-UT et alignement avec le money management.</p>
+      </div>
+    </section>
+
+
+    <header class="section-head stp-sep stp-sep--no-line">
+  <h2 id="ralTitle">Les 7 parties du Setup — Ralentissement</h2>
+  <p class="section-sub">Cas pour une entrée avec ralentissement.</p>
+</header>
+
+<section id="ral-parts" class="reveal stp-sep stp-one-per-line" aria-labelledby="ralTitle">
+  <div class="stp-grid" aria-label="Grille des 7 parties — Ralentissement">
+
+    <!-- P1 -->
+    <article class="stp-card" aria-labelledby="ral-p1-title">
+      <figure class="stp-figure">
+        <a class="stp-thumb" href="/assets/images/setup/ralentissement/tendance.png" target="_blank" rel="noopener" aria-label="Illustration Tendance Daily (Ralentissement)">
+          <img src="/assets/images/setup/ralentissement/tendance.png" alt="Tendance Daily — Ralentissement" loading="lazy" width="1600" height="1000">
+        </a>
+      </figure>
+      <div class="stp-content">
+        <h3 id="ral-p1-title" class="stp-title">Partie 1 — Déterminer la tendance Daily</h3>
+        <ul class="stp-rules --plain" data-list>
+          <li class="stp-item"><p class="stp-text">Analyser ~5 derniers mois.</p></li>
+          <li class="stp-item"><p class="stp-text">Le dernier plus haut est plus récent que le dernier plus bas.</p></li>
+          <li class="stp-item"><p class="stp-text">Le dernier plus bas n’est pas cassé par le corps.</p></li>
+          <li class="stp-item"><p class="stp-text">Conclusion : tendance haussière, chercher M ou IETE.</p></li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- P2 -->
+    <article class="stp-card" aria-labelledby="ral-p2-title">
+      <figure class="stp-figure">
+        <a class="stp-thumb" href="/assets/images/setup/ralentissement/pattern-daily.png" target="_blank" rel="noopener" aria-label="Illustration Pattern Daily (Ralentissement)">
+          <img src="/assets/images/setup/ralentissement/pattern-daily.png" alt="Pattern Daily — Ralentissement" loading="lazy" width="1600" height="1000">
+        </a>
+      </figure>
+      <div class="stp-content">
+        <h3 id="ral-p2-title" class="stp-title">Partie 2 — Pattern haussier en Daily</h3>
+        <ul class="stp-rules --plain --compact" data-list>
+          <li class="stp-item"><p class="stp-text">Identifier un pattern dans le sens de la tendance.</p></li>
+          <li class="stp-item"><p class="stp-text">Tracer le Fibonacci.</p></li>
+          <li class="stp-item"><p class="stp-text">ZOI au niveau du P2 (M4).</p></li>
+          <li class="stp-item"><p class="stp-text">M4 : si P1 = P3 alors P2 = P4.</p></li>
+          <li class="stp-item"><p class="stp-text">Respect des DATAs du tableau.</p></li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- P3 -->
+    <article class="stp-card" aria-labelledby="ral-p3-title">
+      <figure class="stp-figure">
+        <a class="stp-thumb" href="/assets/images/setup/ralentissement/weekly.png" target="_blank" rel="noopener" aria-label="Illustration Weekly (Ralentissement)">
+          <img src="/assets/images/setup/ralentissement/weekly.png" alt="Weekly — Ralentissement" loading="lazy" width="1600" height="1000">
+        </a>
+      </figure>
+      <div class="stp-content">
+        <h3 id="ral-p3-title" class="stp-title">Partie 3 — Analyse Weekly</h3>
+        <ul class="stp-rules --plain --compact" data-list>
+          <li class="stp-item"><p class="stp-text"><strong>S&amp;D Zone :</strong> sur support ⇒ (+).</p></li>
+          <li class="stp-item"><p class="stp-text"><strong>Tendance :</strong> haussière ⇒ (+).</p></li>
+          <li class="stp-item"><p class="stp-text"><strong>CC :</strong> corps rouge ⇒ (−).</p></li>
+          <li class="stp-item"><p class="stp-text"><strong>Pattern :</strong> pattern actif prêt à aller au P5 ⇒ (+).</p></li>
+          <li class="stp-item"><p class="stp-text">Résultat : 3/4 à l’achat. Setup validé.</p></li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- P4 -->
+    <article class="stp-card" aria-labelledby="ral-p4-title">
+      <figure class="stp-figure">
+        <a class="stp-thumb" href="/assets/images/setup/ralentissement/entree-4h.png" target="_blank" rel="noopener" aria-label="Illustration Entrée 4H (Ralentissement)">
+          <img src="/assets/images/setup/ralentissement/entree-4h.png" alt="Entrée 4H — Ralentissement" loading="lazy" width="1600" height="1000">
+        </a>
+      </figure>
+      <div class="stp-content">
+        <h3 id="ral-p4-title" class="stp-title">Partie 4 — Entrée 4H</h3>
+        <ul class="stp-rules --plain" data-list>
+          <li class="stp-item"><p class="stp-text">Déjà dans la ZOI Daily → passer en 4H.</p></li>
+          <li class="stp-item"><p class="stp-text">Tracer la zone de ralentissement : du corps le plus bas à la mèche la plus basse.</p></li>
+          <li class="stp-item"><p class="stp-text">Déclenchement sur la 4ᵉ bougie : préparer la limite.</p></li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- P5 -->
+    <article class="stp-card" aria-labelledby="ral-p5-title">
+      <figure class="stp-figure">
+        <a class="stp-thumb" href="/assets/images/setup/ralentissement/limite.png" target="_blank" rel="noopener" aria-label="Illustration Limite (Ralentissement)">
+          <img src="/assets/images/setup/ralentissement/limite.png" alt="Placer la limite — Ralentissement" loading="lazy" width="1600" height="1000">
+        </a>
+      </figure>
+      <div class="stp-content">
+        <h3 id="ral-p5-title" class="stp-title">Partie 5 — Placer la limite</h3>
+        <ul class="stp-rules --plain" data-list>
+          <li class="stp-item"><p class="stp-text">PE, SL, Target (arrondir en défaveur).</p></li>
+          <li class="stp-item"><p class="stp-text">Calcul du lot et ordre limite (MT4, cTrader).</p></li>
+          <li class="stp-item"><p class="stp-text">Alerte sur le PE (pas besoin de surveiller H24).</p></li>
+          <li class="stp-item"><p class="stp-text">Appliquer les règles du ralentissement (chapitre Analyse technique → Entrée 4H).</p></li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- P6 -->
+    <article class="stp-card" aria-labelledby="ral-p6-title">
+      <figure class="stp-figure">
+        <a class="stp-thumb" href="/assets/images/setup/ralentissement/declenche.png" target="_blank" rel="noopener" aria-label="Illustration Déclenché (Ralentissement)">
+          <img src="/assets/images/setup/ralentissement/declenche.png" alt="Déclenché — Ralentissement" loading="lazy" width="1600" height="1000">
+        </a>
+      </figure>
+      <div class="stp-content">
+        <h3 id="ral-p6-title" class="stp-title">Partie 6 — Déclenché</h3>
+        <ul class="stp-rules --plain" data-list>
+          <li class="stp-item"><p class="stp-text">Alerte 1 % → BreakEven.</p></li>
+          <li class="stp-item"><p class="stp-text">Alerte 0 Daily : clôturer 1/3.</p></li>
+          <li class="stp-item"><p class="stp-text">À peine déclenché : déjà sécurisé.</p></li>
+          <li class="stp-item"><p class="stp-text">Patienter…</p></li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- P7 -->
+    <article class="stp-card" aria-labelledby="ral-p7-title">
+      <figure class="stp-figure">
+        <a class="stp-thumb" href="/assets/images/setup/ralentissement/tp.png" target="_blank" rel="noopener" aria-label="Illustration TP (Ralentissement)">
+          <img src="/assets/images/setup/ralentissement/tp.png" alt="Encaisser — Ralentissement" loading="lazy" width="1600" height="1000">
+        </a>
+      </figure>
+      <div class="stp-content">
+        <h3 id="ral-p7-title" class="stp-title">Partie 7 — Encaisser</h3>
+        <ul class="stp-rules --plain" data-list>
+          <li class="stp-item"><p class="stp-text"><strong>1 % touché :</strong> SL au PE.</p></li>
+          <li class="stp-item"><p class="stp-text"><strong>BE 1 % :</strong> protection par palier (atteint 2 %, revenu 1 %).</p></li>
+          <li class="stp-item"><p class="stp-text">Journal + rapport fin de mois.</p></li>
+          <li class="stp-item"><p class="stp-text">PS : 1 % sur 200 000 $ = 2 000 $. Objectif réaliste : 0,5 %/semaine (~2 %/mois).</p></li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+    <!-- NAVIGATION -->
+    <nav class="chapter-cta" aria-label="Navigation chapitres">
+      <a href="/pages/money-management.html" class="btn btn-ghost">← Chapitre précédent — Money Management</a>
+      <a href="/pages/psychologie-discipline.html" class="btn btn-primary">Chapitre suivant — Psychologie &amp; Discipline →</a>
+    </nav>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p id="footerText">© 2026 — Wavest | Tous droits réservés</p>
+
+    <nav class="footer-links" aria-label="Liens légaux">
+      <a id="linkMentions" href="/Legal/mentions-legales.html">Mentions légales</a>
+      <a id="linkPrivacy"  href="/Legal/confidentialite.html">Confidentialité</a>
+      <a id="linkCookies" href="/Legal/cookies.html">Cookies</a>
+      <a id="linkCgv" href="/Legal/cgv.html">CGV</a>
+      <a href="#" data-open-cookie-banner="true">Gérer les cookies</a>
+    </nav>
+
+    <p>
+      <a href="mailto:contact@wavest.fr" class="mail-link" id="footerMail" title="Envoyer un email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 12h16V8l-8 7-8-7v10z"/>
+        </svg>
+        <span id="footerMailText">Contact</span>
+      </a>
+    </p>
+  </footer>
+
+  <script src="/js/app.js?v=6" defer></script>
+</body>
+</html>
+
