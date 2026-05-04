@@ -58,12 +58,21 @@ body.dark.page-setup{
 body.page-setup{
   background: var(--setup-bg);
   color: var(--setup-ink);
+
+  /* ✅ sécurité anti overflow iPhone */
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body.page-setup .chapter{
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+
+  /* ✅ important pour que les enfants flex/grid ne débordent pas */
+  min-width: 0;
 }
 
 body.page-setup section{
@@ -120,6 +129,11 @@ body.page-setup section{
   grid-template-columns: repeat(3,1fr);
   gap: 16px;
   align-items: stretch;
+
+  /* ✅ sécurité iPhone */
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 @media (max-width:1200px){ .stp-grid{ grid-template-columns: repeat(2,1fr); } }
 @media (max-width:960px){  .stp-grid{ grid-template-columns: 1fr; } }
@@ -140,6 +154,11 @@ body.page-setup section{
   -webkit-backdrop-filter: var(--bf-card);
 
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+
+  /* ✅ sécurité iPhone */
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 @media (hover:hover){
@@ -161,7 +180,13 @@ body.page-setup section{
 }
 
 /* ===================== MEDIA ===================== */
-.stp-figure{ margin:0; }
+.stp-figure{
+  margin:0;
+
+  /* ✅ important (sinon flex peut déborder sur iPhone) */
+  min-width: 0;
+  max-width: 100%;
+}
 
 .stp-thumb{
   display:block;
@@ -171,18 +196,27 @@ body.page-setup section{
 
   aspect-ratio: 16/9;
   background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.06));
+
+  /* ✅ sécurité iPhone */
+  width: 100%;
+  max-width: 100%;
 }
 
 .stp-thumb img{
   width:100%;
   height:100%;
-  object-fit: cover;
   display:block;
   transition: transform .35s ease;
+
+  /* ✅ choix final : pas de bandes noires */
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.10);
+  transform-origin: center;
 }
 
 @media (hover:hover){
-  .stp-thumb:hover img{ transform: scale(1.02); }
+  .stp-thumb:hover img{ transform: scale(1.12); }
 }
 
 .stp-thumb:focus-visible{ box-shadow: var(--focus-ring); }
@@ -215,10 +249,15 @@ body.page-setup section{
   align-items:center;
   gap: 10px;
   min-height: 32px;
+
+  /* ✅ évite débordements */
+  min-width: 0;
 }
 
 .stp-text{
   margin:0;
+
+  /* ✅ sur mobile, laisse respirer plutôt que forcer 1 ligne */
   overflow:hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -245,16 +284,26 @@ body.page-setup section{
   padding: 20px;
   border-radius: var(--r-lg);
   gap: 18px;
+
+  /* ✅ sécurité */
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .stp-one-per-line .stp-figure{
   flex: 0 0 clamp(260px,38vw,420px);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .stp-one-per-line .stp-thumb{
   height: 100%;
   aspect-ratio: 16/10;
   min-height: 260px;
+
+  width: 100%;
+  max-width: 100%;
 }
 
 .stp-one-per-line .stp-content{
@@ -263,6 +312,8 @@ body.page-setup section{
   flex-direction:column;
   justify-content:center;
   gap: 12px;
+
+  min-width: 0;
 }
 
 /* Passe en colonne plus tôt (évite le layout cassé entre 860 et 1000px) */
@@ -284,6 +335,7 @@ body.page-setup section{
 .stp-one-per-line .stp-figure,
 .stp-one-per-line .stp-content{
   min-width: 0;
+  max-width: 100%;
 }
 
 /* ===================== À RETENIR ===================== */
@@ -309,6 +361,10 @@ body.page-setup section{
 
   backdrop-filter: var(--bf-card);
   -webkit-backdrop-filter: var(--bf-card);
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .mm-remember-icon{ font-size:18px; }
@@ -327,6 +383,8 @@ body.page-setup section{
 
   backdrop-filter: var(--bf-card);
   -webkit-backdrop-filter: var(--bf-card);
+
+  width: 100%;
 }
 .video-frame{
   position: relative;
@@ -364,6 +422,8 @@ body.page-setup section{
   padding: 26px 22px;
   position: relative;
   overflow: hidden;
+
+  min-width: 0;
 }
 
 #sommaire .card::before{
@@ -437,6 +497,8 @@ body.page-setup section{
   padding: 10px 14px;
 
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+
+  min-width: 0;
 }
 
 body.page-setup.dark #sommaire .sub-list a,
@@ -495,35 +557,47 @@ html.js .reveal.visible{
   }
 }
 
-
-/* Screenshots trading : ne pas rogner */
-body.page-setup .stp-thumb{
-  background: var(--media-bg);
-}
-body.page-setup .stp-thumb img{
-  object-fit: contain;
-}
-
-
 /* =========================================
-   FIX — Enlever les bandes noires des images
-   (crop léger + centrage)
+   ✅ FIX iPhone (centrage + full width)
+   (à garder en fin de fichier)
 ========================================= */
-body.page-setup .stp-thumb{
-  background: transparent;
+@media (max-width: 640px){
+  body.page-setup .stp-one-per-line .stp-card{
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  body.page-setup .stp-one-per-line .stp-figure{
+    width: 100% !important;
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    display: flex;
+    justify-content: center;
+  }
+
+  body.page-setup .stp-one-per-line .stp-thumb{
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  body.page-setup .stp-one-per-line .stp-thumb img{
+    max-width: 100%;
+    display: block;
+  }
 }
 
-body.page-setup .stp-thumb img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transform: scale(1.10);
-  transform-origin: center;
-}
-
+/* petit ajustement scale sur petits écrans */
 @media (max-width: 860px){
   body.page-setup .stp-thumb img{
     transform: scale(1.06);
   }
+}
+
+
+/* Chapitre 5 : header non sticky */
+body.page-setup .site-header{
+  position: static !important;
 }
