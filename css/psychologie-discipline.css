@@ -1,48 +1,32 @@
 /* =========================================================
-   CHAPITRE 6 — Psychologie & Discipline (Mindvest Premium)
-   - Thème clair/sombre cohérent
-   - Cartes glass harmonisées
-   - Texte lisible (aucun conflit de contraste)
-   - Mode sombre fiable + toggle compatible
+   CHAPITRE 6 — Psychologie & Discipline
+   S'appuie sur les tokens globaux de /css/styles.css
+   (--bg, --card, --text, --muted, --line, --link, --link-strong,
+   --glass-card, --glass-soft, --radius-lg, --radius-md, --bf-card...)
 ========================================================= */
 
-/* ===================== TOKENS ===================== */
+/* ===================== TOKENS locaux (aliases vers le global) ===================== */
 body.page-psy {
-  /* 🌞 Mode clair */
-  --psy-bg: #f6f6f7;
-  --psy-ink: #111418;
-  --psy-muted: #5a5a5a;
+  /* Alias vers les tokens globaux : le mode sombre suit automatiquement
+     le bouton de thème du site (body.dark), plus besoin de bloc séparé
+     ni de @media (prefers-color-scheme) qui ignorerait ce choix manuel. */
+  --psy-bg: var(--bg);
+  --psy-ink: var(--text);
+  --psy-muted: var(--muted);
 
-  /* Glass card */
-  --card-bg: rgba(255,255,255,0.72);
-  --card-brd: color-mix(in oklab, #8c8ca0 28%, transparent);
-  --card-shadow: 0 6px 24px rgba(0,0,0,.12);
+  --card-bg: var(--glass-card);
+  --card-brd: var(--glass-card-border);
+  --card-shadow: var(--shadow);
 
-  /* Divers */
-  --hairline: rgba(140,140,160,.25);
-  --media-bg: #0f0f10;
+  --hairline: var(--line);
+  --media-bg: #0b0d12;
 
-  /* Accent Mindvest */
-  --primary: var(--mv-primary, #4A90E2);
-  --accent: var(--mv-accent,  #2dd4bf);
+  --primary: var(--link);
+  --accent: var(--link-strong);
 
-  /* Rayons / blur */
-  --r-sm: 12px; --r-md: 16px; --r-lg: 20px;
-  --bf-card: saturate(140%) blur(8px);
-}
-
-/* 🌙 Mode sombre activé (via classe .dark) */
-body.page-psy.dark {
-  --psy-bg: #0f0f10;
-  --psy-ink: #ececec;
-  --psy-muted: #bcbcbc;
-
-  --card-bg: rgba(18,18,18,.70);
-  --card-brd: rgba(255,255,255,.10);
-  --card-shadow: 0 10px 28px rgba(0,0,0,.55);
-
-  --hairline: rgba(255,255,255,.12);
-  --media-bg: #080808;
+  --r-sm: 12px;
+  --r-md: var(--radius-md);
+  --r-lg: var(--radius-lg);
 }
 
 /* ===================== PAGE ===================== */
@@ -63,11 +47,11 @@ body.page-psy section {
 }
 
 /* ===================== HEADER ===================== */
-.site-header {
+.page-psy .site-header {
   text-align: center;
   padding: 60px 20px 40px;
 }
-.site-header h1 {
+.page-psy .site-header h1 {
   font-size: clamp(22px,1.5vw + 14px,28px);
   font-weight: 800;
   background: linear-gradient(90deg, var(--primary), var(--accent));
@@ -80,6 +64,7 @@ body.page-psy section {
   font-style: italic;
   color: var(--psy-muted);
   margin: 12px 0 18px;
+  text-align: center;
 }
 .header-actions .btn {
   font-size: 14.5px;
@@ -121,6 +106,7 @@ body.page-psy section {
   line-height: 1.55;
   font-size: 15px;
   margin-bottom: 14px;
+  color: var(--psy-ink);
 }
 
 /* Liste interne */
@@ -130,7 +116,7 @@ body.page-psy section {
   display: grid; gap: 8px;
 }
 .rules li {
-  background: rgba(255,255,255,0.55);
+  background: var(--glass-soft);
   border: 1px solid var(--card-brd);
   border-radius: 12px;
   padding: 10px 14px;
@@ -158,6 +144,7 @@ body.page-psy section {
   border-radius: var(--r-md);
   box-shadow: var(--card-shadow);
   backdrop-filter: var(--bf-card);
+  -webkit-backdrop-filter: var(--bf-card);
 }
 .psy-quote p {
   font-size: 18px;
@@ -214,7 +201,7 @@ body.page-psy section {
 .coach-preview {
   padding: 12px 16px;
   border-radius: 12px;
-  background: rgba(255,255,255,0.65);
+  background: var(--glass-soft);
   border: 1px solid var(--card-brd);
   font-size: 15px;
   color: var(--psy-ink);
@@ -230,6 +217,7 @@ body.page-psy section {
   border: 1px solid var(--card-brd);
   box-shadow: var(--card-shadow);
   backdrop-filter: var(--bf-card);
+  -webkit-backdrop-filter: var(--bf-card);
 }
 .video-frame {
   aspect-ratio: 16 / 9;
@@ -254,40 +242,6 @@ body.page-psy section {
   #retenir .rules.highlight li { flex: 1 1 100%; }
   .hero-cta { flex-direction: column; gap: 10px; }
 }
-
-/* =========================================================
-   🌙 FIX MODE SOMBRE (force)
-   ========================================================= */
-@media (prefers-color-scheme: dark) {
-  body.page-psy,
-  .dark .page-psy {
-    background: var(--psy-bg);
-    color: var(--psy-ink);
-  }
-  .rules-block, .psy-quote, .coach-card, .coach-preview, .video-wrap {
-    background: var(--card-bg);
-    border: 1px solid var(--card-brd);
-    box-shadow: var(--card-shadow);
-  }
-  .rules li {
-    background: rgba(255,255,255,0.08);
-    border-color: rgba(255,255,255,0.12);
-    color: var(--psy-ink);
-  }
-  .rules li:hover {
-    background: rgba(255,255,255,0.15);
-    box-shadow: 0 6px 18px rgba(110,168,254,0.35);
-  }
-  .psy-quote p, .rule-text, .coach-preview, .section-sub {
-    color: var(--psy-ink);
-  }
-}
-
-
-.chapter-quote {
-    text-align: center;
-}
-
 
 /* ===================== FIX PLEIN ÉCRAN (pas de rognage) ===================== */
 video:fullscreen{

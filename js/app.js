@@ -54,6 +54,8 @@
     /* ============================================================
        🌙 THEME (global)
        - Support iOS: addListener fallback
+       - Icônes SVG (soleil/lune) gérées en CSS via body.dark,
+         ce script ne fait que basculer la classe + mémoriser + a11y
     ============================================================ */
     (function initTheme() {
       const root = document.body;
@@ -79,7 +81,12 @@
       function applyTheme(mode) {
         const isDark = mode === "dark";
         root.classList.toggle("dark", isDark);
-        if (btn) btn.textContent = isDark ? "☀️" : "🌙";
+        if (btn) {
+          btn.setAttribute(
+            "aria-label",
+            isDark ? "Passer en thème clair" : "Passer en thème sombre"
+          );
+        }
       }
 
       applyTheme(initial);
@@ -279,6 +286,25 @@
       });
 
       restoreAccordionState();
+
+      // Ouverture automatique si on arrive avec un lien du type
+      // "index.html#tools" ou "index.html#chapters" — un ancrage HTML
+      // scrolle jusqu'à la section mais n'ouvre pas l'accordéon tout seul.
+      try {
+        if (location.hash && location.hash.length > 1) {
+          const targetId = decodeURIComponent(location.hash.slice(1));
+          const targetSection = document.getElementById(targetId);
+          const btn = targetSection ? targetSection.querySelector(".acc-btn") : null;
+
+          if (btn && accButtons.includes(btn) && btn.getAttribute("aria-expanded") !== "true") {
+            closeAllExcept(btn);
+            const panel = getPanelFor(btn);
+            btn.setAttribute("aria-expanded", "true");
+            if (panel) panel.hidden = false;
+            persistOpenPanelId(panel ? panel.id : null);
+          }
+        }
+      } catch {}
     })();
 
     /* ============================================================

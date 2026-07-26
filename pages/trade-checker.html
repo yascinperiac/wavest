@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trade Checker — Wavest</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png?v=2">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png?v=2">
+  <link rel="shortcut icon" href="../favicon.ico?v=2">
+  <meta name="description" content="Trade Checker Wavest : valide ton setup de trading (contexte Daily, Weekly, confirmation 4H et règles) avant de l'exécuter.">
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/trade-checker.css" />
+
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f0f10" media="(prefers-color-scheme: dark)">
+</head>
+<body class="page-trade-checker">
+
+  <!-- === HEADER === -->
+  <header class="site-header">
+    <h1>Trade Checker</h1>
+    <div class="header-actions">
+      <a href="../index.html#chapters" class="btn btn-ghost">← Sommaire</a>
+    </div>
+  </header>
+
+  <main class="container tc-wide" id="content">
+
+    <!-- INTRO -->
+    <section class="hero reveal" aria-label="Trade Checker">
+      <p id="heroText">Valide rapidement un setup selon ton contexte Daily, ta confirmation 4H et tes statistiques backtestées.</p>
+    </section>
+
+
+    <!-- VIDÉO TUTORIEL -->
+    <div class="tool-video-wrap reveal">
+      <p class="tool-video-title">🎥 Tutoriel vidéo</p>
+      <div class="tool-video-frame">
+        <video controls preload="metadata" poster="../assets/images/posters/trade-checker.svg">
+        <source src="../assets/videos/trade-checker.mp4" type="video/mp4">
+      </video>
+      </div>
+    </div>
+
+
+    <!-- OUTIL -->
+    <div class="tc-app reveal">
+      <div class="tc-shell">
+
+        <div class="tc-toolbar">
+          <button id="resetBtn" class="btn-premium" type="button">
+            ↻ Nouveau setup
+          </button>
+        </div>
+
+        <section class="hero-card">
+          <div class="hero-card__glow"></div>
+
+          <div class="hero-grid">
+            <!-- COLONNE GAUCHE -->
+            <div class="checker-column">
+
+              <!-- 1. CONTEXTE DAILY -->
+              <section class="card section-card tone-daily">
+                <div class="section-title">
+                  <span class="section-badge">1</span>
+                  <div>
+                    <p class="mod-tag">Étape 1 <em>· Daily</em></p>
+                    <h2>Contexte Daily</h2>
+                    <p>Définis la tendance et le pattern principal.</p>
+                  </div>
+                </div>
+
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="dailyTrend">Tendance Daily</label>
+                    <select id="dailyTrend">
+                      <option value="">Sélectionner</option>
+                      <option value="Haussière">Haussière</option>
+                      <option value="Baissière">Baissière</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="dailyPattern">Pattern Daily</label>
+                    <select id="dailyPattern">
+                      <option value="">Sélectionner</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="patternDirection">Sens du pattern</label>
+                    <input id="patternDirection" type="text" readonly />
+                  </div>
+
+                  <div class="field">
+                    <label>Validation Daily</label>
+                    <div id="dailyValidation" class="status-box neutral">
+                      En attente
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 2. VALIDATION WEEKLY -->
+              <section class="card section-card tone-weekly">
+                <div class="section-title">
+                  <span class="section-badge">2</span>
+                  <div>
+                    <p class="mod-tag">Étape 2 <em>· Weekly</em></p>
+                    <h2>Validation Weekly</h2>
+                    <p>Confirme que le contexte Weekly soutient le setup.</p>
+                  </div>
+                </div>
+
+                <div class="form-grid two-cols">
+                  <div class="field">
+                    <label for="weeklyFav">Weekly favorable ?</label>
+                    <select id="weeklyFav">
+                      <option value="">Sélectionner</option>
+                      <option value="Oui">Oui</option>
+                      <option value="Non">Non</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label>Validation Weekly</label>
+                    <div id="weeklyValidation" class="status-box neutral">
+                      En attente
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 3. CONFIRMATION 4H -->
+              <section class="card section-card tone-confirm">
+                <div class="section-title">
+                  <span class="section-badge">3</span>
+                  <div>
+                    <p class="mod-tag">Étape 3 <em>· Confirmation 4H</em></p>
+                    <h2>Confirmation 4H</h2>
+                    <p>Choisis la confirmation compatible avec le pattern Daily.</p>
+                  </div>
+                </div>
+
+                <div class="form-grid two-cols">
+                  <div class="field">
+                    <label for="confirmation4h">Confirmation 4H</label>
+                    <select id="confirmation4h">
+                      <option value="">Choisir un pattern Daily d’abord</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label>Validation 4H</label>
+                    <div id="validation4h" class="status-box neutral">
+                      En attente
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 4. RÈGLES 4H -->
+              <section class="card section-card tone-rules">
+                <div class="section-title">
+                  <span class="section-badge">4</span>
+                  <div>
+                    <p class="mod-tag">Étape 4 <em>· Règles 4H</em></p>
+                    <h2>Règles 4H</h2>
+                    <p>Valide uniquement les règles affichées pour cette confirmation.</p>
+                  </div>
+                </div>
+
+                <div class="rules-wrapper">
+                  <div class="rules-head">
+                    <span>Liste des règles</span>
+                    <span>Respectées ?</span>
+                  </div>
+
+                  <div id="rulesList" class="rules-list">
+                    <div class="rule-row">
+                      <div class="rule-name">
+                        Sélectionne une confirmation 4H pour afficher les règles.
+                      </div>
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rules-footer">
+                  <div id="rulesValidation" class="status-box neutral full">
+                    En attente des règles
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- COLONNE DROITE -->
+            <aside class="stats-column">
+
+              <!-- VERDICT FINAL -->
+              <section class="card verdict-card">
+                <div class="section-title">
+                  <span class="section-badge verdict">✓</span>
+                  <div>
+                    <p class="mod-tag">Résultat <em>· en direct</em></p>
+                    <h2>Verdict final</h2>
+                    <p>Décision automatique selon tes validations.</p>
+                  </div>
+                </div>
+
+                <div id="finalVerdict" class="verdict-box pending">
+                  En attente
+                </div>
+              </section>
+
+              <!-- DATA DU SETUP -->
+              <section class="card stats-card tone-stats">
+                <div class="section-title">
+                  <span class="section-badge stats">📊</span>
+                  <div>
+                    <p class="mod-tag">Statistiques <em>· backtest</em></p>
+                    <h2>Data du setup</h2>
+                    <p>Lecture instantanée du combo sélectionné.</p>
+                  </div>
+                </div>
+
+                <div class="radar-widget">
+                  <div class="radar-label radar-label-top">
+                    <strong id="radarWinrateValue">-</strong>
+                    <span>Winrate</span>
+                  </div>
+
+                  <div class="radar-label radar-label-ul">
+                    <strong id="radarMaitriseValue">-</strong>
+                    <span>Maîtrise</span>
+                  </div>
+
+                  <div class="radar-label radar-label-ur">
+                    <strong id="radarRRValue">-</strong>
+                    <span>RR moyen</span>
+                  </div>
+
+                  <div class="radar-svg-wrap">
+                    <svg class="radar-svg" viewBox="0 0 200 200">
+                      <polygon class="radar-grid" points="100,15 173.6,57.5 173.6,142.5 100,185 26.4,142.5 26.4,57.5"></polygon>
+                      <polygon class="radar-grid" points="100,43.3 149.1,71.65 149.1,128.35 100,156.7 50.9,128.35 50.9,71.65"></polygon>
+                      <polygon class="radar-grid" points="100,71.7 124.5,85.85 124.5,114.15 100,128.3 75.5,114.15 75.5,85.85"></polygon>
+                      <line class="radar-axis" x1="100" y1="100" x2="100" y2="15"></line>
+                      <line class="radar-axis" x1="100" y1="100" x2="173.6" y2="57.5"></line>
+                      <line class="radar-axis" x1="100" y1="100" x2="173.6" y2="142.5"></line>
+                      <line class="radar-axis" x1="100" y1="100" x2="100" y2="185"></line>
+                      <line class="radar-axis" x1="100" y1="100" x2="26.4" y2="142.5"></line>
+                      <line class="radar-axis" x1="100" y1="100" x2="26.4" y2="57.5"></line>
+                      <polygon id="radarDataPolygon" class="radar-data" points="100,100 100,100 100,100 100,100 100,100 100,100"></polygon>
+                    </svg>
+                  </div>
+
+                  <div class="radar-label radar-label-ll">
+                    <strong id="radarVolumeValue">-</strong>
+                    <span>Volume</span>
+                  </div>
+
+                  <div class="radar-label radar-label-lr">
+                    <strong id="radarScoreValue">-</strong>
+                    <span>Score</span>
+                  </div>
+
+                  <div class="radar-label radar-label-bottom">
+                    <strong id="radarGainValue">-</strong>
+                    <span>Gain total</span>
+                  </div>
+                </div>
+
+                <div class="stats-list">
+                  <div class="stat-row">
+                    <span>Combo analysé</span>
+                    <strong id="comboAnalyse">-</strong>
+                  </div>
+
+                  <div class="stat-row">
+                    <span>Nb trades</span>
+                    <strong id="nbTrades">-</strong>
+                  </div>
+
+                  <div class="stat-row">
+                    <span>Winrate</span>
+                    <strong id="winrate">-</strong>
+                  </div>
+
+                  <div class="stat-row">
+                    <span>RR moyen</span>
+                    <strong id="rrMoyen">-</strong>
+                  </div>
+
+                  <div class="stat-row">
+                    <span>Gain total</span>
+                    <strong id="gainTotal">-</strong>
+                  </div>
+
+                  <div class="stat-row">
+                    <span>Score</span>
+                    <strong id="score">-</strong>
+                  </div>
+                </div>
+
+                <div class="reading-block">
+                  <h3>Lecture data</h3>
+
+                  <div class="reading-list">
+                    <div id="readNbTrades" class="reading-pill neutral">
+                      Nb trades : -
+                    </div>
+
+                    <div id="readWinrate" class="reading-pill neutral">
+                      Winrate : -
+                    </div>
+
+                    <div id="readRR" class="reading-pill neutral">
+                      RR : -
+                    </div>
+
+                    <div id="readGain" class="reading-pill neutral">
+                      Gain : -
+                    </div>
+
+                    <div id="readScore" class="reading-pill neutral">
+                      Score : -
+                    </div>
+
+                    <div id="readGlobal" class="reading-pill neutral">
+                      Lecture globale : -
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- MODALE CONFIRMATION RESET -->
+      <div id="resetModalOverlay" class="modal-overlay" hidden>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="resetModalTitle">
+          <h3 id="resetModalTitle">Nouveau setup ?</h3>
+          <p>Ton analyse en cours sera effacée. Tu ne pourras pas la récupérer.</p>
+          <div class="modal-actions">
+            <button id="resetCancelBtn" class="tc-btn-ghost" type="button">Annuler</button>
+            <button id="resetConfirmBtn" class="btn-premium" type="button">Réinitialiser</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p id="footerText">© 2026 — Wavest | Tous droits réservés</p>
+
+    <nav class="footer-links" aria-label="Liens légaux">
+      <a id="linkMentions" href="../Legal/mentions-legales.html">Mentions légales</a>
+      <a id="linkPrivacy"  href="../Legal/confidentialite.html">Confidentialité</a>
+      <a id="linkCookies" href="../Legal/cookies.html">Cookies</a>
+      <a id="linkCgv" href="../Legal/cgv.html">CGV</a>
+      <a href="#" data-open-cookie-banner="true">Gérer les cookies</a>
+    </nav>
+
+    <p>
+      <a href="mailto:contact@wavest.fr" class="mail-link" id="footerMail" title="Envoyer un email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+             viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 12h16V8l-8 7-8-7v10z"/>
+        </svg>
+        <span id="footerMailText">Contact</span>
+      </a>
+    </p>
+  </footer>
+
+  <script src="../js/app.js" defer></script>
+  <script src="../js/trade-checker.js" defer></script>
+</body>
+</html>

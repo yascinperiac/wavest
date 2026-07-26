@@ -1,57 +1,33 @@
 /* =========================================================
-   CHAPITRE 5 — Setup (Wavest / Mindvest style)
-   - Thème clair/sombre fiable
-   - Cartes "glass"
-   - Grille responsive
-   - Vidéo responsive
-   - Sections "À retenir"
-   - Sommaire accordéon glass
-   - Reveal SAFE (pas d'écran blanc si JS foire)
+   CHAPITRE 5 — Setup
+   S'appuie sur les tokens globaux de /css/styles.css
+   (--bg, --card, --text, --muted, --line, --link, --link-strong,
+   --glass-card, --glass-soft, --radius-lg, --radius-md, --bf-card...)
 ========================================================= */
 
-/* ===================== TOKENS (fallbacks sûrs) ===================== */
+/* ===================== TOKENS locaux (aliases vers le global) ===================== */
 body.page-setup{
-  /* Light */
-  --setup-bg:    #f6f6f7;
-  --setup-ink:   #111418;
-  --setup-muted: #5a5a5a;
+  /* Alias vers les tokens globaux : le mode sombre suit automatiquement,
+     plus besoin d'un bloc body.dark séparé ici. */
+  --setup-bg:    var(--bg);
+  --setup-ink:   var(--text);
+  --setup-muted: var(--muted);
 
-  /* Glass card */
-  --card-bg:     rgba(255,255,255,.72);
-  --card-brd:    color-mix(in oklab, #8c8ca0 28%, transparent);
-  --card-shadow: 0 6px 24px rgba(0,0,0,.12);
+  --card-bg:     var(--glass-card);
+  --card-brd:    var(--glass-card-border);
+  --card-shadow: var(--shadow);
 
-  /* Traits / médias */
-  --hairline: rgba(140,140,160,.25);
-  --media-bg: #0f0f10;
+  --hairline: var(--line);
+  --media-bg: #0b0d12;
 
-  /* Accents */
-  --primary: var(--mv-primary, #4A90E2);
-  --accent:  var(--mv-accent,  #2dd4bf);
+  --primary: var(--link);
+  --accent:  var(--link-strong);
 
-  /* Rayons / blur */
   --r-sm: 12px;
-  --r-md: 16px;
-  --r-lg: 20px;
-  --bf-card: saturate(140%) blur(8px);
+  --r-md: var(--radius-md);
+  --r-lg: var(--radius-lg);
 
-  /* Focus */
   --focus-ring: 0 0 0 3px color-mix(in oklab, var(--primary) 55%, transparent);
-}
-
-/* 🌙 Dark mode (supporte body.dark OU body.page-setup.dark) */
-body.page-setup.dark,
-body.dark.page-setup{
-  --setup-bg:    #0f0f10;
-  --setup-ink:   #ececec;
-  --setup-muted: #bcbcbc;
-
-  --card-bg:     rgba(18,18,18,.70);
-  --card-brd:    rgba(255,255,255,.10);
-  --card-shadow: 0 10px 28px rgba(0,0,0,.55);
-
-  --hairline: rgba(255,255,255,.12);
-  --media-bg: #080808;
 }
 
 /* ===================== PAGE ===================== */
@@ -59,7 +35,7 @@ body.page-setup{
   background: var(--setup-bg);
   color: var(--setup-ink);
 
-  /* ✅ sécurité anti overflow iPhone */
+  /* sécurité anti overflow iPhone */
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
@@ -70,8 +46,6 @@ body.page-setup .chapter{
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-
-  /* ✅ important pour que les enfants flex/grid ne débordent pas */
   min-width: 0;
 }
 
@@ -129,8 +103,6 @@ body.page-setup section{
   grid-template-columns: repeat(3,1fr);
   gap: 16px;
   align-items: stretch;
-
-  /* ✅ sécurité iPhone */
   width: 100%;
   max-width: 100%;
   min-width: 0;
@@ -138,7 +110,7 @@ body.page-setup section{
 @media (max-width:1200px){ .stp-grid{ grid-template-columns: repeat(2,1fr); } }
 @media (max-width:960px){  .stp-grid{ grid-template-columns: 1fr; } }
 
-/* ===================== CARTES (glass) ===================== */
+/* ===================== CARTES ===================== */
 .stp-card{
   display:flex;
   flex-direction:column;
@@ -155,7 +127,6 @@ body.page-setup section{
 
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 
-  /* ✅ sécurité iPhone */
   width: 100%;
   max-width: 100%;
   min-width: 0;
@@ -164,7 +135,7 @@ body.page-setup section{
 @media (hover:hover){
   .stp-card:hover{
     transform: translateY(-4px);
-    box-shadow: 0 12px 34px rgba(0,0,0,.18);
+    box-shadow: 0 14px 30px rgba(60,55,40,.12);
   }
 }
 
@@ -182,8 +153,6 @@ body.page-setup section{
 /* ===================== MEDIA ===================== */
 .stp-figure{
   margin:0;
-
-  /* ✅ important (sinon flex peut déborder sur iPhone) */
   min-width: 0;
   max-width: 100%;
 }
@@ -195,9 +164,8 @@ body.page-setup section{
   position:relative;
 
   aspect-ratio: 16/9;
-  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.06));
+  background: var(--bg-soft, rgba(74,134,200,.05));
 
-  /* ✅ sécurité iPhone */
   width: 100%;
   max-width: 100%;
 }
@@ -208,7 +176,6 @@ body.page-setup section{
   display:block;
   transition: transform .35s ease;
 
-  /* ✅ choix final : pas de bandes noires */
   object-fit: cover;
   object-position: center;
   transform: scale(1.10);
@@ -221,7 +188,7 @@ body.page-setup section{
 
 .stp-thumb:focus-visible{ box-shadow: var(--focus-ring); }
 
-/* léger glow */
+/* léger glow au survol */
 .stp-thumb::after{
   content:"";
   position:absolute;
@@ -249,22 +216,17 @@ body.page-setup section{
   align-items:center;
   gap: 10px;
   min-height: 32px;
-
-  /* ✅ évite débordements */
   min-width: 0;
 }
 
 .stp-text{
   margin:0;
-
-  /* ✅ sur mobile, laisse respirer plutôt que forcer 1 ligne */
   overflow:hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   opacity: .95;
 }
 
-/* si tu veux une ligne qui wrap : ajoute class="stp-item --wrap" */
 .stp-item.--wrap .stp-text{
   white-space: normal;
   display: -webkit-box;
@@ -285,7 +247,6 @@ body.page-setup section{
   border-radius: var(--r-lg);
   gap: 18px;
 
-  /* ✅ sécurité */
   width: 100%;
   max-width: 100%;
   min-width: 0;
@@ -316,7 +277,6 @@ body.page-setup section{
   min-width: 0;
 }
 
-/* Passe en colonne plus tôt (évite le layout cassé entre 860 et 1000px) */
 @media (max-width: 1024px){
   .stp-one-per-line .stp-card{
     flex-direction: column;
@@ -331,7 +291,6 @@ body.page-setup section{
   }
 }
 
-/* IMPORTANT : empêche flex de “déborder” horizontalement */
 .stp-one-per-line .stp-figure,
 .stp-one-per-line .stp-content{
   min-width: 0;
@@ -395,6 +354,7 @@ body.page-setup section{
   margin: 10px 12px 14px;
   opacity: .85;
   font-size: 13.5px;
+  color: var(--setup-muted);
 }
 
 /* ===================== SOMMAIRE (accordéon) ===================== */
@@ -431,7 +391,7 @@ body.page-setup section{
   position:absolute;
   inset:0;
   border-radius: inherit;
-  background: radial-gradient(circle at top center, rgba(110,168,254,0.15), transparent 70%);
+  background: radial-gradient(circle at top center, color-mix(in oklab, var(--primary) 15%, transparent), transparent 70%);
   pointer-events:none;
 }
 
@@ -491,7 +451,7 @@ body.page-setup section{
   font-weight: 600;
   color: var(--setup-ink);
 
-  background: color-mix(in oklab, #ffffff 60%, transparent);
+  background: var(--glass-soft);
   border: 1px solid var(--card-brd);
   border-radius: 10px;
   padding: 10px 14px;
@@ -501,29 +461,22 @@ body.page-setup section{
   min-width: 0;
 }
 
-body.page-setup.dark #sommaire .sub-list a,
-body.dark.page-setup #sommaire .sub-list a{
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.15);
-  color: #fff;
-}
-
 #sommaire .sub-list a:hover{
   background: color-mix(in oklab, var(--primary) 25%, transparent);
   color: #fff;
   border-color: color-mix(in oklab, var(--primary) 60%, transparent);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(74,144,226,0.25);
+  box-shadow: 0 6px 18px color-mix(in oklab, var(--primary) 25%, transparent);
 }
 
 /* ===================== REVEAL (SAFE) ===================== */
-/* Important : par défaut -> VISIBLE (sinon "page blanche" si JS foire) */
+/* Par défaut -> VISIBLE (pas de "page blanche" si JS foire) */
 .reveal{
   opacity: 1;
   transform: none;
 }
 
-/* Si JS OK (tu ajoutes html.js via app.js) -> animation */
+/* Si JS OK (app.js ajoute html.js) -> animation */
 html.js .reveal{
   opacity: 0;
   transform: translateY(18px);
@@ -543,24 +496,13 @@ html.js .reveal.visible{
   }
 }
 
-/* ===================== PETITS AJUSTEMENTS MOBILE ===================== */
+/* ===================== MOBILE ===================== */
 @media (max-width:520px){
   body.page-setup .chapter{ padding: 0 14px; }
   #sommaire .card{ padding: 22px 16px; }
   .stp-card{ padding: 14px; }
 }
 
-/* ===================== DÉTAILS LUMIÈRE (light) ===================== */
-@media (prefers-color-scheme: light){
-  .stp-card, .mm-remember-card, .video-wrap, #sommaire .card{
-    box-shadow: 0 6px 22px rgba(0,0,0,.12), 0 1px 0 rgba(255,255,255,.35) inset;
-  }
-}
-
-/* =========================================
-   ✅ FIX iPhone (centrage + full width)
-   (à garder en fin de fichier)
-========================================= */
 @media (max-width: 640px){
   body.page-setup .stp-one-per-line .stp-card{
     flex-direction: column !important;
@@ -589,15 +531,13 @@ html.js .reveal.visible{
   }
 }
 
-/* petit ajustement scale sur petits écrans */
 @media (max-width: 860px){
   body.page-setup .stp-thumb img{
     transform: scale(1.06);
   }
 }
 
-
-/* Chapitre 5 : header non sticky */
+/* Chapitre 5 : header non sticky (choix volontaire de cette page) */
 body.page-setup .site-header{
   position: static !important;
 }

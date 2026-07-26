@@ -1,0 +1,278 @@
+/* =====================================================
+   WAVEST — CALCULATEUR DE LOT
+   Scopé sous .lot-app : aucune collision avec le reste du site.
+   S'appuie sur les tokens globaux de /css/styles.css
+===================================================== */
+
+.lot-app {
+  --lot-card: var(--glass-card);
+  --lot-card-border: var(--glass-card-border);
+  --lot-bg-soft: var(--glass-soft);
+  --lot-accent: var(--link);
+  --lot-accent-deep: var(--link-strong);
+  --lot-accent-soft: color-mix(in oklab, var(--link) 12%, transparent);
+  --lot-danger: #e4949a;
+  --lot-danger-soft: color-mix(in oklab, #e4949a 14%, transparent);
+
+  position: relative;
+  margin: 8px 0 30px;
+}
+
+.lot-shell{
+  position: relative;
+}
+
+.lot-toolbar{
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.lot-reset-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: 0.2s ease;
+}
+
+.lot-reset-btn:hover{
+  background: var(--lot-accent-soft);
+  border-color: var(--lot-accent);
+  color: var(--lot-accent-deep);
+  transform: translateY(-1px);
+}
+
+.lot-grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.9fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px){
+  .lot-grid{ grid-template-columns: 1fr; }
+}
+
+/* ---------- Cartes ---------- */
+/* ---------- Cartes (base) ---------- */
+.lot-app .card{
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--lot-card);
+  box-shadow: var(--shadow);
+}
+
+.lot-card,
+.lot-result-card{
+  padding: 24px;
+}
+
+.lot-app .section-title{
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.lot-app .section-title h2{
+  margin: 0;
+  font-size: 18.5px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.lot-app .section-title p{
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.lot-app .section-badge{
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--lot-accent-soft);
+  color: var(--lot-accent-deep);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.lot-app .section-badge.verdict{
+  background: var(--lot-accent-soft);
+  color: var(--lot-accent-deep);
+}
+
+.lot-app .mod-tag{
+  display: inline-block;
+  margin-bottom: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.lot-app .mod-tag em{
+  font-style: normal;
+  color: var(--lot-accent-deep);
+}
+
+.lot-disclaimer{
+  margin: 20px 0 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(230,187,121,.12);
+  border: 1px solid rgba(230,187,121,.28);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.lot-rates-status{
+  margin: 10px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.lot-rates-status.is-live{
+  color: var(--lot-accent-deep);
+}
+
+.lot-rates-status.is-offline{
+  color: color-mix(in oklab, var(--lot-danger) 70%, var(--text));
+}
+
+/* ---------- Formulaire ---------- */
+.form-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 16px;
+}
+
+.field-full{
+  grid-column: 1 / -1;
+}
+
+.lot-app .field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lot-app .field label{
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.lot-app select,
+.lot-app input[type="number"]{
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14.5px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.lot-app select{ cursor: pointer; }
+
+.lot-app select:focus,
+.lot-app input[type="number"]:focus{
+  border-color: var(--lot-accent);
+  box-shadow: 0 0 0 4px var(--lot-accent-soft);
+}
+
+/* ---------- Résultat ---------- */
+.lot-verdict{
+  min-height: 90px;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-display, inherit);
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  transition: 0.3s ease;
+}
+
+.lot-verdict.pending{
+  background: var(--lot-bg-soft);
+  color: var(--muted);
+}
+
+.lot-verdict.ready{
+  background: var(--lot-accent-soft);
+  color: var(--lot-accent-deep);
+  border-color: color-mix(in oklab, var(--link) 35%, transparent);
+}
+
+.lot-verdict.invalid{
+  background: var(--lot-danger-soft);
+  color: color-mix(in oklab, var(--lot-danger) 70%, var(--text));
+  border-color: color-mix(in oklab, var(--lot-danger) 35%, transparent);
+}
+
+.lot-stats-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lot-stat-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--card);
+}
+
+.lot-stat-row span{
+  color: var(--muted);
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.lot-stat-row strong{
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 700px){
+  .lot-card,
+  .lot-result-card{
+    padding: 18px;
+  }
+
+  .form-grid{
+    grid-template-columns: 1fr;
+  }
+}

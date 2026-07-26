@@ -1,0 +1,648 @@
+/* =====================================================
+   WAVEST — DASHBOARD DE PROGRESSION
+   Scopé sous .dash-app : aucune collision avec le reste du site.
+===================================================== */
+
+.dash-app {
+  --dash-win: #3f8f81;
+  --dash-win-ink: #2f6b53;
+  --dash-win-soft: rgba(63, 143, 129, 0.14);
+
+  --dash-loss: #e4949a;
+  --dash-loss-ink: #c85b62;
+  --dash-loss-soft: rgba(228, 148, 154, 0.14);
+
+  --dash-neutral: color-mix(in oklab, var(--muted) 55%, var(--text));
+  --dash-neutral-ink: color-mix(in oklab, var(--text) 68%, var(--muted));
+  --dash-neutral-soft: color-mix(in oklab, var(--muted) 26%, var(--card));
+
+  position: relative;
+  margin: 8px 0 30px;
+}
+
+.dash-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dash-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dash-app .card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.dash-app .section-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.dash-app .section-title h2 {
+  margin: 0;
+  font-size: 18.5px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.dash-app .section-title p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.dash-app .section-badge {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--link) 12%, transparent);
+  color: var(--link-strong);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.dash-app .mod-tag {
+  display: inline-block;
+  margin-bottom: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.dash-app .mod-tag em {
+  font-style: normal;
+  color: var(--link-strong);
+}
+
+/* ---------- Connexion ---------- */
+
+.dash-connect-card {
+  padding: 24px;
+}
+
+.dash-connect-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dash-connect-row input {
+  flex: 1 1 320px;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.dash-connect-row input:focus {
+  border-color: var(--link);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--link) 12%, transparent);
+}
+
+.dash-help {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.dash-status {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.dash-status.is-loading {
+  background: var(--glass-soft);
+  color: var(--muted);
+}
+
+.dash-status.is-error {
+  background: var(--dash-loss-soft);
+  color: var(--dash-loss-ink);
+}
+
+.dash-status.is-ok {
+  background: var(--dash-win-soft);
+  color: var(--dash-win-ink);
+}
+
+/* ---------- Toolbar ---------- */
+
+.dash-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dash-connected-as {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.dash-change-btn {
+  padding: 9px 16px;
+  font-size: 13px;
+}
+
+/* ---------- Stats ---------- */
+
+.dash-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.dash-stat-card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  overflow: hidden;
+  min-width: 0;
+  container-type: inline-size;
+}
+
+.dash-stat-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+
+.dash-stat-card strong {
+  font-family: var(--font-display, inherit);
+  font-size: clamp(13px, 9cqw, 19px);
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+.dash-stat-card strong.is-positive {
+  color: var(--dash-win-ink);
+}
+
+.dash-stat-card strong.is-negative {
+  color: var(--dash-loss-ink);
+}
+
+@media (max-width: 900px) {
+  .dash-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Calendrier ---------- */
+
+.dash-calendar-card {
+  padding: 24px;
+}
+
+.dash-calendar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.dash-calendar-head h2 {
+  margin: 0;
+  font-family: var(--font-display, inherit);
+  font-size: 19px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.dash-calendar-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.dash-nav-btn {
+  padding: 9px 14px;
+  font-size: 13px;
+}
+
+.dash-calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.dash-calendar-weekdays span {
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.dash-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.dash-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.dash-day {
+  min-height: 78px;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+  min-width: 0;
+  container-type: inline-size;
+}
+
+.dash-day.is-empty {
+  border: none;
+  background: transparent;
+}
+
+.dash-day.is-win {
+  background: var(--dash-win-soft);
+  border-color: color-mix(in oklab, var(--dash-win) 35%, transparent);
+}
+
+.dash-day.is-loss {
+  background: var(--dash-loss-soft);
+  border-color: color-mix(in oklab, var(--dash-loss) 35%, transparent);
+}
+
+.dash-day.is-be {
+  background: var(--dash-neutral-soft);
+  border-color: color-mix(in oklab, var(--dash-neutral) 40%, transparent);
+}
+
+.dash-day.is-today {
+  box-shadow: 0 0 0 2px var(--link);
+}
+
+.dash-day-num {
+  font-size: clamp(8px, 9cqw, 12px);
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.dash-day-pnl {
+  font-size: clamp(7.5px, 12cqw, 13px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dash-day.is-win .dash-day-pnl {
+  color: var(--dash-win-ink);
+}
+
+.dash-day.is-loss .dash-day-pnl {
+  color: var(--dash-loss-ink);
+}
+
+.dash-day.is-be .dash-day-pnl {
+  color: var(--dash-neutral-ink);
+}
+
+.dash-day-pairs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: auto;
+}
+
+.dash-day-pair {
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 999px;
+  background: var(--glass-soft);
+  color: var(--text-dim, var(--muted));
+}
+
+@media (max-width: 700px) {
+  .dash-day {
+    min-height: 58px;
+    padding: 5px;
+  }
+
+  .dash-day-pairs {
+    display: none;
+  }
+}
+
+.dash-day[data-has-trades="true"] {
+  cursor: pointer;
+}
+
+.dash-day[data-has-trades="true"]:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Modale détail du jour ---------- */
+
+.dash-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(51, 50, 45, 0.32);
+  backdrop-filter: blur(3px);
+}
+
+.dash-modal-overlay[hidden] {
+  display: none;
+}
+
+.dash-modal-card {
+  width: min(480px, 100%);
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.dash-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.dash-modal-head h3 {
+  margin: 0;
+  font-family: var(--font-display, inherit);
+  font-size: 17px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.dash-modal-close {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.dash-modal-close:hover {
+  background: var(--glass-soft);
+  color: var(--text);
+}
+
+.dash-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dash-trade-item {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+}
+
+.dash-trade-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.dash-trade-pair {
+  font-weight: 700;
+  font-size: 14.5px;
+}
+
+.dash-trade-pnl {
+  font-weight: 700;
+  font-size: 14.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dash-trade-pnl.is-positive {
+  color: var(--dash-win-ink);
+}
+
+.dash-trade-pnl.is-negative {
+  color: var(--dash-loss-ink);
+}
+
+.dash-trade-pnl.is-neutral {
+  color: var(--dash-neutral-ink);
+}
+
+.dash-trade-image {
+  display: block;
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+}
+
+.dash-trade-image-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--link);
+}
+
+.dash-trade-no-image {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ---------- Courbe d'équité ---------- */
+
+.dash-equity-card {
+  padding: 24px;
+}
+
+.dash-equity-wrap {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  padding: 12px;
+}
+
+.dash-equity-tooltip {
+  position: absolute;
+  z-index: 2;
+  transform: translate(-50%, -120%);
+  pointer-events: none;
+  padding: 8px 11px;
+  border-radius: 10px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+
+.dash-equity-tooltip strong {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.dash-equity-tooltip span {
+  display: block;
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+.dash-equity-svg {
+  width: 100%;
+  height: 260px;
+  display: block;
+}
+
+.dash-equity-svg text {
+  font-family: var(--font-body, inherit);
+  fill: var(--muted);
+}
+
+.dash-equity-svg .dash-equity-pulse {
+  animation: dash-equity-pulse 2.2s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes dash-equity-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.05;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dash-equity-svg .dash-equity-pulse {
+    animation: none;
+  }
+}
+
+.dash-equity-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.dash-equity-stat {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  text-align: center;
+  overflow: hidden;
+  min-width: 0;
+  container-type: inline-size;
+}
+
+.dash-equity-stat span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+
+.dash-equity-stat strong {
+  font-size: clamp(11px, 11cqw, 15px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+.dash-equity-stat strong.is-positive {
+  color: var(--dash-win-ink);
+}
+
+.dash-equity-stat strong.is-negative {
+  color: var(--dash-loss-ink);
+}
+
+@media (max-width: 700px) {
+  .dash-equity-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 700px) {
+  .dash-connect-card,
+  .dash-calendar-card,
+  .dash-equity-card {
+    padding: 18px;
+  }
+}

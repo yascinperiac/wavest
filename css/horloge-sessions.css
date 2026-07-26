@@ -1,0 +1,331 @@
+/* =====================================================
+   WAVEST — HORLOGE DES SESSIONS
+   Scopé sous .fx-clock-app : aucune collision avec le reste du site.
+===================================================== */
+
+.fx-clock-app {
+  --fx-asia: #f3cd8e;
+  --fx-asia-ink: #b6812b;
+  --fx-asia-soft: rgba(243, 205, 142, 0.18);
+
+  --fx-europe: #4a86c8;
+  --fx-europe-ink: #2f5f8f;
+  --fx-europe-soft: rgba(74, 134, 200, 0.18);
+
+  --fx-us: #a78bda;
+  --fx-us-ink: #6b4fa0;
+  --fx-us-soft: rgba(167, 139, 218, 0.18);
+
+  position: relative;
+  margin: 8px 0 30px;
+}
+
+.fx-clock-card {
+  padding: 28px;
+}
+
+/* =========================
+   STATUT
+========================= */
+
+.fx-status-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  background: var(--glass-soft);
+  border: 1px solid var(--line);
+  margin-bottom: 22px;
+}
+
+.fx-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--link);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--link) 20%, transparent);
+}
+
+.fx-status-dot.fx-closed {
+  background: var(--muted);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--muted) 20%, transparent);
+}
+
+#fxStatusText {
+  font-family: var(--font-display, inherit);
+  font-weight: 700;
+  font-size: 15.5px;
+  color: var(--text);
+}
+
+/* =========================
+   HEURES
+========================= */
+
+.fx-time-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.fx-time-block {
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.fx-time-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.fx-time-block strong {
+  font-family: var(--font-display, inherit);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 560px) {
+  .fx-time-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   FRISE CHRONOLOGIQUE
+========================= */
+
+.fx-timeline-wrap {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+.fx-timeline-ticks {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.fx-ticks-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  padding: 0 2px;
+}
+
+.fx-timeline {
+  position: relative;
+}
+
+.fx-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.fx-row-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dim, var(--muted));
+}
+
+.fx-track {
+  position: relative;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--bg-soft, rgba(0, 0, 0, 0.03));
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.fx-band {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+}
+
+.fx-band-asia {
+  background: var(--fx-asia);
+}
+
+.fx-band-europe {
+  background: var(--fx-europe);
+}
+
+.fx-band-us {
+  background: var(--fx-us);
+}
+
+.fx-row.is-active .fx-row-label {
+  color: var(--text);
+}
+
+.fx-row.is-active .fx-track {
+  border-color: var(--border-strong, var(--line));
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--link) 15%, transparent);
+}
+
+.fx-now-line {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: calc(120px + (100% - 120px) * var(--fx-now, 0));
+  width: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.fx-now-line::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text);
+}
+
+.fx-hover-line {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: calc(120px + (100% - 120px) * var(--fx-hover, 0));
+  width: 2px;
+  background: var(--link);
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.fx-hover-line.is-visible {
+  opacity: 1;
+}
+
+.fx-hover-tooltip {
+  position: absolute;
+  z-index: 3;
+  top: -8px;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+  padding: 8px 11px;
+  border-radius: 10px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+
+.fx-hover-tooltip strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.fx-hover-tooltip span {
+  display: block;
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+@media (max-width: 620px) {
+  .fx-timeline-ticks,
+  .fx-row {
+    grid-template-columns: 78px 1fr;
+  }
+
+  .fx-now-line {
+    left: calc(78px + (100% - 78px) * var(--fx-now, 0));
+  }
+
+  .fx-hover-line {
+    left: calc(78px + (100% - 78px) * var(--fx-hover, 0));
+  }
+
+  .fx-row-label {
+    font-size: 11.5px;
+  }
+}
+
+/* =========================
+   LÉGENDE
+========================= */
+
+.fx-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-bottom: 18px;
+}
+
+.fx-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.fx-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.fx-dot-asia {
+  background: var(--fx-asia);
+}
+
+.fx-dot-europe {
+  background: var(--fx-europe);
+}
+
+.fx-dot-us {
+  background: var(--fx-us);
+}
+
+.fx-note {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--warning-soft, rgba(230, 187, 121, 0.12));
+  border: 1px solid rgba(230, 187, 121, 0.28);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+  .fx-clock-card {
+    padding: 18px;
+  }
+}

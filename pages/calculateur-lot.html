@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculateur de lot — Wavest</title>
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png?v=2">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png?v=2">
+  <link rel="shortcut icon" href="../favicon.ico?v=2">
+  <meta name="description" content="Calculateur de taille de position (lot) Wavest : détermine ton lot en fonction de ton solde, ton risque en % et ton stop de protection.">
+
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/calculateur-lot.css" />
+
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f0f10" media="(prefers-color-scheme: dark)">
+</head>
+<body class="page-lot-calc">
+
+  <!-- === HEADER === -->
+  <header class="site-header">
+    <h1>Calculateur de lot</h1>
+    <div class="header-actions">
+      <a href="../index.html#tools" class="btn btn-ghost">← Sommaire</a>
+    </div>
+  </header>
+
+  <main class="container" id="content">
+
+    <!-- INTRO -->
+    <section class="hero reveal" aria-label="Calculateur de lot">
+      <p>Détermine la taille de position adaptée à ton risque, avant chaque trade.</p>
+    </section>
+
+    <!-- VIDÉO TUTORIEL -->
+    <div class="tool-video-wrap reveal">
+      <p class="tool-video-title">🎥 Tutoriel vidéo</p>
+      <div class="tool-video-frame">
+        <video controls preload="metadata" poster="../assets/images/posters/calculateur-de-lot.svg">
+        <source src="../assets/videos/calculateur-de-lot.mp4" type="video/mp4">
+      </video>
+      </div>
+    </div>
+
+    <!-- OUTIL -->
+    <div class="lot-app reveal">
+      <div class="lot-shell">
+        <div class="lot-toolbar">
+          <button id="lotResetBtn" class="lot-reset-btn" type="button">
+            ↻ Réinitialiser (paire + stop)
+          </button>
+        </div>
+        <div class="lot-grid">
+
+          <!-- FORMULAIRE -->
+          <section class="card lot-card">
+            <div class="section-title">
+              <span class="section-badge">1</span>
+              <div>
+                <p class="mod-tag">Paramètres <em>· ton trade</em></p>
+                <h2>Ton setup</h2>
+                <p>Renseigne ta paire, ton solde, ton risque et ton stop.</p>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="lotPair">Paire</label>
+                <select id="lotPair">
+                  <option value="EURUSD">EUR/USD</option>
+                  <option value="EURGBP">EUR/GBP</option>
+                  <option value="EURAUD">EUR/AUD</option>
+                  <option value="EURNZD">EUR/NZD</option>
+                  <option value="EURCAD">EUR/CAD</option>
+                  <option value="EURCHF">EUR/CHF</option>
+                  <option value="EURJPY">EUR/JPY</option>
+                  <option value="GBPUSD">GBP/USD</option>
+                  <option value="GBPAUD">GBP/AUD</option>
+                  <option value="GBPNZD">GBP/NZD</option>
+                  <option value="GBPCAD">GBP/CAD</option>
+                  <option value="GBPCHF">GBP/CHF</option>
+                  <option value="GBPJPY">GBP/JPY</option>
+                  <option value="AUDUSD">AUD/USD</option>
+                  <option value="AUDNZD">AUD/NZD</option>
+                  <option value="AUDCAD">AUD/CAD</option>
+                  <option value="AUDCHF">AUD/CHF</option>
+                  <option value="AUDJPY">AUD/JPY</option>
+                  <option value="NZDUSD">NZD/USD</option>
+                  <option value="NZDCAD">NZD/CAD</option>
+                  <option value="NZDCHF">NZD/CHF</option>
+                  <option value="NZDJPY">NZD/JPY</option>
+                  <option value="USDCAD">USD/CAD</option>
+                  <option value="USDCHF">USD/CHF</option>
+                  <option value="USDJPY">USD/JPY</option>
+                  <option value="CADCHF">CAD/CHF</option>
+                  <option value="CADJPY">CAD/JPY</option>
+                  <option value="CHFJPY">CHF/JPY</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="lotAccountCurrency">Devise du compte</label>
+                <select id="lotAccountCurrency">
+                  <option value="EUR">EUR</option>
+                  <option value="USD">USD</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="lotBalance">Solde du compte</label>
+                <input id="lotBalance" type="number" inputmode="decimal" min="0" step="1" placeholder="Ex : 1000" />
+              </div>
+
+              <div class="field">
+                <label for="lotRisk">Risque (%)</label>
+                <input id="lotRisk" type="number" inputmode="decimal" min="0" step="0.1" placeholder="Ex : 1" />
+              </div>
+
+              <div class="field field-full">
+                <label for="lotStop">Stop de protection (en pips)</label>
+                <input id="lotStop" type="number" inputmode="decimal" min="0" step="0.1" placeholder="Ex : 25" />
+              </div>
+            </div>
+
+            <p class="lot-disclaimer">
+              ⚠️ Valeurs de pip calculées à partir de taux de change <strong>indicatifs</strong>.
+              Vérifie toujours la valeur exacte du pip et la taille de lot chez ton broker avant d’exécuter un trade réel.
+            </p>
+            <p id="lotRatesStatus" class="lot-rates-status">Chargement des taux de change…</p>
+          </section>
+
+          <!-- RÉSULTAT -->
+          <aside class="card lot-result-card">
+            <div class="section-title">
+              <span class="section-badge verdict">✓</span>
+              <div>
+                <p class="mod-tag">Résultat <em>· en direct</em></p>
+                <h2>Taille de position</h2>
+                <p>Calcul automatique selon tes paramètres.</p>
+              </div>
+            </div>
+
+            <div id="lotVerdict" class="lot-verdict pending">
+              Renseigne tes paramètres
+            </div>
+
+            <div class="lot-stats-list">
+              <div class="lot-stat-row">
+                <span>Montant risqué</span>
+                <strong id="lotRiskAmount">-</strong>
+              </div>
+              <div class="lot-stat-row">
+                <span>Valeur du pip (1.00 lot)</span>
+                <strong id="lotPipValue">-</strong>
+              </div>
+              <div class="lot-stat-row">
+                <span>Lot standard</span>
+                <strong id="lotStandard">-</strong>
+              </div>
+              <div class="lot-stat-row">
+                <span>Équivalent mini-lots</span>
+                <strong id="lotMini">-</strong>
+              </div>
+              <div class="lot-stat-row">
+                <span>Équivalent micro-lots</span>
+                <strong id="lotMicro">-</strong>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="hero-cta mt-20">
+      <a href="trade-checker.html" class="btn btn-primary">← Retour au Trade Checker</a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p id="footerText">© 2026 — Wavest | Tous droits réservés</p>
+
+    <nav class="footer-links" aria-label="Liens légaux">
+      <a id="linkMentions" href="../Legal/mentions-legales.html">Mentions légales</a>
+      <a id="linkPrivacy"  href="../Legal/confidentialite.html">Confidentialité</a>
+      <a id="linkCookies" href="../Legal/cookies.html">Cookies</a>
+      <a id="linkCgv" href="../Legal/cgv.html">CGV</a>
+      <a href="#" data-open-cookie-banner="true">Gérer les cookies</a>
+    </nav>
+
+    <p>
+      <a href="mailto:contact@wavest.fr" class="mail-link" id="footerMail" title="Envoyer un email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+             viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 12h16V8l-8 7-8-7v10z"/>
+        </svg>
+        <span id="footerMailText">Contact</span>
+      </a>
+    </p>
+  </footer>
+
+  <script src="../js/app.js" defer></script>
+  <script src="../js/calculateur-lot.js" defer></script>
+</body>
+</html>

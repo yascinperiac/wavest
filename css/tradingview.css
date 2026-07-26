@@ -1,222 +1,178 @@
-/* =========================================================
-   Chapitre 2 — TradingView (Version aérée, claire & nette)
-   - Hiérarchie lisible, beaucoup d'espace, pas de fioritures
-   - Bordures fines, ombres très légères
-   - Hook dark mode via body.dark (aucune couleur “figée”)
-========================================================= */
+/* ===============================
+   CHAPITRE 2 — CONFIGURATION TRADINGVIEW
+   S'appuie sur les tokens globaux de /css/styles.css
+   (--bg, --card, --text, --muted, --line, --link, --font-display...)
+=================================*/
 
-/* ------ Tokens (hérite de tes globaux si présents) ------ */
-:root{
-  --tv-accent: var(--accent, #2563eb);
-  --tv-ink: var(--text, #0f172a);
-  --tv-muted: var(--muted, #6b7280);
-
-  --tv-surface: color-mix(in oklab, #fff 96%, transparent);
-  --tv-surface-2: color-mix(in oklab, #fff 92%, transparent);
-  --tv-border: rgba(15, 23, 42, .12);
-
-  --tv-radius-sm: 10px;
-  --tv-radius-md: 14px;
-  --tv-shadow: 0 6px 18px rgba(0,0,0,.06);
-}
-body.dark{
-  --tv-ink: #e5e7eb;
-  --tv-muted: #aeb3bb;
-
-  --tv-surface: rgba(19, 20, 23, .82);
-  --tv-surface-2: rgba(20, 22, 26, .7);
-  --tv-border: rgba(255,255,255,.12);
-
-  --tv-shadow: 0 10px 28px rgba(0,0,0,.45);
-}
-
-/* ---------- Layout de page ---------- */
-.page-tradingview .chapter{
-  max-width: 1040px;
-  margin: 0 auto;
-  padding-inline: 20px;
-}
-.page-tradingview section{
-  margin: 48px 0;
-  scroll-margin-top: 92px;
-}
-.page-tradingview h2{
-  margin: 0 0 12px;
-  color: var(--tv-ink);
-  font-weight: 800;
-  letter-spacing: -.01em;
-  font-size: clamp(20px, 1.2vw + 16px, 28px);
-}
-
-/* ---------- Révélation douce ---------- */
-.page-tradingview .reveal{ opacity: 0; transform: translateY(14px); transition: opacity .4s ease, transform .4s ease; }
-.page-tradingview .reveal.visible{ opacity: 1; transform: translateY(0); }
-@media (prefers-reduced-motion: reduce){
-  .page-tradingview .reveal{ opacity: 1 !important; transform:none !important; transition:none !important; }
-}
-
-/* ---------- Composant carte “sobre” ---------- */
-.tv-card{
-  background: var(--tv-surface);
-  border: 1px solid var(--tv-border);
-  border-radius: var(--tv-radius-md);
-  box-shadow: var(--tv-shadow);
-}
-
-/* ---------- Vidéo ---------- */
+/* ===============================
+   VIDÉO
+=================================*/
 .video-wrap{
-  max-width: 960px;
-  margin-inline: auto;
-}
-.video-wrap .video-frame{
-  border-radius: var(--tv-radius-md);
-  overflow: clip;
-  aspect-ratio: 16/9;
-  background: #0b0d12;
-  border: 1px solid var(--tv-border);
-  box-shadow: var(--tv-shadow);
-}
-.video-caption{
-  margin-top: 10px;
-  color: var(--tv-muted);
-  font-size: 0.95rem;
+  margin:20px 0 40px;
 }
 
-/* ---------- Légende code couleurs ---------- */
+.video-frame{
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--card);
+  box-shadow:var(--shadow);
+}
+
+.video-frame video{
+  width:100%;
+  height:auto;
+  display:block;
+  background:#000;
+}
+
+.video-caption{
+  margin-top:12px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* ===============================
+   LÉGENDE — CODE COULEUR DES ZONES
+=================================*/
 .legend-wrap{
-  padding: 16px;
+  margin:40px 0;
+  padding:24px;
+  background:var(--glass-card);
+  border:1px solid var(--glass-card-border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);
+  backdrop-filter:var(--bf-card);
+  -webkit-backdrop-filter:var(--bf-card);
 }
-.legend-wrap{ /* applique la carte sobre */
-  background: var(--tv-surface);
-  border: 1px solid var(--tv-border);
-  border-radius: var(--tv-radius-md);
-  box-shadow: var(--tv-shadow);
+
+.legend-title{
+  margin:0 0 16px;
+  font-size:19px;
+  font-weight:700;
 }
-.legend-title{ font-weight: 800; letter-spacing: -.2px; margin-bottom: 10px; }
+
 .legend-grid{
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0,1fr));
-  gap: 12px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+  gap:12px;
 }
-@media (max-width:980px){ .legend-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
 
 .legend-item{
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 12px;
-  background: var(--tv-surface-2);
-  border: 1px solid var(--tv-border);
-  border-radius: var(--tv-radius-sm);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 14px;
+  border-radius:var(--radius-md);
+  background:var(--glass-soft);
+  border:1px solid var(--glass-ink);
+  font-size:14px;
+  font-weight:500;
 }
+
 .legend-color{
-  width: 22px; height: 22px; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+  width:18px;
+  height:18px;
+  border-radius:6px;
+  flex-shrink:0;
+  border:1px solid rgba(0,0,0,.12);
 }
-.legend-label{ font-weight: 600; color: var(--tv-ink); }
 
-/* Couleurs simples (adaptables) */
-.legend-color.monthly{ background:#fb923c; }
-.legend-color.weekly { background:#60a5fa; }
-.legend-color.daily  { background:#ffffff; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
-.legend-color.h4     { background:#0f1115; }
+/* Couleurs fixes : ce sont les vraies couleurs TradingView,
+   elles ne suivent pas le thème clair/sombre */
+.legend-color.monthly{ background:#f4a94f; }
+.legend-color.weekly{  background:#4a86c8; }
+.legend-color.daily{   background:#ffffff; border-color:rgba(0,0,0,.22); }
+.legend-color.h4{      background:#1f1e1a; border-color:rgba(255,255,255,.14); }
 
-/* ---------- Outils ---------- */
+/* ===============================
+   OUTILS UTILISÉS
+=================================*/
 .tv-tools{
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap: 14px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:16px;
 }
-@media (max-width:1020px){ .tv-tools{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width:760px){  .tv-tools{ grid-template-columns: 1fr; } }
 
 .tool-card{
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: 12px;
-  align-items: start;
-  padding: 14px;
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  padding:20px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);
 }
-.tool-card{ /* carte sobre */
-  background: var(--tv-surface);
-  border: 1px solid var(--tv-border);
-  border-radius: var(--tv-radius-md);
-  box-shadow: var(--tv-shadow);
-}
-@media (hover:hover){
-  .tool-card{ transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
-  .tool-card:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.10); border-color: color-mix(in oklab, var(--tv-accent) 30%, var(--tv-border)); }
+
+@media (prefers-reduced-motion:no-preference){
+  .tool-card{transition:transform .25s ease, box-shadow .25s ease}
+  .tool-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(60,55,40,.1)}
 }
 
 .tool-ico{
-  width: 48px; height: 48px; border-radius: 12px;
-  display: grid; place-items: center;
-  font-weight: 800; font-size: 18px;
-  color: var(--tv-accent);
-  background: color-mix(in oklab, var(--tv-accent) 10%, transparent);
-  border: 1px solid color-mix(in oklab, var(--tv-accent) 30%, var(--tv-border));
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  min-width:40px;
+  border-radius:12px;
+  background:rgba(74,134,200,.12);
+  color:var(--link-strong);
+  font-size:18px;
+  font-weight:700;
 }
+
 .tool-title{
-  margin: 0 0 4px;
-  color: var(--tv-ink);
-  font-size: 16px;
-  font-weight: 700;
+  margin:0 0 6px;
+  font-size:16px;
+  font-weight:700;
 }
+
 .tool-desc{
-  margin: 0;
-  color: var(--tv-muted);
-  line-height: 1.5;
-  font-size: 0.96rem;
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
 }
 
-/* ---------- Bandeau CTA ---------- */
+/* ===============================
+   CTA — ÉTAPE SUIVANTE
+=================================*/
 .cta-strip{
-  background: var(--tv-surface);
-  border: 1px solid var(--tv-border);
-  border-radius: var(--tv-radius-md);
-  padding: 16px;
-  box-shadow: var(--tv-shadow);
-}
-.cta-inner{ display: grid; gap: 6px; }
-.cta-inner h3{ margin: 0; font-size: 18px; font-weight: 800; color: var(--tv-ink); }
-.cta-strip p{ margin: 0; color: var(--tv-muted); }
-
-/* ---------- Séparateur “pro” (ligne fine) ---------- */
-.page-tradingview section{
-  padding-bottom: 32px;
-}
-.page-tradingview section::after{
-  content:""; display:block; height:1px; margin-top:32px;
-  background: linear-gradient(90deg, transparent, var(--tv-border), transparent);
-}
-.page-tradingview section:last-of-type::after{ display:none; }
-
-/* ---------- Focus accessibles ---------- */
-a:focus-visible,
-button:focus-visible,
-.tool-card:focus-within{
-  outline: 3px solid color-mix(in oklab, var(--tv-accent) 45%, transparent);
-  outline-offset: 2px;
-  border-radius: 12px;
+  margin:48px 0 20px;
+  padding:24px 28px;
+  border-radius:var(--radius-lg);
+  background:linear-gradient(135deg, rgba(74,134,200,.1), rgba(74,134,200,.03));
+  border:1px solid rgba(74,134,200,.18);
+  box-shadow:var(--shadow);
 }
 
-
-
-/* === Grille Outils : 2 par ligne (desktop/tablette), 1 sur petit écran === */
-.tv-tools{
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr)) !important;
-  gap: 14px;
+.cta-inner h3{
+  margin:0 0 6px;
+  font-size:18px;
+  font-weight:700;
+  color:var(--link-strong);
 }
 
-/* Option : bascule en 1 colonne uniquement sous 640px */
-@media (max-width: 640px){
-  .tv-tools{
-    grid-template-columns: 1fr !important;
+.cta-inner p{
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.55;
+}
+
+/* ===============================
+   RESPONSIVE
+=================================*/
+@media (max-width:700px){
+  .legend-wrap,
+  .cta-strip{
+    padding:18px;
   }
-}
 
-/* Rendre la vidéo 100% responsive dans son cadre */
-.video-frame video {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain; /* ou "cover" si tu préfères remplir le cadre quitte à couper légèrement */
+  .tool-card{
+    padding:16px;
+  }
 }

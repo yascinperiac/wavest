@@ -1,178 +1,130 @@
 /* =========================================================
-   CHAPITRE 1 — Fondation (aéré, clair & net, logique Mindvest)
-   - Structure cohérente avec les autres chapitres
-   - Table sobre + bullets premium
-   - Navigation bas de page via .hero-cta (styles globaux)
+   CHAPITRE 1 — Fondation
+   S'appuie sur les tokens globaux de /css/styles.css
+   (--bg, --card, --text, --muted, --line, --link, --font-display...)
 ========================================================= */
 
-/* ========= Variables locales ========= */
-.page-foundation{
-  --accent: #6ea8fe;
-  --text: #0f172a;
-  --muted: #64748b;
-  --glass-card: #ffffff;
-  --glass-card-border: rgba(0,0,0,.12);
-  --shadow: 0 6px 20px rgba(0,0,0,.12);
-  --radius: 14px;
-}
-
-body.dark .page-foundation{
-  --glass-card: rgba(22,22,26,.9);
-  --glass-card-border: rgba(255,255,255,.12);
-  --text: #e6e9ef;
-  --muted: #aeb3bb;
-}
-
-/* ========= Layout global ========= */
+/* ---------- Layout ---------- */
 .page-foundation .chapter{
   max-width: 980px;
-  margin-inline: auto;
-  padding-inline: 20px;
+  margin: 0 auto;
 }
 
 .page-foundation section{
   margin: 48px 0;
-  scroll-margin-top: 90px;
-  position: relative;
-  padding-bottom: 40px;
+  padding-bottom: 32px;
+  scroll-margin-top: 92px;
 }
 
-/* Un peu plus d’air au-dessus du footer */
-.page-foundation section:last-of-type{
-  margin-bottom: 72px;
+.page-foundation section::after{
+  content:"";
+  display:block;
+  height:1px;
+  margin-top:32px;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
 }
+.page-foundation section:last-of-type::after{ display:none; }
 
-/* ========= Titres ========= */
+/* ---------- Titres & texte ---------- */
 .page-foundation h1{
   margin-bottom: 8px;
 }
 
 .page-foundation h2{
-  font-size: 22px;
   margin: 0 0 12px;
-  font-weight: 800;
-  letter-spacing: -.01em;
-  color: var(--text);
+  font-size: clamp(20px, 1.2vw + 16px, 26px);
 }
 
-/* ========= Paragraphes & texte ========= */
 .page-foundation p{
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.65;
   margin: 8px 0;
 }
 
 .page-foundation strong{ font-weight: 700; }
-.page-foundation em{ opacity: .85; }
+.page-foundation em{ color: var(--muted); font-style: normal; }
 
 .page-foundation .tip{
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: .95rem;
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(74,134,200,.08);
+  border: 1px solid rgba(74,134,200,.16);
+  color: var(--text);
+  font-size: 14.5px;
 }
 
-/* ========= Liste à puces premium ========= */
-.about-bullets{
+/* ---------- Liste à puces (cartes) ---------- */
+.page-foundation .about-bullets{
   list-style: none;
   padding: 0;
-  margin: 12px 0 0;
+  margin: 16px 0 0;
   display: grid;
   gap: 10px;
 }
 
-.about-bullets li{
-  background: var(--glass-card);
-  border: 1px solid var(--glass-card-border);
-  border-radius: var(--radius);
-  padding: 12px 14px;
+.page-foundation .about-bullets li{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
   box-shadow: var(--shadow);
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
-.about-bullets li em{
+.page-foundation .about-bullets li em{
   color: var(--muted);
 }
 
-/* ========= Tableau des horaires ========= */
+/* ---------- Tableau des horaires ---------- */
 .fx-hours{
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  border: 1px solid var(--glass-card-border);
-  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--glass-card);
+  background: var(--card);
   box-shadow: var(--shadow);
-  margin: 10px 0 8px;
+  margin: 14px 0 8px;
 }
 
 .fx-hours thead th{
   text-align: left;
-  padding: 12px 14px;
-  font-weight: 800;
-  color: var(--text);
-  background: color-mix(in oklab, var(--glass-card) 92%, #f9fafb);
-  border-bottom: 1px solid var(--glass-card-border);
+  padding: 13px 16px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--bg-soft, rgba(74,134,200,.05));
+  border-bottom: 1px solid var(--line);
 }
 
 .fx-hours td{
-  padding: 12px 14px;
+  padding: 13px 16px;
   color: var(--text);
   vertical-align: top;
-  font-size: 0.98rem;
-  border-top: 1px solid var(--glass-card-border);
+  font-size: 15px;
+  border-top: 1px solid var(--line);
 }
 
 .fx-hours tbody tr:first-child td{
   border-top: 0;
 }
 
-/* Hover doux sur les lignes */
 @media (hover:hover){
   .fx-hours tbody tr:hover td{
-    background: color-mix(in oklab, var(--glass-card) 80%, var(--accent) 6%);
+    background: rgba(74,134,200,.05);
   }
 }
 
-/* ========= Révélation douce ========= */
-.page-foundation .reveal{
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity .45s ease, transform .45s ease;
-}
-
-.page-foundation .reveal.visible{
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce){
-  .page-foundation .reveal{
-    opacity: 1 !important;
-    transform:none !important;
-    transition:none !important;
-  }
-}
-
-/* ========= Séparateur visuel entre sections ========= */
-.page-foundation section::after{
-  content:"";
-  display:block;
-  height:1px;
-  margin-top:32px;
-  background:linear-gradient(90deg,transparent,var(--glass-card-border),transparent);
-}
-
-.page-foundation section:last-of-type::after{
-  display:none;
-}
-
-/* ========= Accessibilité & responsive ========= */
+/* ---------- Responsive ---------- */
 @media (max-width:640px){
   .fx-hours td,
   .fx-hours th{
-    padding:10px 12px;
+    padding: 10px 12px;
   }
 }
 
