@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Comment backtester une méthode de trading avant de risquer de l'argent réel : méthode, ce qu'il faut mesurer, et les erreurs classiques d'un backtest mal fait." />
+  <title>Backtest en trading : comment tester une méthode avant de trader en réel — Wavest</title>
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png?v=2">
+  <link rel="apple-touch-icon" href="/assets/images/favicon.png?v=2">
+  <link rel="shortcut icon" href="/favicon.ico?v=2">
+  <link rel="stylesheet" href="/css/styles.css" />
+  <meta name="theme-color" content="#0f0f10" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <link rel="canonical" href="https://wavest.fr/pages/blog/backtest-trading-methode.html" />
+</head>
+<body class="page-blog">
+  <header class="site-header" role="banner">
+    <h1>Backtest en trading : comment tester une méthode avant de trader en réel</h1>
+    <div class="header-actions">
+      <a href="/index.html" class="btn btn-ghost" aria-label="Retour à l'accueil">← Accueil</a>
+    </div>
+  </header>
+
+  <main class="container chapter" role="main">
+    <section class="reveal" aria-labelledby="introTitle">
+      <h2 id="introTitle">Pourquoi backtester avant de risquer de l'argent réel</h2>
+      <p>
+        Un <strong>backtest</strong> consiste à appliquer une méthode de trading sur des données
+        historiques pour voir comment elle se serait comportée. C'est l'étape qui sépare "je pense
+        que ça marche" de "j'ai des chiffres qui montrent que ça marche" — sur des dizaines ou
+        centaines de trades, pas sur une impression.
+      </p>
+    </section>
+
+    <section class="reveal" aria-labelledby="stepsTitle">
+      <h2 id="stepsTitle">Comment backtester une méthode</h2>
+      <ul class="about-bullets">
+        <li>
+          <strong>1. Définir des règles précises</strong> — critères d'entrée, de sortie, de stop
+          et de risque, sans zone d'interprétation.
+        </li>
+        <li>
+          <strong>2. Parcourir l'historique chronologiquement</strong> — trade par trade, sans
+          regarder ce qui se passe après (pour éviter de "tricher" avec le recul).
+        </li>
+        <li>
+          <strong>3. Noter chaque trade</strong> — résultat, taille de position, contexte —
+          dans un tableau structuré.
+        </li>
+        <li>
+          <strong>4. Calculer les statistiques</strong> — taux de réussite, ratio gain/perte
+          moyen, espérance mathématique, drawdown maximum.
+        </li>
+      </ul>
+    </section>
+
+    <section class="reveal" aria-labelledby="mistakesTitle">
+      <h2 id="mistakesTitle">Les erreurs qui faussent un backtest</h2>
+      <ul class="about-bullets">
+        <li>
+          <strong>Le biais rétrospectif</strong> — repérer un setup parce qu'on sait déjà ce qui
+          s'est passé après.
+        </li>
+        <li>
+          <strong>Un échantillon trop petit</strong> — juger une méthode sur 10-15 trades ne dit
+          presque rien statistiquement.
+        </li>
+        <li>
+          <strong>Ignorer les coûts réels</strong> — spread, slippage, commissions changent parfois
+          complètement les résultats.
+        </li>
+      </ul>
+      <p class="tip">
+        🔔 Une méthode qui n'a pas été backtestée sur au moins 100-200 trades reste, au mieux, une
+        hypothèse.
+      </p>
+    </section>
+
+    <section class="reveal" aria-labelledby="recapTitle">
+      <h2 id="recapTitle">À retenir</h2>
+      <ul class="about-bullets">
+        <li>Le backtest transforme une intuition en données vérifiables.</li>
+        <li>Des règles précises et un large échantillon sont indispensables.</li>
+        <li>Attention au biais rétrospectif et aux coûts de trading non pris en compte.</li>
+      </ul>
+    </section>
+
+    <div class="hero-cta mt-20" aria-label="Article suivant et découverte de la formation">
+      <a href="/pages/blog/psychologie-discipline-trading.html" class="btn btn-ghost">← Psychologie du trading</a>
+      <a href="/pages/blog/signaux-trading-forex.html" class="btn btn-ghost">Article suivant — Signaux de trading →</a>
+      <a href="https://go.wavest.fr" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Découvrir la méthode Wavest →</a>
+    </div>
+
+    <p class="tip" style="margin-top:24px;">
+      ⚠️ Ce contenu a une vocation uniquement éducative. Il ne constitue en aucun cas un conseil en
+      investissement. Le trading comporte des risques de perte en capital.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p id="footerText">© 2026 — Wavest | Tous droits réservés</p>
+    <nav class="footer-links" aria-label="Liens légaux">
+      <a id="linkMentions" href="/Legal/mentions-legales.html">Mentions légales</a>
+      <a id="linkPrivacy"  href="/Legal/confidentialite.html">Confidentialité</a>
+      <a id="linkCookies" href="/Legal/cookies.html">Cookies</a>
+      <a id="linkCgv" href="/Legal/cgv.html">CGV</a>
+      <a href="#" data-open-cookie-banner="true" aria-label="Ouvrir les préférences cookies">Gérer les cookies</a>
+    </nav>
+    <p>
+      <a href="mailto:contact@wavest.fr" class="mail-link" id="footerMail" title="Envoyer un email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 12h16V8l-8 7-8-7v10z"/>
+        </svg>
+        <span id="footerMailText">Contact</span>
+      </a>
+    </p>
+  </footer>
+  <script src="/js/app.js" defer></script>
+</body>
+</html>
