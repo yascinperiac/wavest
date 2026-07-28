@@ -1,0 +1,245 @@
+/* =====================================================
+   WAVEST — PERFORMANCE DES PATTERNS
+   Scopé sous .perf-app : aucune collision avec le reste du site.
+   S'appuie sur les tokens globaux de /css/styles.css
+===================================================== */
+
+.perf-app {
+  --perf-card: var(--glass-card);
+  --perf-accent: var(--link);
+  --perf-accent-deep: var(--link-strong);
+  --perf-accent-soft: color-mix(in oklab, var(--link) 12%, transparent);
+  --perf-good: #7cc39a;
+  --perf-bad: #e4949a;
+
+  position: relative;
+  margin: 8px 0 30px;
+}
+
+.perf-app .card{
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--perf-card);
+  box-shadow: var(--shadow);
+}
+
+.perf-ranking-card,
+.perf-heatmap-card{
+  padding: 24px;
+  margin-top: 20px;
+}
+
+.perf-app .section-title{
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.perf-app .section-title h2{
+  margin: 0;
+  font-size: 18.5px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.perf-app .section-title p{
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.perf-app .section-badge{
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--perf-accent-soft);
+  color: var(--perf-accent-deep);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.perf-app .mod-tag{
+  display: inline-block;
+  margin-bottom: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.perf-app .mod-tag em{
+  font-style: normal;
+  color: var(--perf-accent-deep);
+}
+
+/* ---------- Résumé ---------- */
+.perf-summary-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 16px;
+}
+
+.perf-summary-card{
+  padding: 20px;
+  text-align: center;
+}
+
+.perf-summary-value{
+  margin-top: 6px;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--perf-accent-deep);
+  font-family: var(--font-display, inherit);
+}
+
+.perf-summary-score{
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--perf-good);
+}
+
+/* ---------- Contrôles ---------- */
+.perf-controls{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.perf-controls label{
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.perf-controls select{
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+
+/* ---------- Tableaux ---------- */
+.perf-table-scroll{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.perf-ranking-table,
+.perf-heatmap-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.perf-ranking-table th,
+.perf-heatmap-table th{
+  text-align: left;
+  padding: 10px 12px;
+  color: var(--muted);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.perf-ranking-table td,
+.perf-heatmap-table td{
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.perf-rank{
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.perf-pair-cell{
+  font-weight: 700;
+  color: var(--text);
+}
+
+.perf-pattern-tag{
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--perf-accent-soft);
+  color: var(--perf-accent-deep);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.perf-score,
+.perf-total{
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.perf-score.is-positive,
+.perf-total.is-positive{ color: var(--perf-good); }
+.perf-score.is-negative,
+.perf-total.is-negative{ color: color-mix(in oklab, var(--perf-bad) 70%, var(--text)); }
+
+/* ---------- Heatmap ---------- */
+.perf-heatmap-table td{
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-size: 12.5px;
+  color: var(--text);
+}
+
+.perf-heatmap-table .perf-pair-col,
+.perf-heatmap-table .perf-total-col{
+  text-align: left;
+  font-weight: 700;
+  background: var(--card);
+  position: sticky;
+  left: 0;
+}
+
+.perf-heatmap-table .perf-total-col{
+  left: auto;
+  right: 0;
+}
+
+.perf-heatmap-table td.is-best{
+  box-shadow: inset 0 0 0 2px var(--perf-accent-deep);
+  font-weight: 800;
+}
+
+/* ---------- Disclaimer ---------- */
+.perf-disclaimer{
+  margin: 20px 0 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(230,187,121,.12);
+  border: 1px solid rgba(230,187,121,.28);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 700px){
+  .perf-summary-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .perf-ranking-card,
+  .perf-heatmap-card{
+    padding: 18px;
+  }
+}

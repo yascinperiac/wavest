@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simulateur de croissance de capital — Wavest</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Simulateur de croissance de capital — Wavest" />
+  <meta property="og:description" content="Simule l'évolution de ton capital de trading selon ton risque par trade, ton ratio risque/rendement et ton taux de réussite. Visualise pourquoi la gestion du risque compte plus que la stratégie." />
+  <meta property="og:url" content="https://wavest.fr/pages/simulateur-croissance.html" />
+  <meta property="og:image" content="https://wavest.fr/assets/images/logowavest1.png" />
+  <meta property="og:site_name" content="Wavest" />
+  <meta property="og:locale" content="fr_FR" />
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png?v=2">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png?v=2">
+  <link rel="shortcut icon" href="../favicon.ico?v=2">
+  <meta name="description" content="Simulateur de croissance de capital Wavest : visualise l'évolution de ton compte de trading selon ton risque par trade, ton ratio risque/rendement et ton taux de réussite.">
+
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/simulateur-croissance.css" />
+
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f0f10" media="(prefers-color-scheme: dark)">
+
+  <link rel="canonical" href="https://wavest.fr/pages/simulateur-croissance.html" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Simulateur de croissance de capital",
+  "url": "https://wavest.fr/pages/simulateur-croissance.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "description": "Simule l'évolution de ton capital de trading selon ton risque par trade, ton ratio risque/rendement et ton taux de réussite.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Wavest",
+    "url": "https://wavest.fr"
+  },
+  "inLanguage": "fr-FR"
+}
+  </script>
+</head>
+<body class="page-sim-calc">
+
+  <!-- === HEADER === -->
+  <header class="site-header">
+    <h1>Simulateur de croissance de capital</h1>
+    <div class="header-actions">
+      <a href="../index.html#tools" class="btn btn-ghost">← Sommaire</a>
+    </div>
+  </header>
+
+  <main class="container" id="content">
+
+    <!-- INTRO -->
+    <section class="hero reveal" aria-label="Simulateur de croissance de capital">
+      <p>Visualise comment ton capital évolue selon ton risque, ton ratio risque/rendement et ton taux de réussite — avant de risquer un euro en réel.</p>
+    </section>
+
+    <!-- OUTIL -->
+    <div class="sim-app reveal">
+      <div class="sim-shell">
+        <div class="sim-toolbar">
+          <button id="simResetBtn" class="sim-reset-btn" type="button">
+            ↻ Réinitialiser
+          </button>
+        </div>
+        <div class="sim-grid">
+
+          <!-- FORMULAIRE -->
+          <section class="card sim-card">
+            <div class="section-title">
+              <span class="section-badge">1</span>
+              <div>
+                <p class="mod-tag">Paramètres <em>· ta méthode</em></p>
+                <h2>Ton scénario</h2>
+                <p>Renseigne ton capital de départ et les stats de ta méthode.</p>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="simCapital">Capital de départ (€)</label>
+                <input id="simCapital" type="number" inputmode="decimal" min="0" step="1" placeholder="Ex : 1000" value="1000" />
+              </div>
+
+              <div class="field">
+                <label for="simRisk">Risque par trade (%)</label>
+                <input id="simRisk" type="number" inputmode="decimal" min="0" step="0.1" placeholder="Ex : 1" value="1" />
+              </div>
+
+              <div class="field">
+                <label for="simRR">Ratio risque/rendement moyen (R:R)</label>
+                <input id="simRR" type="number" inputmode="decimal" min="0" step="0.1" placeholder="Ex : 2" value="2" />
+                <p class="field-hint">
+                  Utilise ta moyenne réelle sur au moins 30-50 trades (backtestés ou en réel),
+                  pas un chiffre théorique — le R:R n'est jamais identique à chaque trade.
+                </p>
+              </div>
+
+              <div class="field">
+                <label for="simWinrate">Taux de réussite estimé (%)</label>
+                <input id="simWinrate" type="number" inputmode="decimal" min="0" max="100" step="1" placeholder="Ex : 45" value="45" />
+              </div>
+
+              <div class="field field-full">
+                <label for="simTrades">Nombre de trades à simuler</label>
+                <input id="simTrades" type="number" inputmode="decimal" min="1" max="1000" step="1" placeholder="Ex : 100" value="100" />
+              </div>
+            </div>
+
+            <p class="sim-disclaimer">
+              ⚠️ Simulation statistique à but pédagogique. Les résultats passés ou simulés ne préjugent
+              pas des résultats futurs. Le trading comporte des risques de perte en capital.
+            </p>
+          </section>
+
+          <!-- RÉSULTAT -->
+          <aside class="card sim-result-card">
+            <div class="section-title">
+              <span class="section-badge verdict">✓</span>
+              <div>
+                <p class="mod-tag">Résultat <em>· en direct</em></p>
+                <h2>Projection</h2>
+                <p>Trois scénarios simulés selon les mêmes paramètres.</p>
+              </div>
+            </div>
+
+            <div class="sim-chart-wrap">
+              <canvas id="simChart" width="600" height="280" aria-label="Courbe de croissance du capital simulé" role="img"></canvas>
+              <div class="sim-chart-legend">
+                <span class="legend-item legend-good"><i></i> Scénario favorable</span>
+                <span class="legend-item legend-mid"><i></i> Scénario médian</span>
+                <span class="legend-item legend-bad"><i></i> Scénario défavorable</span>
+              </div>
+            </div>
+
+            <div class="sim-stats-list">
+              <div class="sim-stat-row">
+                <span>Capital final (médian)</span>
+                <strong id="simFinalCapital">-</strong>
+              </div>
+              <div class="sim-stat-row">
+                <span>Rendement total</span>
+                <strong id="simTotalReturn">-</strong>
+              </div>
+              <div class="sim-stat-row">
+                <span>Drawdown max (médian)</span>
+                <strong id="simMaxDrawdown">-</strong>
+              </div>
+              <div class="sim-stat-row">
+                <span>Trades gagnants attendus</span>
+                <strong id="simWinsExpected">-</strong>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+
+        <section class="card sim-explain">
+          <div class="section-title">
+            <span class="section-badge">2</span>
+            <div>
+              <p class="mod-tag">Pourquoi <em>· ça compte</em></p>
+              <h2>Ce que montre la simulation</h2>
+              <p>Le même taux de réussite ne donne pas la même trajectoire selon le risque pris par trade.</p>
+            </div>
+          </div>
+          <p>
+            Le scénario défavorable simule une série de pertes plus longue que la moyenne — le genre de
+            séquence qui arrive à tout le monde, même avec une méthode statistiquement rentable. Un risque
+            par trade trop élevé peut transformer une méthode rentable sur le papier en compte explosé
+            dans la réalité. C'est le money management qui détermine si tu survis à cette séquence, pas
+            la stratégie d'entrée.
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="hero-cta mt-20">
+      <a href="/pages/blog/money-management-forex.html" class="btn btn-ghost">← Lire l'article Money Management</a>
+      <a href="calculateur-lot.html" class="btn btn-primary">Calculateur de lot →</a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p id="footerText">© 2026 — Wavest | Tous droits réservés</p>
+
+    <nav class="footer-links" aria-label="Liens légaux">
+      <a id="linkMentions" href="../Legal/mentions-legales.html">Mentions légales</a>
+      <a id="linkPrivacy"  href="../Legal/confidentialite.html">Confidentialité</a>
+      <a id="linkCookies" href="../Legal/cookies.html">Cookies</a>
+      <a id="linkCgv" href="../Legal/cgv.html">CGV</a>
+      <a href="#" data-open-cookie-banner="true">Gérer les cookies</a>
+    </nav>
+
+    <p>
+      <a href="mailto:contact@wavest.fr" class="mail-link" id="footerMail" title="Envoyer un email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+             viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 12h16V8l-8 7-8-7v10z"/>
+        </svg>
+        <span id="footerMailText">Contact</span>
+      </a>
+    </p>
+  </footer>
+
+  <script src="../js/app.js" defer></script>
+  <script src="../js/simulateur-croissance.js" defer></script>
+</body>
+</html>
