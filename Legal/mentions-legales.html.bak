@@ -21,7 +21,7 @@
   <header class="site-header">
     <h1>Mentions légales</h1>
     <div class="header-actions">
-      <a href="../index.html" class="btn btn-ghost">← Retour</a>
+      <a href="../pages/index.html" class="btn btn-ghost">← Retour</a>
     </div>
   </header>
 
