@@ -781,7 +781,13 @@ body.dark .fx-hours thead{background:var(--glass-card)}
 .mail-link{
   gap:8px;
   padding:6px 10px;
+  transition:color .2s ease;
 }
+.icon-mail:hover{color:#3B82F6}
+.icon-instagram:hover{color:#E1306C}
+.icon-tiktok:hover{color:#FE2C55}
+.icon-youtube:hover{color:#FF0000}
+.icon-discord:hover{color:#5865F2}
 
 .disclaimer{
   margin-top:12px;
