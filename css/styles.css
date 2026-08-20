@@ -475,6 +475,55 @@ body.dark .hero--image::before{opacity:.12}
   .about-bullets li:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(60,55,40,.08)}
 }
 
+/* Call individuel CTA */
+.call-cta{
+  max-width:720px;
+  margin:56px auto 32px;
+  padding:0 16px;
+}
+.call-cta-inner{
+  background:var(--glass-card);
+  border:1px solid var(--glass-card-border);
+  border-radius:var(--radius-lg);
+  padding:20px 26px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  box-shadow:var(--shadow);
+  backdrop-filter:var(--bf-card);
+  -webkit-backdrop-filter:var(--bf-card);
+}
+.call-cta-text{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.call-cta-emoji{font-size:20px}
+.call-cta-title{
+  color:var(--text);
+  font-weight:700;
+  font-size:16px;
+  font-family:var(--font-display);
+}
+.call-cta-btn{
+  background:var(--link);
+  color:#fff;
+  font-weight:600;
+  padding:10px 20px;
+  border-radius:999px;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:transform .2s ease, opacity .2s ease;
+}
+.call-cta-btn:hover{transform:translateY(-1px); opacity:.9}
+
+@media (max-width:640px){
+  .call-cta-inner{flex-direction:column; text-align:center; justify-content:center;}
+  .call-cta-text{flex-direction:column; text-align:center;}
+}
+
 /* Témoignage */
 .testimonial{
   max-width:920px;
