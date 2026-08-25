@@ -24,6 +24,35 @@
 
   const CURRENCIES = Object.keys(FALLBACK_RATES_TO_USD);
 
+  // Code devise -> code pays ISO2 pour flagcdn.com
+  const CURRENCY_FLAG = {
+    EUR: "eu",
+    USD: "us",
+    GBP: "gb",
+    JPY: "jp",
+    CHF: "ch",
+    CAD: "ca",
+    AUD: "au",
+    NZD: "nz",
+  };
+
+  function flagUrl(currency) {
+    const iso = CURRENCY_FLAG[currency];
+    return iso ? `https://flagcdn.com/w80/${iso}.png` : "";
+  }
+
+  // Code devise -> symbole affiché dans le champ "Solde du compte"
+  const CURRENCY_SYMBOL = {
+    EUR: "€",
+    USD: "$",
+    GBP: "£",
+    JPY: "¥",
+    CHF: "Fr",
+    CAD: "$",
+    AUD: "$",
+    NZD: "$",
+  };
+
   const PAIRS = {
     EURUSD: { base: "EUR", quote: "USD" },
     EURGBP: { base: "EUR", quote: "GBP" },
@@ -65,7 +94,15 @@
   ===================================================== */
 
   const lotPair = document.getElementById("lotPair");
+  const lotPairSelect = document.getElementById("lotPairSelect");
+  const lotPairTrigger = document.getElementById("lotPairTrigger");
+  const lotPairOptions = document.getElementById("lotPairOptions");
+  const lotPairFlagA = document.getElementById("lotPairFlagA");
+  const lotPairFlagB = document.getElementById("lotPairFlagB");
+  const lotPairTriggerCode = document.getElementById("lotPairTriggerCode");
   const lotAccountCurrency = document.getElementById("lotAccountCurrency");
+  const currencyButtons = Array.from(document.querySelectorAll(".currency-btn"));
+  const lotBalanceCurrency = document.getElementById("lotBalanceCurrency");
   const lotBalance = document.getElementById("lotBalance");
   const lotRisk = document.getElementById("lotRisk");
   const lotStop = document.getElementById("lotStop");
@@ -163,6 +200,19 @@
     lotVerdict.className = `lot-verdict ${type}`;
   }
 
+  function setAccountCurrency(code) {
+    lotAccountCurrency.value = code;
+    currencyButtons.forEach((btn) => {
+      const active = btn.dataset.currency === code;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    if (lotBalanceCurrency) {
+      lotBalanceCurrency.textContent = CURRENCY_SYMBOL[code] || code;
+    }
+    updateCalculator();
+  }
+
   function resetOutputs() {
     lotRiskAmount.textContent = "-";
     lotPipValue.textContent = "-";
@@ -237,18 +287,94 @@
   }
 
   /* =====================================================
-     6. ÉVÉNEMENTS + INIT
+     6. SÉLECTEUR DE PAIRE (drapeaux doubles)
   ===================================================== */
 
-  [lotPair, lotAccountCurrency, lotBalance, lotRisk, lotStop].forEach((el) => {
+  function syncPairTrigger() {
+    const pair = PAIRS[lotPair.value];
+    if (!pair) return;
+    lotPairFlagA.src = flagUrl(pair.base);
+    lotPairFlagA.alt = pair.base;
+    lotPairFlagB.src = flagUrl(pair.quote);
+    lotPairFlagB.alt = pair.quote;
+    lotPairTriggerCode.textContent = `${pair.base}/${pair.quote}`;
+
+    lotPairOptions.querySelectorAll(".pair-option").forEach((opt) => {
+      opt.classList.toggle("is-selected", opt.dataset.pair === lotPair.value);
+    });
+  }
+
+  function buildPairOptions() {
+    Object.keys(PAIRS).forEach((key) => {
+      const pair = PAIRS[key];
+      const opt = document.createElement("button");
+      opt.type = "button";
+      opt.className = "pair-option";
+      opt.setAttribute("role", "option");
+      opt.dataset.pair = key;
+      opt.innerHTML = `
+        <span class="pair-flags">
+          <img class="flag-a" src="${flagUrl(pair.base)}" alt="${pair.base}">
+          <img class="flag-b" src="${flagUrl(pair.quote)}" alt="${pair.quote}">
+        </span>
+        <span>${pair.base}/${pair.quote}</span>
+      `;
+      opt.addEventListener("click", () => {
+        lotPair.value = key;
+        syncPairTrigger();
+        closePairOptions();
+        updateCalculator();
+      });
+      lotPairOptions.appendChild(opt);
+    });
+  }
+
+  function openPairOptions() {
+    lotPairOptions.hidden = false;
+    lotPairSelect.classList.add("is-open");
+    lotPairTrigger.setAttribute("aria-expanded", "true");
+  }
+
+  function closePairOptions() {
+    lotPairOptions.hidden = true;
+    lotPairSelect.classList.remove("is-open");
+    lotPairTrigger.setAttribute("aria-expanded", "false");
+  }
+
+  lotPairTrigger.addEventListener("click", () => {
+    if (lotPairOptions.hidden) openPairOptions();
+    else closePairOptions();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!lotPairSelect.contains(e.target)) closePairOptions();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closePairOptions();
+  });
+
+  buildPairOptions();
+  syncPairTrigger();
+
+  /* =====================================================
+     7. ÉVÉNEMENTS + INIT
+  ===================================================== */
+
+  [lotPair, lotBalance, lotRisk, lotStop].forEach((el) => {
     el.addEventListener("input", updateCalculator);
     el.addEventListener("change", updateCalculator);
   });
 
+  currencyButtons.forEach((btn) => {
+    btn.addEventListener("click", () => setAccountCurrency(btn.dataset.currency));
+  });
+
   lotResetBtn.addEventListener("click", () => {
     lotPair.selectedIndex = 0;
+    syncPairTrigger();
     lotStop.value = "";
-    updateCalculator();
+    setAccountCurrency("EUR");
   });
 
   updateCalculator();

@@ -83,8 +83,19 @@
 
             <div class="form-grid">
               <div class="field">
-                <label for="lotPair">Paire</label>
-                <select id="lotPair">
+                <label for="lotPairTrigger">Paire</label>
+                <div class="pair-select" id="lotPairSelect">
+                  <button type="button" class="pair-trigger" id="lotPairTrigger" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="pair-flags">
+                      <img class="flag-a" id="lotPairFlagA" src="https://flagcdn.com/w80/eu.png" alt="">
+                      <img class="flag-b" id="lotPairFlagB" src="https://flagcdn.com/w80/us.png" alt="">
+                    </span>
+                    <span class="pair-trigger-code" id="lotPairTriggerCode">EUR/USD</span>
+                    <span class="pair-trigger-caret" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="pair-options" id="lotPairOptions" role="listbox" hidden></div>
+                </div>
+                <select id="lotPair" class="visually-hidden" tabindex="-1" aria-hidden="true">
                   <option value="EURUSD">EUR/USD</option>
                   <option value="EURGBP">EUR/GBP</option>
                   <option value="EURAUD">EUR/AUD</option>
@@ -116,17 +127,51 @@
                 </select>
               </div>
 
-              <div class="field">
-                <label for="lotAccountCurrency">Devise du compte</label>
-                <select id="lotAccountCurrency">
-                  <option value="EUR">EUR</option>
-                  <option value="USD">USD</option>
-                </select>
+              <div class="field field-full">
+                <label id="lotAccountCurrencyLabel">Devise du compte</label>
+                <div class="currency-grid" id="lotAccountCurrencyGrid" role="radiogroup" aria-labelledby="lotAccountCurrencyLabel">
+                  <button type="button" class="currency-btn is-active" data-currency="EUR" aria-pressed="true">
+                    <span class="currency-flag"><img src="https://flagcdn.com/w80/eu.png" alt="" loading="lazy"></span>
+                    <span class="currency-code">EUR</span>
+                  </button>
+                  <button type="button" class="currency-btn" data-currency="USD" aria-pressed="false">
+                    <span class="currency-flag"><img src="https://flagcdn.com/w80/us.png" alt="" loading="lazy"></span>
+                    <span class="currency-code">USD</span>
+                  </button>
+                  <button type="button" class="currency-btn" data-currency="GBP" aria-pressed="false">
+                    <span class="currency-flag"><img src="https://flagcdn.com/w80/gb.png" alt="" loading="lazy"></span>
+                    <span class="currency-code">GBP</span>
+                  </button>
+                  <button type="button" class="currency-btn" data-currency="CHF" aria-pressed="false">
+                    <span class="currency-flag"><img src="https://flagcdn.com/w80/ch.png" alt="" loading="lazy"></span>
+                    <span class="currency-code">CHF</span>
+                  </button>
+                  <button type="button" class="currency-btn" data-currency="AUD" aria-pressed="false">
+                    <span class="currency-flag"><img src="https://flagcdn.com/w80/au.png" alt="" loading="lazy"></span>
+                    <span class="currency-code">AUD</span>
+                  </button>
+                  <button type="button" class="currency-btn" data-currency="CAD" aria-pressed="false">
+                    <span class="currency-flag"><img src="https://flagcdn.com/w80/ca.png" alt="" loading="lazy"></span>
+                    <span class="currency-code">CAD</span>
+                  </button>
+                  <button type="button" class="currency-btn" data-currency="NZD" aria-pressed="false">
+                    <span class="currency-flag"><img src="https://flagcdn.com/w80/nz.png" alt="" loading="lazy"></span>
+                    <span class="currency-code">NZD</span>
+                  </button>
+                  <button type="button" class="currency-btn" data-currency="JPY" aria-pressed="false">
+                    <span class="currency-flag"><img src="https://flagcdn.com/w80/jp.png" alt="" loading="lazy"></span>
+                    <span class="currency-code">JPY</span>
+                  </button>
+                </div>
+                <input type="hidden" id="lotAccountCurrency" value="EUR" />
               </div>
 
               <div class="field">
                 <label for="lotBalance">Solde du compte</label>
-                <input id="lotBalance" type="number" inputmode="decimal" min="0" step="1" placeholder="Ex : 1000" />
+                <div class="amount-input">
+                  <span class="amount-currency" id="lotBalanceCurrency" aria-hidden="true">€</span>
+                  <input id="lotBalance" type="number" inputmode="decimal" min="0" step="1" placeholder="Ex : 1000" />
+                </div>
               </div>
 
               <div class="field">

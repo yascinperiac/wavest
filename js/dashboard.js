@@ -37,6 +37,11 @@
   const statAvgLoss = document.getElementById("statAvgLoss");
   const statProfitFactor = document.getElementById("statProfitFactor");
 
+  const dashPieStage = document.getElementById("dashPieStage");
+  const dashPieSvg = document.getElementById("dashPieSvg");
+  const dashPieCallouts = document.getElementById("dashPieCallouts");
+  const dashPieLegend = document.getElementById("dashPieLegend");
+  const dashPieTotal = document.getElementById("dashPieTotal");
   const dashMonthLabel = document.getElementById("dashMonthLabel");
   const dashCalendarGrid = document.getElementById("dashCalendarGrid");
   const dashPrevBtn = document.getElementById("dashPrevBtn");
@@ -264,6 +269,298 @@
   }
 
   /* =====================================================
+     6bis. RÉPARTITION TP / SL / BE (anneau 3D premium)
+     TP = trade clôturé positif, SL = clôturé négatif,
+     BE = clôturé pile à 0 (même logique que le calendrier).
+  ===================================================== */
+
+  let lastPieSegments = null;
+  let lastPieTotal = 0;
+  let pieAnimFrame = null;
+  let lastCalloutBoxes = [];
+
+  // Géométrie de l'anneau (coordonnées du viewBox SVG). Les parts tapissent
+  // l'anneau bord à bord (pas d'écartement) : pas de trous ni de recouvrement
+  // entre elles, donc pas besoin de fond de secours.
+  const PIE_VIEW_W = 640;
+  const PIE_VIEW_H = 460;
+  const PIE_CENTER_X = 300;
+  const PIE_CENTER_Y = 185;
+  const PIE_RX = 150;
+  const PIE_RY = PIE_RX * 0.55;
+  const PIE_INNER_RX = PIE_RX * 0.56;
+  const PIE_INNER_RY = PIE_RY * 0.56;
+  const PIE_DEPTH = 44;
+
+  // Emplacements possibles des étiquettes autour de l'anneau (fractions du
+  // viewBox) — plus nombreux que de parts : on choisit ensuite, pour chaque
+  // rendu, la combinaison qui colle le mieux à l'angle réel de chaque part,
+  // pour que les lignes ne se croisent jamais par-dessus l'anneau.
+  const PIE_CALLOUT_SLOTS = [
+    { x: 0.06, y: 0.08 },
+    { x: 0.94, y: 0.08 },
+    { x: 0.97, y: 0.5 },
+    { x: 0.03, y: 0.5 },
+    { x: 0.82, y: 0.95 },
+    { x: 0.18, y: 0.95 },
+  ];
+
+  function renderPieChart(list) {
+    const tp = list.filter((t) => t.pnl > 0).length;
+    const sl = list.filter((t) => t.pnl < 0).length;
+    const be = list.filter((t) => t.pnl === 0).length;
+    const total = tp + sl + be;
+
+    if (pieAnimFrame) {
+      cancelAnimationFrame(pieAnimFrame);
+      pieAnimFrame = null;
+    }
+
+    if (dashPieTotal) dashPieTotal.textContent = total || "-";
+
+    if (total === 0) {
+      if (dashPieSvg) dashPieSvg.innerHTML = "";
+      if (dashPieCallouts) dashPieCallouts.innerHTML = "";
+      dashPieLegend.innerHTML = '<li class="pie3d-empty">Pas encore de trades.</li>';
+      lastPieSegments = null;
+      lastCalloutBoxes = [];
+      return;
+    }
+
+    const segments = [
+      { key: "tp", label: "Take Profit", count: tp, color: "var(--pie-tp)", deep: "var(--pie-tp-deep)" },
+      { key: "sl", label: "Stop Loss", count: sl, color: "var(--pie-sl)", deep: "var(--pie-sl-deep)" },
+      { key: "be", label: "Break Even", count: be, color: "var(--pie-be)", deep: "var(--pie-be-deep)" },
+    ].filter((s) => s.count > 0);
+
+    let acc = 0;
+    segments.forEach((s) => {
+      const from = (acc / total) * 360;
+      acc += s.count;
+      const to = (acc / total) * 360;
+      s.fromAngle = from;
+      s.toAngle = to;
+      s.midDeg = (from + to) / 2;
+      s.pct = (s.count / total) * 100;
+    });
+
+    dashPieLegend.innerHTML = segments
+      .map((s) => {
+        return `
+          <li class="is-${s.key}">
+            <span class="pie3d-dot"></span>
+            <div class="pie3d-info">
+              <div class="pie3d-info-top">
+                <span class="pie3d-label">${s.label}</span>
+                <span class="pie3d-value">${s.count} · ${s.pct.toFixed(1)}%</span>
+              </div>
+              <div class="pie3d-bar"><span style="width:${s.pct.toFixed(1)}%"></span></div>
+            </div>
+          </li>`;
+      })
+      .join("");
+
+    lastPieSegments = segments;
+    lastPieTotal = total;
+    renderPieSvg(segments);
+  }
+
+  /* =====================================================
+     6ter. ANNEAU 3D
+     Chaque part est un secteur annulaire (arc extérieur + arc intérieur,
+     tracés en SVG). L'extrusion reprend le principe "pièce de monnaie" :
+     une copie assombrie, décalée vers le bas, est recouverte par sa propre
+     face du dessus — seul le bord avant (en bas) reste visible, ce qui
+     donne l'épaisseur 3D sans jamais déborder sur les parts voisines
+     puisqu'elles se touchent pile bord à bord (aucun écart entre elles).
+  ===================================================== */
+
+  function ellipsePt(cx, cy, rx, ry, deg) {
+    const rad = (deg * Math.PI) / 180;
+    return [cx + rx * Math.sin(rad), cy - ry * Math.cos(rad)];
+  }
+
+  function annularSectorPath(cx, cy, rx, ry, irx, iry, a0, a1) {
+    if (a1 <= a0) return "";
+    const outerStart = ellipsePt(cx, cy, rx, ry, a0);
+    const outerEnd = ellipsePt(cx, cy, rx, ry, a1);
+    const innerEnd = ellipsePt(cx, cy, irx, iry, a1);
+    const innerStart = ellipsePt(cx, cy, irx, iry, a0);
+    const largeArc = a1 - a0 > 180 ? 1 : 0;
+    const f = (n) => n.toFixed(2);
+    return (
+      `M ${f(outerStart[0])},${f(outerStart[1])} ` +
+      `A ${f(rx)} ${f(ry)} 0 ${largeArc} 1 ${f(outerEnd[0])},${f(outerEnd[1])} ` +
+      `L ${f(innerEnd[0])},${f(innerEnd[1])} ` +
+      `A ${f(irx)} ${f(iry)} 0 ${largeArc} 0 ${f(innerStart[0])},${f(innerStart[1])} Z`
+    );
+  }
+
+  function renderPieSvg(segments) {
+    if (!dashPieSvg) return;
+    dashPieSvg.innerHTML = "";
+    if (dashPieCallouts) dashPieCallouts.innerHTML = "";
+    lastCalloutBoxes = [];
+
+    const svgNS = "http://www.w3.org/2000/svg";
+    const addEl = (parent, tag, attrs) => {
+      const el = document.createElementNS(svgNS, tag);
+      Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+      parent.appendChild(el);
+      return el;
+    };
+
+    // Dégradés glacés (léger reflet en haut) pour un rendu premium plutôt
+    // que des aplats mats.
+    const defs = addEl(dashPieSvg, "defs", {});
+    segments.forEach((s) => {
+      const grad = addEl(defs, "linearGradient", {
+        id: `pieGrad-${s.key}`,
+        x1: "0", y1: "0", x2: "0", y2: "1",
+      });
+      addEl(grad, "stop", { offset: "0%", "stop-color": `color-mix(in oklab, ${s.color} 62%, white)` });
+      addEl(grad, "stop", { offset: "100%", "stop-color": s.color });
+    });
+
+    const depthLayer = addEl(dashPieSvg, "g", { class: "pie3d-ring-depth" });
+    const topLayer = addEl(dashPieSvg, "g", { class: "pie3d-ring-top" });
+    const linesGroup = addEl(dashPieSvg, "g", { class: "pie3d-lines-group" });
+
+    const duration = 900;
+    const t0 = performance.now();
+    function step(now) {
+      const raw = Math.min(1, (now - t0) / duration);
+      const eased = 1 - Math.pow(1 - raw, 3);
+      const sweepEnd = 360 * eased;
+
+      depthLayer.innerHTML = "";
+      topLayer.innerHTML = "";
+      segments.forEach((s) => {
+        const a0 = Math.min(s.fromAngle, sweepEnd);
+        const a1 = Math.min(s.toAngle, sweepEnd);
+        if (a1 <= a0) return;
+        addEl(depthLayer, "path", {
+          d: annularSectorPath(PIE_CENTER_X, PIE_CENTER_Y + PIE_DEPTH, PIE_RX, PIE_RY, PIE_INNER_RX, PIE_INNER_RY, a0, a1),
+          fill: s.deep,
+        });
+        addEl(topLayer, "path", {
+          d: annularSectorPath(PIE_CENTER_X, PIE_CENTER_Y, PIE_RX, PIE_RY, PIE_INNER_RX, PIE_INNER_RY, a0, a1),
+          fill: `url(#pieGrad-${s.key})`,
+          stroke: "var(--card)",
+          "stroke-width": "1.5",
+          "stroke-linejoin": "round",
+        });
+      });
+
+      if (raw < 1) {
+        pieAnimFrame = requestAnimationFrame(step);
+      } else {
+        pieAnimFrame = null;
+        renderPieCallouts(segments, linesGroup);
+      }
+    }
+    pieAnimFrame = requestAnimationFrame(step);
+  }
+
+  function renderPieCallouts(segments, linesGroup) {
+    if (!dashPieCallouts || !linesGroup || !dashPieStage) return;
+    linesGroup.innerHTML = "";
+    dashPieCallouts.innerHTML = "";
+    lastCalloutBoxes = [];
+    if (!segments.length) return;
+
+    const svgNS = "http://www.w3.org/2000/svg";
+    const addEl = (parent, tag, attrs) => {
+      const el = document.createElementNS(svgNS, tag);
+      Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+      parent.appendChild(el);
+      return el;
+    };
+
+    // Assigne chaque part au slot dont l'angle colle le mieux au sien (recherche
+    // globale, pas gloutonne), pour que la ligne de rappel reste courte et ne
+    // traverse jamais l'anneau.
+    const angleDiff = (a, b) => {
+      const d = Math.abs(a - b) % 360;
+      return d > 180 ? 360 - d : d;
+    };
+    const slotAngle = (slot) =>
+      (Math.atan2(slot.x * PIE_VIEW_W - PIE_CENTER_X, -(slot.y * PIE_VIEW_H - PIE_CENTER_Y)) * 180) / Math.PI;
+    const slotAngles = PIE_CALLOUT_SLOTS.map(slotAngle);
+
+    let bestCost = Infinity;
+    let bestCombo = null;
+    (function search(remaining, chosen) {
+      if (chosen.length === segments.length) {
+        let cost = 0;
+        for (let i = 0; i < segments.length; i++) cost += angleDiff(segments[i].midDeg, slotAngles[chosen[i]]);
+        if (cost < bestCost) {
+          bestCost = cost;
+          bestCombo = chosen.slice();
+        }
+        return;
+      }
+      for (let i = 0; i < remaining.length; i++) {
+        const idx = remaining[i];
+        chosen.push(idx);
+        search(remaining.slice(0, i).concat(remaining.slice(i + 1)), chosen);
+        chosen.pop();
+      }
+    })(PIE_CALLOUT_SLOTS.map((_, i) => i), []);
+
+    const stageRect = dashPieStage.getBoundingClientRect();
+    const scaleX = stageRect.width / PIE_VIEW_W || 1;
+    const scaleY = stageRect.height / PIE_VIEW_H || 1;
+
+    segments.forEach((s, i) => {
+      const slot = PIE_CALLOUT_SLOTS[bestCombo[i]];
+      const midRad = (s.midDeg * Math.PI) / 180;
+      const nx = Math.sin(midRad);
+      const nyScreen = -Math.cos(midRad);
+      const rimX = PIE_CENTER_X + PIE_RX * nx;
+      const rimY = PIE_CENTER_Y + PIE_RY * nyScreen;
+      const bendX = rimX + nx * 26;
+      const bendY = rimY + nyScreen * 26;
+      const boxXsvg = slot.x * PIE_VIEW_W;
+      const boxYsvg = slot.y * PIE_VIEW_H;
+
+      addEl(linesGroup, "polyline", {
+        points: `${rimX.toFixed(1)},${rimY.toFixed(1)} ${bendX.toFixed(1)},${bendY.toFixed(1)} ${boxXsvg.toFixed(1)},${boxYsvg.toFixed(1)}`,
+        fill: "none",
+        stroke: s.deep,
+        "stroke-width": "2",
+        "stroke-linejoin": "round",
+        opacity: "0.85",
+      });
+      addEl(linesGroup, "circle", { cx: rimX.toFixed(1), cy: rimY.toFixed(1), r: "4.5", fill: s.deep });
+
+      const box = document.createElement("div");
+      box.className = "pie3d-callout";
+      box.style.left = `${boxXsvg * scaleX}px`;
+      box.style.top = `${boxYsvg * scaleY}px`;
+      box.style.borderColor = s.deep;
+      box.innerHTML = `<span class="pie3d-callout-label">${s.label}</span><strong class="pie3d-callout-value">${s.pct.toFixed(0)}%</strong>`;
+      dashPieCallouts.appendChild(box);
+      lastCalloutBoxes.push({ el: box, xSvg: boxXsvg, ySvg: boxYsvg });
+    });
+  }
+
+  let pieResizeTimer = null;
+  window.addEventListener("resize", () => {
+    if (!lastCalloutBoxes.length || !dashPieStage) return;
+    clearTimeout(pieResizeTimer);
+    pieResizeTimer = setTimeout(() => {
+      const stageRect = dashPieStage.getBoundingClientRect();
+      const scaleX = stageRect.width / PIE_VIEW_W || 1;
+      const scaleY = stageRect.height / PIE_VIEW_H || 1;
+      lastCalloutBoxes.forEach((b) => {
+        b.el.style.left = `${b.xSvg * scaleX}px`;
+        b.el.style.top = `${b.ySvg * scaleY}px`;
+      });
+    }, 120);
+  });
+
+  /* =====================================================
      7. CALENDRIER
   ===================================================== */
 
@@ -486,21 +783,50 @@
       return el;
     };
 
-    // ---------- Défs : dégradé sous la courbe + halo sur la ligne ----------
+    // ---------- Défs : dégradé rouge/vert (selon le résultat) + halo sur la ligne ----------
     const defs = addEl("defs", {});
+
+    // Fraction verticale (0 = haut du graphique, 1 = bas) à laquelle se trouve
+    // la ligne zéro : au-dessus -> vert (gain), en dessous -> rouge (perte).
+    const zeroFrac = Math.min(0.98, Math.max(0.02, yScale(0) / height));
+    const bandAbove = Math.max(0, zeroFrac - 0.05);
+    const bandBelow = Math.min(1, zeroFrac + 0.05);
 
     const gradientId = "dashEquityGradient";
     const gradient = document.createElementNS(svgNS, "linearGradient");
     gradient.setAttribute("id", gradientId);
+    gradient.setAttribute("gradientUnits", "userSpaceOnUse");
     gradient.setAttribute("x1", "0");
     gradient.setAttribute("y1", "0");
     gradient.setAttribute("x2", "0");
-    gradient.setAttribute("y2", "1");
+    gradient.setAttribute("y2", height);
     gradient.innerHTML = `
-      <stop offset="0%" stop-color="var(--link)" stop-opacity="0.28"></stop>
-      <stop offset="100%" stop-color="var(--link)" stop-opacity="0"></stop>
+      <stop offset="0%" stop-color="var(--dash-win)" stop-opacity="0.30"></stop>
+      <stop offset="${(bandAbove * 100).toFixed(1)}%" stop-color="var(--dash-win)" stop-opacity="0.05"></stop>
+      <stop offset="${(zeroFrac * 100).toFixed(1)}%" stop-color="var(--dash-win)" stop-opacity="0"></stop>
+      <stop offset="${(zeroFrac * 100).toFixed(1)}%" stop-color="var(--dash-loss)" stop-opacity="0"></stop>
+      <stop offset="${(bandBelow * 100).toFixed(1)}%" stop-color="var(--dash-loss)" stop-opacity="0.05"></stop>
+      <stop offset="100%" stop-color="var(--dash-loss)" stop-opacity="0.30"></stop>
     `;
     defs.appendChild(gradient);
+
+    // Même logique pour le trait de la courbe : plein vert au-dessus de zéro,
+    // plein rouge en dessous, avec une petite zone de fondu autour de zéro.
+    const lineGradientId = "dashEquityLineGradient";
+    const lineGradient = document.createElementNS(svgNS, "linearGradient");
+    lineGradient.setAttribute("id", lineGradientId);
+    lineGradient.setAttribute("gradientUnits", "userSpaceOnUse");
+    lineGradient.setAttribute("x1", "0");
+    lineGradient.setAttribute("y1", "0");
+    lineGradient.setAttribute("x2", "0");
+    lineGradient.setAttribute("y2", height);
+    lineGradient.innerHTML = `
+      <stop offset="0%" stop-color="var(--dash-win)"></stop>
+      <stop offset="${(bandAbove * 100).toFixed(1)}%" stop-color="var(--dash-win)"></stop>
+      <stop offset="${(bandBelow * 100).toFixed(1)}%" stop-color="var(--dash-loss)"></stop>
+      <stop offset="100%" stop-color="var(--dash-loss)"></stop>
+    `;
+    defs.appendChild(lineGradient);
 
     const glowId = "dashEquityGlow";
     const filter = document.createElementNS(svgNS, "filter");
@@ -564,9 +890,9 @@
     // Zone sous la courbe (dégradé)
     addEl("path", { d: areaD, fill: `url(#${gradientId})`, stroke: "none" });
 
-    // Ligne (avec léger halo)
+    // Ligne (avec léger halo), colorée en dégradé rouge/vert selon le résultat
     const linePath = addEl("path", {
-      d: lineD, fill: "none", stroke: "var(--link)",
+      d: lineD, fill: "none", stroke: `url(#${lineGradientId})`,
       "stroke-width": "2.5", "stroke-linejoin": "round", "stroke-linecap": "round",
       filter: `url(#${glowId})`,
     });
@@ -599,17 +925,18 @@
       });
     }
 
-    // Point final — halo qui pulse doucement (position "live")
+    // Point final — halo qui pulse doucement (position "live"), teinté selon le résultat
     const lastPoint = points[points.length - 1];
     const lastCx = xScale(lastPoint.time);
     const lastCy = yScale(lastPoint.value);
+    const lastColor = lastPoint.value >= 0 ? "var(--dash-win)" : "var(--dash-loss)";
 
     addEl("circle", {
-      cx: lastCx, cy: lastCy, r: "9", fill: "var(--link)", opacity: "0.25",
+      cx: lastCx, cy: lastCy, r: "9", fill: lastColor, opacity: "0.25",
       class: "dash-equity-pulse",
     });
     addEl("circle", {
-      cx: lastCx, cy: lastCy, r: "4.5", fill: "var(--link)", stroke: "var(--card)", "stroke-width": "2",
+      cx: lastCx, cy: lastCy, r: "4.5", fill: lastColor, stroke: "var(--card)", "stroke-width": "2",
     });
 
     // Dates de début / fin
