@@ -346,6 +346,8 @@
         const banner = await ensureBannerInDom();
         if (!banner) return;
 
+        if (window.WavestI18n) window.WavestI18n.applyLang(window.WavestI18n.getLang());
+
         const accept  = document.getElementById("cookieAccept");
         const decline = document.getElementById("cookieDecline");
 

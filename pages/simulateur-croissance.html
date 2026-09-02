@@ -65,13 +65,16 @@
 }
   </script>
 </head>
-<body class="page-sim-calc">
+<body class="page-sim-calc" data-i18n-title="pageTitle_simulateurCroissance">
 
   <!-- === HEADER === -->
   <header class="site-header">
-    <h1>Simulateur de croissance de capital</h1>
+    <button id="langToggle" type="button" class="lang-toggle" aria-label="Passer le site en anglais" data-i18n-aria-label="langToggleAria">
+      <span data-i18n="langToggleLabel">EN</span>
+    </button>
+    <h1 data-i18n="simulateurCroissance_1">Simulateur de croissance de capital</h1>
     <div class="header-actions">
-      <a href="../index.html#tools" class="btn btn-ghost">← Sommaire</a>
+      <a href="../index.html#tools" class="btn btn-ghost" data-i18n="simulateurCroissance_2">← Sommaire</a>
     </div>
   </header>
 
@@ -79,14 +82,14 @@
 
     <!-- INTRO -->
     <section class="hero reveal" aria-label="Simulateur de croissance de capital">
-      <p>Visualise comment ton capital évolue selon ton risque, ton ratio risque/rendement et ton taux de réussite — avant de risquer un euro en réel.</p>
+      <p data-i18n="simulateurCroissance_3">Visualise comment ton capital évolue selon ton risque, ton ratio risque/rendement et ton taux de réussite — avant de risquer un euro en réel.</p>
     </section>
 
     <!-- OUTIL -->
     <div class="sim-app reveal">
       <div class="sim-shell">
         <div class="sim-toolbar">
-          <button id="simResetBtn" class="sim-reset-btn" type="button">
+          <button id="simResetBtn" class="sim-reset-btn" type="button" data-i18n="simulateurCroissance_4">
             ↻ Réinitialiser
           </button>
         </div>
@@ -97,44 +100,44 @@
             <div class="section-title">
               <span class="section-badge">1</span>
               <div>
-                <p class="mod-tag">Paramètres <em>· ta méthode</em></p>
-                <h2>Ton scénario</h2>
-                <p>Renseigne ton capital de départ et les stats de ta méthode.</p>
+                <p class="mod-tag"><span data-i18n="simulateurCroissance_6">Paramètres </span><em data-i18n="simulateurCroissance_5">· ta méthode</em></p>
+                <h2 data-i18n="simulateurCroissance_7">Ton scénario</h2>
+                <p data-i18n="simulateurCroissance_8">Renseigne ton capital de départ et les stats de ta méthode.</p>
               </div>
             </div>
 
             <div class="form-grid">
               <div class="field">
-                <label for="simCapital">Capital de départ (€)</label>
+                <label for="simCapital" data-i18n="simulateurCroissance_9">Capital de départ (€)</label>
                 <input id="simCapital" type="number" inputmode="decimal" min="0" step="1" placeholder="Ex : 1000" value="1000" />
               </div>
 
               <div class="field">
-                <label for="simRisk">Risque par trade (%)</label>
+                <label for="simRisk" data-i18n="simulateurCroissance_10">Risque par trade (%)</label>
                 <input id="simRisk" type="number" inputmode="decimal" min="0" step="0.1" placeholder="Ex : 1" value="1" />
               </div>
 
               <div class="field">
-                <label for="simRR">Ratio risque/rendement moyen (R:R)</label>
+                <label for="simRR" data-i18n="simulateurCroissance_11">Ratio risque/rendement moyen (R:R)</label>
                 <input id="simRR" type="number" inputmode="decimal" min="0" step="0.1" placeholder="Ex : 2" value="2" />
-                <p class="field-hint">
+                <p class="field-hint" data-i18n="simulateurCroissance_12">
                   Utilise ta moyenne réelle sur au moins 30-50 trades (backtestés ou en réel),
                   pas un chiffre théorique — le R:R n'est jamais identique à chaque trade.
                 </p>
               </div>
 
               <div class="field">
-                <label for="simWinrate">Taux de réussite estimé (%)</label>
+                <label for="simWinrate" data-i18n="simulateurCroissance_13">Taux de réussite estimé (%)</label>
                 <input id="simWinrate" type="number" inputmode="decimal" min="0" max="100" step="1" placeholder="Ex : 45" value="45" />
               </div>
 
               <div class="field field-full">
-                <label for="simTrades">Nombre de trades à simuler</label>
+                <label for="simTrades" data-i18n="simulateurCroissance_14">Nombre de trades à simuler</label>
                 <input id="simTrades" type="number" inputmode="decimal" min="1" max="1000" step="1" placeholder="Ex : 100" value="100" />
               </div>
             </div>
 
-            <p class="sim-disclaimer">
+            <p class="sim-disclaimer" data-i18n="simulateurCroissance_15">
               ⚠️ Simulation statistique à but pédagogique. Les résultats passés ou simulés ne préjugent
               pas des résultats futurs. Le trading comporte des risques de perte en capital.
             </p>
@@ -145,36 +148,36 @@
             <div class="section-title">
               <span class="section-badge verdict">✓</span>
               <div>
-                <p class="mod-tag">Résultat <em>· en direct</em></p>
-                <h2>Projection</h2>
-                <p>Trois scénarios simulés selon les mêmes paramètres.</p>
+                <p class="mod-tag"><span data-i18n="simulateurCroissance_17">Résultat </span><em data-i18n="simulateurCroissance_16">· en direct</em></p>
+                <h2 data-i18n="simulateurCroissance_18">Projection</h2>
+                <p data-i18n="simulateurCroissance_19">Trois scénarios simulés selon les mêmes paramètres.</p>
               </div>
             </div>
 
             <div class="sim-chart-wrap">
               <canvas id="simChart" width="600" height="280" aria-label="Courbe de croissance du capital simulé" role="img"></canvas>
               <div class="sim-chart-legend">
-                <span class="legend-item legend-good"><i></i> Scénario favorable</span>
-                <span class="legend-item legend-mid"><i></i> Scénario médian</span>
-                <span class="legend-item legend-bad"><i></i> Scénario défavorable</span>
+                <span class="legend-item legend-good"><i></i><span data-i18n="simulateurCroissance_20"> Scénario favorable</span></span>
+                <span class="legend-item legend-mid"><i></i><span data-i18n="simulateurCroissance_21"> Scénario médian</span></span>
+                <span class="legend-item legend-bad"><i></i><span data-i18n="simulateurCroissance_22"> Scénario défavorable</span></span>
               </div>
             </div>
 
             <div class="sim-stats-list">
               <div class="sim-stat-row">
-                <span>Capital final (médian)</span>
+                <span data-i18n="simulateurCroissance_23">Capital final (médian)</span>
                 <strong id="simFinalCapital">-</strong>
               </div>
               <div class="sim-stat-row">
-                <span>Rendement total</span>
+                <span data-i18n="simulateurCroissance_24">Rendement total</span>
                 <strong id="simTotalReturn">-</strong>
               </div>
               <div class="sim-stat-row">
-                <span>Drawdown max (médian)</span>
+                <span data-i18n="simulateurCroissance_25">Drawdown max (médian)</span>
                 <strong id="simMaxDrawdown">-</strong>
               </div>
               <div class="sim-stat-row">
-                <span>Trades gagnants attendus</span>
+                <span data-i18n="simulateurCroissance_26">Trades gagnants attendus</span>
                 <strong id="simWinsExpected">-</strong>
               </div>
             </div>
@@ -186,12 +189,12 @@
           <div class="section-title">
             <span class="section-badge">2</span>
             <div>
-              <p class="mod-tag">Pourquoi <em>· ça compte</em></p>
-              <h2>Ce que montre la simulation</h2>
-              <p>Le même taux de réussite ne donne pas la même trajectoire selon le risque pris par trade.</p>
+              <p class="mod-tag"><span data-i18n="simulateurCroissance_28">Pourquoi </span><em data-i18n="simulateurCroissance_27">· ça compte</em></p>
+              <h2 data-i18n="simulateurCroissance_29">Ce que montre la simulation</h2>
+              <p data-i18n="simulateurCroissance_30">Le même taux de réussite ne donne pas la même trajectoire selon le risque pris par trade.</p>
             </div>
           </div>
-          <p>
+          <p data-i18n="simulateurCroissance_31">
             Le scénario défavorable simule une série de pertes plus longue que la moyenne — le genre de
             séquence qui arrive à tout le monde, même avec une méthode statistiquement rentable. Un risque
             par trade trop élevé peut transformer une méthode rentable sur le papier en compte explosé
@@ -204,22 +207,22 @@
 
     <!-- CTA -->
     <div class="hero-cta mt-20">
-      <a href="/pages/blog/money-management-forex.html" class="btn btn-ghost">← Lire l'article Money Management</a>
-      <a href="calculateur-lot.html" class="btn btn-primary">Calculateur de lot →</a>
+      <a href="/pages/blog/money-management-forex.html" class="btn btn-ghost" data-i18n="simulateurCroissance_32">← Lire l'article Money Management</a>
+      <a href="calculateur-lot.html" class="btn btn-primary" data-i18n="simulateurCroissance_33">Calculateur de lot →</a>
     </div>
 
   </main>
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <p id="footerText">© 2026 — Wavest | Tous droits réservés</p>
+    <p id="footerText" data-i18n="simulateurCroissance_34">© 2026 — Wavest | Tous droits réservés</p>
 
     <nav class="footer-links" aria-label="Liens légaux">
-      <a id="linkMentions" href="../Legal/mentions-legales.html">Mentions légales</a>
-      <a id="linkPrivacy"  href="../Legal/confidentialite.html">Confidentialité</a>
-      <a id="linkCookies" href="../Legal/cookies.html">Cookies</a>
-      <a id="linkCgv" href="../Legal/cgv.html">CGV</a>
-      <a href="#" data-open-cookie-banner="true">Gérer les cookies</a>
+      <a id="linkMentions" href="../Legal/mentions-legales.html" data-i18n="simulateurCroissance_35">Mentions légales</a>
+      <a id="linkPrivacy"  href="../Legal/confidentialite.html" data-i18n="simulateurCroissance_36">Confidentialité</a>
+      <a id="linkCookies" href="../Legal/cookies.html" data-i18n="simulateurCroissance_37">Cookies</a>
+      <a id="linkCgv" href="../Legal/cgv.html" data-i18n="simulateurCroissance_38">CGV</a>
+      <a href="#" data-open-cookie-banner="true" data-i18n="simulateurCroissance_39">Gérer les cookies</a>
     </nav>
 
     <p>
@@ -228,12 +231,13 @@
              viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 12h16V8l-8 7-8-7v10z"/>
         </svg>
-        <span id="footerMailText">Contact</span>
+        <span id="footerMailText" data-i18n="simulateurCroissance_40">Contact</span>
       </a>
     </p>
   </footer>
 
   <script src="../js/app.js" defer></script>
+  <script src="../js/i18n.js?v=1" defer></script>
   <script src="../js/simulateur-croissance.js" defer></script>
 </body>
 </html>

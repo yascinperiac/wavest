@@ -34,13 +34,16 @@
   <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0f0f10" media="(prefers-color-scheme: dark)">
 </head>
-<body class="page-psy" data-header-height="90">
+<body class="page-psy" data-header-height="90" data-i18n-title="pageTitle_psychologieDiscipline">
 
   <!-- === HEADER === -->
   <header class="site-header">
-  <h1>Chapitre 6 — Psychologie & Discipline</h1>
+    <button id="langToggle" type="button" class="lang-toggle" aria-label="Passer le site en anglais" data-i18n-aria-label="langToggleAria">
+      <span data-i18n="langToggleLabel">EN</span>
+    </button>
+  <h1 data-i18n="psychologieDiscipline_1">Chapitre 6 — Psychologie & Discipline</h1>
   <div class="header-actions">
-    <a href="../index.html#chapters" class="btn btn-ghost">← Sommaire</a>
+    <a href="../index.html#chapters" class="btn btn-ghost" data-i18n="psychologieDiscipline_2">← Sommaire</a>
   </div>
 </header>
 
@@ -49,19 +52,19 @@
     <!-- === SOMMAIRE === -->
     <section id="sommaire" class="accordion reveal" aria-labelledby="sommaireTitle" data-accordion="chap6">
       <div class="card">
-        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="sommairePanel" id="sommaireTitle">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="sommairePanel" id="sommaireTitle"><span data-i18n="psychologieDiscipline_3">
           Sous Chapitres
-          <span class="chev" aria-hidden="true"></span>
+          </span><span class="chev" aria-hidden="true"></span>
         </button>
-        <p class="chapter-quote">« La psychologie, c’est ce qui sépare ceux qui survivent de ceux qui performent. »</p>
+        <p class="chapter-quote" data-i18n="psychologieDiscipline_4">« La psychologie, c’est ce qui sépare ceux qui survivent de ceux qui performent. »</p>
         <div id="sommairePanel" class="acc-panel" hidden>
           <ul class="sub-list">
-            <li><a href="#emotions">🧠 Émotions</a></li>
-            <li><a href="#discipline">🎯 Discipline</a></li>
-            <li><a href="#routine">⏰ Routine mentale</a></li>
-            <li><a href="#resilience">💪 Résilience</a></li>
-            <li><a href="#erreurs">⚠️ Erreurs fréquentes</a></li>
-            <li><a href="#mental">👑 Mental de pro</a></li>
+            <li><a href="#emotions" data-i18n="psychologieDiscipline_5">🧠 Émotions</a></li>
+            <li><a href="#discipline" data-i18n="psychologieDiscipline_6">🎯 Discipline</a></li>
+            <li><a href="#routine" data-i18n="psychologieDiscipline_7">⏰ Routine mentale</a></li>
+            <li><a href="#resilience" data-i18n="psychologieDiscipline_8">💪 Résilience</a></li>
+            <li><a href="#erreurs" data-i18n="psychologieDiscipline_9">⚠️ Erreurs fréquentes</a></li>
+            <li><a href="#mental" data-i18n="psychologieDiscipline_10">👑 Mental de pro</a></li>
           </ul>
         </div>
       </div>
@@ -69,29 +72,29 @@
 
     <!-- === VIDÉO INTRO === -->
     <section id="video-intro" class="reveal">
-      <h2>Routine</h2>
+      <h2 data-i18n="psychologieDiscipline_11">Routine</h2>
       <figure class="video-wrap">
         <div class="video-frame">
           <video width="960" height="540" controls preload="metadata" playsinline poster="../assets/images/posters/psychologie-discipline.png">
             <source src="../assets/videos/psychologiediscipline.mp4" type="video/mp4">
           </video>
         </div>
-        <figcaption class="video-caption"><span aria-hidden="true">🎥</span> Vidéo — Les clés mentales d’un trader rentable.</figcaption>
+        <figcaption class="video-caption" data-i18n-html="psychologieDiscipline_12"><span aria-hidden="true">🎥</span> Vidéo — Les clés mentales d’un trader rentable.</figcaption>
       </figure>
     </section>
 
     <!-- === ÉMOTIONS === -->
     <section id="emotions" class="reveal">
       <header class="section-head">
-        <h2>🧠 Émotions</h2>
-        <p class="section-sub">Tu ne contrôles pas le marché. Mais tu peux te contrôler, toi.</p>
+        <h2 data-i18n="psychologieDiscipline_13">🧠 Émotions</h2>
+        <p class="section-sub" data-i18n="psychologieDiscipline_14">Tu ne contrôles pas le marché. Mais tu peux te contrôler, toi.</p>
       </header>
       <div class="rules-block">
-        <p>Chaque trade est une épreuve émotionnelle. La peur te fait sortir trop tôt. La cupidité te fait entrer trop tard. Ton objectif, c’est d’observer tes émotions sans agir sous leur influence.</p>
+        <p data-i18n="psychologieDiscipline_15">Chaque trade est une épreuve émotionnelle. La peur te fait sortir trop tôt. La cupidité te fait entrer trop tard. Ton objectif, c’est d’observer tes émotions sans agir sous leur influence.</p>
         <ul class="rules">
-          <li><p class="rule-text">🩵 Observe tes réactions, pas seulement le marché.</p></li>
-          <li><p class="rule-text">🩵 Accepte la perte avant même d’entrer en position.</p></li>
-          <li><p class="rule-text">🩵 Ne cherche pas à avoir raison, cherche à être discipliné.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_16">🩵 Observe tes réactions, pas seulement le marché.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_17">🩵 Accepte la perte avant même d’entrer en position.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_18">🩵 Ne cherche pas à avoir raison, cherche à être discipliné.</p></li>
         </ul>
       </div>
     </section>
@@ -99,15 +102,15 @@
     <!-- === DISCIPLINE === -->
     <section id="discipline" class="reveal">
       <header class="section-head">
-        <h2>🎯 Discipline</h2>
-        <p class="section-sub">La discipline, c’est faire ce que tu dois faire, même quand tu n’en as pas envie.</p>
+        <h2 data-i18n="psychologieDiscipline_19">🎯 Discipline</h2>
+        <p class="section-sub" data-i18n="psychologieDiscipline_20">La discipline, c’est faire ce que tu dois faire, même quand tu n’en as pas envie.</p>
       </header>
       <div class="rules-block">
-        <p>La discipline, c’est la clé qui transforme un bon plan en résultats réels. Tes émotions veulent de l’adrénaline, ton succès demande de la rigueur.</p>
+        <p data-i18n="psychologieDiscipline_21">La discipline, c’est la clé qui transforme un bon plan en résultats réels. Tes émotions veulent de l’adrénaline, ton succès demande de la rigueur.</p>
         <ul class="rules">
-          <li><p class="rule-text">🩵 Suis ton plan, pas ton humeur.</p></li>
-          <li><p class="rule-text">🩵 Rappelle-toi : un setup 5★ ne garantit rien, il maximise tes chances.</p></li>
-          <li><p class="rule-text">🩵 Tiens ton journal. Les chiffres ne mentent pas, toi si.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_22">🩵 Suis ton plan, pas ton humeur.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_23">🩵 Rappelle-toi : un setup 5★ ne garantit rien, il maximise tes chances.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_24">🩵 Tiens ton journal. Les chiffres ne mentent pas, toi si.</p></li>
         </ul>
       </div>
     </section>
@@ -115,15 +118,15 @@
     <!-- === ROUTINE MENTALE === -->
     <section id="routine" class="reveal">
       <header class="section-head">
-        <h2>⏰ Routine mentale</h2>
-        <p class="section-sub">Ton esprit doit être aussi préparé que ton graphique.</p>
+        <h2 data-i18n="psychologieDiscipline_25">⏰ Routine mentale</h2>
+        <p class="section-sub" data-i18n="psychologieDiscipline_26">Ton esprit doit être aussi préparé que ton graphique.</p>
       </header>
       <div class="rules-block">
-        <p>Les meilleurs traders ne réagissent pas, ils exécutent. Chaque matin, aligne ton mental avec ta méthode. Ta routine, c’est ton ancrage dans la tempête.</p>
+        <p data-i18n="psychologieDiscipline_27">Les meilleurs traders ne réagissent pas, ils exécutent. Chaque matin, aligne ton mental avec ta méthode. Ta routine, c’est ton ancrage dans la tempête.</p>
         <ul class="rules">
-          <li><p class="rule-text">🩵 Commence ta session avec calme et clarté.</p></li>
-          <li><p class="rule-text">🩵 Ferme ton graphique après ta décision.</p></li>
-          <li><p class="rule-text">🩵 Coupe les notifications. Le marché mérite ton attention entière.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_28">🩵 Commence ta session avec calme et clarté.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_29">🩵 Ferme ton graphique après ta décision.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_30">🩵 Coupe les notifications. Le marché mérite ton attention entière.</p></li>
         </ul>
       </div>
     </section>
@@ -131,15 +134,15 @@
     <!-- === RÉSILIENCE === -->
     <section id="resilience" class="reveal">
       <header class="section-head">
-        <h2>💪 Résilience</h2>
-        <p class="section-sub">Ce n’est pas le marché qui te teste, c’est la vie qui te forge.</p>
+        <h2 data-i18n="psychologieDiscipline_31">💪 Résilience</h2>
+        <p class="section-sub" data-i18n="psychologieDiscipline_32">Ce n’est pas le marché qui te teste, c’est la vie qui te forge.</p>
       </header>
       <div class="rules-block">
-        <p>Tu vas perdre. Souvent. Mais chaque perte te rapproche de la version de toi qui gagne. Le but n’est pas d’éviter la douleur, mais de la transformer en expérience.</p>
+        <p data-i18n="psychologieDiscipline_33">Tu vas perdre. Souvent. Mais chaque perte te rapproche de la version de toi qui gagne. Le but n’est pas d’éviter la douleur, mais de la transformer en expérience.</p>
         <ul class="rules">
-          <li><p class="rule-text">🩵 Analyse sans te juger. Apprends, ajuste, avance.</p></li>
-          <li><p class="rule-text">🩵 La constance bat le talent, chaque fois.</p></li>
-          <li><p class="rule-text">🩵 Ne cherche pas la revanche, cherche la progression.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_34">🩵 Analyse sans te juger. Apprends, ajuste, avance.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_35">🩵 La constance bat le talent, chaque fois.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_36">🩵 Ne cherche pas la revanche, cherche la progression.</p></li>
         </ul>
       </div>
     </section>
@@ -147,14 +150,14 @@
     <!-- === ERREURS FRÉQUENTES === -->
     <section id="erreurs" class="reveal">
       <header class="section-head">
-        <h2>⚠️ Erreurs fréquentes</h2>
-        <p class="section-sub">La plupart échouent, non pas à cause du marché, mais à cause d’eux-mêmes.</p>
+        <h2 data-i18n="psychologieDiscipline_37">⚠️ Erreurs fréquentes</h2>
+        <p class="section-sub" data-i18n="psychologieDiscipline_38">La plupart échouent, non pas à cause du marché, mais à cause d’eux-mêmes.</p>
       </header>
       <div class="rules-block">
         <ul class="rules">
-          <li><p class="rule-text">🩵 Chercher à “se refaire” après une perte.</p></li>
-          <li><p class="rule-text">🩵 Doubler le risque pour “rattraper” un trade.</p></li>
-          <li><p class="rule-text">🩵 Oublier que ne pas trader, c’est aussi trader.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_39">🩵 Chercher à “se refaire” après une perte.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_40">🩵 Doubler le risque pour “rattraper” un trade.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_41">🩵 Oublier que ne pas trader, c’est aussi trader.</p></li>
         </ul>
       </div>
     </section>
@@ -162,15 +165,15 @@
     <!-- === MENTAL DE PRO === -->
     <section id="mental" class="reveal">
       <header class="section-head">
-        <h2>👑 Mental de pro</h2>
-        <p class="section-sub">Tu n’es plus un joueur. Tu es un opérateur rationnel dans un environnement incertain.</p>
+        <h2 data-i18n="psychologieDiscipline_42">👑 Mental de pro</h2>
+        <p class="section-sub" data-i18n="psychologieDiscipline_43">Tu n’es plus un joueur. Tu es un opérateur rationnel dans un environnement incertain.</p>
       </header>
       <div class="rules-block">
-        <p>Le mental du trader pro ne dépend ni de ses gains, ni de ses pertes. Il dépend de sa capacité à rester lucide. Être constant, c’est ton vrai edge.</p>
+        <p data-i18n="psychologieDiscipline_44">Le mental du trader pro ne dépend ni de ses gains, ni de ses pertes. Il dépend de sa capacité à rester lucide. Être constant, c’est ton vrai edge.</p>
         <ul class="rules">
-          <li><p class="rule-text">🩵 Maîtrise-toi, et le marché ne t’affectera plus.</p></li>
-          <li><p class="rule-text">🩵 Traite chaque trade comme une ligne de code : précis, neutre, logique.</p></li>
-          <li><p class="rule-text">🩵 Garde ton ego hors du graphique.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_45">🩵 Maîtrise-toi, et le marché ne t’affectera plus.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_46">🩵 Traite chaque trade comme une ligne de code : précis, neutre, logique.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_47">🩵 Garde ton ego hors du graphique.</p></li>
         </ul>
       </div>
     </section>
@@ -178,17 +181,17 @@
     <!-- === CITATION INSPIRANTE === -->
     <section id="citation" class="reveal">
       <blockquote class="psy-quote">
-        <p>« Le marché n’a pas d’émotions. C’est toi qui en as. Et c’est la seule variable que tu peux maîtriser. »</p>
+        <p data-i18n="psychologieDiscipline_48">« Le marché n’a pas d’émotions. C’est toi qui en as. Et c’est la seule variable que tu peux maîtriser. »</p>
       </blockquote>
     </section>
 
     <!-- === À RETENIR === -->
     <section id="retenir" class="reveal">
-      <h3 class="rules-title">📌 À retenir</h3>
+      <h3 class="rules-title" data-i18n="psychologieDiscipline_49">📌 À retenir</h3>
       <ul class="rules highlight">
-        <li><p class="rule-text">🎯 La discipline bat toujours le talent.</p></li>
-        <li><p class="rule-text">🧘 Tes émotions ne sont pas tes ennemies, elles sont ton miroir.</p></li>
-        <li><p class="rule-text">🔥 Le vrai succès, c’est la constance mentale.</p></li>
+        <li><p class="rule-text" data-i18n="psychologieDiscipline_50">🎯 La discipline bat toujours le talent.</p></li>
+        <li><p class="rule-text" data-i18n="psychologieDiscipline_51">🧘 Tes émotions ne sont pas tes ennemies, elles sont ton miroir.</p></li>
+        <li><p class="rule-text" data-i18n="psychologieDiscipline_52">🔥 Le vrai succès, c’est la constance mentale.</p></li>
       </ul>
     </section>
 
@@ -196,8 +199,8 @@
     <section id="coach-note" class="reveal" aria-labelledby="coachNoteTitle">
       <div class="coach-card">
         <header class="coach-head">
-          <h2 id="coachNoteTitle">Note du coach</h2>
-          <button type="button" class="coach-btn" id="coachEditBtn" aria-pressed="false" aria-controls="coachEditor">
+          <h2 id="coachNoteTitle" data-i18n="psychologieDiscipline_53">Note du coach</h2>
+          <button type="button" class="coach-btn" id="coachEditBtn" aria-pressed="false" aria-controls="coachEditor" data-i18n="psychologieDiscipline_54">
             ✏️ Éditer
           </button>
         </header>
@@ -209,8 +212,8 @@
           <div class="coach-bar">
             <span id="coachCount" aria-live="polite">0 / 1000</span>
             <div class="coach-actions">
-              <button type="button" class="coach-btn ghost" id="coachCancelBtn">Annuler</button>
-              <button type="submit" class="coach-btn primary" id="coachSaveBtn">Enregistrer</button>
+              <button type="button" class="coach-btn ghost" id="coachCancelBtn" data-i18n="psychologieDiscipline_55">Annuler</button>
+              <button type="submit" class="coach-btn primary" id="coachSaveBtn" data-i18n="psychologieDiscipline_56">Enregistrer</button>
             </div>
           </div>
           <input type="text" name="website" autocomplete="off" tabindex="-1" class="hp" aria-hidden="true">
@@ -220,19 +223,21 @@
 
    <!-- === CTA FINAL === -->
 <div class="hero-cta mt-20">
-  <a href="setup.html" class="btn btn-ghost">← Revenir au Chapitre 5 — Setup</a>
+  <a href="setup.html" class="btn btn-ghost" data-i18n="psychologieDiscipline_57">← Revenir au Chapitre 5 — Setup</a>
 </div>
+
+  </main>
 
   <!-- FOOTER -->
   <footer class="site-footer">
-  <p id="footerText">© 2026 — Wavest | Tous droits réservés</p>
+  <p id="footerText" data-i18n="psychologieDiscipline_58">© 2026 — Wavest | Tous droits réservés</p>
 
   <nav class="footer-links" aria-label="Liens légaux">
-    <a id="linkMentions" href="../Legal/mentions-legales.html">Mentions légales</a>
-    <a id="linkPrivacy"  href="../Legal/confidentialite.html">Confidentialité</a>
-    <a id="linkCookies" href="../Legal/cookies.html">Cookies</a>
-    <a id="linkCgv" href="../Legal/cgv.html">CGV</a>
-    <a href="#" data-open-cookie-banner="true">Gérer les cookies</a>
+    <a id="linkMentions" href="../Legal/mentions-legales.html" data-i18n="psychologieDiscipline_59">Mentions légales</a>
+    <a id="linkPrivacy"  href="../Legal/confidentialite.html" data-i18n="psychologieDiscipline_60">Confidentialité</a>
+    <a id="linkCookies" href="../Legal/cookies.html" data-i18n="psychologieDiscipline_61">Cookies</a>
+    <a id="linkCgv" href="../Legal/cgv.html" data-i18n="psychologieDiscipline_62">CGV</a>
+    <a href="#" data-open-cookie-banner="true" data-i18n="psychologieDiscipline_63">Gérer les cookies</a>
   </nav>
 
   <p>
@@ -241,12 +246,13 @@
            viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 12h16V8l-8 7-8-7v10z"/>
       </svg>
-      <span id="footerMailText">Contact</span>
+      <span id="footerMailText" data-i18n="psychologieDiscipline_64">Contact</span>
     </a>
   </p>
 </footer>
 
   <script src="../js/app.js" defer></script>
+  <script src="../js/i18n.js?v=1" defer></script>
 </body>
 </html>
 

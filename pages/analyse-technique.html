@@ -40,7 +40,7 @@
   </style>
 </head>
 
-<body class="page-analyse" data-header-height="90">
+<body class="page-analyse" data-header-height="90" data-i18n-title="pageTitle_analyseTechnique">
 
   <!-- Sprite SVG (icônes réutilisables) -->
   <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
@@ -79,9 +79,12 @@
 
   <!-- HEADER -->
   <header class="site-header">
-    <h1>Chapitre 3 — Analyse technique</h1>
+    <button id="langToggle" type="button" class="lang-toggle" aria-label="Passer le site en anglais" data-i18n-aria-label="langToggleAria">
+      <span data-i18n="langToggleLabel">EN</span>
+    </button>
+    <h1 data-i18n="analyseTechnique_1">Chapitre 3 — Analyse technique</h1>
     <div class="header-actions">
-      <a href="/index.html#chapters" class="btn btn-ghost" title="Retour à l’accueil">← Sommaire</a>
+      <a href="/index.html#chapters" class="btn btn-ghost" title="Retour à l’accueil" data-i18n="analyseTechnique_2">← Sommaire</a>
     </div>
   </header>
 
@@ -90,24 +93,24 @@
     <!-- SOMMAIRE -->
     <section id="sommaire" class="accordion reveal" aria-labelledby="sommaireTitle" data-accordion="chap3">
       <div class="card">
-        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="sommairePanel" id="sommaireTitle">
+        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="sommairePanel" id="sommaireTitle"><span data-i18n="analyseTechnique_3">
           Sous Chapitres
-          <span class="chev" aria-hidden="true"></span>
+          </span><span class="chev" aria-hidden="true"></span>
         </button>
 
         <div id="sommairePanel" class="acc-panel" role="region" aria-labelledby="sommaireTitle" hidden>
           <nav aria-labelledby="sommaireTitle">
             <ul class="sub-list">
-              <li><a href="#tendance"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trend"/></svg> Tendance</a></li>
-              <li><a href="#pattern"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-triangle"/></svg> Patterns</a></li>
-              <li><a href="#weekly"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg> Weekly</a></li>
-              <li><a href="#entree4h"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg> Entrée 4H</a></li>
-              <li><a href="#pattern-technique"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-checkcircle"/></svg> Pattern technique</a></li>
-              <li><a href="#backtesting"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chart"/></svg> Backtesting</a></li>
+              <li><a href="#tendance"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trend"/></svg><span data-i18n="analyseTechnique_4"> Tendance</span></a></li>
+              <li><a href="#pattern"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-triangle"/></svg><span data-i18n="analyseTechnique_5"> Patterns</span></a></li>
+              <li><a href="#weekly"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span data-i18n="analyseTechnique_6"> Weekly</span></a></li>
+              <li><a href="#entree4h"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span data-i18n="analyseTechnique_7"> Entrée 4H</span></a></li>
+              <li><a href="#pattern-technique"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-checkcircle"/></svg><span data-i18n="analyseTechnique_8"> Pattern technique</span></a></li>
+              <li><a href="#backtesting"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chart"/></svg><span data-i18n="analyseTechnique_9"> Backtesting</span></a></li>
               <li>
                 <a href="https://docs.google.com/spreadsheets/d/1H90w1JHG0bonCXjFuaXH0MhARKaqZFsgtSQAiLitjT8/copy" target="_blank" rel="noopener noreferrer">
-                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg> Bonus — Exercices Google Sheets
-                </a>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg><span data-i18n="analyseTechnique_10"> Bonus — Exercices Google Sheets
+                </span></a>
               </li>
             </ul>
           </nav>
@@ -117,7 +120,7 @@
 
     <!-- SECTION TENDANCE -->
     <section id="tendance" class="reveal">
-      <h2>Tendance</h2>
+      <h2 data-i18n="analyseTechnique_11">Tendance</h2>
 
       <figure class="video-wrap mt-20">
         <div class="video-frame">
@@ -126,34 +129,34 @@
             <track kind="captions" srclang="fr" src="/assets/captions/tendance.vtt" label="Français">
           </video>
         </div>
-        <figcaption class="video-caption"><span aria-hidden="true">🎥</span> Vidéo d’introduction — règles pour valider HH/LL.</figcaption>
+        <figcaption class="video-caption" data-i18n-html="analyseTechnique_12"><span aria-hidden="true">🎥</span> Vidéo d’introduction — règles pour valider HH/LL.</figcaption>
       </figure>
 
       <div class="rules-block tendance-guidelines">
-        <h3 class="rules-title">Règles importantes</h3>
+        <h3 class="rules-title" data-i18n="analyseTechnique_13">Règles importantes</h3>
         <ul class="trend-grid">
           <li class="trend-card">
-            <h4 class="trend-title">Validation HH/LL</h4>
+            <h4 class="trend-title" data-i18n="analyseTechnique_14">Validation HH/LL</h4>
             <a class="trend-thumb" href="/assets/images/tendance/regle-1.png" target="_blank" rel="noopener">
               <img src="/assets/images/tendance/regle-1.png" alt="Règle 1 — Validation HH/LL" loading="lazy" width="960" height="540">
             </a>
-            <p class="trend-text">Pour faire un nouveau plus haut/bas, le <strong>corps</strong> doit casser la <strong>mèche</strong> de l’ancien plus haut/bas.</p>
+            <p class="trend-text"><span data-i18n="analyseTechnique_17">Pour faire un nouveau plus haut/bas, le </span><strong data-i18n="analyseTechnique_15">corps</strong><span data-i18n="analyseTechnique_18"> doit casser la </span><strong data-i18n="analyseTechnique_16">mèche</strong><span data-i18n="analyseTechnique_19"> de l’ancien plus haut/bas.</span></p>
           </li>
 
           <li class="trend-card">
-            <h4 class="trend-title">Alternance des points</h4>
+            <h4 class="trend-title" data-i18n="analyseTechnique_20">Alternance des points</h4>
             <a class="trend-thumb" href="/assets/images/tendance/regle-2.png" target="_blank" rel="noopener">
               <img src="/assets/images/tendance/regle-2.png" alt="Règle 2 — Alternance des points" loading="lazy" width="960" height="540">
             </a>
-            <p class="trend-text">Jamais 2 points haut/bas <strong>successifs</strong> : toujours un sur deux.</p>
+            <p class="trend-text"><span data-i18n="analyseTechnique_22">Jamais 2 points haut/bas </span><strong data-i18n="analyseTechnique_21">successifs</strong><span data-i18n="analyseTechnique_23"> : toujours un sur deux.</span></p>
           </li>
 
           <li class="trend-card">
-            <h4 class="trend-title">Choix du pivot</h4>
+            <h4 class="trend-title" data-i18n="analyseTechnique_24">Choix du pivot</h4>
             <a class="trend-thumb" href="/assets/images/tendance/regle-3.png" target="_blank" rel="noopener">
               <img src="/assets/images/tendance/regle-3.png" alt="Règle 3 — Choix du pivot" loading="lazy" width="960" height="540">
             </a>
-            <p class="trend-text">Toujours prendre le point <strong>le plus haut/bas</strong> entre deux points haut/bas.</p>
+            <p class="trend-text"><span data-i18n="analyseTechnique_26">Toujours prendre le point </span><strong data-i18n="analyseTechnique_25">le plus haut/bas</strong><span data-i18n="analyseTechnique_27"> entre deux points haut/bas.</span></p>
           </li>
         </ul>
       </div>
@@ -162,8 +165,8 @@
     <!-- SECTION PATTERN -->
     <section id="pattern" class="reveal">
       <header class="section-head">
-        <h2>Patterns</h2>
-        <p class="section-sub">Figures chartistes — définitions rapides + visuels</p>
+        <h2 data-i18n="analyseTechnique_28">Patterns</h2>
+        <p class="section-sub" data-i18n="analyseTechnique_29">Figures chartistes — définitions rapides + visuels</p>
       </header>
 
       <figure class="video-wrap mt-20">
@@ -173,43 +176,43 @@
             <track kind="captions" srclang="fr" src="/assets/captions/pattern.vtt" label="Français">
           </video>
         </div>
-        <figcaption class="video-caption"><span aria-hidden="true">🎥</span> Vidéo — Patterns (figures chartistes).</figcaption>
+        <figcaption class="video-caption" data-i18n-html="analyseTechnique_30"><span aria-hidden="true">🎥</span> Vidéo — Patterns (figures chartistes).</figcaption>
       </figure>
 
       <div class="rules-wrapper pattern-grid">
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">IETE</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_31">IETE</h3>
           <a class="pattern-thumb" href="/assets/images/pattern/IETE.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern/IETE.png" alt="Pattern IETE" loading="lazy">
           </a>
-          <p class="pattern-text">L’<strong>IETE</strong> est un pattern haussier. Il sera détaillé dans le chapitre <strong>Pattern technique</strong>.</p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_34">L’</span><strong data-i18n="analyseTechnique_32">IETE</strong><span data-i18n="analyseTechnique_35"> est un pattern haussier. Il sera détaillé dans le chapitre </span><strong data-i18n="analyseTechnique_33">Pattern technique</strong>.</p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
 
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">M</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_36">M</h3>
           <a class="pattern-thumb" href="/assets/images/pattern/M.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern/M.png" alt="Pattern M" loading="lazy">
           </a>
-          <p class="pattern-text">Le <strong>M</strong> est un pattern haussier. D’autres variantes sont présentées dans <strong>Pattern technique</strong>.</p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_39">Le </span><strong data-i18n="analyseTechnique_37">M</strong><span data-i18n="analyseTechnique_40"> est un pattern haussier. D’autres variantes sont présentées dans </span><strong data-i18n="analyseTechnique_38">Pattern technique</strong>.</p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
 
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">W</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_41">W</h3>
           <a class="pattern-thumb" href="/assets/images/pattern/W.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern/W.png" alt="Pattern W" loading="lazy">
           </a>
-          <p class="pattern-text">Le <strong>W</strong> est un pattern baissier. D’autres variantes sont présentées dans <strong>Pattern technique</strong>.</p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_44">Le </span><strong data-i18n="analyseTechnique_42">W</strong><span data-i18n="analyseTechnique_45"> est un pattern baissier. D’autres variantes sont présentées dans </span><strong data-i18n="analyseTechnique_43">Pattern technique</strong>.</p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
 
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">ETE</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_46">ETE</h3>
           <a class="pattern-thumb" href="/assets/images/pattern/ETE.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern/ETE.png" alt="Pattern ETE" loading="lazy">
           </a>
-          <p class="pattern-text">L’<strong>ETE</strong> (Épaule–Tête–Épaule) est un pattern de retournement majeur. Variations et implications dans <strong>Pattern technique</strong>.</p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_49">L’</span><strong data-i18n="analyseTechnique_47">ETE</strong><span data-i18n="analyseTechnique_50"> (Épaule–Tête–Épaule) est un pattern de retournement majeur. Variations et implications dans </span><strong data-i18n="analyseTechnique_48">Pattern technique</strong>.</p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
       </div>
@@ -218,8 +221,8 @@
     <!-- SECTION WEEKLY -->
     <section id="weekly" class="reveal">
       <header class="section-head">
-        <h2>Weekly</h2>
-        <p class="section-sub">Routine hebdo — analyse weekly</p>
+        <h2 data-i18n="analyseTechnique_51">Weekly</h2>
+        <p class="section-sub" data-i18n="analyseTechnique_52">Routine hebdo — analyse weekly</p>
       </header>
 
       <figure class="video-wrap mt-20">
@@ -229,56 +232,56 @@
             <track kind="captions" srclang="fr" src="/assets/captions/weekly.vtt" label="Français">
           </video>
         </div>
-        <figcaption class="video-caption"><span aria-hidden="true">🎥</span> Vidéo — L'analyse Weekly</figcaption>
+        <figcaption class="video-caption" data-i18n-html="analyseTechnique_53"><span aria-hidden="true">🎥</span> Vidéo — L'analyse Weekly</figcaption>
       </figure>
 
       <div class="weekly-guidelines">
         <ul class="wg-grid">
           <li class="wg-card">
-            <h4 class="wg-title">Tendance</h4>
+            <h4 class="wg-title" data-i18n="analyseTechnique_54">Tendance</h4>
             <a class="wg-thumb" href="/assets/images/weekly/tendance.png" target="_blank" rel="noopener">
               <img src="/assets/images/weekly/tendance.png" alt="Weekly — Tendance" loading="lazy">
             </a>
-            <p class="wg-text">Identifier la tendance dominante.</p>
+            <p class="wg-text" data-i18n="analyseTechnique_55">Identifier la tendance dominante.</p>
           </li>
 
           <li class="wg-card">
-            <h4 class="wg-title">Candle Close</h4>
+            <h4 class="wg-title" data-i18n="analyseTechnique_56">Candle Close</h4>
             <a class="wg-thumb" href="/assets/images/weekly/cc.png" target="_blank" rel="noopener">
               <img src="/assets/images/weekly/cc.png" alt="Weekly — Candle Close" loading="lazy">
             </a>
-            <p class="wg-text">Analyser la clôture de la dernière bougie.</p>
+            <p class="wg-text" data-i18n="analyseTechnique_57">Analyser la clôture de la dernière bougie.</p>
           </li>
 
           <li class="wg-card">
-            <h4 class="wg-title">S&amp;D Zone</h4>
+            <h4 class="wg-title" data-i18n="analyseTechnique_58">S&amp;D Zone</h4>
             <a class="wg-thumb" href="/assets/images/weekly/s-and-d-zone.png" target="_blank" rel="noopener">
               <img src="/assets/images/weekly/s-and-d-zone.png" alt="Weekly — S&amp;D Zone" loading="lazy">
             </a>
-            <p class="wg-text">Zone clé testée et réactive.</p>
+            <p class="wg-text" data-i18n="analyseTechnique_59">Zone clé testée et réactive.</p>
           </li>
 
           <li class="wg-card">
-            <h4 class="wg-title">Pattern</h4>
+            <h4 class="wg-title" data-i18n="analyseTechnique_60">Pattern</h4>
             <a class="wg-thumb" href="/assets/images/weekly/pattern.png" target="_blank" rel="noopener">
               <img src="/assets/images/weekly/pattern.png" alt="Weekly — Pattern" loading="lazy">
             </a>
-            <p class="wg-text">Valider IETE/M/W/ETE sur clôture weekly.</p>
+            <p class="wg-text" data-i18n="analyseTechnique_61">Valider IETE/M/W/ETE sur clôture weekly.</p>
           </li>
         </ul>
       </div>
 
       <ul class="weekly-specials">
         <li class="special-item">
-          <h4>🚫 Bougie neutre</h4>
+          <h4 data-i18n="analyseTechnique_62">🚫 Bougie neutre</h4>
           <a class="special-thumb" href="/assets/images/weekly/bougie-neutre.png" target="_blank" rel="noopener">
             <img src="/assets/images/weekly/bougie-neutre.png" alt="Cas spécial : Bougie neutre" loading="lazy" width="960" height="540">
           </a>
-          <p>Indécision → mettre neutre « / ».</p>
+          <p data-i18n="analyseTechnique_63">Indécision → mettre neutre « / ».</p>
         </li>
 
         <li class="special-item">
-          <h4>🔄 Double Pattern</h4>
+          <h4 data-i18n="analyseTechnique_64">🔄 Double Pattern</h4>
           <div class="special-thumbs">
             <a class="special-thumb" href="/assets/images/weekly/double-pattern.png" target="_blank" rel="noopener">
               <img src="/assets/images/weekly/double-pattern.png" alt="Double pattern — variante 1" loading="lazy" width="480" height="270">
@@ -287,31 +290,31 @@
               <img src="/assets/images/weekly/double-pattern2.png" alt="Double pattern — variante 2" loading="lazy" width="480" height="270">
             </a>
           </div>
-          <p>Si 2 patterns valides → neutre « / ».</p>
+          <p data-i18n="analyseTechnique_65">Si 2 patterns valides → neutre « / ».</p>
         </li>
 
         <li class="special-item">
-          <h4>📊 Zone S/R</h4>
+          <h4 data-i18n="analyseTechnique_66">📊 Zone S/R</h4>
           <a class="special-thumb" href="/assets/images/weekly/zone-avant.png" target="_blank" rel="noopener">
             <img src="/assets/images/weekly/zone-avant.png" alt="Zone testée ≥ 3 fois" loading="lazy" width="960" height="540">
           </a>
-          <p>Zone testée ≥ 3 fois.</p>
+          <p data-i18n="analyseTechnique_67">Zone testée ≥ 3 fois.</p>
         </li>
       </ul>
 
       <div class="weekly-keys">
-        <div class="key-item"><h4>📈 TENDANCE</h4><p>Noter haussier / baissier / range.</p></div>
-        <div class="key-item"><h4>🕯️ CANDLE CLOSE</h4><p>Corps fin et centré → neutre « / ».</p></div>
-        <div class="key-item"><h4>🟩/🟥 S&amp;D ZONE</h4><p>Zone validée si ≥ 3 tests.</p></div>
-        <div class="key-item"><h4>🔺 PATTERN</h4><p>2 patterns valides → neutre « / ».</p></div>
+        <div class="key-item"><h4 data-i18n="analyseTechnique_68">📈 TENDANCE</h4><p data-i18n="analyseTechnique_69">Noter haussier / baissier / range.</p></div>
+        <div class="key-item"><h4 data-i18n="analyseTechnique_70">🕯️ CANDLE CLOSE</h4><p data-i18n="analyseTechnique_71">Corps fin et centré → neutre « / ».</p></div>
+        <div class="key-item"><h4 data-i18n="analyseTechnique_72">🟩/🟥 S&amp;D ZONE</h4><p data-i18n="analyseTechnique_73">Zone validée si ≥ 3 tests.</p></div>
+        <div class="key-item"><h4 data-i18n="analyseTechnique_74">🔺 PATTERN</h4><p data-i18n="analyseTechnique_75">2 patterns valides → neutre « / ».</p></div>
       </div>
     </section>
 
     <!-- SECTION ENTREE 4H -->
     <section id="entree4h" class="reveal">
       <header class="section-head">
-        <h2>Entrée 4H</h2>
-        <p class="section-sub">Affiner ses entrées avec Décélération et FC-27</p>
+        <h2 data-i18n="analyseTechnique_76">Entrée 4H</h2>
+        <p class="section-sub" data-i18n="analyseTechnique_77">Affiner ses entrées avec Décélération et FC-27</p>
       </header>
 
       <figure class="video-wrap mt-20">
@@ -321,27 +324,27 @@
             <track kind="captions" srclang="fr" src="/assets/captions/entree4h.vtt" label="Français">
           </video>
         </div>
-        <figcaption class="video-caption"><span aria-hidden="true">🎥</span> Vidéo — Entrée 4H (Décélération + FC-27)</figcaption>
+        <figcaption class="video-caption" data-i18n-html="analyseTechnique_78"><span aria-hidden="true">🎥</span> Vidéo — Entrée 4H (Décélération + FC-27)</figcaption>
       </figure>
 
       <!-- Décélération -->
       <div class="entree4h-grid">
         <div class="rules-block">
-          <h3 class="rules-title">Ralentissement (Décélération)</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_79">Ralentissement (Décélération)</h3>
           <ul class="rules rules--analyse-technique">
-            <li class="rule-item"><p class="rule-text">⚡ <strong>Prix impulsif</strong> avant la zone.</p></li>
-            <li class="rule-item"><p class="rule-text">🕯️ <strong>Mèche de rejet</strong> sur la 1<sup>ère</sup> bougie.</p></li>
-            <li class="rule-item"><p class="rule-text">〰️ <strong>3 mèches</strong> dans la zone de ralentissement.</p></li>
-            <li class="rule-item"><p class="rule-text">✅ <strong>1 bougie</strong> dans le sens du trade.</p></li>
-            <li class="rule-item"><p class="rule-text">🎯 <strong>Entrée</strong> sur la 4<sup>ᵉ</sup> bougie (validation).</p></li>
-            <li class="rule-item"><p class="rule-text">🔒 <strong>Stop Loss</strong> sous la mèche la plus basse + arrondi à 10 pips.</p></li>
-            <li class="rule-item"><p class="rule-text">📈 Si <strong>RR &gt; 10</strong> → doubler la distance du SL.</p></li>
-            <li class="rule-item"><p class="rule-text">🚫 <strong>Pas de M1/W1 Big</strong>.</p></li>
+            <li class="rule-item"><p class="rule-text">⚡ <strong data-i18n="analyseTechnique_80">Prix impulsif</strong><span data-i18n="analyseTechnique_81"> avant la zone.</span></p></li>
+            <li class="rule-item"><p class="rule-text">🕯️ <strong data-i18n="analyseTechnique_82">Mèche de rejet</strong><span data-i18n="analyseTechnique_84"> sur la 1</span><sup data-i18n="analyseTechnique_83">ère</sup><span data-i18n="analyseTechnique_85"> bougie.</span></p></li>
+            <li class="rule-item"><p class="rule-text">〰️ <strong data-i18n="analyseTechnique_86">3 mèches</strong><span data-i18n="analyseTechnique_87"> dans la zone de ralentissement.</span></p></li>
+            <li class="rule-item"><p class="rule-text">✅ <strong data-i18n="analyseTechnique_88">1 bougie</strong><span data-i18n="analyseTechnique_89"> dans le sens du trade.</span></p></li>
+            <li class="rule-item"><p class="rule-text">🎯 <strong data-i18n="analyseTechnique_90">Entrée</strong><span data-i18n="analyseTechnique_91"> sur la 4</span><sup>ᵉ</sup><span data-i18n="analyseTechnique_92"> bougie (validation).</span></p></li>
+            <li class="rule-item"><p class="rule-text">🔒 <strong data-i18n="analyseTechnique_93">Stop Loss</strong><span data-i18n="analyseTechnique_94"> sous la mèche la plus basse + arrondi à 10 pips.</span></p></li>
+            <li class="rule-item"><p class="rule-text"><span data-i18n="analyseTechnique_96">📈 Si </span><strong data-i18n="analyseTechnique_95">RR &gt; 10</strong><span data-i18n="analyseTechnique_97"> → doubler la distance du SL.</span></p></li>
+            <li class="rule-item"><p class="rule-text">🚫 <strong data-i18n="analyseTechnique_98">Pas de M1/W1 Big</strong>.</p></li>
           </ul>
         </div>
 
         <div class="examples-block">
-          <h3 class="rules-title">Exemples visuels</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_99">Exemples visuels</h3>
           <div class="examples-grid">
             <a class="example" href="/assets/images/4h/Rallentissement/rall.png" target="_blank" rel="noopener">
               <img src="/assets/images/4h/Rallentissement/rall.png" alt="Décélération — Exemple 1" loading="lazy" width="480" height="270">
@@ -367,21 +370,21 @@
       <!-- FC-27 -->
       <div class="entree4h-grid">
         <div class="rules-block fc27">
-          <h3 class="rules-title">FC-27</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_100">FC-27</h3>
           <ul class="rules rules--analyse-technique">
-            <li class="rule-item"><p class="rule-text">Uniquement en <strong>4H</strong>.</p></li>
-            <li class="rule-item"><p class="rule-text">Pas de <strong>M1/W1 Big</strong> ni <strong>M5/W5</strong>.</p></li>
-            <li class="rule-item"><p class="rule-text">Le <strong>P3</strong> ne doit pas toucher la ZOI avant le <strong>P5</strong>.</p></li>
-            <li class="rule-item"><p class="rule-text">Le prix doit être <strong>correctif</strong>.</p></li>
-            <li class="rule-item"><p class="rule-text">Avoir les niveaux <strong>-0.27</strong> / <strong>-0.68</strong> dans la zone daily.</p></li>
-            <li class="rule-item"><p class="rule-text"><strong>PE</strong> sur <strong>-0.27</strong> et <strong>SL</strong> sous <strong>-0.68</strong>.</p></li>
-            <li class="rule-item"><p class="rule-text"><strong>PE</strong> sur <strong>-0.68</strong> et <strong>SL</strong> sous <strong>100%</strong> daily.</p></li>
-            <li class="rule-item"><p class="rule-text"><strong>TP1 4H</strong> au <strong>61.8%</strong>.</p></li>
+            <li class="rule-item"><p class="rule-text"><span data-i18n="analyseTechnique_102">Uniquement en </span><strong data-i18n="analyseTechnique_101">4H</strong>.</p></li>
+            <li class="rule-item"><p class="rule-text"><span data-i18n="analyseTechnique_105">Pas de </span><strong data-i18n="analyseTechnique_103">M1/W1 Big</strong><span data-i18n="analyseTechnique_106"> ni </span><strong data-i18n="analyseTechnique_104">M5/W5</strong>.</p></li>
+            <li class="rule-item"><p class="rule-text"><span data-i18n="analyseTechnique_109">Le </span><strong data-i18n="analyseTechnique_107">P3</strong><span data-i18n="analyseTechnique_110"> ne doit pas toucher la ZOI avant le </span><strong data-i18n="analyseTechnique_108">P5</strong>.</p></li>
+            <li class="rule-item"><p class="rule-text"><span data-i18n="analyseTechnique_112">Le prix doit être </span><strong data-i18n="analyseTechnique_111">correctif</strong>.</p></li>
+            <li class="rule-item"><p class="rule-text" data-i18n-html="analyseTechnique_113">Avoir les niveaux <strong>-0.27</strong> / <strong>-0.68</strong> dans la zone daily.</p></li>
+            <li class="rule-item"><p class="rule-text"><strong data-i18n="analyseTechnique_114">PE</strong><span data-i18n="analyseTechnique_116"> sur </span><strong>-0.27</strong><span data-i18n="analyseTechnique_117"> et </span><strong data-i18n="analyseTechnique_115">SL</strong><span data-i18n="analyseTechnique_118"> sous </span><strong>-0.68</strong>.</p></li>
+            <li class="rule-item"><p class="rule-text"><strong data-i18n="analyseTechnique_119">PE</strong><span data-i18n="analyseTechnique_121"> sur </span><strong>-0.68</strong><span data-i18n="analyseTechnique_122"> et </span><strong data-i18n="analyseTechnique_120">SL</strong><span data-i18n="analyseTechnique_123"> sous </span><strong>100%</strong><span data-i18n="analyseTechnique_124"> daily.</span></p></li>
+            <li class="rule-item"><p class="rule-text"><strong data-i18n="analyseTechnique_125">TP1 4H</strong><span data-i18n="analyseTechnique_126"> au </span><strong>61.8%</strong>.</p></li>
           </ul>
         </div>
 
         <div class="examples-block">
-          <h3 class="rules-title">Exemples visuels</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_127">Exemples visuels</h3>
           <div class="examples-grid">
             <a class="example" href="/assets/images/4h/Fibonacci/FC1.png" target="_blank" rel="noopener">
               <img src="/assets/images/4h/Fibonacci/FC1.png" alt="FC-27 — Exemple 1" loading="lazy" width="480" height="270">
@@ -408,8 +411,8 @@
     <!-- M/W cassure -->
     <section id="video-mw-cassure" class="reveal">
       <header class="section-head">
-        <h2>Patterns M/W — avec et sans cassure</h2>
-        <p class="section-sub">Exemples concrets et check-list de validation</p>
+        <h2 data-i18n="analyseTechnique_128">Patterns M/W — avec et sans cassure</h2>
+        <p class="section-sub" data-i18n="analyseTechnique_129">Exemples concrets et check-list de validation</p>
       </header>
 
       <figure class="video-wrap mt-20">
@@ -421,15 +424,15 @@
           </video>
         </div>
         <figcaption class="video-caption">
-          <span aria-hidden="true">🎥</span>
-          Différence entre <strong>M/W avec cassure (BOS)</strong> et <strong>sans cassure</strong> :
+          <span aria-hidden="true">🎥</span><span data-i18n="analyseTechnique_132">
+          Différence entre </span><strong data-i18n="analyseTechnique_130">M/W avec cassure (BOS)</strong><span data-i18n="analyseTechnique_133"> et </span><strong data-i18n="analyseTechnique_131">sans cassure</strong><span data-i18n="analyseTechnique_134"> :
           critères, erreurs fréquentes, et exemples 4H.
-        </figcaption>
+        </span></figcaption>
       </figure>
 
       <div class="mw-grid">
         <div class="mw-block">
-          <h3 class="mw-title">M avec cassure</h3>
+          <h3 class="mw-title" data-i18n="analyseTechnique_135">M avec cassure</h3>
           <div class="mw-pair">
             <a href="/assets/images/4h/Pattern M,W/M with BOS.png" target="_blank" rel="noopener">
               <img src="/assets/images/4h/Pattern M,W/M with BOS.png" alt="M avec cassure — exemple 1" width="480" height="270" loading="lazy">
@@ -439,16 +442,16 @@
             </a>
           </div>
 
-          <h4 class="rules-title">Règles importantes</h4>
+          <h4 class="rules-title" data-i18n="analyseTechnique_136">Règles importantes</h4>
           <ul class="rules rules--analyse-technique rules--flat mw-rules">
-            <li class="rule-item"><p class="rule-text">📏 Fibonacci mèches P3 et corps P2.</p></li>
-            <li class="rule-item"><p class="rule-text">💥 Nécessite une cassure du dernier plus haut.</p></li>
-            <li class="rule-item"><p class="rule-text">🔒 Stop Loss sous la mèche la plus basse.</p></li>
+            <li class="rule-item"><p class="rule-text" data-i18n="analyseTechnique_137">📏 Fibonacci mèches P3 et corps P2.</p></li>
+            <li class="rule-item"><p class="rule-text" data-i18n="analyseTechnique_138">💥 Nécessite une cassure du dernier plus haut.</p></li>
+            <li class="rule-item"><p class="rule-text" data-i18n="analyseTechnique_139">🔒 Stop Loss sous la mèche la plus basse.</p></li>
           </ul>
         </div>
 
         <div class="mw-block">
-          <h3 class="mw-title">M sans cassure</h3>
+          <h3 class="mw-title" data-i18n="analyseTechnique_140">M sans cassure</h3>
           <div class="mw-pair">
             <a href="/assets/images/4h/Pattern M,W/M without BOS.png" target="_blank" rel="noopener">
               <img src="/assets/images/4h/Pattern M,W/M without BOS.png" alt="M sans cassure — exemple 1" width="480" height="270" loading="lazy">
@@ -458,40 +461,40 @@
             </a>
           </div>
 
-          <h4 class="rules-title">Règles importantes</h4>
+          <h4 class="rules-title" data-i18n="analyseTechnique_141">Règles importantes</h4>
           <ul class="rules rules--analyse-technique rules--flat mw-rules">
-            <li class="rule-item"><p class="rule-text">📏 Fibonacci mèches P3 et corps P0.</p></li>
-            <li class="rule-item"><p class="rule-text">🚫 Ne casse pas le dernier plus haut.</p></li>
-            <li class="rule-item"><p class="rule-text">🔒 Stop Loss sous la mèche la plus basse.</p></li>
+            <li class="rule-item"><p class="rule-text" data-i18n="analyseTechnique_142">📏 Fibonacci mèches P3 et corps P0.</p></li>
+            <li class="rule-item"><p class="rule-text" data-i18n="analyseTechnique_143">🚫 Ne casse pas le dernier plus haut.</p></li>
+            <li class="rule-item"><p class="rule-text" data-i18n="analyseTechnique_144">🔒 Stop Loss sous la mèche la plus basse.</p></li>
           </ul>
         </div>
       </div>
     </section>
 
     <div class="rules-block highlight">
-      <h3 class="rules-title">📌 À retenir — Entrée 4H</h3>
+      <h3 class="rules-title" data-i18n="analyseTechnique_145">📌 À retenir — Entrée 4H</h3>
       <ol class="rules rules--analyse-technique">
-        <li class="rule-item"><p class="rule-text">⚡ Toujours un <strong>mouvement impulsif clair</strong> avant toute décélération.</p></li>
-        <li class="rule-item"><p class="rule-text">💥 Privilégier les <strong>M/W avec cassure (BOS)</strong> pour plus de fiabilité.</p></li>
-        <li class="rule-item"><p class="rule-text">🎯 Entrer uniquement quand tous les <strong>critères 4H</strong> sont réunis.</p></li>
+        <li class="rule-item"><p class="rule-text"><span data-i18n="analyseTechnique_147">⚡ Toujours un </span><strong data-i18n="analyseTechnique_146">mouvement impulsif clair</strong><span data-i18n="analyseTechnique_148"> avant toute décélération.</span></p></li>
+        <li class="rule-item"><p class="rule-text"><span data-i18n="analyseTechnique_150">💥 Privilégier les </span><strong data-i18n="analyseTechnique_149">M/W avec cassure (BOS)</strong><span data-i18n="analyseTechnique_151"> pour plus de fiabilité.</span></p></li>
+        <li class="rule-item"><p class="rule-text"><span data-i18n="analyseTechnique_153">🎯 Entrer uniquement quand tous les </span><strong data-i18n="analyseTechnique_152">critères 4H</strong><span data-i18n="analyseTechnique_154"> sont réunis.</span></p></li>
       </ol>
     </div>
 
     <div class="example-wrap google-sheets-link">
-      <h3 class="rules-title">📊 Backtest Analytics — 2022–2025</h3>
-      <p class="section-sub">Voici mes Datas de backtesting</p>
+      <h3 class="rules-title" data-i18n="analyseTechnique_155">📊 Backtest Analytics — 2022–2025</h3>
+      <p class="section-sub" data-i18n="analyseTechnique_156">Voici mes Datas de backtesting</p>
       <a href="https://docs.google.com/spreadsheets/d/1H90w1JHG0bonCXjFuaXH0MhARKaqZFsgtSQAiLitjT8/copy"
          target="_blank" rel="noopener noreferrer" class="btn-sheets">
         <img src="https://www.gstatic.com/images/branding/product/1x/sheets_48dp.png" alt="" class="sheets-logo" width="28" height="28">
-        <span>Ouvrir la feuille Google Sheets</span>
+        <span data-i18n="analyseTechnique_157">Ouvrir la feuille Google Sheets</span>
       </a>
     </div>
 
     <!-- PATTERN TECHNIQUE -->
     <section id="pattern-technique" class="reveal">
       <header class="section-head">
-        <h2>Pattern technique</h2>
-        <p class="section-sub">Variantes avancées, critères de validation et erreurs fréquentes</p>
+        <h2 data-i18n="analyseTechnique_158">Pattern technique</h2>
+        <p class="section-sub" data-i18n="analyseTechnique_159">Variantes avancées, critères de validation et erreurs fréquentes</p>
       </header>
 
       <figure class="video-wrap mt-20">
@@ -504,107 +507,107 @@
             <track kind="captions" srclang="fr" src="/assets/captions/pattern-technique.vtt" label="Français">
           </video>
         </div>
-        <figcaption class="video-caption">
+        <figcaption class="video-caption" data-i18n-html="analyseTechnique_160">
           <span aria-hidden="true">🎥</span> Patterns avancés — lecture, validation, gestion du risque.
         </figcaption>
       </figure>
 
       <div class="rules-wrapper pattern-grid">
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">M1 Small/Big</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_161">M1 Small/Big</h3>
           <a class="pattern-thumb" href="/assets/images/pattern-technique/m1small-m1big.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern-technique/m1small-m1big.png" alt="M1 small / M1 big" loading="lazy">
           </a>
-          <p class="pattern-text">Pour le M1 big, <strong>les ralentissements et Fibonacci inversés</strong> sont déconseillés en 4h.</p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_163">Pour le M1 big, </span><strong data-i18n="analyseTechnique_162">les ralentissements et Fibonacci inversés</strong><span data-i18n="analyseTechnique_164"> sont déconseillés en 4h.</span></p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
 
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">W1 Small/Big</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_165">W1 Small/Big</h3>
           <a class="pattern-thumb" href="/assets/images/pattern-technique/w1small-w1big.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern-technique/w1small-w1big.png" alt="W1 small / W1 big" loading="lazy">
           </a>
-          <p class="pattern-text">Le W1 big ne fait plus partie de mon plan, trop de perte sur ce pattern. Je t’invite à le backtester.</p>
+          <p class="pattern-text" data-i18n="analyseTechnique_166">Le W1 big ne fait plus partie de mon plan, trop de perte sur ce pattern. Je t’invite à le backtester.</p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
 
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">M2</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_167">M2</h3>
           <a class="pattern-thumb" href="/assets/images/pattern-technique/m2.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern-technique/m2.png" alt="Pattern M2" loading="lazy">
           </a>
-          <p class="pattern-text">Il faut au <strong>minimum 2 bougies inverses</strong> dans la <strong>correction du P3 au P4</strong>.</p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_170">Il faut au </span><strong data-i18n="analyseTechnique_168">minimum 2 bougies inverses</strong><span data-i18n="analyseTechnique_171"> dans la </span><strong data-i18n="analyseTechnique_169">correction du P3 au P4</strong>.</p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
 
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">W2</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_172">W2</h3>
           <a class="pattern-thumb" href="/assets/images/pattern-technique/w2.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern-technique/w2.png" alt="Pattern W2" loading="lazy">
           </a>
-          <p class="pattern-text">Il faut au <strong>minimum 2 bougies inverses</strong> dans la <strong>correction du P3 au P4</strong>.</p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_175">Il faut au </span><strong data-i18n="analyseTechnique_173">minimum 2 bougies inverses</strong><span data-i18n="analyseTechnique_176"> dans la </span><strong data-i18n="analyseTechnique_174">correction du P3 au P4</strong>.</p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
 
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">M3</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_177">M3</h3>
           <a class="pattern-thumb" href="/assets/images/pattern-technique/m3.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern-technique/m3.png" alt="Pattern M3" loading="lazy">
           </a>
-          <p class="pattern-text">
-            Une fois le corps de la bougie aimant touché, <strong>mettre son SL au PE</strong>.<br>
-            <strong>Ne pas rentrer</strong> sur une bougie aimant.<br>
-            <strong>Si mon pattern 4h a dépassé le corps de ma bougie aimant</strong>, j’annule le trade.
-          </p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_181">
+            Une fois le corps de la bougie aimant touché, </span><strong data-i18n="analyseTechnique_178">mettre son SL au PE</strong>.<br>
+            <strong data-i18n="analyseTechnique_179">Ne pas rentrer</strong><span data-i18n="analyseTechnique_182"> sur une bougie aimant.</span><br>
+            <strong data-i18n="analyseTechnique_180">Si mon pattern 4h a dépassé le corps de ma bougie aimant</strong><span data-i18n="analyseTechnique_183">, j’annule le trade.
+          </span></p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
 
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">W3</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_184">W3</h3>
           <a class="pattern-thumb" href="/assets/images/pattern-technique/w3.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern-technique/w3.png" alt="Pattern W3" loading="lazy">
           </a>
-          <p class="pattern-text">
-            Une fois le corps de la bougie aimant touché, <strong>mettre son SL au PE</strong>.<br>
-            <strong>Ne pas rentrer</strong> sur une bougie aimant.<br>
-            <strong>Si mon pattern 4h a dépassé le corps de ma bougie aimant</strong>, j’annule le trade.
-          </p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_188">
+            Une fois le corps de la bougie aimant touché, </span><strong data-i18n="analyseTechnique_185">mettre son SL au PE</strong>.<br>
+            <strong data-i18n="analyseTechnique_186">Ne pas rentrer</strong><span data-i18n="analyseTechnique_189"> sur une bougie aimant.</span><br>
+            <strong data-i18n="analyseTechnique_187">Si mon pattern 4h a dépassé le corps de ma bougie aimant</strong><span data-i18n="analyseTechnique_190">, j’annule le trade.
+          </span></p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
 
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">M4</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_191">M4</h3>
           <a class="pattern-thumb" href="/assets/images/pattern-technique/m4.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern-technique/m4.png" alt="Pattern M4" loading="lazy">
           </a>
-          <p class="pattern-text">Si le <strong>P1 et P3 sont au même niveau</strong>, automatiquement cela devient un M4. La <strong>zone d'intérêt</strong> est au <strong>même niveau que le P2</strong>.</p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_195">Si le </span><strong data-i18n="analyseTechnique_192">P1 et P3 sont au même niveau</strong><span data-i18n="analyseTechnique_196">, automatiquement cela devient un M4. La </span><strong data-i18n="analyseTechnique_193">zone d'intérêt</strong><span data-i18n="analyseTechnique_197"> est au </span><strong data-i18n="analyseTechnique_194">même niveau que le P2</strong>.</p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
 
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">W4</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_198">W4</h3>
           <a class="pattern-thumb" href="/assets/images/pattern-technique/w4.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern-technique/w4.png" alt="Pattern W4" loading="lazy">
           </a>
-          <p class="pattern-text">Si le <strong>P1 et P3 sont au même niveau</strong>, automatiquement cela devient un W4. La <strong>zone d'intérêt</strong> est au <strong>même niveau que le P2</strong>.</p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_202">Si le </span><strong data-i18n="analyseTechnique_199">P1 et P3 sont au même niveau</strong><span data-i18n="analyseTechnique_203">, automatiquement cela devient un W4. La </span><strong data-i18n="analyseTechnique_200">zone d'intérêt</strong><span data-i18n="analyseTechnique_204"> est au </span><strong data-i18n="analyseTechnique_201">même niveau que le P2</strong>.</p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
 
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">M5</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_205">M5</h3>
           <a class="pattern-thumb" href="/assets/images/pattern-technique/m5.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern-technique/m5.png" alt="Pattern M5" loading="lazy">
           </a>
-          <p class="pattern-text">Le P4 doit clôturer <strong>entre le corps du P2 et la mèche du P2</strong>.</p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_207">Le P4 doit clôturer </span><strong data-i18n="analyseTechnique_206">entre le corps du P2 et la mèche du P2</strong>.</p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
 
         <div class="rules-block pattern-card">
-          <h3 class="rules-title">W5</h3>
+          <h3 class="rules-title" data-i18n="analyseTechnique_208">W5</h3>
           <a class="pattern-thumb" href="/assets/images/pattern-technique/w5.png" target="_blank" rel="noopener">
             <img src="/assets/images/pattern-technique/w5.png" alt="Pattern W5" loading="lazy">
           </a>
-          <p class="pattern-text">Le P4 doit clôturer <strong>en dehors de la zone d’intérêt</strong>.</p>
+          <p class="pattern-text"><span data-i18n="analyseTechnique_210">Le P4 doit clôturer </span><strong data-i18n="analyseTechnique_209">en dehors de la zone d’intérêt</strong>.</p>
           <span class="pattern-ring" aria-hidden="true"></span>
         </div>
       </div>
@@ -612,32 +615,32 @@
 
     <!-- BACKTESTING -->
     <section id="backtesting" class="reveal">
-      <h2>Backtesting</h2>
+      <h2 data-i18n="analyseTechnique_211">Backtesting</h2>
 
       <figure class="video-wrap mt-20">
         <div class="video-frame">
           <video width="960" height="540" controls preload="metadata" playsinline poster="/assets/images/posters/backtesting.png" aria-label="Tutoriel de backtesting — méthodologie et bonnes pratiques">
             <source src="/assets/videos/backtesting.mp4" type="video/mp4">
-            <track kind="captions" srclang="fr" src="/assets/captions/backtesting.vtt" label="Français" default>
+            <track kind="captions" srclang="fr" src="/assets/captions/backtesting.vtt" label="Français" default><span data-i18n="analyseTechnique_213">
             Votre navigateur ne supporte pas la vidéo HTML5.
-            <a href="/assets/videos/backtesting.mp4" download>Télécharger la vidéo</a>.
+            </span><a href="/assets/videos/backtesting.mp4" download data-i18n="analyseTechnique_212">Télécharger la vidéo</a>.
           </video>
         </div>
-        <figcaption class="video-caption">
+        <figcaption class="video-caption" data-i18n-html="analyseTechnique_214">
           <span aria-hidden="true">🎥</span>
           Backtesting — méthode pas à pas (jeu de données, règles de validation, journal de trades).
         </figcaption>
       </figure>
 
       <div class="example-wrap google-sheets-link" role="region" aria-labelledby="gs-backtesting-title">
-        <h3 class="rules-title" id="gs-backtesting-title">📊 Workspace Trading — Google Sheets</h3>
-        <p class="section-sub">Backteste aujourd’hui, performe demain.</p>
+        <h3 class="rules-title" id="gs-backtesting-title" data-i18n="analyseTechnique_215">📊 Workspace Trading — Google Sheets</h3>
+        <p class="section-sub" data-i18n="analyseTechnique_216">Backteste aujourd’hui, performe demain.</p>
 
         <a class="btn-sheets"
            href="https://docs.google.com/spreadsheets/d/1H90w1JHG0bonCXjFuaXH0MhARKaqZFsgtSQAiLitjT8/copy"
            target="_blank" rel="noopener noreferrer">
           <img src="https://www.gstatic.com/images/branding/product/1x/sheets_48dp.png" alt="" class="sheets-logo" width="28" height="28" loading="lazy" decoding="async">
-          <span>Ouvrir la feuille Google Sheets (Backtesting)</span>
+          <span data-i18n="analyseTechnique_217">Ouvrir la feuille Google Sheets (Backtesting)</span>
         </a>
       </div>
     </section>
@@ -646,8 +649,8 @@
     <section id="coach-note" class="reveal" aria-labelledby="coachNoteTitle">
       <div class="coach-card">
         <header class="coach-head">
-          <h2 id="coachNoteTitle">Note du coach</h2>
-          <button type="button" class="coach-btn" id="coachEditBtn" aria-pressed="false" aria-controls="coachEditor">
+          <h2 id="coachNoteTitle" data-i18n="analyseTechnique_218">Note du coach</h2>
+          <button type="button" class="coach-btn" id="coachEditBtn" aria-pressed="false" aria-controls="coachEditor" data-i18n="analyseTechnique_219">
             ✏️ Éditer
           </button>
         </header>
@@ -657,14 +660,14 @@
         </div>
 
         <form id="coachEditor" class="coach-editor" hidden novalidate>
-          <label for="coachTextarea" class="sr-only">Écrire le commentaire</label>
+          <label for="coachTextarea" class="sr-only" data-i18n="analyseTechnique_220">Écrire le commentaire</label>
           <textarea id="coachTextarea" maxlength="1000" rows="5" placeholder="Ton commentaire aux élèves… (1000 caractères max)"></textarea>
 
           <div class="coach-bar">
             <span id="coachCount" aria-live="polite">0 / 1000</span>
             <div class="coach-actions">
-              <button type="button" class="coach-btn ghost" id="coachCancelBtn">Annuler</button>
-              <button type="submit" class="coach-btn primary" id="coachSaveBtn">Enregistrer</button>
+              <button type="button" class="coach-btn ghost" id="coachCancelBtn" data-i18n="analyseTechnique_221">Annuler</button>
+              <button type="submit" class="coach-btn primary" id="coachSaveBtn" data-i18n="analyseTechnique_222">Enregistrer</button>
             </div>
           </div>
 
@@ -675,22 +678,22 @@
 
     <!-- NAV CHAPITRES -->
     <div class="hero-cta mt-20" aria-label="Navigation chapitres">
-      <a href="/pages/tradingview.html" class="btn btn-ghost">Revenir au Chapitre 2 — Configuration TradingView</a>
-      <a href="/pages/money-management.html" class="btn btn-primary">Passer au Chapitre 4 — Money management</a>
+      <a href="/pages/tradingview.html" class="btn btn-ghost" data-i18n="analyseTechnique_223">Revenir au Chapitre 2 — Configuration TradingView</a>
+      <a href="/pages/money-management.html" class="btn btn-primary" data-i18n="analyseTechnique_224">Passer au Chapitre 4 — Money management</a>
     </div>
 
   </main>
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <p id="footerText">© 2026 — Wavest | Tous droits réservés</p>
+    <p id="footerText" data-i18n="analyseTechnique_225">© 2026 — Wavest | Tous droits réservés</p>
 
     <nav class="footer-links" aria-label="Liens légaux">
-      <a id="linkMentions" href="/Legal/mentions-legales.html">Mentions légales</a>
-      <a id="linkPrivacy"  href="/Legal/confidentialite.html">Confidentialité</a>
-      <a id="linkCookies" href="/Legal/cookies.html">Cookies</a>
-      <a id="linkCgv" href="/Legal/cgv.html">CGV</a>
-      <a href="#" data-open-cookie-banner="true" aria-label="Ouvrir les préférences cookies">Gérer les cookies</a>
+      <a id="linkMentions" href="/Legal/mentions-legales.html" data-i18n="analyseTechnique_226">Mentions légales</a>
+      <a id="linkPrivacy"  href="/Legal/confidentialite.html" data-i18n="analyseTechnique_227">Confidentialité</a>
+      <a id="linkCookies" href="/Legal/cookies.html" data-i18n="analyseTechnique_228">Cookies</a>
+      <a id="linkCgv" href="/Legal/cgv.html" data-i18n="analyseTechnique_229">CGV</a>
+      <a href="#" data-open-cookie-banner="true" aria-label="Ouvrir les préférences cookies" data-i18n="analyseTechnique_230">Gérer les cookies</a>
     </nav>
 
     <p>
@@ -698,11 +701,12 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 12h16V8l-8 7-8-7v10z"/>
         </svg>
-        <span id="footerMailText">Contact</span>
+        <span id="footerMailText" data-i18n="analyseTechnique_231">Contact</span>
       </a>
     </p>
   </footer>
 
   <script src="/js/app.js?v=6" defer></script>
+  <script src="/js/i18n.js?v=1" defer></script>
 </body>
 </html>

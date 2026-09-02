@@ -1,0 +1,163 @@
+/* ==========================================================
+   Wavest — i18n (FR / EN)
+   Système simple de traduction côté client, sans rechargement.
+   Convention :
+     - data-i18n="clé"        -> remplace le textContent
+     - data-i18n-html="clé"   -> remplace l'innerHTML (garde des balises comme <strong>, <br>, <a>)
+     - data-i18n-aria-label="clé" -> remplace l'attribut aria-label
+     - <body data-i18n-title="clé"> -> remplace document.title
+   Chaque clé du dictionnaire = { fr: "...", en: "..." }
+   ========================================================== */
+(function () {
+  "use strict";
+
+  var STORAGE_KEY = "wavest-lang";
+
+  var translations = {
+    /* ---------- Commun (header / footer / cookies) ---------- */
+    skipLink: { fr: "Aller au contenu", en: "Skip to content" },
+    themeToggleAria: { fr: "Changer le thème", en: "Toggle theme" },
+    langToggleLabel: { fr: "EN", en: "FR" },
+    langToggleAria: { fr: "Passer le site en anglais", en: "Switch site to French" },
+
+    footerText: { fr: "© 2026 — Wavest | Tous droits réservés", en: "© 2026 — Wavest | All rights reserved" },
+    linkMentions: { fr: "Mentions légales", en: "Legal notice" },
+    linkPrivacy: { fr: "Confidentialité", en: "Privacy policy" },
+    linkCgv: { fr: "CGV", en: "Terms of sale" },
+    manageCookies: { fr: "Gérer les cookies", en: "Manage cookies" },
+    disclaimer: {
+      fr: "⚠️ Ce site a une vocation uniquement éducative.<br>Il ne constitue en aucun cas un conseil en investissement.<br>Le trading comporte des risques de perte en capital.",
+      en: "⚠️ This site is for educational purposes only.<br>It does not constitute investment advice of any kind.<br>Trading involves a risk of capital loss."
+    },
+
+    cookieMessage: {
+      fr: "Nous utilisons des traceurs strictement nécessaires (ex. préférence de thème). Si des traceurs non essentiels sont ajoutés (mesure d’audience / marketing), vous pourrez les accepter ou les refuser ici. <a href=\"/Legal/cookies.html\">En savoir plus</a>",
+      en: "We use strictly necessary trackers (e.g. theme preference). If non-essential trackers are added later (audience measurement / marketing), you'll be able to accept or decline them here. <a href=\"/Legal/cookies.html\">Learn more</a>"
+    },
+    cookieDecline: { fr: "Refuser", en: "Decline" },
+    cookieAccept: { fr: "Accepter", en: "Accept" },
+
+    /* ---------- index.html ---------- */
+    pageTitleIndex: { fr: "Accueil — Wavest", en: "Home — Wavest" },
+
+    heroTitle: { fr: "Arrête de suivre des signaux. Apprends une méthode.", en: "Stop following signals. Learn a method." },
+    heroText: { fr: "Analyse de prix, gestion du risque, discipline — sans bullshit.", en: "Price action, risk management, discipline — no bullshit." },
+    ctaOffer: { fr: "Découvrir l'offre →", en: "See the offer →" },
+    ctaStart: { fr: "Commencer", en: "Get started" },
+
+    testimonial1: { fr: "« Le coaching fut hyper enrichissant. Toutes mes questions ont été levées. Merci beaucoup Yascin, je recommande à 1000%. »", en: "“The coaching was incredibly valuable. All my questions were answered. Thank you so much Yascin, I recommend it 1000%.”" },
+    testimonial2: { fr: "« Franchement, juste avec la configuration TradingView, ça m'a montré que c'est vraiment sérieux ce que tu proposes. »", en: "“Honestly, just with the TradingView setup alone, I could tell this was the real deal.”" },
+    testimonial3: { fr: "« Excellent professeur de trading, pédagogue, disponible et surtout très à l'écoute. Je recommande fortement ! »", en: "“Excellent trading teacher, great at explaining things, available and above all a great listener. Highly recommend!”" },
+    testimonialLink: { fr: "Voir la communauté →", en: "See the community →" },
+
+    keypoint1Title: { fr: "Analyse technique", en: "Technical Analysis" },
+    keypoint1Text: { fr: "Comprends les bases des marchés et les patterns utilisés par les traders pros.", en: "Understand market fundamentals and the patterns used by professional traders." },
+    keypoint2Title: { fr: "Psychologie & Discipline", en: "Psychology & Discipline" },
+    keypoint2Text: { fr: "Maîtrise tes émotions, gère ton risque et respecte ton plan de trading.", en: "Master your emotions, manage your risk and stick to your trading plan." },
+    keypoint3Title: { fr: "Études de cas", en: "Case Studies" },
+    keypoint3Text: { fr: "Exemples concrets et backtests pour progresser avec méthode.", en: "Concrete examples and backtests to progress methodically." },
+    keypoint4Title: { fr: "Outils gratuits", en: "Free Tools" },
+    keypoint4Text: { fr: "Trade Checker, calculateur de lot, dashboard de progression et plus, prêts à l'emploi.", en: "Trade Checker, lot size calculator, progress dashboard and more, ready to use." },
+
+    aboutEyebrow: { fr: "Notre philosophie", en: "Our philosophy" },
+    aboutTitle: { fr: "À propos", en: "About" },
+    aboutParagraph: {
+      fr: "Je ne vends pas de rêve. Mon approche du trading repose sur la rigueur, l'analyse et la discipline. Chaque élément de ma méthode a été testé et validé avant d'être appliqué. Mon objectif : partager un chemin <strong>réaliste et durable</strong> pour progresser pas à pas.",
+      en: "I don't sell dreams. My approach to trading is built on rigor, analysis and discipline. Every part of my method has been tested and validated before being applied. My goal: to share a <strong>realistic and sustainable</strong> path to progress step by step."
+    },
+    aboutBullet1: { fr: "Méthode claire, structurée et sans promesses irréalistes", en: "A clear, structured method with no unrealistic promises" },
+    aboutBullet2: { fr: "Analyses basées sur l'étude de centaines de trades", en: "Analysis based on the study of hundreds of trades" },
+    aboutBullet3: { fr: "Discipline et psychologie au cœur du processus", en: "Discipline and psychology at the heart of the process" },
+    metric1Label: { fr: "années de recherche et de backtests", en: "years of research and backtesting" },
+    metric2Label: { fr: "trades analysés en détail", en: "trades analyzed in detail" },
+    metric3Label: { fr: "méthode cohérente et transparente", en: "consistent, transparent method" },
+
+    joinTitle: { fr: "Pas encore membre ?", en: "Not a member yet?" },
+    joinText: { fr: "Découvre l'offre complète — méthode, suivi personnalisé et communauté.", en: "Discover the full offer — method, personal follow-up and community." },
+
+    chapTitle: { fr: "Chapitres", en: "Chapters" },
+    chap1: { fr: "Fondation", en: "Foundations" },
+    chap2: { fr: "Configuration TradingView", en: "TradingView Setup" },
+    chap3: { fr: "Analyse technique", en: "Technical Analysis" },
+    chap4: { fr: "Money management", en: "Money Management" },
+    chap5: { fr: "Setup", en: "Setup" },
+    chap6: { fr: "Psychologie & Discipline", en: "Psychology & Discipline" },
+
+    toolsTitle: { fr: "Outils Wavest", en: "Wavest Tools" },
+    tool1: { fr: "Trade Checker", en: "Trade Checker" },
+    tool2: { fr: "Calculateur de lot", en: "Lot Size Calculator" },
+    tool3: { fr: "Horloge des sessions", en: "Sessions Clock" },
+    tool5: { fr: "Simulateur de croissance de capital", en: "Capital Growth Simulator" },
+    tool4: { fr: "Dashboard de progression", en: "Progress Dashboard" },
+    tool6: { fr: "Performance des patterns", en: "Pattern Performance" },
+    toolsNote: {
+      fr: "💡 Le Trade Checker, le Dashboard de progression et la Performance des patterns s'utilisent avec la méthode enseignée dans la formation — c'est pour ça qu'ils sont réservés aux membres.",
+      en: "💡 The Trade Checker, Progress Dashboard and Pattern Performance tools are meant to be used with the method taught in the program — that's why they're reserved for members."
+    },
+
+    blogTitle: { fr: "Blog", en: "Blog" },
+    blog1: { fr: "Apprendre le trading Forex en débutant : le guide complet", en: "Learning Forex trading as a beginner: the complete guide" },
+    blog2: { fr: "Analyse technique Forex : les bases pour lire un graphique", en: "Forex technical analysis: the basics of reading a chart" },
+    blog3: { fr: "Money management : combien risquer par trade ?", en: "Money management: how much to risk per trade?" },
+    blog4: { fr: "Psychologie du trading : discipline avant stratégie", en: "Trading psychology: discipline before strategy" },
+    blog5: { fr: "Backtest : tester une méthode avant de trader en réel", en: "Backtesting: testing a method before trading live" },
+    blog6: { fr: "Signaux de trading : pourquoi ils ne suffisent pas", en: "Trading signals: why they're not enough" },
+    blog7: { fr: "Combien de temps pour devenir rentable ?", en: "How long does it take to become profitable?" },
+    blog8: { fr: "Calculateur de lot : bien dimensionner ses positions", en: "Lot size calculator: sizing your positions correctly" },
+    blog9: { fr: "Checklist : ce qu'il faut valider avant un trade", en: "Checklist: what to confirm before a trade" },
+    blog10: { fr: "Formation trading Forex : comment bien choisir", en: "Forex trading course: how to choose the right one" },
+
+    callCtaTitle: { fr: "Besoin d'un vrai coaching ? Réserve une séance.", en: "Need real coaching? Book a session." },
+    callCtaBtn: { fr: "Réserver →", en: "Book →" }
+  };
+
+  function getLang() {
+    var stored = localStorage.getItem(STORAGE_KEY);
+    return stored === "en" ? "en" : "fr";
+  }
+
+  function setLang(lang) {
+    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+    applyLang(lang);
+  }
+
+  function applyLang(lang) {
+    document.documentElement.setAttribute("lang", lang);
+
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      var entry = translations[key];
+      if (entry) el.textContent = entry[lang] || entry.fr;
+    });
+
+    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-html");
+      var entry = translations[key];
+      if (entry) el.innerHTML = entry[lang] || entry.fr;
+    });
+
+    document.querySelectorAll("[data-i18n-aria-label]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-aria-label");
+      var entry = translations[key];
+      if (entry) el.setAttribute("aria-label", entry[lang] || entry.fr);
+    });
+
+    var titleKey = document.body.getAttribute("data-i18n-title");
+    if (titleKey && translations[titleKey]) {
+      document.title = translations[titleKey][lang] || translations[titleKey].fr;
+    }
+
+    var toggle = document.getElementById("langToggle");
+    if (toggle) toggle.setAttribute("aria-pressed", lang === "en" ? "true" : "false");
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    applyLang(getLang());
+    var toggle = document.getElementById("langToggle");
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        setLang(getLang() === "fr" ? "en" : "fr");
+      });
+    }
+  });
+})();

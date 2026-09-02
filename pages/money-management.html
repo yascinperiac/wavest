@@ -68,13 +68,16 @@
   </style>
 </head>
 
-<body class="page-money">
+<body class="page-money" data-i18n-title="pageTitle_moneyManagement">
 
   <!-- HEADER -->
   <header class="site-header" role="banner">
-    <h1>Chapitre 4 — Money Management</h1>
+    <button id="langToggle" type="button" class="lang-toggle" aria-label="Passer le site en anglais" data-i18n-aria-label="langToggleAria">
+      <span data-i18n="langToggleLabel">EN</span>
+    </button>
+    <h1 data-i18n="moneyManagement_1">Chapitre 4 — Money Management</h1>
     <div class="header-actions">
-      <a href="/index.html#chapters" class="btn btn-ghost" title="Retour à l’accueil">← Sommaire</a>
+      <a href="/index.html#chapters" class="btn btn-ghost" title="Retour à l’accueil" data-i18n="moneyManagement_2">← Sommaire</a>
     </div>
   </header>
 
@@ -83,36 +86,36 @@
     <!-- VIDÉO — Money Management -->
     <section id="mm-video" class="reveal mm-sep" aria-labelledby="mmVideoTitle">
       <header class="section-head">
-        <h2 id="mmVideoTitle">Vidéo — Money Management</h2>
-        <p class="section-sub">Explication du cadre, des TP et de la protection par paliers</p>
+        <h2 id="mmVideoTitle" data-i18n="moneyManagement_3">Vidéo — Money Management</h2>
+        <p class="section-sub" data-i18n="moneyManagement_4">Explication du cadre, des TP et de la protection par paliers</p>
       </header>
 
       <div class="video-wrap">
         <div class="video-frame">
           <video controls preload="metadata" playsinline poster="/assets/images/posters/money-management.png" aria-label="Vidéo explicative du money management">
             <source src="/assets/videos/money-management.mp4" type="video/mp4">
-            <source src="/assets/videos/money-management.webm" type="video/webm">
+            <source src="/assets/videos/money-management.webm" type="video/webm"><span data-i18n="moneyManagement_5">
             Votre navigateur ne supporte pas la vidéo HTML5.
-          </video>
+          </span></video>
         </div>
-        <p class="video-caption">
-          Synthèse : logique des TP (<strong>−0.27</strong> 4H &amp; Daily), et gestion <strong>avec paliers de 1%</strong> pour sécuriser le trade.
-        </p>
+        <p class="video-caption"><span data-i18n="moneyManagement_7">
+          Synthèse : logique des TP (</span><strong>−0.27</strong><span data-i18n="moneyManagement_8"> 4H &amp; Daily), et gestion </span><strong data-i18n="moneyManagement_6">avec paliers de 1%</strong><span data-i18n="moneyManagement_9"> pour sécuriser le trade.
+        </span></p>
       </div>
     </section>
 
     <!-- Titre -->
     <header class="section-head mm-sep mm-sep--no-line">
-      <h2 id="mmTitle">Règles de Money Management</h2>
-      <p class="section-sub">Cadre clair, reproductible, sans exception</p>
+      <h2 id="mmTitle" data-i18n="moneyManagement_10">Règles de Money Management</h2>
+      <p class="section-sub" data-i18n="moneyManagement_11">Cadre clair, reproductible, sans exception</p>
     </header>
 
     <!-- Onglets variantes -->
     <div class="mm-tabs" role="tablist" aria-label="Variantes money management">
-      <button id="tab-avec" class="mm-tab is-active" role="tab" aria-selected="true" aria-controls="mm-avec-palier" tabindex="0" data-target="#mm-avec-palier">
+      <button id="tab-avec" class="mm-tab is-active" role="tab" aria-selected="true" aria-controls="mm-avec-palier" tabindex="0" data-target="#mm-avec-palier" data-i18n="moneyManagement_12">
         Avec palier
       </button>
-      <button id="tab-sans" class="mm-tab" role="tab" aria-selected="false" aria-controls="mm-sans-palier" tabindex="-1" data-target="#mm-sans-palier">
+      <button id="tab-sans" class="mm-tab" role="tab" aria-selected="false" aria-controls="mm-sans-palier" tabindex="-1" data-target="#mm-sans-palier" data-i18n="moneyManagement_13">
         Sans palier
       </button>
     </div>
@@ -122,44 +125,44 @@
       <div class="mm-grid" aria-label="Colonnes de règles (avec palier)">
 
         <article class="mm-card" aria-labelledby="t4h-avec">
-          <h3 id="t4h-avec" class="mm-title">Pattern 4H</h3>
+          <h3 id="t4h-avec" class="mm-title" data-i18n="moneyManagement_14">Pattern 4H</h3>
           <figure class="mm-figure">
             <a class="mm-thumb" href="/assets/images/money-management/pattern4h-safe.png" target="_blank" rel="noopener" aria-label="Ouvrir l’illustration Pattern 4H en grand">
               <img src="/assets/images/money-management/pattern4h-safe.png" alt="Pattern 4H — illustration" loading="lazy" width="1600" height="900">
             </a>
           </figure>
           <ul class="mm-rules">
-            <li class="rule-item"><span class="mm-badge">TP1 4H — 1/3</span><p class="rule-text">Clôture au <strong>−0.27 Fibo 4H</strong>.</p></li>
-            <li class="rule-item"><span class="mm-badge">TP2 Daily — 2/3</span><p class="rule-text">Clôture au <strong>−0.27 Fibo Daily</strong>.</p></li>
-            <li class="rule-item"><span class="mm-badge">Palier 1%</span><p class="rule-text">À chaque <strong>+1%</strong>, remonter le <strong>SL d’un palier</strong> pour verrouiller le gain.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_15">TP1 4H — 1/3</span><p class="rule-text"><span data-i18n="moneyManagement_17">Clôture au </span><strong data-i18n="moneyManagement_16">−0.27 Fibo 4H</strong>.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_18">TP2 Daily — 2/3</span><p class="rule-text"><span data-i18n="moneyManagement_20">Clôture au </span><strong data-i18n="moneyManagement_19">−0.27 Fibo Daily</strong>.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_21">Palier 1%</span><p class="rule-text"><span data-i18n="moneyManagement_23">À chaque </span><strong>+1%</strong><span data-i18n="moneyManagement_24">, remonter le </span><strong data-i18n="moneyManagement_22">SL d’un palier</strong><span data-i18n="moneyManagement_25"> pour verrouiller le gain.</span></p></li>
           </ul>
         </article>
 
         <article class="mm-card" aria-labelledby="tfibo-avec">
-          <h3 id="tfibo-avec" class="mm-title">Fibonacci inversé</h3>
+          <h3 id="tfibo-avec" class="mm-title" data-i18n="moneyManagement_26">Fibonacci inversé</h3>
           <figure class="mm-figure">
             <a class="mm-thumb" href="/assets/images/money-management/fibonacci-inverse-safe.png" target="_blank" rel="noopener" aria-label="Ouvrir l’illustration Fibonacci inversé en grand">
               <img src="/assets/images/money-management/fibonacci-inverse-safe.png" alt="Fibonacci inversé — illustration" loading="lazy" width="1600" height="900">
             </a>
           </figure>
           <ul class="mm-rules">
-            <li class="rule-item"><span class="mm-badge">TP1 4H — 1/3</span><p class="rule-text">Clôture au <strong>0.618 Fibo 4H</strong>.</p></li>
-            <li class="rule-item"><span class="mm-badge">TP2 Daily — 2/3</span><p class="rule-text">Clôture au <strong>−0.27 Fibo Daily</strong>.</p></li>
-            <li class="rule-item"><span class="mm-badge">Palier 1%</span><p class="rule-text">À chaque <strong>+1%</strong>, remonter le <strong>SL d’un palier</strong> pour verrouiller le gain.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_27">TP1 4H — 1/3</span><p class="rule-text"><span data-i18n="moneyManagement_29">Clôture au </span><strong data-i18n="moneyManagement_28">0.618 Fibo 4H</strong>.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_30">TP2 Daily — 2/3</span><p class="rule-text"><span data-i18n="moneyManagement_32">Clôture au </span><strong data-i18n="moneyManagement_31">−0.27 Fibo Daily</strong>.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_33">Palier 1%</span><p class="rule-text"><span data-i18n="moneyManagement_35">À chaque </span><strong>+1%</strong><span data-i18n="moneyManagement_36">, remonter le </span><strong data-i18n="moneyManagement_34">SL d’un palier</strong><span data-i18n="moneyManagement_37"> pour verrouiller le gain.</span></p></li>
           </ul>
         </article>
 
         <article class="mm-card" aria-labelledby="tral-avec">
-          <h3 id="tral-avec" class="mm-title">Ralentissement</h3>
+          <h3 id="tral-avec" class="mm-title" data-i18n="moneyManagement_38">Ralentissement</h3>
           <figure class="mm-figure">
             <a class="mm-thumb" href="/assets/images/money-management/ralentissement-safe.png" target="_blank" rel="noopener" aria-label="Ouvrir l’illustration Ralentissement en grand">
               <img src="/assets/images/money-management/ralentissement-safe.png" alt="Ralentissement — illustration" loading="lazy" width="1600" height="900">
             </a>
           </figure>
           <ul class="mm-rules">
-            <li class="rule-item"><span class="mm-badge">TP1 4H — 1/3</span><p class="rule-text">Clôture au <strong>0 Fibo Daily</strong>.</p></li>
-            <li class="rule-item"><span class="mm-badge">TP2 Daily — 2/3</span><p class="rule-text">Clôture au <strong>−0.27 Fibo Daily</strong>.</p></li>
-            <li class="rule-item"><span class="mm-badge">Palier 1%</span><p class="rule-text">À chaque <strong>+1%</strong>, remonter le <strong>SL d’un palier</strong> pour verrouiller le gain.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_39">TP1 4H — 1/3</span><p class="rule-text"><span data-i18n="moneyManagement_41">Clôture au </span><strong data-i18n="moneyManagement_40">0 Fibo Daily</strong>.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_42">TP2 Daily — 2/3</span><p class="rule-text"><span data-i18n="moneyManagement_44">Clôture au </span><strong data-i18n="moneyManagement_43">−0.27 Fibo Daily</strong>.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_45">Palier 1%</span><p class="rule-text"><span data-i18n="moneyManagement_47">À chaque </span><strong>+1%</strong><span data-i18n="moneyManagement_48">, remonter le </span><strong data-i18n="moneyManagement_46">SL d’un palier</strong><span data-i18n="moneyManagement_49"> pour verrouiller le gain.</span></p></li>
           </ul>
         </article>
 
@@ -171,41 +174,41 @@
       <div class="mm-grid" aria-label="Colonnes de règles (sans palier)">
 
         <article class="mm-card" aria-labelledby="t4h-sans">
-          <h3 id="t4h-sans" class="mm-title">Pattern 4H</h3>
+          <h3 id="t4h-sans" class="mm-title" data-i18n="moneyManagement_50">Pattern 4H</h3>
           <figure class="mm-figure">
             <a class="mm-thumb" href="/assets/images/money-management/pattern4h.png" target="_blank" rel="noopener" aria-label="Ouvrir l’illustration Pattern 4H en grand">
               <img src="/assets/images/money-management/pattern4h.png" alt="Pattern 4H — illustration" loading="lazy" width="1600" height="900">
             </a>
           </figure>
           <ul class="mm-rules">
-            <li class="rule-item"><span class="mm-badge">TP1 4H — 1/3</span><p class="rule-text">Clôture au <strong>−0.27 Fibo 4H</strong>.</p></li>
-            <li class="rule-item"><span class="mm-badge">TP2 Daily — 2/3</span><p class="rule-text">Clôture au <strong>−0.27 Fibo Daily</strong>.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_51">TP1 4H — 1/3</span><p class="rule-text"><span data-i18n="moneyManagement_53">Clôture au </span><strong data-i18n="moneyManagement_52">−0.27 Fibo 4H</strong>.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_54">TP2 Daily — 2/3</span><p class="rule-text"><span data-i18n="moneyManagement_56">Clôture au </span><strong data-i18n="moneyManagement_55">−0.27 Fibo Daily</strong>.</p></li>
           </ul>
         </article>
 
         <article class="mm-card" aria-labelledby="tfibo-sans">
-          <h3 id="tfibo-sans" class="mm-title">Fibonacci inversé</h3>
+          <h3 id="tfibo-sans" class="mm-title" data-i18n="moneyManagement_57">Fibonacci inversé</h3>
           <figure class="mm-figure">
             <a class="mm-thumb" href="/assets/images/money-management/fibonacci-inverse.png" target="_blank" rel="noopener" aria-label="Ouvrir l’illustration Fibonacci inversé en grand">
               <img src="/assets/images/money-management/fibonacci-inverse.png" alt="Fibonacci inversé — illustration" loading="lazy" width="1600" height="900">
             </a>
           </figure>
           <ul class="mm-rules">
-            <li class="rule-item"><span class="mm-badge">TP1 4H — 1/3</span><p class="rule-text">Clôture au <strong>0.618 Fibo 4H</strong>.</p></li>
-            <li class="rule-item"><span class="mm-badge">TP2 Daily — 2/3</span><p class="rule-text">Clôture au <strong>−0.27 Fibo Daily</strong>.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_58">TP1 4H — 1/3</span><p class="rule-text"><span data-i18n="moneyManagement_60">Clôture au </span><strong data-i18n="moneyManagement_59">0.618 Fibo 4H</strong>.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_61">TP2 Daily — 2/3</span><p class="rule-text"><span data-i18n="moneyManagement_63">Clôture au </span><strong data-i18n="moneyManagement_62">−0.27 Fibo Daily</strong>.</p></li>
           </ul>
         </article>
 
         <article class="mm-card" aria-labelledby="tral-sans">
-          <h3 id="tral-sans" class="mm-title">Ralentissement</h3>
+          <h3 id="tral-sans" class="mm-title" data-i18n="moneyManagement_64">Ralentissement</h3>
           <figure class="mm-figure">
             <a class="mm-thumb" href="/assets/images/money-management/ralentissement.png" target="_blank" rel="noopener" aria-label="Ouvrir l’illustration Ralentissement en grand">
               <img src="/assets/images/money-management/ralentissement.png" alt="Ralentissement — illustration" loading="lazy" width="1600" height="900">
             </a>
           </figure>
           <ul class="mm-rules">
-            <li class="rule-item"><span class="mm-badge">TP1 4H — 1/3</span><p class="rule-text">Clôture au <strong>0 Fibo Daily</strong>.</p></li>
-            <li class="rule-item"><span class="mm-badge">TP2 Daily — 2/3</span><p class="rule-text">Clôture au <strong>−0.27 Fibo Daily</strong>.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_65">TP1 4H — 1/3</span><p class="rule-text"><span data-i18n="moneyManagement_67">Clôture au </span><strong data-i18n="moneyManagement_66">0 Fibo Daily</strong>.</p></li>
+            <li class="rule-item"><span class="mm-badge" data-i18n="moneyManagement_68">TP2 Daily — 2/3</span><p class="rule-text"><span data-i18n="moneyManagement_70">Clôture au </span><strong data-i18n="moneyManagement_69">−0.27 Fibo Daily</strong>.</p></li>
           </ul>
         </article>
 
@@ -215,16 +218,16 @@
     <!-- À RETENIR -->
     <section id="remember" class="mm-remember mm-sep reveal" aria-labelledby="rememberTitle">
       <header class="mm-remember-head">
-        <h4 id="rememberTitle">📌 À retenir — Règles globales <span class="dot" aria-hidden="true"></span></h4>
+        <h4 id="rememberTitle" data-i18n-html="moneyManagement_71">📌 À retenir — Règles globales <span class="dot" aria-hidden="true"></span></h4>
       </header>
       <div class="mm-remember-grid">
         <article class="mm-remember-card" tabindex="0">
           <div class="mm-remember-icon" aria-hidden="true">🛡️</div>
-          <p class="mm-remember-text">Toujours <strong>SL = 1%</strong> du capital.</p>
+          <p class="mm-remember-text"><span data-i18n="moneyManagement_73">Toujours </span><strong data-i18n="moneyManagement_72">SL = 1%</strong><span data-i18n="moneyManagement_74"> du capital.</span></p>
         </article>
         <article class="mm-remember-card" tabindex="0">
           <div class="mm-remember-icon" aria-hidden="true">🎯</div>
-          <p class="mm-remember-text"><strong>Mettre le SL au PE</strong> dès que la position est <strong>≥ +1%</strong>.</p>
+          <p class="mm-remember-text"><strong data-i18n="moneyManagement_75">Mettre le SL au PE</strong><span data-i18n="moneyManagement_76"> dès que la position est </span><strong>≥ +1%</strong>.</p>
         </article>
       </div>
     </section>
@@ -232,30 +235,30 @@
     <!-- AVANTAGES / INCONVÉNIENTS -->
     <section id="palier-pros-cons" class="reveal mm-sep" aria-labelledby="pcTitle">
       <header class="section-head">
-        <h2 id="pcTitle">Avantages &amp; Inconvénients — Avec palier</h2>
-        <p class="section-sub">Synthèse rapide du cadre à paliers</p>
+        <h2 id="pcTitle" data-i18n="moneyManagement_77">Avantages &amp; Inconvénients — Avec palier</h2>
+        <p class="section-sub" data-i18n="moneyManagement_78">Synthèse rapide du cadre à paliers</p>
       </header>
 
       <div class="mm-proscons" role="region" aria-labelledby="pcTitle">
         <table class="mm-table">
           <thead>
             <tr>
-              <th scope="col">Avantages</th>
-              <th scope="col">Inconvénients</th>
+              <th scope="col" data-i18n="moneyManagement_79">Avantages</th>
+              <th scope="col" data-i18n="moneyManagement_80">Inconvénients</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Sécurise vite les gains, réduit le stress.</td>
-              <td>Peut sortir trop tôt sur forte tendance.</td>
+              <td data-i18n="moneyManagement_81">Sécurise vite les gains, réduit le stress.</td>
+              <td data-i18n="moneyManagement_82">Peut sortir trop tôt sur forte tendance.</td>
             </tr>
             <tr>
-              <td>Limite l’impact d’un retournement brutal.</td>
-              <td>Demande des ajustements plus fréquents.</td>
+              <td data-i18n="moneyManagement_83">Limite l’impact d’un retournement brutal.</td>
+              <td data-i18n="moneyManagement_84">Demande des ajustements plus fréquents.</td>
             </tr>
             <tr>
-              <td>Discipline mécanique, reproductible.</td>
-              <td>Peut rogner la perf si le prix « bruite ».</td>
+              <td data-i18n="moneyManagement_85">Discipline mécanique, reproductible.</td>
+              <td data-i18n="moneyManagement_86">Peut rogner la perf si le prix « bruite ».</td>
             </tr>
           </tbody>
         </table>
@@ -264,22 +267,22 @@
 
     <!-- Navigation -->
     <nav class="chapter-cta" aria-label="Navigation chapitres">
-      <a href="/pages/analyse-technique.html" class="btn btn-ghost">← Chapitre précédent — Analyse technique</a>
-      <a href="/pages/setup.html" class="btn btn-primary">Chapitre suivant — Setup →</a>
+      <a href="/pages/analyse-technique.html" class="btn btn-ghost" data-i18n="moneyManagement_87">← Chapitre précédent — Analyse technique</a>
+      <a href="/pages/setup.html" class="btn btn-primary" data-i18n="moneyManagement_88">Chapitre suivant — Setup →</a>
     </nav>
 
   </main>
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <p id="footerText">© 2026 — Wavest | Tous droits réservés</p>
+    <p id="footerText" data-i18n="moneyManagement_89">© 2026 — Wavest | Tous droits réservés</p>
 
     <nav class="footer-links" aria-label="Liens légaux">
-      <a id="linkMentions" href="/Legal/mentions-legales.html">Mentions légales</a>
-      <a id="linkPrivacy"  href="/Legal/confidentialite.html">Confidentialité</a>
-      <a id="linkCookies" href="/Legal/cookies.html">Cookies</a>
-      <a id="linkCgv" href="/Legal/cgv.html">CGV</a>
-      <a href="#" data-open-cookie-banner="true" aria-label="Ouvrir les préférences cookies">Gérer les cookies</a>
+      <a id="linkMentions" href="/Legal/mentions-legales.html" data-i18n="moneyManagement_90">Mentions légales</a>
+      <a id="linkPrivacy"  href="/Legal/confidentialite.html" data-i18n="moneyManagement_91">Confidentialité</a>
+      <a id="linkCookies" href="/Legal/cookies.html" data-i18n="moneyManagement_92">Cookies</a>
+      <a id="linkCgv" href="/Legal/cgv.html" data-i18n="moneyManagement_93">CGV</a>
+      <a href="#" data-open-cookie-banner="true" aria-label="Ouvrir les préférences cookies" data-i18n="moneyManagement_94">Gérer les cookies</a>
     </nav>
 
     <p>
@@ -287,12 +290,13 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 12h16V8l-8 7-8-7v10z"/>
         </svg>
-        <span id="footerMailText">Contact</span>
+        <span id="footerMailText" data-i18n="moneyManagement_95">Contact</span>
       </a>
     </p>
   </footer>
 
   <script src="/js/app.js?v=6" defer></script>
+  <script src="/js/i18n.js?v=1" defer></script>
 
   <!-- Tabs accessibles (si pas déjà géré dans app.js) -->
   <script>

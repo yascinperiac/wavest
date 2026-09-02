@@ -51,13 +51,16 @@
   <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
 
-<body class="page-setup">
+<body class="page-setup" data-i18n-title="pageTitle_setup">
 
   <!-- HEADER -->
   <header class="site-header" role="banner" aria-label="En-tête du chapitre Setup">
-    <h1>Chapitre 5 — Setup</h1>
+    <button id="langToggle" type="button" class="lang-toggle" aria-label="Passer le site en anglais" data-i18n-aria-label="langToggleAria">
+      <span data-i18n="langToggleLabel">EN</span>
+    </button>
+    <h1 data-i18n="setup_1">Chapitre 5 — Setup</h1>
     <div class="header-actions">
-      <a href="/index.html#chapters" class="btn btn-ghost" title="Retour au sommaire">← Sommaire</a>
+      <a href="/index.html#chapters" class="btn btn-ghost" title="Retour au sommaire" data-i18n="setup_2">← Sommaire</a>
     </div>
   </header>
 
@@ -70,25 +73,25 @@
     ==================================== -->
     <section id="fibonacci" class="reveal stp-sep" aria-labelledby="fiboVideoTitle">
       <header class="section-head">
-        <h2 id="fiboVideoTitle">Vidéo — Setup (Fibonacci inversé)</h2>
-        <p class="section-sub">Introduction : logique d’entrée, confirmations multi-UT, gestion du risque.</p>
+        <h2 id="fiboVideoTitle" data-i18n="setup_3">Vidéo — Setup (Fibonacci inversé)</h2>
+        <p class="section-sub" data-i18n="setup_4">Introduction : logique d’entrée, confirmations multi-UT, gestion du risque.</p>
       </header>
 
       <div class="video-wrap" aria-label="Vidéo explicative du setup Fibonacci inversé">
         <div class="video-frame">
           <video controls preload="metadata" playsinline poster="/assets/images/posters/setup.png">
             <source src="/assets/videos/setup-fibonacci-inverse.mp4" type="video/mp4">
-            <source src="/assets/videos/setup-fibonacci-inverse.webm" type="video/webm">
+            <source src="/assets/videos/setup-fibonacci-inverse.webm" type="video/webm"><span data-i18n="setup_5">
             Votre navigateur ne supporte pas la vidéo HTML5.
-          </video>
+          </span></video>
         </div>
-        <p class="video-caption">Synthèse : critères d’entrée, confirmations multi-UT et alignement avec le money management.</p>
+        <p class="video-caption" data-i18n="setup_6">Synthèse : critères d’entrée, confirmations multi-UT et alignement avec le money management.</p>
       </div>
     </section>
 
     <header class="section-head stp-sep stp-sep--no-line">
-      <h2 id="fiboTitle">Les 7 parties du Setup — Fibonacci inversé</h2>
-      <p class="section-sub">Cas pour une entrée Fibonacci inversé.</p>
+      <h2 id="fiboTitle" data-i18n="setup_7">Les 7 parties du Setup — Fibonacci inversé</h2>
+      <p class="section-sub" data-i18n="setup_8">Cas pour une entrée Fibonacci inversé.</p>
     </header>
 
     <section id="fibo-parts" class="reveal stp-sep stp-one-per-line" aria-labelledby="fiboTitle">
@@ -101,12 +104,12 @@
             </a>
           </figure>
           <div class="stp-content">
-            <h3 id="fibo-p1-title" class="stp-title">Partie 1 — Déterminer la tendance Daily</h3>
+            <h3 id="fibo-p1-title" class="stp-title" data-i18n="setup_9">Partie 1 — Déterminer la tendance Daily</h3>
             <ul class="stp-rules --plain" data-list>
-              <li class="stp-item"><p class="stp-text">Analyser la tendance sur ~5 derniers mois.</p></li>
-              <li class="stp-item"><p class="stp-text">Le dernier plus bas est plus récent que le dernier plus haut.</p></li>
-              <li class="stp-item"><p class="stp-text">Le dernier plus haut n’est pas cassé par le corps (mèches ignorées).</p></li>
-              <li class="stp-item"><p class="stp-text">Conclusion : tendance baissière.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_10">Analyser la tendance sur ~5 derniers mois.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_11">Le dernier plus bas est plus récent que le dernier plus haut.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_12">Le dernier plus haut n’est pas cassé par le corps (mèches ignorées).</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_13">Conclusion : tendance baissière.</p></li>
             </ul>
           </div>
         </article>
@@ -118,13 +121,13 @@
             </a>
           </figure>
           <div class="stp-content">
-            <h3 id="fibo-p2-title" class="stp-title">Partie 2 — Pattern baissier en Daily</h3>
+            <h3 id="fibo-p2-title" class="stp-title" data-i18n="setup_14">Partie 2 — Pattern baissier en Daily</h3>
             <ul class="stp-rules --plain --compact" data-list>
-              <li class="stp-item"><p class="stp-text">Identifier un pattern dans le sens de la tendance.</p></li>
-              <li class="stp-item"><p class="stp-text">Tracer le Fibonacci.</p></li>
-              <li class="stp-item"><p class="stp-text">ZOI : première zone touchée entre 0.618 et 1 du Fibo.</p></li>
-              <li class="stp-item"><p class="stp-text">Attendre un W2 : retour correctif du prix dans la ZOI Daily.</p></li>
-              <li class="stp-item"><p class="stp-text">Vérifier que le pattern respecte les DATAs.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_15">Identifier un pattern dans le sens de la tendance.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_16">Tracer le Fibonacci.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_17">ZOI : première zone touchée entre 0.618 et 1 du Fibo.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_18">Attendre un W2 : retour correctif du prix dans la ZOI Daily.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_19">Vérifier que le pattern respecte les DATAs.</p></li>
             </ul>
           </div>
         </article>
@@ -136,13 +139,13 @@
             </a>
           </figure>
           <div class="stp-content">
-            <h3 id="fibo-p3-title" class="stp-title">Partie 3 — Analyse Weekly</h3>
+            <h3 id="fibo-p3-title" class="stp-title" data-i18n="setup_20">Partie 3 — Analyse Weekly</h3>
             <ul class="stp-rules --plain --compact" data-list>
-              <li class="stp-item"><p class="stp-text"><strong>S&amp;D Zone :</strong> mèche sur un support ⇒ (−).</p></li>
-              <li class="stp-item"><p class="stp-text"><strong>Tendance :</strong> baissière ⇒ (−).</p></li>
-              <li class="stp-item"><p class="stp-text"><strong>CC :</strong> corps bleu ⇒ (+).</p></li>
-              <li class="stp-item"><p class="stp-text"><strong>Pattern :</strong> proche des 0.618 Weekly, potentiel −0.27 Weekly ⇒ (−).</p></li>
-              <li class="stp-item"><p class="stp-text">Résultat : 3/4 à la vente. Setup validé.</p></li>
+              <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_21">S&amp;D Zone :</strong><span data-i18n="setup_22"> mèche sur un support ⇒ (−).</span></p></li>
+              <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_23">Tendance :</strong><span data-i18n="setup_24"> baissière ⇒ (−).</span></p></li>
+              <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_25">CC :</strong><span data-i18n="setup_26"> corps bleu ⇒ (+).</span></p></li>
+              <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_27">Pattern :</strong><span data-i18n="setup_28"> proche des 0.618 Weekly, potentiel −0.27 Weekly ⇒ (−).</span></p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_29">Résultat : 3/4 à la vente. Setup validé.</p></li>
             </ul>
           </div>
         </article>
@@ -154,11 +157,11 @@
             </a>
           </figure>
           <div class="stp-content">
-            <h3 id="fibo-p4-title" class="stp-title">Partie 4 — Entrée 4H</h3>
+            <h3 id="fibo-p4-title" class="stp-title" data-i18n="setup_30">Partie 4 — Entrée 4H</h3>
             <ul class="stp-rules --plain" data-list>
-              <li class="stp-item"><p class="stp-text">Basculer 4H une fois le prix dans la ZOI Daily.</p></li>
-              <li class="stp-item"><p class="stp-text">Anticiper via Fibonacci inversé : W2 corrige dans la ZOI.</p></li>
-              <li class="stp-item"><p class="stp-text">0.68 du Fibo inversé dans la ZOI : FC-68 validé.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_31">Basculer 4H une fois le prix dans la ZOI Daily.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_32">Anticiper via Fibonacci inversé : W2 corrige dans la ZOI.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_33">0.68 du Fibo inversé dans la ZOI : FC-68 validé.</p></li>
             </ul>
           </div>
         </article>
@@ -170,11 +173,11 @@
             </a>
           </figure>
           <div class="stp-content">
-            <h3 id="fibo-p5-title" class="stp-title">Partie 5 — Placer la limite</h3>
+            <h3 id="fibo-p5-title" class="stp-title" data-i18n="setup_34">Partie 5 — Placer la limite</h3>
             <ul class="stp-rules --plain" data-list>
-              <li class="stp-item"><p class="stp-text">Paramétrer PE, SL, Target (arrondir les pips en défaveur).</p></li>
-              <li class="stp-item"><p class="stp-text">Calculer la taille de position et placer l’ordre limite (MT4, cTrader).</p></li>
-              <li class="stp-item"><p class="stp-text">Alerte sur le PE (éviter de surveiller H24).</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_35">Paramétrer PE, SL, Target (arrondir les pips en défaveur).</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_36">Calculer la taille de position et placer l’ordre limite (MT4, cTrader).</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_37">Alerte sur le PE (éviter de surveiller H24).</p></li>
             </ul>
           </div>
         </article>
@@ -186,11 +189,11 @@
             </a>
           </figure>
           <div class="stp-content">
-            <h3 id="fibo-p6-title" class="stp-title">Partie 6 — Déclenché</h3>
+            <h3 id="fibo-p6-title" class="stp-title" data-i18n="setup_38">Partie 6 — Déclenché</h3>
             <ul class="stp-rules --plain" data-list>
-              <li class="stp-item"><p class="stp-text">Alerte sur 1 % et passage au BreakEven à ce seuil.</p></li>
-              <li class="stp-item"><p class="stp-text">Alerte sur 0.618 : clôturer 1/3.</p></li>
-              <li class="stp-item"><p class="stp-text">Patienter…</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_39">Alerte sur 1 % et passage au BreakEven à ce seuil.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_40">Alerte sur 0.618 : clôturer 1/3.</p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_41">Patienter…</p></li>
             </ul>
           </div>
         </article>
@@ -202,12 +205,12 @@
             </a>
           </figure>
           <div class="stp-content">
-            <h3 id="fibo-p7-title" class="stp-title">Partie 7 — Encaisser</h3>
+            <h3 id="fibo-p7-title" class="stp-title" data-i18n="setup_42">Partie 7 — Encaisser</h3>
             <ul class="stp-rules --plain" data-list>
-              <li class="stp-item"><p class="stp-text"><strong>1 % touché :</strong> descendre le SL au PE.</p></li>
-              <li class="stp-item"><p class="stp-text"><strong>0.618 touché :</strong> clôturer 1/3 et laisser courir.</p></li>
-              <li class="stp-item"><p class="stp-text"><strong>−0.27 touché :</strong> TP auto.</p></li>
-              <li class="stp-item"><p class="stp-text">Remplir le journal et faire le rapport mensuel.</p></li>
+              <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_43">1 % touché :</strong><span data-i18n="setup_44"> descendre le SL au PE.</span></p></li>
+              <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_45">0.618 touché :</strong><span data-i18n="setup_46"> clôturer 1/3 et laisser courir.</span></p></li>
+              <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_47">−0.27 touché :</strong><span data-i18n="setup_48"> TP auto.</span></p></li>
+              <li class="stp-item"><p class="stp-text" data-i18n="setup_49">Remplir le journal et faire le rapport mensuel.</p></li>
             </ul>
           </div>
         </article>
@@ -218,16 +221,16 @@
     <!-- À RETENIR (fibo) -->
     <section id="fibo-remember" class="reveal stp-sep" aria-labelledby="fiboRememberTitle">
       <header class="section-head">
-        <h2 id="fiboRememberTitle">📌 À retenir — Fibonacci inversé</h2>
-        <p class="section-sub">Rappels rapides pour ce setup.</p>
+        <h2 id="fiboRememberTitle" data-i18n="setup_50">📌 À retenir — Fibonacci inversé</h2>
+        <p class="section-sub" data-i18n="setup_51">Rappels rapides pour ce setup.</p>
       </header>
       <div class="mm-remember-grid">
-        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🧭</div><p class="mm-remember-text">Pas de M1/W1 big ou M5 en Daily.</p></article>
-        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🗺️</div><p class="mm-remember-text">Le P3 ne doit pas toucher la ZOI Daily avant le P5.</p></article>
-        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🧩</div><p class="mm-remember-text">Le prix doit être correctif.</p></article>
-        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">📐</div><p class="mm-remember-text">Avoir −0.27 ou −0.68 dans la ZOI Daily.</p></article>
-        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">⚖️</div><p class="mm-remember-text">PE −0.27 ⇒ SL sous/dessus −0.68 ou 1 % Daily.</p></article>
-        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🎯</div><p class="mm-remember-text">TP1 4H au 0.618 : clôturer 1/3.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🧭</div><p class="mm-remember-text" data-i18n="setup_52">Pas de M1/W1 big ou M5 en Daily.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🗺️</div><p class="mm-remember-text" data-i18n="setup_53">Le P3 ne doit pas toucher la ZOI Daily avant le P5.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🧩</div><p class="mm-remember-text" data-i18n="setup_54">Le prix doit être correctif.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">📐</div><p class="mm-remember-text" data-i18n="setup_55">Avoir −0.27 ou −0.68 dans la ZOI Daily.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">⚖️</div><p class="mm-remember-text" data-i18n="setup_56">PE −0.27 ⇒ SL sous/dessus −0.68 ou 1 % Daily.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🎯</div><p class="mm-remember-text" data-i18n="setup_57">TP1 4H au 0.618 : clôturer 1/3.</p></article>
       </div>
     </section>
 
@@ -236,8 +239,8 @@
     ==================================== -->
     <section id="pattern4h" class="reveal stp-sep" aria-labelledby="patVideoTitle">
       <header class="section-head">
-        <h2 id="patVideoTitle">Vidéo — Setup (Pattern 4H)</h2>
-        <p class="section-sub">Logique d’entrée, confirmations multi-UT, gestion du risque.</p>
+        <h2 id="patVideoTitle" data-i18n="setup_58">Vidéo — Setup (Pattern 4H)</h2>
+        <p class="section-sub" data-i18n="setup_59">Logique d’entrée, confirmations multi-UT, gestion du risque.</p>
       </header>
 
       
@@ -246,17 +249,17 @@
         <div class="video-frame">
           <video controls preload="metadata" playsinline poster="/assets/images/posters/setup.png">
             <source src="/assets/videos/setup-pattern-4h.mp4" type="video/mp4">
-            <source src="/assets/videos/setup-pattern-4h.webm" type="video/webm">
+            <source src="/assets/videos/setup-pattern-4h.webm" type="video/webm"><span data-i18n="setup_60">
             Votre navigateur ne supporte pas la vidéo HTML5.
-          </video>
+          </span></video>
         </div>
-        <p class="video-caption">Synthèse : critères d’entrée, confirmations multi-UT et alignement avec le money management.</p>
+        <p class="video-caption" data-i18n="setup_61">Synthèse : critères d’entrée, confirmations multi-UT et alignement avec le money management.</p>
       </div>
     </section>
 
     <header class="section-head stp-sep stp-sep--no-line">
-      <h2 id="patTitle">Les 7 parties du Setup — Pattern 4H (avec / sans cassure)</h2>
-      <p class="section-sub">Cas pour une entrée avec pattern avec et sans cassure.</p>
+      <h2 id="patTitle" data-i18n="setup_62">Les 7 parties du Setup — Pattern 4H (avec / sans cassure)</h2>
+      <p class="section-sub" data-i18n="setup_63">Cas pour une entrée avec pattern avec et sans cassure.</p>
     </header>
 
     <section id="pat-parts" class="reveal stp-sep stp-one-per-line" aria-labelledby="patTitle">
@@ -270,12 +273,12 @@
     </a>
   </figure>
   <div class="stp-content">
-    <h3 id="pat-p1-title" class="stp-title">Partie 1 — Déterminer la tendance Daily</h3>
+    <h3 id="pat-p1-title" class="stp-title" data-i18n="setup_64">Partie 1 — Déterminer la tendance Daily</h3>
     <ul class="stp-rules --plain" data-list>
-      <li class="stp-item"><p class="stp-text">Analyser la tendance sur ~5 derniers mois.</p></li>
-      <li class="stp-item"><p class="stp-text">Le dernier plus haut est plus récent que le dernier plus bas.</p></li>
-      <li class="stp-item"><p class="stp-text">Le dernier plus bas n’est pas cassé par le corps (mèches ignorées).</p></li>
-      <li class="stp-item"><p class="stp-text">Conclusion : tendance haussière.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_65">Analyser la tendance sur ~5 derniers mois.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_66">Le dernier plus haut est plus récent que le dernier plus bas.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_67">Le dernier plus bas n’est pas cassé par le corps (mèches ignorées).</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_68">Conclusion : tendance haussière.</p></li>
     </ul>
   </div>
 </article>
@@ -288,13 +291,13 @@
     </a>
   </figure>
   <div class="stp-content">
-    <h3 id="pat-p2-title" class="stp-title">Partie 2 — Pattern haussier en Daily</h3>
+    <h3 id="pat-p2-title" class="stp-title" data-i18n="setup_69">Partie 2 — Pattern haussier en Daily</h3>
     <ul class="stp-rules --plain --compact" data-list>
-      <li class="stp-item"><p class="stp-text">Identifier un pattern dans le sens de la tendance.</p></li>
-      <li class="stp-item"><p class="stp-text">Tracer le Fibonacci.</p></li>
-      <li class="stp-item"><p class="stp-text">ZOI : première zone touchée entre 0.618 et 1.</p></li>
-      <li class="stp-item"><p class="stp-text">Ici, M1 small : M inférieur à 9/10 bougies.</p></li>
-      <li class="stp-item"><p class="stp-text">Vérifier les DATAs du tableau.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_70">Identifier un pattern dans le sens de la tendance.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_71">Tracer le Fibonacci.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_72">ZOI : première zone touchée entre 0.618 et 1.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_73">Ici, M1 small : M inférieur à 9/10 bougies.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_74">Vérifier les DATAs du tableau.</p></li>
     </ul>
   </div>
 </article>
@@ -307,13 +310,13 @@
     </a>
   </figure>
   <div class="stp-content">
-    <h3 id="pat-p3-title" class="stp-title">Partie 3 — Analyse Weekly</h3>
+    <h3 id="pat-p3-title" class="stp-title" data-i18n="setup_75">Partie 3 — Analyse Weekly</h3>
     <ul class="stp-rules --plain --compact" data-list>
-      <li class="stp-item"><p class="stp-text"><strong>S&amp;D Zone :</strong> neutre (ancienne zone trop loin) ⇒ (/).</p></li>
-      <li class="stp-item"><p class="stp-text"><strong>Tendance :</strong> haussière ⇒ (+).</p></li>
-      <li class="stp-item"><p class="stp-text"><strong>CC :</strong> corps bleu ⇒ (+).</p></li>
-      <li class="stp-item"><p class="stp-text"><strong>Pattern :</strong> pas de pattern actif ⇒ (/).</p></li>
-      <li class="stp-item"><p class="stp-text">Résultat : 2/4 à l’achat. Setup validé.</p></li>
+      <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_76">S&amp;D Zone :</strong><span data-i18n="setup_77"> neutre (ancienne zone trop loin) ⇒ (/).</span></p></li>
+      <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_78">Tendance :</strong><span data-i18n="setup_79"> haussière ⇒ (+).</span></p></li>
+      <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_80">CC :</strong><span data-i18n="setup_81"> corps bleu ⇒ (+).</span></p></li>
+      <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_82">Pattern :</strong><span data-i18n="setup_83"> pas de pattern actif ⇒ (/).</span></p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_84">Résultat : 2/4 à l’achat. Setup validé.</p></li>
     </ul>
   </div>
 </article>
@@ -326,11 +329,11 @@
     </a>
   </figure>
   <div class="stp-content">
-    <h3 id="pat-p4-title" class="stp-title">Partie 4 — Entrée 4H (sans cassure)</h3>
+    <h3 id="pat-p4-title" class="stp-title" data-i18n="setup_85">Partie 4 — Entrée 4H (sans cassure)</h3>
     <ul class="stp-rules --plain" data-list>
-      <li class="stp-item"><p class="stp-text">Attendre d’être dans la ZOI Daily avant 4H.</p></li>
-      <li class="stp-item"><p class="stp-text">Tracer Fibo : mèche P3 ↔ corps P0.</p></li>
-      <li class="stp-item"><p class="stp-text">Chercher le PE dans la zone 4H.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_86">Attendre d’être dans la ZOI Daily avant 4H.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_87">Tracer Fibo : mèche P3 ↔ corps P0.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_88">Chercher le PE dans la zone 4H.</p></li>
     </ul>
   </div>
 </article>
@@ -343,11 +346,11 @@
     </a>
   </figure>
   <div class="stp-content">
-    <h3 id="pat-p5-title" class="stp-title">Partie 5 — Placer la limite</h3>
+    <h3 id="pat-p5-title" class="stp-title" data-i18n="setup_89">Partie 5 — Placer la limite</h3>
     <ul class="stp-rules --plain" data-list>
-      <li class="stp-item"><p class="stp-text">PE, SL, Target (arrondir défavorablement).</p></li>
-      <li class="stp-item"><p class="stp-text">Calcul du lot, ordre limite (MT4, cTrader).</p></li>
-      <li class="stp-item"><p class="stp-text">Alerte sur le PE.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_90">PE, SL, Target (arrondir défavorablement).</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_91">Calcul du lot, ordre limite (MT4, cTrader).</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_92">Alerte sur le PE.</p></li>
     </ul>
   </div>
 </article>
@@ -360,12 +363,12 @@
     </a>
   </figure>
   <div class="stp-content">
-    <h3 id="pat-p6-title" class="stp-title">Partie 6 — Déclenché</h3>
+    <h3 id="pat-p6-title" class="stp-title" data-i18n="setup_93">Partie 6 — Déclenché</h3>
     <ul class="stp-rules --plain" data-list>
-      <li class="stp-item"><p class="stp-text">Alerte 1 % → BreakEven.</p></li>
-      <li class="stp-item"><p class="stp-text">Alerte −0.27 : clôturer 1/3.</p></li>
-      <li class="stp-item"><p class="stp-text"><strong>BE 3 % touché :</strong> protection par palier (atteint 4 %, revient 3 %).</p></li>
-      <li class="stp-item"><p class="stp-text">Patienter…</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_94">Alerte 1 % → BreakEven.</p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_95">Alerte −0.27 : clôturer 1/3.</p></li>
+      <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_96">BE 3 % touché :</strong><span data-i18n="setup_97"> protection par palier (atteint 4 %, revient 3 %).</span></p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_98">Patienter…</p></li>
     </ul>
   </div>
 </article>
@@ -378,12 +381,12 @@
     </a>
   </figure>
   <div class="stp-content">
-    <h3 id="pat-p7-title" class="stp-title">Partie 7 — Encaisser</h3>
+    <h3 id="pat-p7-title" class="stp-title" data-i18n="setup_99">Partie 7 — Encaisser</h3>
     <ul class="stp-rules --plain" data-list>
-      <li class="stp-item"><p class="stp-text"><strong>1 % touché :</strong> SL au PE.</p></li>
-      <li class="stp-item"><p class="stp-text"><strong>−0.27 touché :</strong> clôturer 1/3, laisser tourner.</p></li>
-      <li class="stp-item"><p class="stp-text"><strong>BE 3 % :</strong> protection par palier (4 % → 3 %).</p></li>
-      <li class="stp-item"><p class="stp-text">Journal + rapport mensuel.</p></li>
+      <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_100">1 % touché :</strong><span data-i18n="setup_101"> SL au PE.</span></p></li>
+      <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_102">−0.27 touché :</strong><span data-i18n="setup_103"> clôturer 1/3, laisser tourner.</span></p></li>
+      <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_104">BE 3 % :</strong><span data-i18n="setup_105"> protection par palier (4 % → 3 %).</span></p></li>
+      <li class="stp-item"><p class="stp-text" data-i18n="setup_106">Journal + rapport mensuel.</p></li>
     </ul>
   </div>
 </article>
@@ -394,13 +397,13 @@
     <!-- À RETENIR (pattern 4H) -->
     <section id="pat-remember" class="reveal stp-sep" aria-labelledby="patRememberTitle">
       <header class="section-head">
-        <h2 id="patRememberTitle">📌 À retenir — Pattern 4H</h2>
-        <p class="section-sub">Rappels rapides.</p>
+        <h2 id="patRememberTitle" data-i18n="setup_107">📌 À retenir — Pattern 4H</h2>
+        <p class="section-sub" data-i18n="setup_108">Rappels rapides.</p>
       </header>
       <div class="mm-remember-grid">
-        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🧭</div><p class="mm-remember-text">Pas de contre-tendance. Tendance claire.</p></article>
-        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🗺️</div><p class="mm-remember-text">ZOI Daily : 1ʳᵉ zone entre 0.618–1.</p></article>
-        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">⚖️</div><p class="mm-remember-text">Risque 1 % • RR ≥ 3,8 • BE à 1 %.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🧭</div><p class="mm-remember-text" data-i18n="setup_109">Pas de contre-tendance. Tendance claire.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">🗺️</div><p class="mm-remember-text" data-i18n="setup_110">ZOI Daily : 1ʳᵉ zone entre 0.618–1.</p></article>
+        <article class="mm-remember-card" tabindex="0"><div class="mm-remember-icon">⚖️</div><p class="mm-remember-text" data-i18n="setup_111">Risque 1 % • RR ≥ 3,8 • BE à 1 %.</p></article>
       </div>
     </section>
 
@@ -409,26 +412,26 @@
     ==================================== -->
     <section id="ralentissement" class="reveal stp-sep" aria-labelledby="ralVideoTitle">
       <header class="section-head">
-        <h2 id="ralVideoTitle">Vidéo — Setup (Ralentissement)</h2>
-        <p class="section-sub">Logique d’entrée, confirmations multi-UT, gestion du risque.</p>
+        <h2 id="ralVideoTitle" data-i18n="setup_112">Vidéo — Setup (Ralentissement)</h2>
+        <p class="section-sub" data-i18n="setup_113">Logique d’entrée, confirmations multi-UT, gestion du risque.</p>
       </header>
 
       <div class="video-wrap" aria-label="Vidéo explicative du setup Ralentissement">
         <div class="video-frame">
           <video controls preload="metadata" playsinline poster="/assets/images/posters/setup.png">
             <source src="/assets/videos/setup-ralentissement.mp4" type="video/mp4">
-            <source src="/assets/videos/setup-ralentissement.webm" type="video/webm">
+            <source src="/assets/videos/setup-ralentissement.webm" type="video/webm"><span data-i18n="setup_114">
             Votre navigateur ne supporte pas la vidéo HTML5.
-          </video>
+          </span></video>
         </div>
-        <p class="video-caption">Synthèse : critères d’entrée, confirmations multi-UT et alignement avec le money management.</p>
+        <p class="video-caption" data-i18n="setup_115">Synthèse : critères d’entrée, confirmations multi-UT et alignement avec le money management.</p>
       </div>
     </section>
 
 
     <header class="section-head stp-sep stp-sep--no-line">
-  <h2 id="ralTitle">Les 7 parties du Setup — Ralentissement</h2>
-  <p class="section-sub">Cas pour une entrée avec ralentissement.</p>
+  <h2 id="ralTitle" data-i18n="setup_116">Les 7 parties du Setup — Ralentissement</h2>
+  <p class="section-sub" data-i18n="setup_117">Cas pour une entrée avec ralentissement.</p>
 </header>
 
 <section id="ral-parts" class="reveal stp-sep stp-one-per-line" aria-labelledby="ralTitle">
@@ -442,12 +445,12 @@
         </a>
       </figure>
       <div class="stp-content">
-        <h3 id="ral-p1-title" class="stp-title">Partie 1 — Déterminer la tendance Daily</h3>
+        <h3 id="ral-p1-title" class="stp-title" data-i18n="setup_118">Partie 1 — Déterminer la tendance Daily</h3>
         <ul class="stp-rules --plain" data-list>
-          <li class="stp-item"><p class="stp-text">Analyser ~5 derniers mois.</p></li>
-          <li class="stp-item"><p class="stp-text">Le dernier plus haut est plus récent que le dernier plus bas.</p></li>
-          <li class="stp-item"><p class="stp-text">Le dernier plus bas n’est pas cassé par le corps.</p></li>
-          <li class="stp-item"><p class="stp-text">Conclusion : tendance haussière, chercher M ou IETE.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_119">Analyser ~5 derniers mois.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_120">Le dernier plus haut est plus récent que le dernier plus bas.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_121">Le dernier plus bas n’est pas cassé par le corps.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_122">Conclusion : tendance haussière, chercher M ou IETE.</p></li>
         </ul>
       </div>
     </article>
@@ -460,13 +463,13 @@
         </a>
       </figure>
       <div class="stp-content">
-        <h3 id="ral-p2-title" class="stp-title">Partie 2 — Pattern haussier en Daily</h3>
+        <h3 id="ral-p2-title" class="stp-title" data-i18n="setup_123">Partie 2 — Pattern haussier en Daily</h3>
         <ul class="stp-rules --plain --compact" data-list>
-          <li class="stp-item"><p class="stp-text">Identifier un pattern dans le sens de la tendance.</p></li>
-          <li class="stp-item"><p class="stp-text">Tracer le Fibonacci.</p></li>
-          <li class="stp-item"><p class="stp-text">ZOI au niveau du P2 (M4).</p></li>
-          <li class="stp-item"><p class="stp-text">M4 : si P1 = P3 alors P2 = P4.</p></li>
-          <li class="stp-item"><p class="stp-text">Respect des DATAs du tableau.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_124">Identifier un pattern dans le sens de la tendance.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_125">Tracer le Fibonacci.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_126">ZOI au niveau du P2 (M4).</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_127">M4 : si P1 = P3 alors P2 = P4.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_128">Respect des DATAs du tableau.</p></li>
         </ul>
       </div>
     </article>
@@ -479,13 +482,13 @@
         </a>
       </figure>
       <div class="stp-content">
-        <h3 id="ral-p3-title" class="stp-title">Partie 3 — Analyse Weekly</h3>
+        <h3 id="ral-p3-title" class="stp-title" data-i18n="setup_129">Partie 3 — Analyse Weekly</h3>
         <ul class="stp-rules --plain --compact" data-list>
-          <li class="stp-item"><p class="stp-text"><strong>S&amp;D Zone :</strong> sur support ⇒ (+).</p></li>
-          <li class="stp-item"><p class="stp-text"><strong>Tendance :</strong> haussière ⇒ (+).</p></li>
-          <li class="stp-item"><p class="stp-text"><strong>CC :</strong> corps rouge ⇒ (−).</p></li>
-          <li class="stp-item"><p class="stp-text"><strong>Pattern :</strong> pattern actif prêt à aller au P5 ⇒ (+).</p></li>
-          <li class="stp-item"><p class="stp-text">Résultat : 3/4 à l’achat. Setup validé.</p></li>
+          <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_130">S&amp;D Zone :</strong><span data-i18n="setup_131"> sur support ⇒ (+).</span></p></li>
+          <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_132">Tendance :</strong><span data-i18n="setup_133"> haussière ⇒ (+).</span></p></li>
+          <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_134">CC :</strong><span data-i18n="setup_135"> corps rouge ⇒ (−).</span></p></li>
+          <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_136">Pattern :</strong><span data-i18n="setup_137"> pattern actif prêt à aller au P5 ⇒ (+).</span></p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_138">Résultat : 3/4 à l’achat. Setup validé.</p></li>
         </ul>
       </div>
     </article>
@@ -498,11 +501,11 @@
         </a>
       </figure>
       <div class="stp-content">
-        <h3 id="ral-p4-title" class="stp-title">Partie 4 — Entrée 4H</h3>
+        <h3 id="ral-p4-title" class="stp-title" data-i18n="setup_139">Partie 4 — Entrée 4H</h3>
         <ul class="stp-rules --plain" data-list>
-          <li class="stp-item"><p class="stp-text">Déjà dans la ZOI Daily → passer en 4H.</p></li>
-          <li class="stp-item"><p class="stp-text">Tracer la zone de ralentissement : du corps le plus bas à la mèche la plus basse.</p></li>
-          <li class="stp-item"><p class="stp-text">Déclenchement sur la 4ᵉ bougie : préparer la limite.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_140">Déjà dans la ZOI Daily → passer en 4H.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_141">Tracer la zone de ralentissement : du corps le plus bas à la mèche la plus basse.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_142">Déclenchement sur la 4ᵉ bougie : préparer la limite.</p></li>
         </ul>
       </div>
     </article>
@@ -515,12 +518,12 @@
         </a>
       </figure>
       <div class="stp-content">
-        <h3 id="ral-p5-title" class="stp-title">Partie 5 — Placer la limite</h3>
+        <h3 id="ral-p5-title" class="stp-title" data-i18n="setup_143">Partie 5 — Placer la limite</h3>
         <ul class="stp-rules --plain" data-list>
-          <li class="stp-item"><p class="stp-text">PE, SL, Target (arrondir en défaveur).</p></li>
-          <li class="stp-item"><p class="stp-text">Calcul du lot et ordre limite (MT4, cTrader).</p></li>
-          <li class="stp-item"><p class="stp-text">Alerte sur le PE (pas besoin de surveiller H24).</p></li>
-          <li class="stp-item"><p class="stp-text">Appliquer les règles du ralentissement (chapitre Analyse technique → Entrée 4H).</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_144">PE, SL, Target (arrondir en défaveur).</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_145">Calcul du lot et ordre limite (MT4, cTrader).</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_146">Alerte sur le PE (pas besoin de surveiller H24).</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_147">Appliquer les règles du ralentissement (chapitre Analyse technique → Entrée 4H).</p></li>
         </ul>
       </div>
     </article>
@@ -533,12 +536,12 @@
         </a>
       </figure>
       <div class="stp-content">
-        <h3 id="ral-p6-title" class="stp-title">Partie 6 — Déclenché</h3>
+        <h3 id="ral-p6-title" class="stp-title" data-i18n="setup_148">Partie 6 — Déclenché</h3>
         <ul class="stp-rules --plain" data-list>
-          <li class="stp-item"><p class="stp-text">Alerte 1 % → BreakEven.</p></li>
-          <li class="stp-item"><p class="stp-text">Alerte 0 Daily : clôturer 1/3.</p></li>
-          <li class="stp-item"><p class="stp-text">À peine déclenché : déjà sécurisé.</p></li>
-          <li class="stp-item"><p class="stp-text">Patienter…</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_149">Alerte 1 % → BreakEven.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_150">Alerte 0 Daily : clôturer 1/3.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_151">À peine déclenché : déjà sécurisé.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_152">Patienter…</p></li>
         </ul>
       </div>
     </article>
@@ -551,12 +554,12 @@
         </a>
       </figure>
       <div class="stp-content">
-        <h3 id="ral-p7-title" class="stp-title">Partie 7 — Encaisser</h3>
+        <h3 id="ral-p7-title" class="stp-title" data-i18n="setup_153">Partie 7 — Encaisser</h3>
         <ul class="stp-rules --plain" data-list>
-          <li class="stp-item"><p class="stp-text"><strong>1 % touché :</strong> SL au PE.</p></li>
-          <li class="stp-item"><p class="stp-text"><strong>BE 1 % :</strong> protection par palier (atteint 2 %, revenu 1 %).</p></li>
-          <li class="stp-item"><p class="stp-text">Journal + rapport fin de mois.</p></li>
-          <li class="stp-item"><p class="stp-text">PS : 1 % sur 200 000 $ = 2 000 $. Objectif réaliste : 0,5 %/semaine (~2 %/mois).</p></li>
+          <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_154">1 % touché :</strong><span data-i18n="setup_155"> SL au PE.</span></p></li>
+          <li class="stp-item"><p class="stp-text"><strong data-i18n="setup_156">BE 1 % :</strong><span data-i18n="setup_157"> protection par palier (atteint 2 %, revenu 1 %).</span></p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_158">Journal + rapport fin de mois.</p></li>
+          <li class="stp-item"><p class="stp-text" data-i18n="setup_159">PS : 1 % sur 200 000 $ = 2 000 $. Objectif réaliste : 0,5 %/semaine (~2 %/mois).</p></li>
         </ul>
       </div>
     </article>
@@ -566,22 +569,22 @@
 
     <!-- NAVIGATION -->
     <nav class="chapter-cta" aria-label="Navigation chapitres">
-      <a href="/pages/money-management.html" class="btn btn-ghost">← Chapitre précédent — Money Management</a>
-      <a href="/pages/psychologie-discipline.html" class="btn btn-primary">Chapitre suivant — Psychologie &amp; Discipline →</a>
+      <a href="/pages/money-management.html" class="btn btn-ghost" data-i18n="setup_160">← Chapitre précédent — Money Management</a>
+      <a href="/pages/psychologie-discipline.html" class="btn btn-primary" data-i18n="setup_161">Chapitre suivant — Psychologie &amp; Discipline →</a>
     </nav>
 
   </main>
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <p id="footerText">© 2026 — Wavest | Tous droits réservés</p>
+    <p id="footerText" data-i18n="setup_162">© 2026 — Wavest | Tous droits réservés</p>
 
     <nav class="footer-links" aria-label="Liens légaux">
-      <a id="linkMentions" href="/Legal/mentions-legales.html">Mentions légales</a>
-      <a id="linkPrivacy"  href="/Legal/confidentialite.html">Confidentialité</a>
-      <a id="linkCookies" href="/Legal/cookies.html">Cookies</a>
-      <a id="linkCgv" href="/Legal/cgv.html">CGV</a>
-      <a href="#" data-open-cookie-banner="true">Gérer les cookies</a>
+      <a id="linkMentions" href="/Legal/mentions-legales.html" data-i18n="setup_163">Mentions légales</a>
+      <a id="linkPrivacy"  href="/Legal/confidentialite.html" data-i18n="setup_164">Confidentialité</a>
+      <a id="linkCookies" href="/Legal/cookies.html" data-i18n="setup_165">Cookies</a>
+      <a id="linkCgv" href="/Legal/cgv.html" data-i18n="setup_166">CGV</a>
+      <a href="#" data-open-cookie-banner="true" data-i18n="setup_167">Gérer les cookies</a>
     </nav>
 
     <p>
@@ -589,12 +592,13 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v.01L12 13l8-6.99V6H4zm0 12h16V8l-8 7-8-7v10z"/>
         </svg>
-        <span id="footerMailText">Contact</span>
+        <span id="footerMailText" data-i18n="setup_168">Contact</span>
       </a>
     </p>
   </footer>
 
   <script src="/js/app.js?v=6" defer></script>
+  <script src="/js/i18n.js?v=1" defer></script>
 </body>
 </html>
 

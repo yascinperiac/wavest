@@ -1042,3 +1042,27 @@ body.dark .fx-hours thead{background:var(--glass-card)}
     padding:10px 16px;
   }
 }
+/* ===============================
+   LANG TOGGLE (EN/FR) — header, à gauche
+=================================*/
+.lang-toggle{
+  position:relative;
+  z-index:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:36px;
+  height:28px;
+  padding:0 9px;
+  background:var(--glass-soft);
+  border:1px solid var(--glass-ink);
+  backdrop-filter:var(--bf-chip);
+  -webkit-backdrop-filter:var(--bf-chip);
+  border-radius:999px;
+  color:var(--text);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.02em;
+  cursor:pointer;
+}
+.lang-toggle:hover{transform:scale(1.08);opacity:.92}
