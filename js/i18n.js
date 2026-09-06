@@ -6841,6 +6841,10 @@
   "pageTitle_tradingview": {
     "fr": "Chapitre 2 — Configuration TradingView",
     "en": "Chapter 2 — TradingView Setup"
+  },
+  "memberBadge": {
+    "fr": "Membres",
+    "en": "Members"
   }
 };
 

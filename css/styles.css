@@ -828,6 +828,31 @@ body.dark .acc-btn:hover{background:rgba(168,205,240,.08)}
   color:currentColor;
 }
 
+.member-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  margin-left:8px;
+  padding:3px 9px;
+  border-radius:999px;
+  background:var(--glass-ink);
+  color:var(--muted);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  flex-shrink:0;
+  white-space:nowrap;
+}
+.member-badge svg{width:11px;height:11px;flex-shrink:0}
+.sub-list li a:hover .member-badge{
+  background:rgba(255,255,255,.25);
+  color:#fff;
+}
+@media (max-width:640px){
+  .member-badge{font-size:10px;padding:2px 7px}
+}
+
 @media (max-width:700px){
   .acc-btn{font-size:18px;padding:18px 20px}
   .acc-panel{padding:0 20px 18px}
