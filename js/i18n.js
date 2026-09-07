@@ -75,12 +75,12 @@
     "en": "Home — Wavest"
   },
   "heroTitle": {
-    "fr": "Arrête de suivre des signaux. Apprends une méthode.",
-    "en": "Stop following signals. Learn a method."
+    "fr": "800+ trades backtestés. Zéro promesse de gains. Une méthode.",
+    "en": "800+ backtested trades. Zero profit promises. One method."
   },
   "heroText": {
-    "fr": "Analyse de prix, gestion du risque, discipline — sans bullshit.",
-    "en": "Price action, risk management, discipline — no bullshit."
+    "fr": "Analyse technique pure, gestion du risque, discipline — celle que j'utilise moi-même depuis 3 ans.",
+    "en": "Pure technical analysis, risk management, discipline — the same one I've used myself for 3 years."
   },
   "ctaOffer": {
     "fr": "Découvrir l'offre →",
@@ -6845,6 +6845,22 @@
   "memberBadge": {
     "fr": "Membres",
     "en": "Members"
+  },
+  "testimonialEyebrow": {
+    "fr": "Peu d'élèves, mais un suivi individuel pour chacun",
+    "en": "Few students, but individual follow-up for each one"
+  },
+  "proofCtaBtn": {
+    "fr": "Recevoir le backtest",
+    "en": "Get the backtest"
+  },
+  "proofCardTitle": {
+    "fr": "La preuve, sans filtre",
+    "en": "The proof, unfiltered"
+  },
+  "proofCardText": {
+    "fr": "800+ trades documentés (2022-2025), capture TradingView à l'appui pour chacun. Laisse ton email, tu reçois l'accès direct.",
+    "en": "800+ documented trades (2022-2025), with a TradingView screenshot for each. Leave your email, get direct access."
   }
 };
 
