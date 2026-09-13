@@ -164,10 +164,11 @@ body.page-setup section{
   position:relative;
 
   aspect-ratio: 16/9;
-  background: var(--bg-soft, rgba(74,134,200,.05));
+  background: var(--bg-soft, rgba(0,144,245,.05));
 
   width: 100%;
   max-width: 100%;
+  cursor: zoom-in;
 }
 
 .stp-thumb img{

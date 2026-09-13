@@ -125,8 +125,10 @@
 
   <!-- HEADER -->
   <header class="site-header">
-    <button id="langToggle" type="button" class="lang-toggle" aria-label="Passer le site en anglais" data-i18n-aria-label="langToggleAria">
-      <span data-i18n="langToggleLabel">EN</span>
+    <button id="langToggle" type="button" class="lang-toggle" role="switch" aria-checked="false" aria-label="Changer la langue du site" data-i18n-aria-label="langToggleAria">
+      <span class="lang-toggle-thumb" aria-hidden="true"></span>
+      <span class="lang-toggle-opt lang-toggle-fr">FR</span>
+      <span class="lang-toggle-opt lang-toggle-en">EN</span>
     </button>
 
     <a href="/index.html" class="brand" aria-label="Wavest">
@@ -136,12 +138,12 @@
 
     <div class="header-actions">
       <button id="themeToggle" type="button" aria-label="Changer le thème" data-i18n-aria-label="themeToggleAria">
-        <svg class="theme-icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="4.3"></circle>
-          <path d="M12 2.8v2.6M12 18.6v2.6M4.7 4.7l1.8 1.8M17.5 17.5l1.8 1.8M2.8 12h2.6M18.6 12h2.6M4.7 19.3l1.8-1.8M17.5 6.5l1.8-1.8"></path>
-        </svg>
-        <svg class="theme-icon icon-moon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7.1 7.1 0 0 0 11.1 11.1Z"></path>
+        <svg class="theme-icon-morph" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <g class="sun-rays" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <path d="M12 2.8v2.6M12 18.6v2.6M4.7 4.7l1.8 1.8M17.5 17.5l1.8 1.8M2.8 12h2.6M18.6 12h2.6M4.7 19.3l1.8-1.8M17.5 6.5l1.8-1.8"></path>
+          </g>
+          <circle class="sun-core" cx="12" cy="12" r="4.6" fill="currentColor"></circle>
+          <circle class="moon-mask" cx="12" cy="12" r="5"></circle>
         </svg>
       </button>
     </div>
@@ -552,9 +554,9 @@
           </ul>
 
           <p class="tools-note" data-i18n="toolsNote">
-            💡 Le Trade Checker, le Dashboard de progression et la Performance des patterns
-            s'utilisent avec la méthode enseignée dans la formation — c'est pour ça qu'ils sont
-            réservés aux membres.
+            💡 Le Trade Checker, le Simulateur de croissance de capital, le Dashboard de progression
+            et la Performance des patterns s'utilisent avec la méthode enseignée dans la formation —
+            c'est pour ça qu'ils sont réservés aux membres.
           </p>
         </div>
       </div>

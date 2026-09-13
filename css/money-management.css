@@ -69,6 +69,7 @@
   display:block; width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden;
   border:1px solid var(--glass-border, rgba(0,0,0,.08)); box-shadow:0 4px 12px rgba(0,0,0,.06);
   margin:0 0 8px;
+  cursor: zoom-in;
 }
 .mm-thumb img{ width:100%; height:auto; display:block; object-fit:cover; }
 .mm-thumb:focus-visible{ outline:3px solid color-mix(in oklab,var(--mm-accent) 55%,transparent); outline-offset:3px; border-radius:12px; }
@@ -154,22 +155,12 @@
 /* Nav chapitres */
 .chapter-cta{ margin-top:22px; display:flex; gap:12px; }
 
-/* ————— Modes & préférences ————— */
-@media (prefers-color-scheme: dark){
-  .mm-card{ box-shadow:var(--mm-shadow-lg); }
-  .mm-rule, .rule-item{
-    background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.12); color:#eef2ff;
-  }
-  .mm-badge, .mm-tag{
-    background:color-mix(in oklab, var(--mm-accent) 28%, rgba(255,255,255,.08));
-    border-color:color-mix(in oklab, var(--mm-accent) 55%, rgba(255,255,255,.12));
-    color:#eef2ff;
-  }
-  .page-money section.mm-sep::after{
-    background:linear-gradient(to right, transparent, color-mix(in oklab, var(--mm-accent) 70%, #9ec8ff), transparent);
-    opacity:.75;
-  }
-}
+/* ————— Modes & préférences —————
+   (le thème sombre est piloté uniquement par la classe body.page-money.dark,
+   ajoutée par le script de thème — voir plus bas dans ce fichier. On ne
+   duplique plus ces règles via prefers-color-scheme, sinon elles s'appliquent
+   même quand l'utilisateur a choisi le thème clair manuellement, ce qui
+   rendait le texte des badges illisible.) */
 @media (prefers-reduced-motion: reduce){
   .mm-card, .mm-rule, .rule-item, .mm-remember-card{ transition:none !important; transform:none !important; }
   .page-money section.mm-sep::after{ transition:none !important; animation:none !important; transform:translateX(-50%) scaleX(1); }
@@ -246,29 +237,8 @@
   }
 }
 
-/* Mode sombre */
-@media (prefers-color-scheme: dark){
-  .mm-table{
-    box-shadow: var(--mm-shadow-lg);
-    border-color: rgba(255,255,255,.12);
-    background: color-mix(in oklab, #0b1220 78%, transparent);
-  }
-  .mm-table thead th{
-    background: color-mix(in oklab, var(--mm-accent) 22%, rgba(255,255,255,.06));
-    color: #eef2ff;
-  }
-  .mm-table tbody td{
-    color: #eef2ff;
-  }
-  .mm-table tbody tr + tr td{
-    border-top-color: rgba(255,255,255,.12);
-  }
-  @media (hover:hover){
-    .mm-table tbody tr:hover td{
-      background: color-mix(in oklab, rgba(255,255,255,.12) 70%, var(--mm-accent) 10%);
-    }
-  }
-}
+/* Le thème sombre du tableau est géré par body.page-money.dark plus bas
+   dans ce fichier — voir la note plus haut sur prefers-color-scheme. */
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){

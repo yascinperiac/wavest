@@ -26,7 +26,7 @@
   <link rel="icon" type="image/png" href="../assets/images/favicon.png?v=2">
   <link rel="apple-touch-icon" href="../assets/images/favicon.png?v=2">
   <link rel="shortcut icon" href="../favicon.ico?v=2">
-  <meta name="description" content="Performance des patterns Wavest par paire, à partir du backtest interne : meilleur pattern par paire et heatmap complète.">
+  <meta name="description" content="La meilleure combinaison de contexte par pattern daily, à partir du backtest interne Wavest : winrate, RR moyen et score, sans avoir à chercher.">
 
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/performance-patterns.css" />
@@ -38,8 +38,10 @@
 
   <!-- === HEADER === -->
   <header class="site-header">
-    <button id="langToggle" type="button" class="lang-toggle" aria-label="Passer le site en anglais" data-i18n-aria-label="langToggleAria">
-      <span data-i18n="langToggleLabel">EN</span>
+    <button id="langToggle" type="button" class="lang-toggle" role="switch" aria-checked="false" aria-label="Changer la langue du site" data-i18n-aria-label="langToggleAria">
+      <span class="lang-toggle-thumb" aria-hidden="true"></span>
+      <span class="lang-toggle-opt lang-toggle-fr">FR</span>
+      <span class="lang-toggle-opt lang-toggle-en">EN</span>
     </button>
     <h1 data-i18n="performancePatterns_1">Performance des patterns</h1>
     <div class="header-actions">
@@ -50,87 +52,52 @@
   <main class="container" id="content">
 
     <!-- INTRO -->
-    <section class="hero reveal" aria-label="Performance des patterns">
-      <p data-i18n="performancePatterns_3">Le meilleur pattern par paire, calculé à partir du backtest interne Wavest — pour savoir où concentrer ton attention.</p>
+    <section class="hero reveal" aria-label="Meilleures combinaisons par pattern">
+      <p data-i18n="performancePatterns_3">Pour chaque pattern daily que tu identifies sur ton graphique, voici la combinaison de contexte qui a historiquement le mieux fonctionné sur mon backtest — pas besoin de chercher, la meilleure combo s'affiche directement.</p>
     </section>
 
     <!-- OUTIL -->
     <div class="perf-app reveal">
       <div class="perf-shell">
 
-        <!-- RÉSUMÉ -->
-        <div class="perf-summary-grid">
-          <div class="card perf-summary-card">
-            <p class="mod-tag"><span data-i18n="performancePatterns_5">Meilleur pattern </span><em data-i18n="performancePatterns_4">· global</em></p>
-            <div class="perf-summary-value" id="perfBestPattern">–</div>
-            <div class="perf-summary-score" id="perfBestPatternScore">–</div>
-          </div>
-          <div class="card perf-summary-card">
-            <p class="mod-tag"><span data-i18n="performancePatterns_7">Meilleure paire </span><em data-i18n="performancePatterns_6">· global</em></p>
-            <div class="perf-summary-value" id="perfBestPair">–</div>
-            <div class="perf-summary-score" id="perfBestPairScore">–</div>
-          </div>
+        <!-- MEILLEURE COMBO GLOBALE -->
+        <div class="card combo-highlight" id="comboHighlight">
+          <p class="mod-tag" data-i18n="performancePatterns_35">Meilleure combo · toutes patterns confondues</p>
+          <div class="combo-highlight-name" id="comboHighlightName">–</div>
+          <div class="combo-stats-row" id="comboHighlightStats"></div>
         </div>
 
-        <!-- CLASSEMENT -->
-        <section class="card perf-ranking-card">
+        <!-- GRILLE DES COMBOS -->
+        <section class="card combo-grid-card">
           <div class="section-title">
             <span class="section-badge">1</span>
             <div>
-              <p class="mod-tag"><span data-i18n="performancePatterns_9">Classement </span><em data-i18n="performancePatterns_8">· par paire</em></p>
-              <h2 data-i18n="performancePatterns_10">Meilleur pattern par paire</h2>
-              <p data-i18n="performancePatterns_11">Le pattern le plus performant pour chaque paire, sur l'échantillon backtesté.</p>
+              <p class="mod-tag" data-i18n="performancePatterns_34">Combos · par pattern daily</p>
+              <h2 data-i18n="performancePatterns_36">Trouve directement ta combinaison</h2>
+              <p data-i18n="performancePatterns_37">Repère le pattern que tu identifies sur ton graphique : la combinaison de contexte la plus performante associée s'affiche juste en dessous, avec ses statistiques.</p>
             </div>
           </div>
 
-          <div class="perf-controls">
-            <label for="perfSort" data-i18n="performancePatterns_12">Trier par</label>
-            <select id="perfSort">
-              <option value="score-desc" data-i18n="performancePatterns_13">Meilleur score</option>
-              <option value="total-desc" data-i18n="performancePatterns_14">Total paire</option>
-              <option value="pair-asc" data-i18n="performancePatterns_15">Paire (A-Z)</option>
-            </select>
-          </div>
-
-          <div class="perf-table-scroll">
-            <table class="perf-ranking-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th data-i18n="performancePatterns_16">Paire</th>
-                  <th data-i18n="performancePatterns_17">Meilleur pattern</th>
-                  <th data-i18n="performancePatterns_18">Score</th>
-                  <th data-i18n="performancePatterns_19">Total paire</th>
-                </tr>
-              </thead>
-              <tbody id="perfRankingBody"></tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- HEATMAP -->
-        <section class="card perf-heatmap-card">
-          <div class="section-title">
-            <span class="section-badge">2</span>
-            <div>
-              <p class="mod-tag"><span data-i18n="performancePatterns_21">Détail </span><em data-i18n="performancePatterns_20">· heatmap complète</em></p>
-              <h2 data-i18n="performancePatterns_22">Toutes les paires × tous les patterns</h2>
-              <p data-i18n="performancePatterns_23">La cellule encadrée indique le meilleur pattern de chaque ligne.</p>
+          <div class="combo-legend" id="comboLegend">
+            <div class="combo-legend-item">
+              <span class="combo-legend-term">Winrate</span>
+              <span class="combo-legend-def" data-i18n="performancePatterns_43">% de trades gagnants sur le total pris.</span>
+            </div>
+            <div class="combo-legend-item">
+              <span class="combo-legend-term" data-i18n="performancePatterns_44">RR moyen</span>
+              <span class="combo-legend-def" data-i18n="performancePatterns_45">Gain moyen encaissé par trade, en multiple du risque pris (1€ risqué → x€ gagné en moyenne).</span>
+            </div>
+            <div class="combo-legend-item">
+              <span class="combo-legend-term" data-i18n="performancePatterns_46">Score</span>
+              <span class="combo-legend-def" data-i18n="performancePatterns_47">Note globale qui combine winrate, RR et nombre de trades : plus il est haut, plus la combo est fiable.</span>
             </div>
           </div>
 
-          <div class="perf-table-scroll">
-            <table class="perf-heatmap-table">
-              <thead>
-                <tr id="perfHeatmapHead"></tr>
-              </thead>
-              <tbody id="perfHeatmapBody"></tbody>
-            </table>
-          </div>
+          <div class="combo-grid" id="comboGrid"></div>
         </section>
 
         <p class="perf-disclaimer" data-i18n="performancePatterns_24">
-          ⚠️ Données issues d'un backtest interne à but pédagogique. Les performances passées ne
+          ⚠️ Données issues d'un backtest interne à but pédagogique, mises à jour manuellement. Les performances passées ne
           préjugent pas des performances futures. Le trading comporte des risques de perte en capital.
         </p>
       </div>
@@ -166,6 +133,35 @@
       </a>
     </p>
   </footer>
+
+<!-- MODAL DETAIL COMBO -->
+<div class="combo-modal" id="comboModal" aria-hidden="true">
+  <div class="combo-modal-backdrop" data-combo-modal-close="true"></div>
+  <div class="combo-modal-panel" role="dialog" aria-modal="true">
+    <button type="button" class="combo-modal-close" data-combo-modal-close="true" aria-label="Fermer">&times;</button>
+    <div class="combo-modal-head">
+      <span class="section-badge" id="comboModalPatternBadge">–</span>
+      <div>
+        <p class="mod-tag" id="comboModalPattern">–</p>
+        <h3 id="comboModalTitle">–</h3>
+      </div>
+    </div>
+    <div class="combo-modal-body">
+      <table class="combo-modal-table" id="comboModalTable">
+        <thead>
+          <tr>
+            <th data-i18n="performancePatterns_38">Contexte</th>
+            <th data-i18n="performancePatterns_39">Trades</th>
+            <th data-i18n="performancePatterns_40">Winrate</th>
+            <th data-i18n="performancePatterns_41">RR moyen</th>
+            <th data-i18n="performancePatterns_42">Score</th>
+          </tr>
+        </thead>
+        <tbody id="comboModalTbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
   <script src="../js/app.js" defer></script>
   <script src="../js/i18n.js?v=1" defer></script>

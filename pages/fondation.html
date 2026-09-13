@@ -41,8 +41,10 @@
 
   <!-- HEADER -->
   <header class="site-header" role="banner">
-    <button id="langToggle" type="button" class="lang-toggle" aria-label="Passer le site en anglais" data-i18n-aria-label="langToggleAria">
-      <span data-i18n="langToggleLabel">EN</span>
+    <button id="langToggle" type="button" class="lang-toggle" role="switch" aria-checked="false" aria-label="Changer la langue du site" data-i18n-aria-label="langToggleAria">
+      <span class="lang-toggle-thumb" aria-hidden="true"></span>
+      <span class="lang-toggle-opt lang-toggle-fr">FR</span>
+      <span class="lang-toggle-opt lang-toggle-en">EN</span>
     </button>
     <h1 data-i18n="fondation_1">Chapitre 1 — Fondation</h1>
     <div class="header-actions">

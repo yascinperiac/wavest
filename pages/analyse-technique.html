@@ -79,8 +79,10 @@
 
   <!-- HEADER -->
   <header class="site-header">
-    <button id="langToggle" type="button" class="lang-toggle" aria-label="Passer le site en anglais" data-i18n-aria-label="langToggleAria">
-      <span data-i18n="langToggleLabel">EN</span>
+    <button id="langToggle" type="button" class="lang-toggle" role="switch" aria-checked="false" aria-label="Changer la langue du site" data-i18n-aria-label="langToggleAria">
+      <span class="lang-toggle-thumb" aria-hidden="true"></span>
+      <span class="lang-toggle-opt lang-toggle-fr">FR</span>
+      <span class="lang-toggle-opt lang-toggle-en">EN</span>
     </button>
     <h1 data-i18n="analyseTechnique_1">Chapitre 3 — Analyse technique</h1>
     <div class="header-actions">
@@ -108,7 +110,7 @@
               <li><a href="#pattern-technique"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-checkcircle"/></svg><span data-i18n="analyseTechnique_8"> Pattern technique</span></a></li>
               <li><a href="#backtesting"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chart"/></svg><span data-i18n="analyseTechnique_9"> Backtesting</span></a></li>
               <li>
-                <a href="https://docs.google.com/spreadsheets/d/1H90w1JHG0bonCXjFuaXH0MhARKaqZFsgtSQAiLitjT8/copy" target="_blank" rel="noopener noreferrer">
+                <a href="#gs-backtesting-title">
                   <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg><span data-i18n="analyseTechnique_10"> Bonus — Exercices Google Sheets
                 </span></a>
               </li>
@@ -137,7 +139,7 @@
         <ul class="trend-grid">
           <li class="trend-card">
             <h4 class="trend-title" data-i18n="analyseTechnique_14">Validation HH/LL</h4>
-            <a class="trend-thumb" href="/assets/images/tendance/regle-1.png" target="_blank" rel="noopener">
+            <a class="trend-thumb" href="/assets/images/tendance/regle-1.png">
               <img src="/assets/images/tendance/regle-1.png" alt="Règle 1 — Validation HH/LL" loading="lazy" width="960" height="540">
             </a>
             <p class="trend-text"><span data-i18n="analyseTechnique_17">Pour faire un nouveau plus haut/bas, le </span><strong data-i18n="analyseTechnique_15">corps</strong><span data-i18n="analyseTechnique_18"> doit casser la </span><strong data-i18n="analyseTechnique_16">mèche</strong><span data-i18n="analyseTechnique_19"> de l’ancien plus haut/bas.</span></p>
@@ -145,7 +147,7 @@
 
           <li class="trend-card">
             <h4 class="trend-title" data-i18n="analyseTechnique_20">Alternance des points</h4>
-            <a class="trend-thumb" href="/assets/images/tendance/regle-2.png" target="_blank" rel="noopener">
+            <a class="trend-thumb" href="/assets/images/tendance/regle-2.png">
               <img src="/assets/images/tendance/regle-2.png" alt="Règle 2 — Alternance des points" loading="lazy" width="960" height="540">
             </a>
             <p class="trend-text"><span data-i18n="analyseTechnique_22">Jamais 2 points haut/bas </span><strong data-i18n="analyseTechnique_21">successifs</strong><span data-i18n="analyseTechnique_23"> : toujours un sur deux.</span></p>
@@ -153,7 +155,7 @@
 
           <li class="trend-card">
             <h4 class="trend-title" data-i18n="analyseTechnique_24">Choix du pivot</h4>
-            <a class="trend-thumb" href="/assets/images/tendance/regle-3.png" target="_blank" rel="noopener">
+            <a class="trend-thumb" href="/assets/images/tendance/regle-3.png">
               <img src="/assets/images/tendance/regle-3.png" alt="Règle 3 — Choix du pivot" loading="lazy" width="960" height="540">
             </a>
             <p class="trend-text"><span data-i18n="analyseTechnique_26">Toujours prendre le point </span><strong data-i18n="analyseTechnique_25">le plus haut/bas</strong><span data-i18n="analyseTechnique_27"> entre deux points haut/bas.</span></p>
@@ -182,7 +184,7 @@
       <div class="rules-wrapper pattern-grid">
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_31">IETE</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern/IETE.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern/IETE.png">
             <img src="/assets/images/pattern/IETE.png" alt="Pattern IETE" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_34">L’</span><strong data-i18n="analyseTechnique_32">IETE</strong><span data-i18n="analyseTechnique_35"> est un pattern haussier. Il sera détaillé dans le chapitre </span><strong data-i18n="analyseTechnique_33">Pattern technique</strong>.</p>
@@ -191,7 +193,7 @@
 
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_36">M</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern/M.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern/M.png">
             <img src="/assets/images/pattern/M.png" alt="Pattern M" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_39">Le </span><strong data-i18n="analyseTechnique_37">M</strong><span data-i18n="analyseTechnique_40"> est un pattern haussier. D’autres variantes sont présentées dans </span><strong data-i18n="analyseTechnique_38">Pattern technique</strong>.</p>
@@ -200,7 +202,7 @@
 
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_41">W</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern/W.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern/W.png">
             <img src="/assets/images/pattern/W.png" alt="Pattern W" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_44">Le </span><strong data-i18n="analyseTechnique_42">W</strong><span data-i18n="analyseTechnique_45"> est un pattern baissier. D’autres variantes sont présentées dans </span><strong data-i18n="analyseTechnique_43">Pattern technique</strong>.</p>
@@ -209,7 +211,7 @@
 
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_46">ETE</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern/ETE.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern/ETE.png">
             <img src="/assets/images/pattern/ETE.png" alt="Pattern ETE" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_49">L’</span><strong data-i18n="analyseTechnique_47">ETE</strong><span data-i18n="analyseTechnique_50"> (Épaule–Tête–Épaule) est un pattern de retournement majeur. Variations et implications dans </span><strong data-i18n="analyseTechnique_48">Pattern technique</strong>.</p>
@@ -239,7 +241,7 @@
         <ul class="wg-grid">
           <li class="wg-card">
             <h4 class="wg-title" data-i18n="analyseTechnique_54">Tendance</h4>
-            <a class="wg-thumb" href="/assets/images/weekly/tendance.png" target="_blank" rel="noopener">
+            <a class="wg-thumb" href="/assets/images/weekly/tendance.png">
               <img src="/assets/images/weekly/tendance.png" alt="Weekly — Tendance" loading="lazy">
             </a>
             <p class="wg-text" data-i18n="analyseTechnique_55">Identifier la tendance dominante.</p>
@@ -247,7 +249,7 @@
 
           <li class="wg-card">
             <h4 class="wg-title" data-i18n="analyseTechnique_56">Candle Close</h4>
-            <a class="wg-thumb" href="/assets/images/weekly/cc.png" target="_blank" rel="noopener">
+            <a class="wg-thumb" href="/assets/images/weekly/cc.png">
               <img src="/assets/images/weekly/cc.png" alt="Weekly — Candle Close" loading="lazy">
             </a>
             <p class="wg-text" data-i18n="analyseTechnique_57">Analyser la clôture de la dernière bougie.</p>
@@ -255,7 +257,7 @@
 
           <li class="wg-card">
             <h4 class="wg-title" data-i18n="analyseTechnique_58">S&amp;D Zone</h4>
-            <a class="wg-thumb" href="/assets/images/weekly/s-and-d-zone.png" target="_blank" rel="noopener">
+            <a class="wg-thumb" href="/assets/images/weekly/s-and-d-zone.png">
               <img src="/assets/images/weekly/s-and-d-zone.png" alt="Weekly — S&amp;D Zone" loading="lazy">
             </a>
             <p class="wg-text" data-i18n="analyseTechnique_59">Zone clé testée et réactive.</p>
@@ -263,7 +265,7 @@
 
           <li class="wg-card">
             <h4 class="wg-title" data-i18n="analyseTechnique_60">Pattern</h4>
-            <a class="wg-thumb" href="/assets/images/weekly/pattern.png" target="_blank" rel="noopener">
+            <a class="wg-thumb" href="/assets/images/weekly/pattern.png">
               <img src="/assets/images/weekly/pattern.png" alt="Weekly — Pattern" loading="lazy">
             </a>
             <p class="wg-text" data-i18n="analyseTechnique_61">Valider IETE/M/W/ETE sur clôture weekly.</p>
@@ -274,7 +276,7 @@
       <ul class="weekly-specials">
         <li class="special-item">
           <h4 data-i18n="analyseTechnique_62">🚫 Bougie neutre</h4>
-          <a class="special-thumb" href="/assets/images/weekly/bougie-neutre.png" target="_blank" rel="noopener">
+          <a class="special-thumb" href="/assets/images/weekly/bougie-neutre.png">
             <img src="/assets/images/weekly/bougie-neutre.png" alt="Cas spécial : Bougie neutre" loading="lazy" width="960" height="540">
           </a>
           <p data-i18n="analyseTechnique_63">Indécision → mettre neutre « / ».</p>
@@ -283,10 +285,10 @@
         <li class="special-item">
           <h4 data-i18n="analyseTechnique_64">🔄 Double Pattern</h4>
           <div class="special-thumbs">
-            <a class="special-thumb" href="/assets/images/weekly/double-pattern.png" target="_blank" rel="noopener">
+            <a class="special-thumb" href="/assets/images/weekly/double-pattern.png">
               <img src="/assets/images/weekly/double-pattern.png" alt="Double pattern — variante 1" loading="lazy" width="480" height="270">
             </a>
-            <a class="special-thumb" href="/assets/images/weekly/double-pattern2.png" target="_blank" rel="noopener">
+            <a class="special-thumb" href="/assets/images/weekly/double-pattern2.png">
               <img src="/assets/images/weekly/double-pattern2.png" alt="Double pattern — variante 2" loading="lazy" width="480" height="270">
             </a>
           </div>
@@ -295,7 +297,7 @@
 
         <li class="special-item">
           <h4 data-i18n="analyseTechnique_66">📊 Zone S/R</h4>
-          <a class="special-thumb" href="/assets/images/weekly/zone-avant.png" target="_blank" rel="noopener">
+          <a class="special-thumb" href="/assets/images/weekly/zone-avant.png">
             <img src="/assets/images/weekly/zone-avant.png" alt="Zone testée ≥ 3 fois" loading="lazy" width="960" height="540">
           </a>
           <p data-i18n="analyseTechnique_67">Zone testée ≥ 3 fois.</p>
@@ -346,21 +348,21 @@
         <div class="examples-block">
           <h3 class="rules-title" data-i18n="analyseTechnique_99">Exemples visuels</h3>
           <div class="examples-grid">
-            <a class="example" href="/assets/images/4h/Rallentissement/rall.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Rallentissement/rall.png">
               <img src="/assets/images/4h/Rallentissement/rall.png" alt="Décélération — Exemple 1" loading="lazy" width="480" height="270">
             </a>
-            <a class="example" href="/assets/images/4h/Rallentissement/rall2.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Rallentissement/rall2.png">
               <img src="/assets/images/4h/Rallentissement/rall2.png" alt="Décélération — Exemple 2" loading="lazy" width="480" height="270">
             </a>
-            <a class="example" href="/assets/images/4h/Rallentissement/rall3.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Rallentissement/rall3.png">
               <img src="/assets/images/4h/Rallentissement/rall3.png" alt="Décélération — Exemple 3" loading="lazy" width="480" height="270">
             </a>
-            <a class="example" href="/assets/images/4h/Rallentissement/rall5.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Rallentissement/rall5.png">
               <img src="/assets/images/4h/Rallentissement/rall5.png" alt="Décélération — Exemple 4" loading="lazy" width="480" height="270">
             </a>
           </div>
           <div class="example-full">
-            <a class="example" href="/assets/images/4h/Rallentissement/exemple.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Rallentissement/exemple.png">
               <img src="/assets/images/4h/Rallentissement/exemple.png" alt="Décélération — Cas particulier" loading="lazy" width="960" height="540">
             </a>
           </div>
@@ -386,21 +388,21 @@
         <div class="examples-block">
           <h3 class="rules-title" data-i18n="analyseTechnique_127">Exemples visuels</h3>
           <div class="examples-grid">
-            <a class="example" href="/assets/images/4h/Fibonacci/FC1.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Fibonacci/FC1.png">
               <img src="/assets/images/4h/Fibonacci/FC1.png" alt="FC-27 — Exemple 1" loading="lazy" width="480" height="270">
             </a>
-            <a class="example" href="/assets/images/4h/Fibonacci/FC2.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Fibonacci/FC2.png">
               <img src="/assets/images/4h/Fibonacci/FC2.png" alt="FC-27 — Exemple 2" loading="lazy" width="480" height="270">
             </a>
-            <a class="example" href="/assets/images/4h/Fibonacci/FC3.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Fibonacci/FC3.png">
               <img src="/assets/images/4h/Fibonacci/FC3.png" alt="FC-27 — Exemple 3" loading="lazy" width="480" height="270">
             </a>
-            <a class="example" href="/assets/images/4h/Fibonacci/FC4.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Fibonacci/FC4.png">
               <img src="/assets/images/4h/Fibonacci/FC4.png" alt="FC-27 — Exemple 4" loading="lazy" width="480" height="270">
             </a>
           </div>
           <div class="example-full">
-            <a class="example" href="/assets/images/4h/Fibonacci/exemple.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Fibonacci/exemple.png">
               <img src="/assets/images/4h/Fibonacci/exemple.png" alt="FC-27 — Cas particulier" loading="lazy" width="960" height="540">
             </a>
           </div>
@@ -434,10 +436,10 @@
         <div class="mw-block">
           <h3 class="mw-title" data-i18n="analyseTechnique_135">M avec cassure</h3>
           <div class="mw-pair">
-            <a href="/assets/images/4h/Pattern M,W/M with BOS.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Pattern M,W/M with BOS.png">
               <img src="/assets/images/4h/Pattern M,W/M with BOS.png" alt="M avec cassure — exemple 1" width="480" height="270" loading="lazy">
             </a>
-            <a href="/assets/images/4h/Pattern M,W/M with BOS exemple.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Pattern M,W/M with BOS exemple.png">
               <img src="/assets/images/4h/Pattern M,W/M with BOS exemple.png" alt="M avec cassure — exemple 2" width="480" height="270" loading="lazy">
             </a>
           </div>
@@ -453,10 +455,10 @@
         <div class="mw-block">
           <h3 class="mw-title" data-i18n="analyseTechnique_140">M sans cassure</h3>
           <div class="mw-pair">
-            <a href="/assets/images/4h/Pattern M,W/M without BOS.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Pattern M,W/M without BOS.png">
               <img src="/assets/images/4h/Pattern M,W/M without BOS.png" alt="M sans cassure — exemple 1" width="480" height="270" loading="lazy">
             </a>
-            <a href="/assets/images/4h/Pattern M,W/M without BOS exemple.png" target="_blank" rel="noopener">
+            <a class="example" href="/assets/images/4h/Pattern M,W/M without BOS exemple.png">
               <img src="/assets/images/4h/Pattern M,W/M without BOS exemple.png" alt="M sans cassure — exemple 2" width="480" height="270" loading="lazy">
             </a>
           </div>
@@ -478,16 +480,6 @@
         <li class="rule-item"><p class="rule-text"><span data-i18n="analyseTechnique_150">💥 Privilégier les </span><strong data-i18n="analyseTechnique_149">M/W avec cassure (BOS)</strong><span data-i18n="analyseTechnique_151"> pour plus de fiabilité.</span></p></li>
         <li class="rule-item"><p class="rule-text"><span data-i18n="analyseTechnique_153">🎯 Entrer uniquement quand tous les </span><strong data-i18n="analyseTechnique_152">critères 4H</strong><span data-i18n="analyseTechnique_154"> sont réunis.</span></p></li>
       </ol>
-    </div>
-
-    <div class="example-wrap google-sheets-link">
-      <h3 class="rules-title" data-i18n="analyseTechnique_155">📊 Backtest Analytics — 2022–2025</h3>
-      <p class="section-sub" data-i18n="analyseTechnique_156">Voici mes Datas de backtesting</p>
-      <a href="https://docs.google.com/spreadsheets/d/1H90w1JHG0bonCXjFuaXH0MhARKaqZFsgtSQAiLitjT8/copy"
-         target="_blank" rel="noopener noreferrer" class="btn-sheets">
-        <img src="https://www.gstatic.com/images/branding/product/1x/sheets_48dp.png" alt="" class="sheets-logo" width="28" height="28">
-        <span data-i18n="analyseTechnique_157">Ouvrir la feuille Google Sheets</span>
-      </a>
     </div>
 
     <!-- PATTERN TECHNIQUE -->
@@ -515,7 +507,7 @@
       <div class="rules-wrapper pattern-grid">
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_161">M1 Small/Big</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern-technique/m1small-m1big.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/m1small-m1big.png">
             <img src="/assets/images/pattern-technique/m1small-m1big.png" alt="M1 small / M1 big" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_163">Pour le M1 big, </span><strong data-i18n="analyseTechnique_162">les ralentissements et Fibonacci inversés</strong><span data-i18n="analyseTechnique_164"> sont déconseillés en 4h.</span></p>
@@ -524,7 +516,7 @@
 
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_165">W1 Small/Big</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern-technique/w1small-w1big.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/w1small-w1big.png">
             <img src="/assets/images/pattern-technique/w1small-w1big.png" alt="W1 small / W1 big" loading="lazy">
           </a>
           <p class="pattern-text" data-i18n="analyseTechnique_166">Le W1 big ne fait plus partie de mon plan, trop de perte sur ce pattern. Je t’invite à le backtester.</p>
@@ -533,7 +525,7 @@
 
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_167">M2</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern-technique/m2.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/m2.png">
             <img src="/assets/images/pattern-technique/m2.png" alt="Pattern M2" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_170">Il faut au </span><strong data-i18n="analyseTechnique_168">minimum 2 bougies inverses</strong><span data-i18n="analyseTechnique_171"> dans la </span><strong data-i18n="analyseTechnique_169">correction du P3 au P4</strong>.</p>
@@ -542,7 +534,7 @@
 
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_172">W2</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern-technique/w2.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/w2.png">
             <img src="/assets/images/pattern-technique/w2.png" alt="Pattern W2" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_175">Il faut au </span><strong data-i18n="analyseTechnique_173">minimum 2 bougies inverses</strong><span data-i18n="analyseTechnique_176"> dans la </span><strong data-i18n="analyseTechnique_174">correction du P3 au P4</strong>.</p>
@@ -551,7 +543,7 @@
 
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_177">M3</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern-technique/m3.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/m3.png">
             <img src="/assets/images/pattern-technique/m3.png" alt="Pattern M3" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_181">
@@ -564,7 +556,7 @@
 
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_184">W3</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern-technique/w3.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/w3.png">
             <img src="/assets/images/pattern-technique/w3.png" alt="Pattern W3" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_188">
@@ -577,7 +569,7 @@
 
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_191">M4</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern-technique/m4.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/m4.png">
             <img src="/assets/images/pattern-technique/m4.png" alt="Pattern M4" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_195">Si le </span><strong data-i18n="analyseTechnique_192">P1 et P3 sont au même niveau</strong><span data-i18n="analyseTechnique_196">, automatiquement cela devient un M4. La </span><strong data-i18n="analyseTechnique_193">zone d'intérêt</strong><span data-i18n="analyseTechnique_197"> est au </span><strong data-i18n="analyseTechnique_194">même niveau que le P2</strong>.</p>
@@ -586,7 +578,7 @@
 
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_198">W4</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern-technique/w4.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/w4.png">
             <img src="/assets/images/pattern-technique/w4.png" alt="Pattern W4" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_202">Si le </span><strong data-i18n="analyseTechnique_199">P1 et P3 sont au même niveau</strong><span data-i18n="analyseTechnique_203">, automatiquement cela devient un W4. La </span><strong data-i18n="analyseTechnique_200">zone d'intérêt</strong><span data-i18n="analyseTechnique_204"> est au </span><strong data-i18n="analyseTechnique_201">même niveau que le P2</strong>.</p>
@@ -595,7 +587,7 @@
 
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_205">M5</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern-technique/m5.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/m5.png">
             <img src="/assets/images/pattern-technique/m5.png" alt="Pattern M5" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_207">Le P4 doit clôturer </span><strong data-i18n="analyseTechnique_206">entre le corps du P2 et la mèche du P2</strong>.</p>
@@ -604,7 +596,7 @@
 
         <div class="rules-block pattern-card">
           <h3 class="rules-title" data-i18n="analyseTechnique_208">W5</h3>
-          <a class="pattern-thumb" href="/assets/images/pattern-technique/w5.png" target="_blank" rel="noopener">
+          <a class="pattern-thumb" href="/assets/images/pattern-technique/w5.png">
             <img src="/assets/images/pattern-technique/w5.png" alt="Pattern W5" loading="lazy">
           </a>
           <p class="pattern-text"><span data-i18n="analyseTechnique_210">Le P4 doit clôturer </span><strong data-i18n="analyseTechnique_209">en dehors de la zone d’intérêt</strong>.</p>
@@ -632,15 +624,30 @@
         </figcaption>
       </figure>
 
-      <div class="example-wrap google-sheets-link" role="region" aria-labelledby="gs-backtesting-title">
-        <h3 class="rules-title" id="gs-backtesting-title" data-i18n="analyseTechnique_215">📊 Workspace Trading — Google Sheets</h3>
+      <div class="example-wrap google-sheets-link gs-premium" role="region" aria-labelledby="gs-backtesting-title">
+        <div class="gs-premium-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="3"></rect>
+            <path d="M3 9h18M3 15h18M9 3v18M15 3v18"></path>
+          </svg>
+        </div>
+        <h3 class="rules-title" id="gs-backtesting-title" data-i18n="analyseTechnique_215">Workspace Trading — Google Sheets</h3>
         <p class="section-sub" data-i18n="analyseTechnique_216">Backteste aujourd’hui, performe demain.</p>
+        <p class="gs-premium-note" data-i18n="analyseTechnique_232">Le classeur complet que j’utilise au quotidien, dupliqué en un clic dans ton propre Google Drive.</p>
+
+        <ul class="gs-premium-list">
+          <li><span class="gs-premium-check" aria-hidden="true">✓</span><span data-i18n="analyseTechnique_233">Mon backtest complet 2022-2025 (800+ trades documentés)</span></li>
+          <li><span class="gs-premium-check" aria-hidden="true">✓</span><span data-i18n="analyseTechnique_234">Une feuille d’exercices sur tout le programme</span></li>
+          <li><span class="gs-premium-check" aria-hidden="true">✓</span><span data-i18n="analyseTechnique_235">Un tableau de backtesting automatisé pour t’entraîner</span></li>
+          <li><span class="gs-premium-check" aria-hidden="true">✓</span><span data-i18n="analyseTechnique_236">Un Trading Journal pour tes prises de trade en réel, connecté à ton Dashboard de progression</span></li>
+        </ul>
 
         <a class="btn-sheets"
            href="https://docs.google.com/spreadsheets/d/1H90w1JHG0bonCXjFuaXH0MhARKaqZFsgtSQAiLitjT8/copy"
            target="_blank" rel="noopener noreferrer">
-          <img src="https://www.gstatic.com/images/branding/product/1x/sheets_48dp.png" alt="" class="sheets-logo" width="28" height="28" loading="lazy" decoding="async">
+          <img src="https://www.gstatic.com/images/branding/product/1x/sheets_48dp.png" alt="" class="sheets-logo" width="22" height="22" loading="lazy" decoding="async">
           <span data-i18n="analyseTechnique_217">Ouvrir la feuille Google Sheets (Backtesting)</span>
+          <span class="gs-premium-arrow" aria-hidden="true">→</span>
         </a>
       </div>
     </section>
@@ -706,7 +713,92 @@
     </p>
   </footer>
 
+  <!-- LIGHTBOX IMAGES -->
+  <div id="atLightbox" class="at-lightbox" aria-hidden="true">
+    <div class="at-lightbox-backdrop" data-at-lightbox-close="true"></div>
+    <button type="button" class="at-lightbox-close" data-at-lightbox-close="true" aria-label="Fermer">&times;</button>
+    <figure class="at-lightbox-figure">
+      <img id="atLightboxImg" src="" alt="">
+      <figcaption id="atLightboxCaption"></figcaption>
+    </figure>
+  </div>
+
   <script src="/js/app.js?v=6" defer></script>
   <script src="/js/i18n.js?v=1" defer></script>
+  <script>
+  (function () {
+    "use strict";
+    var SELECTOR = "a.trend-thumb, a.pattern-thumb, a.wg-thumb, a.special-thumb, a.example";
+
+    function init() {
+      var modal = document.getElementById("atLightbox");
+      var imgEl = document.getElementById("atLightboxImg");
+      var captionEl = document.getElementById("atLightboxCaption");
+      if (!modal || !imgEl || !captionEl) return;
+
+      var savedScrollY = 0;
+
+      function openLightbox(src, alt) {
+        savedScrollY = window.scrollY || window.pageYOffset || 0;
+
+        imgEl.src = src;
+        imgEl.alt = alt || "";
+        captionEl.textContent = alt || "";
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+
+        document.body.classList.add("at-lightbox-open");
+        document.body.style.position = "fixed";
+        document.body.style.top = "-" + savedScrollY + "px";
+        document.body.style.left = "0";
+        document.body.style.right = "0";
+      }
+
+      function closeLightbox() {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        imgEl.src = "";
+
+        document.body.classList.remove("at-lightbox-open");
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+
+        var htmlEl = document.documentElement;
+        var prevBehavior = htmlEl.style.scrollBehavior;
+        htmlEl.style.scrollBehavior = "auto";
+        window.scrollTo(0, savedScrollY);
+        htmlEl.style.scrollBehavior = prevBehavior;
+      }
+
+      document.querySelectorAll(SELECTOR).forEach(function (link) {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          var img = link.querySelector("img");
+          var src = link.getAttribute("href");
+          var alt = img ? img.getAttribute("alt") : "";
+          openLightbox(src, alt);
+        });
+      });
+
+      modal.querySelectorAll("[data-at-lightbox-close]").forEach(function (el) {
+        el.addEventListener("click", closeLightbox);
+      });
+
+      imgEl.addEventListener("click", closeLightbox);
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeLightbox();
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
+  </script>
 </body>
 </html>

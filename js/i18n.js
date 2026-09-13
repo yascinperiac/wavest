@@ -27,8 +27,8 @@
     "en": "FR"
   },
   "langToggleAria": {
-    "fr": "Passer le site en anglais",
-    "en": "Switch site to French"
+    "fr": "Changer la langue du site",
+    "en": "Change site language"
   },
   "footerText": {
     "fr": "© 2026 — Wavest | Tous droits réservés",
@@ -239,8 +239,8 @@
     "en": "Pattern Performance"
   },
   "toolsNote": {
-    "fr": "💡 Le Trade Checker, le Dashboard de progression et la Performance des patterns s'utilisent avec la méthode enseignée dans la formation — c'est pour ça qu'ils sont réservés aux membres.",
-    "en": "💡 The Trade Checker, Progress Dashboard and Pattern Performance tools are meant to be used with the method taught in the program — that's why they're reserved for members."
+    "fr": "💡 Le Trade Checker, le Simulateur de croissance de capital, le Dashboard de progression et la Performance des patterns s'utilisent avec la méthode enseignée dans la formation — c'est pour ça qu'ils sont réservés aux membres.",
+    "en": "💡 The Trade Checker, Capital Growth Simulator, Progress Dashboard and Pattern Performance tools are meant to be used with the method taught in the program — that's why they're reserved for members."
   },
   "blogTitle": {
     "fr": "Blog",
@@ -2251,8 +2251,8 @@
     "en": "Download the video"
   },
   "analyseTechnique_215": {
-    "fr": "📊 Workspace Trading — Google Sheets",
-    "en": "📊 Trading Workspace — Google Sheets"
+    "fr": "Workspace Trading — Google Sheets",
+    "en": "Trading Workspace — Google Sheets"
   },
   "analyseTechnique_216": {
     "fr": "Backteste aujourd’hui, performe demain.",
@@ -2261,6 +2261,26 @@
   "analyseTechnique_217": {
     "fr": "Ouvrir la feuille Google Sheets (Backtesting)",
     "en": "Open the Google Sheet (Backtesting)"
+  },
+  "analyseTechnique_232": {
+    "fr": "Le classeur complet que j’utilise au quotidien, dupliqué en un clic dans ton propre Google Drive.",
+    "en": "The full workbook I use every day, duplicated in one click into your own Google Drive."
+  },
+  "analyseTechnique_233": {
+    "fr": "Mon backtest complet 2022-2025 (800+ trades documentés)",
+    "en": "My full 2022-2025 backtest (800+ documented trades)"
+  },
+  "analyseTechnique_234": {
+    "fr": "Une feuille d’exercices sur tout le programme",
+    "en": "An exercise sheet covering the whole program"
+  },
+  "analyseTechnique_235": {
+    "fr": "Un tableau de backtesting automatisé pour t’entraîner",
+    "en": "An automated backtesting table to practice with"
+  },
+  "analyseTechnique_236": {
+    "fr": "Un Trading Journal pour tes prises de trade en réel, connecté à ton Dashboard de progression",
+    "en": "A Trading Journal for your live trades, connected to your Progress Dashboard"
   },
   "analyseTechnique_218": {
     "fr": "Note du coach",
@@ -5091,8 +5111,8 @@
     "en": "← Table of contents"
   },
   "performancePatterns_3": {
-    "fr": "Le meilleur pattern par paire, calculé à partir du backtest interne Wavest — pour savoir où concentrer ton attention.",
-    "en": "The best pattern per pair, calculated from Wavest's internal backtest — to know where to focus your attention."
+    "fr": "Pour chaque pattern daily que tu identifies sur ton graphique, voici la combinaison de contexte qui a historiquement le mieux fonctionné sur mon backtest — pas besoin de chercher, la meilleure combo s'affiche directement.",
+    "en": "For each daily pattern you spot on your chart, here's the context combo that has historically worked best in my backtest — no digging required, the best combo shows up right away."
   },
   "performancePatterns_5": {
     "fr": "Meilleur pattern ",
@@ -5175,8 +5195,8 @@
     "en": "The highlighted cell shows the best pattern in each row."
   },
   "performancePatterns_24": {
-    "fr": "\n          ⚠️ Données issues d'un backtest interne à but pédagogique. Les performances passées ne\n          préjugent pas des performances futures. Le trading comporte des risques de perte en capital.\n        ",
-    "en": "\n          ⚠️ Data from an internal backtest for educational purposes. Past performance does not\n          guarantee future results. Trading involves a risk of capital loss.\n        "
+    "fr": "⚠️ Données issues d'un backtest interne à but pédagogique, mises à jour manuellement. Les performances passées ne préjugent pas des performances futures. Le trading comporte des risques de perte en capital.",
+    "en": "⚠️ Data from an internal, manually updated backtest for educational purposes. Past performance does not guarantee future results. Trading involves risk of capital loss."
   },
   "performancePatterns_25": {
     "fr": "← Trade Checker",
@@ -6861,7 +6881,33 @@
   "proofCardText": {
     "fr": "800+ trades documentés (2022-2025), capture TradingView à l'appui pour chacun. Laisse ton email, tu reçois l'accès direct.",
     "en": "800+ documented trades (2022-2025), with a TradingView screenshot for each. Leave your email, get direct access."
-  }
+  },
+  "performancePatterns_34": {
+    "fr": "Combos · par pattern daily",
+    "en": "Combos · by daily pattern"
+  },
+  "performancePatterns_35": {
+    "fr": "Meilleure combo · toutes patterns confondues",
+    "en": "Best combo · across all patterns"
+  },
+  "performancePatterns_36": {
+    "fr": "Trouve directement ta combinaison",
+    "en": "Find your combo instantly"
+  },
+  "performancePatterns_37": {
+    "fr": "Repère le pattern que tu identifies sur ton graphique : la combinaison de contexte la plus performante associée s'affiche juste en dessous, avec ses statistiques.",
+    "en": "Spot the pattern on your chart: the best-performing context combo for it shows up right below, with its stats."
+  },
+  "performancePatterns_38": { "fr": "Contexte", "en": "Context" },
+  "performancePatterns_39": { "fr": "Trades", "en": "Trades" },
+  "performancePatterns_40": { "fr": "Winrate", "en": "Winrate" },
+  "performancePatterns_41": { "fr": "RR moyen", "en": "Avg RR" },
+  "performancePatterns_42": { "fr": "Score", "en": "Score" },
+  "performancePatterns_43": { "fr": "% de trades gagnants sur le total pris.", "en": "% of winning trades out of all trades taken." },
+  "performancePatterns_44": { "fr": "RR moyen", "en": "Avg RR" },
+  "performancePatterns_45": { "fr": "Gain moyen encaissé par trade, en multiple du risque pris (1€ risqué → x€ gagné en moyenne).", "en": "Average gain per trade, as a multiple of the risk taken (1€ risked → x€ won on average)." },
+  "performancePatterns_46": { "fr": "Score", "en": "Score" },
+  "performancePatterns_47": { "fr": "Note globale qui combine winrate, RR et nombre de trades : plus il est haut, plus la combo est fiable.", "en": "Overall rating combining winrate, RR and sample size: the higher it is, the more reliable the combo." }
 };
 
   function getLang() {
@@ -6901,7 +6947,11 @@
     }
 
     var toggle = document.getElementById("langToggle");
-    if (toggle) toggle.setAttribute("aria-pressed", lang === "en" ? "true" : "false");
+    if (toggle) {
+      toggle.setAttribute("aria-pressed", lang === "en" ? "true" : "false");
+      toggle.setAttribute("aria-checked", lang === "en" ? "true" : "false");
+      toggle.classList.toggle("is-en", lang === "en");
+    }
   }
 
   window.WavestI18n = {

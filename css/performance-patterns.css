@@ -243,3 +243,422 @@
     padding: 18px;
   }
 }
+
+
+/* ---------- Combo highlight (meilleure combo globale) ---------- */
+.combo-highlight{
+  padding: 24px;
+  text-align: center;
+  margin-top: 8px;
+  background: linear-gradient(180deg, var(--perf-accent-soft), transparent 70%), var(--perf-card);
+}
+
+.combo-highlight-name{
+  margin-top: 8px;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--perf-accent-deep);
+  font-family: var(--font-display, inherit);
+}
+
+.combo-stats-row{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.combo-stat-chip{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  background: var(--card);
+  border: 1px solid var(--line);
+  min-width: 84px;
+}
+
+.combo-stat-chip .v{
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.combo-stat-chip .v.is-positive{ color: var(--perf-good); }
+.combo-stat-chip .v.is-negative{ color: color-mix(in oklab, var(--perf-bad) 70%, var(--text)); }
+
+.combo-stat-chip .l{
+  font-size: 10.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Grille des combos ---------- */
+.combo-grid-card{
+  padding: 24px;
+  margin-top: 20px;
+}
+
+.combo-legend{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--glass-soft);
+  border: 1px solid var(--line);
+}
+
+.combo-legend-item{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.combo-legend-term{
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--link-strong);
+}
+
+.combo-legend-def{
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.combo-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.combo-card{
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  padding: 16px;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.combo-card--reliable{
+  border-color: rgba(124,195,154,.55);
+  box-shadow: 0 0 0 1px rgba(124,195,154,.28), 0 10px 26px rgba(124,195,154,.16);
+}
+
+.combo-card-ribbon{
+  position: absolute;
+  top: 14px;
+  right: -34px;
+  transform: rotate(40deg);
+  display: inline-block;
+  padding: 4px 38px;
+  background: linear-gradient(135deg, #8fd6ab, #4f9d73);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 3px 8px rgba(0,0,0,.16);
+}
+
+@media (hover:hover){
+  .combo-card:hover{
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: var(--perf-accent-soft);
+  }
+}
+
+.combo-card-pattern{
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--perf-accent-soft);
+  color: var(--perf-accent-deep);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.combo-card-name{
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.combo-card-name .arrow{
+  color: var(--muted);
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.combo-card-stats{
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.combo-card-stat{
+  flex: 1 1 0;
+  min-width: 58px;
+  text-align: center;
+  padding: 6px 4px;
+  border-radius: 10px;
+  background: var(--glass-soft);
+}
+
+.combo-card-stat .v{
+  display: block;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.combo-card-stat .v.is-positive{ color: var(--perf-good); }
+.combo-card-stat .v.is-negative{ color: color-mix(in oklab, var(--perf-bad) 70%, var(--text)); }
+
+.combo-card-stat .l{
+  display: block;
+  margin-top: 1px;
+  font-size: 9.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.combo-card-meta{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.combo-low-sample{
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(230,187,121,.15);
+  border: 1px solid rgba(230,187,121,.32);
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.combo-reliable{
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(124,195,154,.15);
+  border: 1px solid rgba(124,195,154,.35);
+  color: var(--perf-good);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.combo-card-details-btn{
+  margin-top: 12px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 11.5px;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--perf-accent-deep);
+  background: var(--glass-soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  transition: background .15s ease, transform .15s ease;
+}
+
+.combo-card-details-btn:hover{
+  background: color-mix(in oklab, var(--perf-accent-soft) 60%, var(--glass-soft));
+  transform: translateY(-1px);
+}
+
+.combo-card-details-btn .arrow{
+  display: inline-block;
+  transition: transform .2s ease;
+}
+
+/* MODAL */
+.combo-modal{
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.combo-modal.is-open{
+  display: flex;
+}
+
+.combo-modal-backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 20, 24, .55);
+  backdrop-filter: blur(2px);
+}
+
+.combo-modal-panel{
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: var(--glass-card, #fff);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(0,0,0,.28);
+  animation: comboModalIn .18s ease;
+}
+
+@keyframes comboModalIn{
+  from{ opacity: 0; transform: translateY(8px) scale(.98); }
+  to{ opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.combo-modal-close{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--glass-soft);
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.combo-modal-head{
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-right: 30px;
+}
+
+.combo-modal .section-badge{
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--link) 12%, transparent);
+  color: var(--link-strong);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.combo-modal .mod-tag{
+  display: inline-block;
+  margin-bottom: 2px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.combo-modal-head h3{
+  margin: 2px 0 0;
+  font-size: 18px;
+}
+
+.combo-modal-body{
+  margin-top: 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.combo-modal-table{
+  width: 100%;
+  min-width: 380px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.combo-modal-table th,
+.combo-modal-table td{
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.combo-modal-table th{
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.combo-modal-table tr.is-best td{
+  font-weight: 800;
+  color: var(--link-strong);
+}
+
+body.combo-modal-open{
+  overflow: hidden;
+}
+
+@media (max-width: 600px){
+  .combo-modal-panel{
+    padding: 20px 16px;
+    max-height: 80vh;
+  }
+  .combo-modal-table{
+    font-size: 12px;
+    min-width: 340px;
+  }
+}
+
+@media (max-width: 700px){
+  .combo-legend{
+    grid-template-columns: 1fr;
+  }
+  .combo-grid{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .combo-grid-card{ padding: 18px; }
+}
+
+@media (max-width: 420px){
+  .combo-grid{
+    grid-template-columns: 1fr;
+  }
+}
