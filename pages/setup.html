@@ -22,8 +22,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chapitre 5 — Setup | Wavest</title>
-  <link rel="icon" type="image/png" href="/assets/images/favicon.png?v=2">
-  <link rel="apple-touch-icon" href="/assets/images/favicon.png?v=2">
+  <link rel="icon" type="image/png" href="/assets/images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico?v=2">
   <meta name="description" content="Chapitre 5 — Setup : Fibonacci inversé, Pattern 4H et Ralentissement. Trois setups complets illustrés, règles, vidéos, et rappels. Gestion du risque et confirmations multi-UT.">
   <meta name="robots" content="noindex, nofollow" />
@@ -52,6 +52,16 @@
 </head>
 
 <body class="page-setup" data-i18n-title="pageTitle_setup">
+
+  <!-- === BARRE DE PROGRESSION DE LECTURE === -->
+  <div class="read-progress" aria-hidden="true"><div class="read-progress-fill" id="readProgressFill"></div></div>
+
+  <!-- === RAIL DE NAVIGATION (scrollspy, 1 point par setup) === -->
+  <nav class="stp-rail" aria-label="Navigation rapide entre les setups">
+    <a href="#fibonacci" class="stp-rail-dot" title="Fibonacci inversé" aria-label="Fibonacci inversé"></a>
+    <a href="#pattern4h" class="stp-rail-dot" title="Pattern 4H" aria-label="Pattern 4H"></a>
+    <a href="#ralentissement" class="stp-rail-dot" title="Ralentissement" aria-label="Ralentissement"></a>
+  </nav>
 
   <!-- HEADER -->
   <header class="site-header" role="banner" aria-label="En-tête du chapitre Setup">
@@ -236,6 +246,17 @@
       </div>
     </section>
 
+
+    <div class="stp-complete-card">
+      <div class="stp-complete-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"></path>
+        </svg>
+      </div>
+      <h3 class="stp-complete-title" data-i18n="setup_169">Setup Fibonacci inversé maîtrisé</h3>
+      <p class="stp-complete-text" data-i18n="setup_170">Tu maîtrises la structure complète : tendance, ZOI, entrée et gestion du risque. Place à la pratique.</p>
+    </div>
+
     <!-- ===================================
          SETUP 2 — PATTERN 4H
     ==================================== -->
@@ -409,6 +430,17 @@
       </div>
     </section>
 
+
+    <div class="stp-complete-card stp-complete--pattern">
+      <div class="stp-complete-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"></path>
+        </svg>
+      </div>
+      <h3 class="stp-complete-title" data-i18n="setup_171">Setup Pattern 4H maîtrisé</h3>
+      <p class="stp-complete-text" data-i18n="setup_172">Tendance, pattern, confirmations multi-UT : tu as toutes les clés du setup Pattern 4H. À toi de le repérer sur le marché.</p>
+    </div>
+
     <!-- ===================================
          SETUP 3 — RALENTISSEMENT
     ==================================== -->
@@ -569,6 +601,16 @@
   </div>
 </section>
 
+    <div class="stp-complete-card stp-complete--ral">
+      <div class="stp-complete-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"></path>
+        </svg>
+      </div>
+      <h3 class="stp-complete-title" data-i18n="setup_173">Setup Ralentissement maîtrisé</h3>
+      <p class="stp-complete-text" data-i18n="setup_174">Tu as vu les 7 parties du setup Ralentissement. Tu as maintenant les 3 setups complets de la méthode Wavest.</p>
+    </div>
+
     <!-- NAVIGATION -->
     <nav class="chapter-cta" aria-label="Navigation chapitres">
       <a href="/pages/money-management.html" class="btn btn-ghost" data-i18n="setup_160">← Chapitre précédent — Money Management</a>
@@ -684,6 +726,82 @@
     } else {
       init();
     }
+  })();
+  </script>
+
+  <!-- === PROGRESSION + RAIL DE NAVIGATION === -->
+  <script>
+  (function () {
+    "use strict";
+
+    var onReady = function (fn) {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", fn, { once: true });
+      } else fn();
+    };
+
+    onReady(function () {
+      (function initReadProgress() {
+        var fill = document.getElementById("readProgressFill");
+        if (!fill) return;
+        var update = function () {
+          var doc = document.documentElement;
+          var scrollTop = doc.scrollTop || document.body.scrollTop || 0;
+          var height = Math.max(doc.scrollHeight, document.body.scrollHeight) - doc.clientHeight;
+          var pct = height > 0 ? (scrollTop / height) * 100 : 0;
+          fill.style.width = pct + "%";
+        };
+        window.addEventListener("scroll", update, { passive: true });
+        document.addEventListener("scroll", update, { passive: true });
+        document.body.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update);
+        update();
+      })();
+
+      (function initRail() {
+        var rail = document.querySelector(".stp-rail");
+        if (!rail) return;
+
+        var ids = ["fibonacci", "pattern4h", "ralentissement"];
+        var links = {};
+        rail.querySelectorAll("a").forEach(function (a) {
+          var id = (a.getAttribute("href") || "").slice(1);
+          if (id) links[id] = a;
+        });
+
+        var sections = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+        if (!sections.length) return;
+
+        var updateActive = function () {
+          var refY = window.innerHeight * 0.4;
+          var current = null;
+          sections.forEach(function (s) {
+            var rect = s.getBoundingClientRect();
+            if (rect.top <= refY && (!current || rect.top > current.top)) {
+              current = { id: s.id, top: rect.top };
+            }
+          });
+          if (!current) current = { id: sections[0].id };
+          Object.keys(links).forEach(function (k) {
+            links[k].classList.toggle("active", k === current.id);
+          });
+        };
+
+        var ticking = false;
+        var onScroll = function () {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function () {
+            try { updateActive(); } catch (e) {} finally { ticking = false; }
+          });
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        document.addEventListener("scroll", onScroll, { passive: true });
+        document.body.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        updateActive();
+      })();
+    });
   })();
   </script>
 </body>

@@ -2259,8 +2259,8 @@
     "en": "Backtest today, perform tomorrow."
   },
   "analyseTechnique_217": {
-    "fr": "Ouvrir la feuille Google Sheets (Backtesting)",
-    "en": "Open the Google Sheet (Backtesting)"
+    "fr": "Accéder au Workspace Trading",
+    "en": "Access the Trading Workspace"
   },
   "analyseTechnique_232": {
     "fr": "Le classeur complet que j’utilise au quotidien, dupliqué en un clic dans ton propre Google Drive.",
@@ -5291,16 +5291,16 @@
     "en": "Every trade is an emotional test. Fear makes you exit too early. Greed makes you enter too late. Your goal is to observe your emotions without acting under their influence."
   },
   "psychologieDiscipline_16": {
-    "fr": "🩵 Observe tes réactions, pas seulement le marché.",
-    "en": "🩵 Observe your reactions, not just the market."
+    "fr": "Observe tes réactions, pas seulement le marché.",
+    "en": "Observe your reactions, not just the market."
   },
   "psychologieDiscipline_17": {
-    "fr": "🩵 Accepte la perte avant même d’entrer en position.",
-    "en": "🩵 Accept the loss before you even enter the position."
+    "fr": "Accepte la perte avant même d’entrer en position.",
+    "en": "Accept the loss before you even enter the position."
   },
   "psychologieDiscipline_18": {
-    "fr": "🩵 Ne cherche pas à avoir raison, cherche à être discipliné.",
-    "en": "🩵 Don't seek to be right, seek to be disciplined."
+    "fr": "Ne cherche pas à avoir raison, cherche à être discipliné.",
+    "en": "Don't seek to be right, seek to be disciplined."
   },
   "psychologieDiscipline_19": {
     "fr": "🎯 Discipline",
@@ -5315,16 +5315,16 @@
     "en": "Discipline is the key that turns a good plan into real results. Your emotions want adrenaline; your success requires rigor."
   },
   "psychologieDiscipline_22": {
-    "fr": "🩵 Suis ton plan, pas ton humeur.",
-    "en": "🩵 Follow your plan, not your mood."
+    "fr": "Suis ton plan, pas ton humeur.",
+    "en": "Follow your plan, not your mood."
   },
   "psychologieDiscipline_23": {
-    "fr": "🩵 Rappelle-toi : un setup 5★ ne garantit rien, il maximise tes chances.",
-    "en": "🩵 Remember: a 5★ setup guarantees nothing, it maximizes your odds."
+    "fr": "Rappelle-toi : un setup 5★ ne garantit rien, il maximise tes chances.",
+    "en": "Remember: a 5★ setup guarantees nothing, it maximizes your odds."
   },
   "psychologieDiscipline_24": {
-    "fr": "🩵 Tiens ton journal. Les chiffres ne mentent pas, toi si.",
-    "en": "🩵 Keep your journal. Numbers don't lie, you might."
+    "fr": "Tiens ton journal. Les chiffres ne mentent pas, toi si.",
+    "en": "Keep your journal. Numbers don't lie, you might."
   },
   "psychologieDiscipline_25": {
     "fr": "⏰ Routine mentale",
@@ -5339,16 +5339,16 @@
     "en": "The best traders don't react, they execute. Every morning, align your mindset with your method. Your routine is your anchor in the storm."
   },
   "psychologieDiscipline_28": {
-    "fr": "🩵 Commence ta session avec calme et clarté.",
-    "en": "🩵 Start your session calm and clear-headed."
+    "fr": "Commence ta session avec calme et clarté.",
+    "en": "Start your session calm and clear-headed."
   },
   "psychologieDiscipline_29": {
-    "fr": "🩵 Ferme ton graphique après ta décision.",
-    "en": "🩵 Close your chart after your decision."
+    "fr": "Ferme ton graphique après ta décision.",
+    "en": "Close your chart after your decision."
   },
   "psychologieDiscipline_30": {
-    "fr": "🩵 Coupe les notifications. Le marché mérite ton attention entière.",
-    "en": "🩵 Turn off notifications. The market deserves your full attention."
+    "fr": "Coupe les notifications. Le marché mérite ton attention entière.",
+    "en": "Turn off notifications. The market deserves your full attention."
   },
   "psychologieDiscipline_31": {
     "fr": "💪 Résilience",
@@ -5363,16 +5363,16 @@
     "en": "You will lose. Often. But every loss brings you closer to the winning version of yourself. The goal isn't to avoid the pain, but to turn it into experience."
   },
   "psychologieDiscipline_34": {
-    "fr": "🩵 Analyse sans te juger. Apprends, ajuste, avance.",
-    "en": "🩵 Analyze without judging yourself. Learn, adjust, move forward."
+    "fr": "Analyse sans te juger. Apprends, ajuste, avance.",
+    "en": "Analyze without judging yourself. Learn, adjust, move forward."
   },
   "psychologieDiscipline_35": {
-    "fr": "🩵 La constance bat le talent, chaque fois.",
-    "en": "🩵 Consistency beats talent, every time."
+    "fr": "La constance bat le talent, chaque fois.",
+    "en": "Consistency beats talent, every time."
   },
   "psychologieDiscipline_36": {
-    "fr": "🩵 Ne cherche pas la revanche, cherche la progression.",
-    "en": "🩵 Don't seek revenge, seek progress."
+    "fr": "Ne cherche pas la revanche, cherche la progression.",
+    "en": "Don't seek revenge, seek progress."
   },
   "psychologieDiscipline_37": {
     "fr": "⚠️ Erreurs fréquentes",
@@ -5383,16 +5383,16 @@
     "en": "Most people fail, not because of the market, but because of themselves."
   },
   "psychologieDiscipline_39": {
-    "fr": "🩵 Chercher à “se refaire” après une perte.",
-    "en": "🩵 Trying to \"win it back\" after a loss."
+    "fr": "Chercher à “se refaire” après une perte.",
+    "en": "Trying to \"win it back\" after a loss."
   },
   "psychologieDiscipline_40": {
-    "fr": "🩵 Doubler le risque pour “rattraper” un trade.",
-    "en": "🩵 Doubling the risk to \"make up for\" a trade."
+    "fr": "Doubler le risque pour “rattraper” un trade.",
+    "en": "Doubling the risk to \"make up for\" a trade."
   },
   "psychologieDiscipline_41": {
-    "fr": "🩵 Oublier que ne pas trader, c’est aussi trader.",
-    "en": "🩵 Forgetting that not trading is also trading."
+    "fr": "Oublier que ne pas trader, c’est aussi trader.",
+    "en": "Forgetting that not trading is also trading."
   },
   "psychologieDiscipline_42": {
     "fr": "👑 Mental de pro",
@@ -5407,16 +5407,16 @@
     "en": "The pro trader's mindset depends neither on their gains nor their losses. It depends on their ability to stay lucid. Being consistent is your true edge."
   },
   "psychologieDiscipline_45": {
-    "fr": "🩵 Maîtrise-toi, et le marché ne t’affectera plus.",
-    "en": "🩵 Master yourself, and the market will no longer affect you."
+    "fr": "Maîtrise-toi, et le marché ne t’affectera plus.",
+    "en": "Master yourself, and the market will no longer affect you."
   },
   "psychologieDiscipline_46": {
-    "fr": "🩵 Traite chaque trade comme une ligne de code : précis, neutre, logique.",
-    "en": "🩵 Treat every trade like a line of code: precise, neutral, logical."
+    "fr": "Traite chaque trade comme une ligne de code : précis, neutre, logique.",
+    "en": "Treat every trade like a line of code: precise, neutral, logical."
   },
   "psychologieDiscipline_47": {
-    "fr": "🩵 Garde ton ego hors du graphique.",
-    "en": "🩵 Keep your ego off the chart."
+    "fr": "Garde ton ego hors du graphique.",
+    "en": "Keep your ego off the chart."
   },
   "psychologieDiscipline_48": {
     "fr": "« Le marché n’a pas d’émotions. C’est toi qui en as. Et c’est la seule variable que tu peux maîtriser. »",
@@ -5485,6 +5485,14 @@
   "psychologieDiscipline_64": {
     "fr": "Contact",
     "en": "Contact"
+  },
+  "psychologieDiscipline_65": {
+    "fr": "Programme terminé",
+    "en": "Program complete"
+  },
+  "psychologieDiscipline_66": {
+    "fr": "Tu as parcouru les 6 chapitres. Tu as la méthode, les outils, et maintenant le mental. Il ne reste plus qu'à passer à l'action.",
+    "en": "You've made it through all 6 chapters. You have the method, the tools, and now the mindset. All that's left is to take action."
   },
   "psychologieDiscipline_12": {
     "fr": "<span aria-hidden=\"true\">🎥</span> Vidéo — Les clés mentales d’un trader rentable.",
@@ -6161,6 +6169,30 @@
   "setup_168": {
     "fr": "Contact",
     "en": "Contact"
+  },
+  "setup_169": {
+    "fr": "Setup Fibonacci inversé maîtrisé",
+    "en": "Reverse Fibonacci setup mastered"
+  },
+  "setup_170": {
+    "fr": "Tu maîtrises la structure complète : tendance, ZOI, entrée et gestion du risque. Place à la pratique.",
+    "en": "You've got the full structure down: trend, ZOI, entry and risk management. Time to practice."
+  },
+  "setup_171": {
+    "fr": "Setup Pattern 4H maîtrisé",
+    "en": "4H Pattern setup mastered"
+  },
+  "setup_172": {
+    "fr": "Tendance, pattern, confirmations multi-UT : tu as toutes les clés du setup Pattern 4H. À toi de le repérer sur le marché.",
+    "en": "Trend, pattern, multi-timeframe confirmations: you have every key to the 4H Pattern setup. Now go spot it on the market."
+  },
+  "setup_173": {
+    "fr": "Setup Ralentissement maîtrisé",
+    "en": "Slowdown setup mastered"
+  },
+  "setup_174": {
+    "fr": "Tu as vu les 7 parties du setup Ralentissement. Tu as maintenant les 3 setups complets de la méthode Wavest.",
+    "en": "You've seen all 7 parts of the Slowdown setup. You now have all 3 complete setups of the Wavest method."
   },
   "simulateurCroissance_1": {
     "fr": "Simulateur de croissance de capital",

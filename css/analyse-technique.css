@@ -782,3 +782,59 @@ a.example{
     max-height: 70vh;
   }
 }
+
+/* =========================================================
+   RAIL DE NAVIGATION (scrollspy) — Analyse technique
+========================================================= */
+.at-rail{
+  position: fixed;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 90;
+}
+.at-rail-dot{
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--muted);
+  opacity: .45;
+  border: 1px solid color-mix(in oklab, var(--text) 20%, transparent);
+  display: block;
+  transition: background .25s ease, transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+}
+.at-rail-dot:hover{
+  transform: scale(1.3);
+}
+.at-rail-dot.active{
+  background: var(--accent);
+  opacity: 1;
+  border-color: transparent;
+  transform: scale(1.35);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 25%, transparent);
+}
+@media (max-width: 1300px){
+  .at-rail{ display: none; }
+}
+
+/* =========================================================
+   BARRE DE PROGRESSION DE LECTURE — Analyse technique
+========================================================= */
+.read-progress{
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  z-index: 300;
+  pointer-events: none;
+}
+.read-progress-fill{
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--link-strong));
+  transition: width .12s linear;
+}

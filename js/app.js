@@ -383,7 +383,40 @@
 
       if (!wrap || !editBtn || !cancelBtn || !preview || !textarea || !count) return;
 
-      const KEY = "mv:coach-note:chap6";
+      const chapterSlug = wrap.closest("[data-chapter]")?.getAttribute("data-chapter")
+        || (document.querySelector("#coach-note[data-chapter]")?.getAttribute("data-chapter"))
+        || location.pathname.replace(/^.*\//, "").replace(/\.html$/, "")
+        || "chap6";
+      const KEY = "mv:coach-note:" + chapterSlug;
+      const AUTH_KEY = "mv:coach-auth";
+      const PASS_HASH = "d629ca133b6af70e4085ef4fb8651271e44725b6cf9e57091cb3e097a926b531";
+
+      const sha256Hex = async (text) => {
+        try {
+          const enc = new TextEncoder().encode(text);
+          const buf = await crypto.subtle.digest("SHA-256", enc);
+          return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+        } catch {
+          return null;
+        }
+      };
+
+      const isCoachAuthed = () => {
+        try { return localStorage.getItem(AUTH_KEY) === "1"; } catch { return false; }
+      };
+
+      const requestCoachAuth = async () => {
+        if (isCoachAuthed()) return true;
+        const entered = window.prompt("Mot de passe coach :");
+        if (entered === null) return false;
+        const hash = await sha256Hex(entered.trim());
+        if (hash && hash === PASS_HASH) {
+          try { localStorage.setItem(AUTH_KEY, "1"); } catch {}
+          return true;
+        }
+        window.alert("Mot de passe incorrect.");
+        return false;
+      };
 
       const escapeHtml = (str) =>
         String(str)
@@ -428,10 +461,15 @@
       }
       setCount();
 
-      editBtn.addEventListener("click", () => {
+      editBtn.addEventListener("click", async () => {
         const isOpen = !wrap.hidden;
-        if (isOpen) closeEditor();
-        else openEditor();
+        if (isOpen) {
+          closeEditor();
+          return;
+        }
+        const ok = await requestCoachAuth();
+        if (!ok) return;
+        openEditor();
       });
 
       cancelBtn.addEventListener("click", () => {

@@ -22,8 +22,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chapitre 6 — Psychologie & Discipline</title>
-  <link rel="icon" type="image/png" href="/assets/images/favicon.png?v=2">
-  <link rel="apple-touch-icon" href="/assets/images/favicon.png?v=2">
+  <link rel="icon" type="image/png" href="/assets/images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico?v=2">
   <meta name="description" content="Chapitre 6 : psychologie et discipline — maîtriser ses émotions, renforcer sa rigueur mentale et développer un mental de trader pro.">
   <meta name="robots" content="noindex, nofollow" />
@@ -35,6 +35,19 @@
   <meta name="theme-color" content="#0f0f10" media="(prefers-color-scheme: dark)">
 </head>
 <body class="page-psy" data-header-height="90" data-i18n-title="pageTitle_psychologieDiscipline">
+
+  <!-- === BARRE DE PROGRESSION DE LECTURE === -->
+  <div class="read-progress" aria-hidden="true"><div class="read-progress-fill" id="readProgressFill"></div></div>
+
+  <!-- === RAIL DE NAVIGATION (scrollspy) === -->
+  <nav class="psy-rail" aria-label="Navigation rapide entre les sections">
+    <a href="#emotions" class="psy-rail-dot"></a>
+    <a href="#discipline" class="psy-rail-dot"></a>
+    <a href="#routine" class="psy-rail-dot"></a>
+    <a href="#resilience" class="psy-rail-dot"></a>
+    <a href="#erreurs" class="psy-rail-dot"></a>
+    <a href="#mental" class="psy-rail-dot"></a>
+  </nav>
 
   <!-- === HEADER === -->
   <header class="site-header">
@@ -85,100 +98,104 @@
       </figure>
     </section>
 
+    <div class="psy-journey">
+
     <!-- === ÉMOTIONS === -->
     <section id="emotions" class="reveal">
-      <header class="section-head">
+      <header class="section-head" data-step="01">
         <h2 data-i18n="psychologieDiscipline_13">🧠 Émotions</h2>
         <p class="section-sub" data-i18n="psychologieDiscipline_14">Tu ne contrôles pas le marché. Mais tu peux te contrôler, toi.</p>
       </header>
       <div class="rules-block">
         <p data-i18n="psychologieDiscipline_15">Chaque trade est une épreuve émotionnelle. La peur te fait sortir trop tôt. La cupidité te fait entrer trop tard. Ton objectif, c’est d’observer tes émotions sans agir sous leur influence.</p>
         <ul class="rules">
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_16">🩵 Observe tes réactions, pas seulement le marché.</p></li>
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_17">🩵 Accepte la perte avant même d’entrer en position.</p></li>
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_18">🩵 Ne cherche pas à avoir raison, cherche à être discipliné.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_16">Observe tes réactions, pas seulement le marché.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_17">Accepte la perte avant même d’entrer en position.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_18">Ne cherche pas à avoir raison, cherche à être discipliné.</p></li>
         </ul>
       </div>
     </section>
 
     <!-- === DISCIPLINE === -->
     <section id="discipline" class="reveal">
-      <header class="section-head">
+      <header class="section-head" data-step="02">
         <h2 data-i18n="psychologieDiscipline_19">🎯 Discipline</h2>
         <p class="section-sub" data-i18n="psychologieDiscipline_20">La discipline, c’est faire ce que tu dois faire, même quand tu n’en as pas envie.</p>
       </header>
       <div class="rules-block">
         <p data-i18n="psychologieDiscipline_21">La discipline, c’est la clé qui transforme un bon plan en résultats réels. Tes émotions veulent de l’adrénaline, ton succès demande de la rigueur.</p>
         <ul class="rules">
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_22">🩵 Suis ton plan, pas ton humeur.</p></li>
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_23">🩵 Rappelle-toi : un setup 5★ ne garantit rien, il maximise tes chances.</p></li>
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_24">🩵 Tiens ton journal. Les chiffres ne mentent pas, toi si.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_22">Suis ton plan, pas ton humeur.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_23">Rappelle-toi : un setup 5★ ne garantit rien, il maximise tes chances.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_24">Tiens ton journal. Les chiffres ne mentent pas, toi si.</p></li>
         </ul>
       </div>
     </section>
 
     <!-- === ROUTINE MENTALE === -->
     <section id="routine" class="reveal">
-      <header class="section-head">
+      <header class="section-head" data-step="03">
         <h2 data-i18n="psychologieDiscipline_25">⏰ Routine mentale</h2>
         <p class="section-sub" data-i18n="psychologieDiscipline_26">Ton esprit doit être aussi préparé que ton graphique.</p>
       </header>
       <div class="rules-block">
         <p data-i18n="psychologieDiscipline_27">Les meilleurs traders ne réagissent pas, ils exécutent. Chaque matin, aligne ton mental avec ta méthode. Ta routine, c’est ton ancrage dans la tempête.</p>
         <ul class="rules">
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_28">🩵 Commence ta session avec calme et clarté.</p></li>
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_29">🩵 Ferme ton graphique après ta décision.</p></li>
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_30">🩵 Coupe les notifications. Le marché mérite ton attention entière.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_28">Commence ta session avec calme et clarté.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_29">Ferme ton graphique après ta décision.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_30">Coupe les notifications. Le marché mérite ton attention entière.</p></li>
         </ul>
       </div>
     </section>
 
     <!-- === RÉSILIENCE === -->
     <section id="resilience" class="reveal">
-      <header class="section-head">
+      <header class="section-head" data-step="04">
         <h2 data-i18n="psychologieDiscipline_31">💪 Résilience</h2>
         <p class="section-sub" data-i18n="psychologieDiscipline_32">Ce n’est pas le marché qui te teste, c’est la vie qui te forge.</p>
       </header>
       <div class="rules-block">
         <p data-i18n="psychologieDiscipline_33">Tu vas perdre. Souvent. Mais chaque perte te rapproche de la version de toi qui gagne. Le but n’est pas d’éviter la douleur, mais de la transformer en expérience.</p>
         <ul class="rules">
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_34">🩵 Analyse sans te juger. Apprends, ajuste, avance.</p></li>
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_35">🩵 La constance bat le talent, chaque fois.</p></li>
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_36">🩵 Ne cherche pas la revanche, cherche la progression.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_34">Analyse sans te juger. Apprends, ajuste, avance.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_35">La constance bat le talent, chaque fois.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_36">Ne cherche pas la revanche, cherche la progression.</p></li>
         </ul>
       </div>
     </section>
 
     <!-- === ERREURS FRÉQUENTES === -->
     <section id="erreurs" class="reveal">
-      <header class="section-head">
+      <header class="section-head" data-step="05">
         <h2 data-i18n="psychologieDiscipline_37">⚠️ Erreurs fréquentes</h2>
         <p class="section-sub" data-i18n="psychologieDiscipline_38">La plupart échouent, non pas à cause du marché, mais à cause d’eux-mêmes.</p>
       </header>
       <div class="rules-block">
         <ul class="rules">
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_39">🩵 Chercher à “se refaire” après une perte.</p></li>
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_40">🩵 Doubler le risque pour “rattraper” un trade.</p></li>
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_41">🩵 Oublier que ne pas trader, c’est aussi trader.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_39">Chercher à “se refaire” après une perte.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_40">Doubler le risque pour “rattraper” un trade.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_41">Oublier que ne pas trader, c’est aussi trader.</p></li>
         </ul>
       </div>
     </section>
 
     <!-- === MENTAL DE PRO === -->
     <section id="mental" class="reveal">
-      <header class="section-head">
+      <header class="section-head" data-step="06">
         <h2 data-i18n="psychologieDiscipline_42">👑 Mental de pro</h2>
         <p class="section-sub" data-i18n="psychologieDiscipline_43">Tu n’es plus un joueur. Tu es un opérateur rationnel dans un environnement incertain.</p>
       </header>
       <div class="rules-block">
         <p data-i18n="psychologieDiscipline_44">Le mental du trader pro ne dépend ni de ses gains, ni de ses pertes. Il dépend de sa capacité à rester lucide. Être constant, c’est ton vrai edge.</p>
         <ul class="rules">
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_45">🩵 Maîtrise-toi, et le marché ne t’affectera plus.</p></li>
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_46">🩵 Traite chaque trade comme une ligne de code : précis, neutre, logique.</p></li>
-          <li><p class="rule-text" data-i18n="psychologieDiscipline_47">🩵 Garde ton ego hors du graphique.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_45">Maîtrise-toi, et le marché ne t’affectera plus.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_46">Traite chaque trade comme une ligne de code : précis, neutre, logique.</p></li>
+          <li><p class="rule-text" data-i18n="psychologieDiscipline_47">Garde ton ego hors du graphique.</p></li>
         </ul>
       </div>
     </section>
+
+    </div><!-- /.psy-journey -->
 
     <!-- === CITATION INSPIRANTE === -->
     <section id="citation" class="reveal">
@@ -197,8 +214,22 @@
       </ul>
     </section>
 
+    <!-- === PROGRAMME TERMINÉ === -->
+    <section id="programme-termine" class="reveal">
+      <div class="psy-complete-card">
+        <div class="psy-complete-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4Z"></path>
+            <path d="M7 5H4a2 2 0 0 0 0 4c.6 1.4 1.5 2.4 2.5 3M17 5h3a2 2 0 0 1 0 4c-.6 1.4-1.5 2.4-2.5 3"></path>
+          </svg>
+        </div>
+        <h3 class="psy-complete-title" data-i18n="psychologieDiscipline_65">Programme terminé</h3>
+        <p class="psy-complete-text" data-i18n="psychologieDiscipline_66">Tu as parcouru les 6 chapitres. Tu as la méthode, les outils, et maintenant le mental. Il ne reste plus qu'à passer à l'action.</p>
+      </div>
+    </section>
+
     <!-- === NOTE DU COACH === -->
-    <section id="coach-note" class="reveal" aria-labelledby="coachNoteTitle">
+    <section id="coach-note" class="reveal" aria-labelledby="coachNoteTitle" data-chapter="psychologie-discipline">
       <div class="coach-card">
         <header class="coach-head">
           <h2 id="coachNoteTitle" data-i18n="psychologieDiscipline_53">Note du coach</h2>
@@ -255,6 +286,131 @@
 
   <script src="../js/app.js" defer></script>
   <script src="../js/i18n.js?v=1" defer></script>
+
+  <!-- === SCRIPTS SPÉCIFIQUES CHAPITRE PSYCHOLOGIE & DISCIPLINE === -->
+  <script>
+    (function () {
+      "use strict";
+
+      var onReady = function (fn) {
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", fn, { once: true });
+        } else fn();
+      };
+
+      onReady(function () {
+        /* ---------- Barre de progression de lecture ---------- */
+        (function initReadProgress() {
+          var fill = document.getElementById("readProgressFill");
+          if (!fill) return;
+          var update = function () {
+            var doc = document.documentElement;
+            var scrollTop = doc.scrollTop || document.body.scrollTop || 0;
+            var height = Math.max(doc.scrollHeight, document.body.scrollHeight) - doc.clientHeight;
+            var pct = height > 0 ? (scrollTop / height) * 100 : 0;
+            fill.style.width = pct + "%";
+          };
+          window.addEventListener("scroll", update, { passive: true });
+          document.addEventListener("scroll", update, { passive: true });
+          document.body.addEventListener("scroll", update, { passive: true });
+          window.addEventListener("resize", update);
+          update();
+        })();
+
+        /* ---------- Rail de navigation (scrollspy) ---------- */
+        (function initRail() {
+          var rail = document.querySelector(".psy-rail");
+          if (!rail) return;
+
+          var ids = ["emotions", "discipline", "routine", "resilience", "erreurs", "mental"];
+          var links = {};
+          rail.querySelectorAll("a").forEach(function (a) {
+            var id = (a.getAttribute("href") || "").slice(1);
+            if (id) links[id] = a;
+          });
+
+          var syncLabels = function () {
+            ids.forEach(function (id) {
+              var link = links[id];
+              if (!link) return;
+              var match = document.querySelector('.sub-list li a[href="#' + id + '"]');
+              if (match) {
+                var label = match.textContent.trim();
+                link.setAttribute("aria-label", label);
+                link.setAttribute("title", label);
+              }
+            });
+          };
+          syncLabels();
+
+          var toggle = document.getElementById("langToggle");
+          if (toggle) toggle.addEventListener("click", function () { setTimeout(syncLabels, 60); });
+
+          var sections = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+          if (!sections.length) return;
+
+          var updateActive = function () {
+            var refY = window.innerHeight * 0.4;
+            var current = null;
+            sections.forEach(function (s) {
+              var rect = s.getBoundingClientRect();
+              if (rect.top <= refY && (!current || rect.top > current.top)) {
+                current = { id: s.id, top: rect.top };
+              }
+            });
+            if (!current) current = { id: sections[0].id };
+            Object.keys(links).forEach(function (k) {
+              links[k].classList.toggle("active", k === current.id);
+            });
+          };
+
+          var ticking = false;
+          var onScroll = function () {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(function () {
+              try { updateActive(); } catch (e) {} finally { ticking = false; }
+            });
+          };
+          window.addEventListener("scroll", onScroll, { passive: true });
+          document.addEventListener("scroll", onScroll, { passive: true });
+          document.body.addEventListener("scroll", onScroll, { passive: true });
+          window.addEventListener("resize", onScroll);
+          updateActive();
+        })();
+
+        /* ---------- Cascade des listes de règles ---------- */
+        (function initStagger() {
+          try {
+            if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+            if (!("IntersectionObserver" in window)) return;
+
+            var lists = document.querySelectorAll(".psy-journey .rules-block .rules");
+            if (!lists.length) return;
+
+            lists.forEach(function (ul) {
+              Array.prototype.forEach.call(ul.children, function (li) {
+                li.classList.add("stagger-item");
+              });
+            });
+
+            var io = new IntersectionObserver(
+              function (entries) {
+                entries.forEach(function (entry) {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add("stagger-in");
+                    io.unobserve(entry.target);
+                  }
+                });
+              },
+              { threshold: 0.25, rootMargin: "0px 0px -10% 0px" }
+            );
+            lists.forEach(function (ul) { io.observe(ul); });
+          } catch (e) {}
+        })();
+      });
+    })();
+  </script>
 </body>
 </html>
 

@@ -22,8 +22,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chapitre 3 — Analyse technique</title>
-  <link rel="icon" type="image/png" href="/assets/images/favicon.png?v=2">
-  <link rel="apple-touch-icon" href="/assets/images/favicon.png?v=2">
+  <link rel="icon" type="image/png" href="/assets/images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico?v=2">
   <meta name="description" content="Chapitre 3 : structurer son analyse technique avec tendance, patterns, weekly, entrées 4H, backtesting et setup." />
   <meta name="robots" content="noindex, nofollow" />
@@ -41,6 +41,19 @@
 </head>
 
 <body class="page-analyse" data-header-height="90" data-i18n-title="pageTitle_analyseTechnique">
+
+  <!-- === BARRE DE PROGRESSION DE LECTURE === -->
+  <div class="read-progress" aria-hidden="true"><div class="read-progress-fill" id="readProgressFill"></div></div>
+
+  <!-- === RAIL DE NAVIGATION (scrollspy) === -->
+  <nav class="at-rail" aria-label="Navigation rapide entre les sections">
+    <a href="#tendance" class="at-rail-dot"></a>
+    <a href="#pattern" class="at-rail-dot"></a>
+    <a href="#weekly" class="at-rail-dot"></a>
+    <a href="#entree4h" class="at-rail-dot"></a>
+    <a href="#pattern-technique" class="at-rail-dot"></a>
+    <a href="#backtesting" class="at-rail-dot"></a>
+  </nav>
 
   <!-- Sprite SVG (icônes réutilisables) -->
   <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
@@ -646,14 +659,14 @@
            href="https://docs.google.com/spreadsheets/d/1H90w1JHG0bonCXjFuaXH0MhARKaqZFsgtSQAiLitjT8/copy"
            target="_blank" rel="noopener noreferrer">
           <img src="https://www.gstatic.com/images/branding/product/1x/sheets_48dp.png" alt="" class="sheets-logo" width="22" height="22" loading="lazy" decoding="async">
-          <span data-i18n="analyseTechnique_217">Ouvrir la feuille Google Sheets (Backtesting)</span>
+          <span data-i18n="analyseTechnique_217">Accéder au Workspace Trading</span>
           <span class="gs-premium-arrow" aria-hidden="true">→</span>
         </a>
       </div>
     </section>
 
     <!-- NOTE DU COACH -->
-    <section id="coach-note" class="reveal" aria-labelledby="coachNoteTitle">
+    <section id="coach-note" class="reveal" aria-labelledby="coachNoteTitle" data-chapter="analyse-technique">
       <div class="coach-card">
         <header class="coach-head">
           <h2 id="coachNoteTitle" data-i18n="analyseTechnique_218">Note du coach</h2>
@@ -798,6 +811,97 @@
     } else {
       init();
     }
+  })();
+  </script>
+
+  <!-- === RAIL DE NAVIGATION SCROLLSPY === -->
+  <script>
+  (function () {
+    "use strict";
+
+    var onReady = function (fn) {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", fn, { once: true });
+      } else fn();
+    };
+
+    onReady(function () {
+      (function initReadProgress() {
+        var fill = document.getElementById("readProgressFill");
+        if (!fill) return;
+        var update = function () {
+          var doc = document.documentElement;
+          var scrollTop = doc.scrollTop || document.body.scrollTop || 0;
+          var height = Math.max(doc.scrollHeight, document.body.scrollHeight) - doc.clientHeight;
+          var pct = height > 0 ? (scrollTop / height) * 100 : 0;
+          fill.style.width = pct + "%";
+        };
+        window.addEventListener("scroll", update, { passive: true });
+        document.addEventListener("scroll", update, { passive: true });
+        document.body.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update);
+        update();
+      })();
+
+      var rail = document.querySelector(".at-rail");
+      if (!rail) return;
+
+      var ids = ["tendance", "pattern", "weekly", "entree4h", "pattern-technique", "backtesting"];
+      var links = {};
+      rail.querySelectorAll("a").forEach(function (a) {
+        var id = (a.getAttribute("href") || "").slice(1);
+        if (id) links[id] = a;
+      });
+
+      var syncLabels = function () {
+        ids.forEach(function (id) {
+          var link = links[id];
+          if (!link) return;
+          var match = document.querySelector('.sub-list li a[href="#' + id + '"]');
+          if (match) {
+            var label = match.textContent.trim();
+            link.setAttribute("aria-label", label);
+            link.setAttribute("title", label);
+          }
+        });
+      };
+      syncLabels();
+
+      var toggle = document.getElementById("langToggle");
+      if (toggle) toggle.addEventListener("click", function () { setTimeout(syncLabels, 60); });
+
+      var sections = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+      if (!sections.length) return;
+
+      var updateActive = function () {
+        var refY = window.innerHeight * 0.4;
+        var current = null;
+        sections.forEach(function (s) {
+          var rect = s.getBoundingClientRect();
+          if (rect.top <= refY && (!current || rect.top > current.top)) {
+            current = { id: s.id, top: rect.top };
+          }
+        });
+        if (!current) current = { id: sections[0].id };
+        Object.keys(links).forEach(function (k) {
+          links[k].classList.toggle("active", k === current.id);
+        });
+      };
+
+      var ticking = false;
+      var onScroll = function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          try { updateActive(); } catch (e) {} finally { ticking = false; }
+        });
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      document.addEventListener("scroll", onScroll, { passive: true });
+      document.body.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+      updateActive();
+    });
   })();
   </script>
 </body>

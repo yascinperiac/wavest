@@ -239,6 +239,30 @@ body.page-setup section{
 .stp-one-per-line .stp-grid{
   grid-template-columns: 1fr;
   gap: 18px;
+  position: relative;
+}
+
+/* ---- Ligne de parcours reliant les numéros de parties ---- */
+.stp-one-per-line .stp-grid::before{
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 34px;
+  bottom: 34px;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--primary), var(--accent));
+  opacity: .7;
+  z-index: 0;
+}
+#pat-parts .stp-grid::before{
+  background: linear-gradient(180deg, #8b5cf6, #6d28d9);
+}
+#ral-parts .stp-grid::before{
+  background: linear-gradient(180deg, #f5a524, #e8871e);
+}
+@media (max-width: 640px){
+  .stp-one-per-line .stp-grid::before{ left: 22px; }
 }
 
 .stp-one-per-line .stp-card{
@@ -337,12 +361,9 @@ body.page-setup section{
   border-radius: 16px;
   overflow: hidden;
 
-  background: var(--card-bg);
-  border: 1px solid var(--card-brd);
-  box-shadow: var(--card-shadow);
-
-  backdrop-filter: var(--bf-card);
-  -webkit-backdrop-filter: var(--bf-card);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 
   width: 100%;
 }
@@ -350,6 +371,10 @@ body.page-setup section{
   position: relative;
   aspect-ratio: 16/9;
   background: var(--media-bg);
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 6px 20px rgba(0,0,0,.12);
+  border-radius: 16px;
+  overflow: hidden;
 }
 .video-caption{
   margin: 10px 12px 14px;
@@ -542,3 +567,187 @@ html.js .reveal.visible{
 body.page-setup .site-header{
   position: static !important;
 }
+/* =========================================================
+   AJOUTS — Progression, rail scrollspy, badges numérotés,
+   indicateur zoom, cartes "Setup validé"
+========================================================= */
+
+/* ---- Barre de progression de lecture ---- */
+.read-progress{
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  z-index: 300;
+  pointer-events: none;
+}
+.read-progress-fill{
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width .12s linear;
+}
+
+/* ---- Rail de navigation (scrollspy, 1 point par setup) ---- */
+.stp-rail{
+  position: fixed;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 90;
+}
+.stp-rail-dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--muted);
+  opacity: .45;
+  border: 1px solid color-mix(in oklab, var(--text) 20%, transparent);
+  display: block;
+  transition: background .25s ease, transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+}
+.stp-rail-dot:hover{ transform: scale(1.3); }
+.stp-rail-dot.active{
+  background: var(--primary);
+  opacity: 1;
+  border-color: transparent;
+  transform: scale(1.35);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 25%, transparent);
+}
+.stp-rail-dot[href="#pattern4h"].active{
+  background: #8b5cf6;
+  box-shadow: 0 0 0 4px rgba(139,92,246,.25);
+}
+.stp-rail-dot[href="#ralentissement"].active{
+  background: #f5a524;
+  box-shadow: 0 0 0 4px rgba(245,165,36,.25);
+}
+@media (max-width: 1300px){
+  .stp-rail{ display: none; }
+}
+
+/* ---- Badges numérotés sur chaque "Partie N" ---- */
+.stp-grid{ counter-reset: stp; }
+.stp-card{
+  counter-increment: stp;
+  position: relative;
+}
+.stp-card::before{
+  content: counter(stp);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  box-shadow: 0 4px 10px color-mix(in oklab, var(--primary) 35%, transparent);
+  pointer-events: none;
+}
+
+/* ---- Identité couleur par setup ---- */
+#pat-parts .stp-card::before{
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  box-shadow: 0 4px 10px rgba(139,92,246,.35);
+}
+#ral-parts .stp-card::before{
+  background: linear-gradient(135deg, #f5a524, #e8871e);
+  box-shadow: 0 4px 10px rgba(245,165,36,.35);
+}
+#patVideoTitle, #patTitle, #patRememberTitle{
+  background: linear-gradient(90deg, #8b5cf6, #6d28d9);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+#ralVideoTitle, #ralTitle{
+  background: linear-gradient(90deg, #f5a524, #e8871e);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* ---- Indicateur zoom au survol des captures ---- */
+.stp-thumb::before{
+  content: "🔍";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%,-50%) scale(.7);
+  border-radius: 50%;
+  background: rgba(0,0,0,.55);
+  color: #fff;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .25s ease, transform .25s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+@media (hover:hover){
+  .stp-thumb:hover::before{
+    opacity: 1;
+    transform: translate(-50%,-50%) scale(1);
+  }
+}
+
+/* ---- Cartes "Setup validé" ---- */
+.stp-complete-card{
+  max-width: 640px;
+  margin: 40px auto 50px;
+  text-align: center;
+  padding: 30px 26px;
+  border-radius: var(--r-lg, 18px);
+  background: var(--card-bg);
+  border: 1px solid color-mix(in oklab, var(--primary) 35%, var(--card-brd));
+  box-shadow: 0 10px 26px color-mix(in oklab, var(--primary) 14%, transparent), var(--card-shadow);
+  backdrop-filter: var(--bf-card);
+  -webkit-backdrop-filter: var(--bf-card);
+}
+.stp-complete-icon{
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: 0 6px 14px color-mix(in oklab, var(--primary) 35%, transparent);
+}
+.stp-complete-icon svg{ width: 22px; height: 22px; }
+.stp-complete-title{
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+}
+.stp-complete-text{
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--setup-ink, var(--text));
+}
+.stp-complete--pattern .stp-complete-icon{ background: linear-gradient(135deg, #8b5cf6, #6d28d9); box-shadow: 0 6px 14px rgba(139,92,246,.35); }
+.stp-complete--pattern{ border-color: color-mix(in oklab, #8b5cf6 35%, var(--card-brd)); box-shadow: 0 10px 26px rgba(139,92,246,.14), var(--card-shadow); }
+.stp-complete--pattern .stp-complete-title{ background: linear-gradient(90deg, #8b5cf6, #6d28d9); -webkit-background-clip: text; background-clip: text; }
+
+.stp-complete--ral .stp-complete-icon{ background: linear-gradient(135deg, #f5a524, #e8871e); box-shadow: 0 6px 14px rgba(245,165,36,.35); }
+.stp-complete--ral{ border-color: color-mix(in oklab, #f5a524 35%, var(--card-brd)); box-shadow: 0 10px 26px rgba(245,165,36,.14), var(--card-shadow); }
+.stp-complete--ral .stp-complete-title{ background: linear-gradient(90deg, #f5a524, #e8871e); -webkit-background-clip: text; background-clip: text; }
