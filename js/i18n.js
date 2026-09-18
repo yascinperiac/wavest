@@ -287,12 +287,12 @@
     "en": "Forex trading course: how to choose the right one"
   },
   "callCtaTitle": {
-    "fr": "Besoin d'un vrai coaching ? Réserve une séance.",
-    "en": "Need real coaching? Book a session."
+    "fr": "Réserver un coaching individuel",
+    "en": "Book a one-on-one coaching session"
   },
   "callCtaBtn": {
-    "fr": "Réserver →",
-    "en": "Book →"
+    "fr": "Voir mes disponibilités →",
+    "en": "See my availability →"
   },
   "cgv_1": {
     "fr": "Conditions Générales de Vente (CGV)",
