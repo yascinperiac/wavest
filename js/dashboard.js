@@ -27,6 +27,9 @@
   const dashContent = document.getElementById("dashContent");
   const dashConnectedAs = document.getElementById("dashConnectedAs");
   const dashChangeSheetBtn = document.getElementById("dashChangeSheetBtn");
+  const dashPrivacyToggle = document.getElementById("dashPrivacyToggle");
+  const dashPrivacyLabel = document.getElementById("dashPrivacyLabel");
+  const dashAppRoot = document.querySelector(".dash-app");
 
   const statTotal = document.getElementById("statTotal");
   const statWinrate = document.getElementById("statWinrate");
@@ -574,9 +577,11 @@
     if (!dashEdgeRadar) return;
     const svgNS = "http://www.w3.org/2000/svg";
     dashEdgeRadar.innerHTML = "";
-    // Canevas plus large que le radar lui-même : les libellés ont besoin
-    // de marge de part et d'autre pour ne pas être coupés par le bord.
-    dashEdgeRadar.setAttribute("viewBox", "0 0 260 260");
+    // Canevas nettement plus large que le radar lui-même : les libellés
+    // ont besoin de marge de part et d'autre pour ne jamais être coupés
+    // par le bord, avec de la réserve pour la vraie police du site
+    // (plus large que la police de test).
+    dashEdgeRadar.setAttribute("viewBox", "0 0 300 300");
 
     const addEl = (parent, tag, attrs) => {
       const el = document.createElementNS(svgNS, tag);
@@ -585,9 +590,9 @@
       return el;
     };
 
-    const cx = 130;
-    const cy = 130;
-    const maxR = 78;
+    const cx = 150;
+    const cy = 150;
+    const maxR = 88;
     const count = axes.length;
     const angleFor = (i) => -Math.PI / 2 + (i * 2 * Math.PI) / count;
     const pointAt = (i, r) => {
@@ -1469,6 +1474,48 @@
   }
   function safeRemoveLS(k) {
     try { localStorage.removeItem(k); } catch {}
+  }
+
+  /* ---------- Confidentialité : masquer les données à l'écran ---------- */
+
+  const PRIVACY_KEY = "wavest-dashboard-privacy";
+
+  function getLang() {
+    return (window.WavestI18n && window.WavestI18n.getLang) ? window.WavestI18n.getLang() : "fr";
+  }
+
+  function setPrivacyMode(on) {
+    if (dashAppRoot) dashAppRoot.classList.toggle("privacy-on", on);
+    if (dashPrivacyToggle) dashPrivacyToggle.classList.toggle("is-active", on);
+    if (dashPrivacyToggle) dashPrivacyToggle.setAttribute("aria-pressed", on ? "true" : "false");
+    if (dashPrivacyLabel) {
+      const lang = getLang();
+      dashPrivacyLabel.textContent = on
+        ? (lang === "en" ? "Show data" : "Afficher les données")
+        : (lang === "en" ? "Hide data" : "Masquer les données");
+    }
+    safeSetLS(PRIVACY_KEY, on ? "1" : "0");
+  }
+
+  if (dashPrivacyToggle) {
+    dashPrivacyToggle.addEventListener("click", () => {
+      const isOn = dashAppRoot ? dashAppRoot.classList.contains("privacy-on") : false;
+      setPrivacyMode(!isOn);
+    });
+    setPrivacyMode(safeGetLS(PRIVACY_KEY) === "1");
+
+    // Le libellé masquer/afficher n'est pas dans le dictionnaire i18n
+    // (il dépend de l'état, pas juste de la langue) : on le resynchronise
+    // manuellement si l'utilisateur change de langue en cours de route.
+    const langToggleBtn = document.getElementById("langToggle");
+    if (langToggleBtn) {
+      langToggleBtn.addEventListener("click", () => {
+        setTimeout(() => {
+          const isOn = dashAppRoot ? dashAppRoot.classList.contains("privacy-on") : false;
+          setPrivacyMode(isOn);
+        }, 0);
+      });
+    }
   }
 
   dashConnectBtn.addEventListener("click", () => {

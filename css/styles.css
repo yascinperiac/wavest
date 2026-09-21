@@ -831,15 +831,6 @@ body.dark .acc-btn:hover{background:rgba(168,205,240,.08)}
   transform:rotate(-45deg);
 }
 
-.tools-dot{
-  display:inline-block;
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:#3f8f81;
-  margin-right:10px;
-  vertical-align:middle;
-}
 .acc-btn[aria-expanded="true"] .chev{transform:rotate(45deg)}
 
 .acc-panel{padding:0 24px 20px}

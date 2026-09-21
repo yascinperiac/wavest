@@ -4398,6 +4398,10 @@
     "fr": "Ton Edge Score",
     "en": "Your Edge Score"
   },
+  "dashboard_53": {
+    "fr": "Masquer les données",
+    "en": "Hide data"
+  },
   "fondation_1": {
     "fr": "Chapitre 1 — Fondation",
     "en": "Chapter 1 — Foundation"

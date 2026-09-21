@@ -104,25 +104,46 @@
             <button id="dashChangeSheetBtn" class="btn-ghost dash-change-btn" type="button" data-i18n="dashboard_16">Changer de Sheet</button>
           </div>
 
+          <!-- CONFIDENTIALITÉ -->
+          <div class="dash-privacy-bar">
+            <button id="dashPrivacyToggle" class="dash-privacy-btn" type="button" aria-pressed="false">
+              <span class="dash-privacy-btn__icon" aria-hidden="true">
+                <svg class="dash-privacy-icon-eye" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg class="dash-privacy-icon-eye-off" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a20.3 20.3 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a20.3 20.3 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </span>
+              <span id="dashPrivacyLabel" class="dash-privacy-btn__label" data-i18n="dashboard_53">Masquer les données</span>
+            </button>
+          </div>
+
           <!-- STATS -->
           <section class="dash-stats-grid dash-stats-grid--v2">
             <div class="dash-stat-card dash-stat-card--trades">
               <span class="dash-stat-label" data-i18n="dashboard_17">Trades</span>
-              <strong id="statTotal">-</strong>
+              <div class="dash-priv-mask">
+                <strong id="statTotal">-</strong>
+              </div>
             </div>
 
             <div class="dash-stat-card dash-stat-card--pnl">
               <span class="dash-stat-label" data-i18n="dashboard_19">P&amp;L total</span>
-              <strong id="statTotalPnl">-</strong>
-              <span class="dash-stat-sub">
-                <span data-i18n="dashboard_20">Meilleur jour</span> <strong id="statBestDay">-</strong>
-                · <span data-i18n="dashboard_21">Pire</span> <strong id="statWorstDay">-</strong>
-              </span>
+              <div class="dash-priv-mask">
+                <strong id="statTotalPnl">-</strong>
+                <span class="dash-stat-sub">
+                  <span data-i18n="dashboard_20">Meilleur jour</span> <strong id="statBestDay">-</strong>
+                  · <span data-i18n="dashboard_21">Pire</span> <strong id="statWorstDay">-</strong>
+                </span>
+              </div>
             </div>
 
             <div class="dash-stat-card dash-stat-card--arc">
               <span class="dash-stat-label" data-i18n="dashboard_18">Winrate</span>
-              <div class="dash-stat-arc-row">
+              <div class="dash-stat-arc-row dash-priv-mask">
                 <svg id="statWinrateArc" class="dash-stat-arc" viewBox="0 0 64 64"></svg>
                 <div class="dash-stat-arc-value">
                   <strong id="statWinrate">-</strong>
@@ -133,7 +154,7 @@
 
             <div class="dash-stat-card dash-stat-card--ring">
               <span class="dash-stat-label" data-i18n="dashboard_24">Profit factor</span>
-              <div class="dash-stat-ring-row">
+              <div class="dash-stat-ring-row dash-priv-mask">
                 <svg id="statPfRing" class="dash-stat-ring" viewBox="0 0 64 64"></svg>
                 <strong id="statProfitFactor" class="dash-stat-ring-value">-</strong>
               </div>
@@ -141,7 +162,7 @@
 
             <div class="dash-stat-card dash-stat-card--arc">
               <span class="dash-stat-label" data-i18n="dashboard_46">Jours gagnants</span>
-              <div class="dash-stat-arc-row">
+              <div class="dash-stat-arc-row dash-priv-mask">
                 <svg id="statDayWinArc" class="dash-stat-arc" viewBox="0 0 64 64"></svg>
                 <div class="dash-stat-arc-value">
                   <strong id="statDayWinPct">-</strong>
@@ -152,13 +173,15 @@
 
             <div class="dash-stat-card dash-stat-card--split">
               <span class="dash-stat-label" data-i18n="dashboard_47">Gain / perte moyens</span>
-              <div class="dash-stat-split-bar">
-                <span id="statSplitWin" class="dash-split-win"></span>
-                <span id="statSplitLoss" class="dash-split-loss"></span>
-              </div>
-              <div class="dash-stat-split-values">
-                <strong id="statAvgWin" class="is-positive">-</strong>
-                <strong id="statAvgLoss" class="is-negative">-</strong>
+              <div class="dash-priv-mask">
+                <div class="dash-stat-split-bar">
+                  <span id="statSplitWin" class="dash-split-win"></span>
+                  <span id="statSplitLoss" class="dash-split-loss"></span>
+                </div>
+                <div class="dash-stat-split-values">
+                  <strong id="statAvgWin" class="is-positive">-</strong>
+                  <strong id="statAvgLoss" class="is-negative">-</strong>
+                </div>
               </div>
             </div>
           </section>
@@ -174,7 +197,7 @@
               </div>
             </div>
 
-            <div class="dash-edge-body">
+            <div class="dash-edge-body dash-priv-mask">
               <svg id="dashEdgeRadar" class="dash-edge-radar" viewBox="0 0 220 220"></svg>
               <div class="dash-edge-score">
                 <span class="dash-edge-score-label" data-i18n="dashboard_52">Ton Edge Score</span>
@@ -225,8 +248,8 @@
                 <p data-i18n="dashboard_38">Somme cumulée de ton P&amp;L (%) trade après trade.</p>
               </div>
             </div>
-            <div id="dashEquitySummary" class="dash-equity-summary"></div>
-            <div class="dash-equity-wrap">
+            <div id="dashEquitySummary" class="dash-equity-summary dash-priv-mask"></div>
+            <div class="dash-equity-wrap dash-priv-mask">
               <svg id="dashEquitySvg" class="dash-equity-svg" viewBox="0 0 600 260" preserveAspectRatio="none"></svg>
               <div id="dashEquityTooltip" class="dash-equity-tooltip" hidden></div>
             </div>
