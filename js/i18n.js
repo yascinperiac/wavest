@@ -238,6 +238,10 @@
     "fr": "Performance des patterns",
     "en": "Pattern Performance"
   },
+  "tool7": {
+    "fr": "Calendrier économique",
+    "en": "Economic Calendar"
+  },
   "toolsNote": {
     "fr": "💡 Le Trade Checker, le Simulateur de croissance de capital, le Dashboard de progression et la Performance des patterns s'utilisent avec la méthode enseignée dans la formation — c'est pour ça qu'ils sont réservés aux membres.",
     "en": "💡 The Trade Checker, Capital Growth Simulator, Progress Dashboard and Pattern Performance tools are meant to be used with the method taught in the program — that's why they're reserved for members."
@@ -6939,7 +6943,43 @@
   "performancePatterns_44": { "fr": "RR moyen", "en": "Avg RR" },
   "performancePatterns_45": { "fr": "Gain moyen encaissé par trade, en multiple du risque pris (1€ risqué → x€ gagné en moyenne).", "en": "Average gain per trade, as a multiple of the risk taken (1€ risked → x€ won on average)." },
   "performancePatterns_46": { "fr": "Score", "en": "Score" },
-  "performancePatterns_47": { "fr": "Note globale qui combine winrate, RR et nombre de trades : plus il est haut, plus la combo est fiable.", "en": "Overall rating combining winrate, RR and sample size: the higher it is, the more reliable the combo." }
+  "performancePatterns_47": { "fr": "Note globale qui combine winrate, RR et nombre de trades : plus il est haut, plus la combo est fiable.", "en": "Overall rating combining winrate, RR and sample size: the higher it is, the more reliable the combo." },
+  "pageTitle_calendrierEconomique": {
+    "fr": "Calendrier économique — Wavest",
+    "en": "Economic Calendar — Wavest"
+  },
+  "calendrierEco_1": {
+    "fr": "Calendrier économique",
+    "en": "Economic calendar"
+  },
+  "calendrierEco_2": {
+    "fr": "← Sommaire",
+    "en": "← Table of contents"
+  },
+  "calendrierEco_3": {
+    "fr": "Taux d'intérêt, NFP, discours des banquiers centraux : ça peut faire bouger le marché en quelques secondes. Un œil dessus avant chaque trade — toujours.",
+    "en": "Rate decisions, NFP, central bank speeches — they can move the market in seconds. Check before every trade, always."
+  },
+  "calendrierEco_4": {
+    "fr": "⚠️ Le calendrier ne constitue pas un conseil en investissement et le trading comporte des risques de perte en capital.",
+    "en": "⚠️ This calendar is not investment advice and trading involves a risk of capital loss."
+  },
+  "calendrierEco_5": {
+    "fr": "Contact",
+    "en": "Contact"
+  },
+  "calendrierEco_6": {
+    "fr": "Cookies",
+    "en": "Cookies"
+  },
+  "calendrierEco_7": {
+    "fr": "Vérifier sur ForexFactory",
+    "en": "Check on ForexFactory"
+  },
+  "calendrierEco_8": {
+    "fr": "Discours de banquiers centraux, annonces surprises : la référence à garder sous la main.",
+    "en": "Central bank speeches, surprise announcements: the reference to keep handy."
+  }
 };
 
   function getLang() {

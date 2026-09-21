@@ -1,0 +1,124 @@
+/* =====================================================
+   WAVEST — CALENDRIER ÉCONOMIQUE
+   Scopé sous .ec-app : aucune collision avec le reste du site.
+===================================================== */
+
+.ec-app {
+  position: relative;
+  margin: 8px 0 30px;
+}
+
+.ec-card {
+  padding: 20px;
+}
+
+.ec-note {
+  margin: 18px 0 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--warning-soft, rgba(230, 187, 121, 0.12));
+  border: 1px solid rgba(230, 187, 121, 0.28);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* =========================
+   LIEN FOREXFACTORY
+========================= */
+
+.ec-ff-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 14px 0 0;
+  padding: 16px 18px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.ec-ff-link:hover {
+  border-color: var(--link);
+  transform: translateY(-1px);
+}
+
+.ec-ff-link__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--glass-soft);
+  color: var(--link);
+}
+
+.ec-ff-link__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ec-ff-link__text strong {
+  font-family: var(--font-display, inherit);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ec-ff-link__text span {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.ec-ff-link__arrow {
+  font-size: 18px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.ec-ff-link--main {
+  padding: 26px 24px;
+  gap: 20px;
+  border-width: 1.5px;
+}
+
+.ec-ff-link--main .ec-ff-link__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+}
+
+.ec-ff-link--main .ec-ff-link__text strong {
+  font-size: 18px;
+}
+
+.ec-ff-link--main .ec-ff-link__text span {
+  font-size: 13.5px;
+}
+
+.ec-ff-link--main .ec-ff-link__arrow {
+  font-size: 22px;
+}
+
+@media (max-width: 700px) {
+  .ec-card {
+    padding: 14px;
+  }
+
+  .ec-ff-link--main {
+    padding: 20px 16px;
+  }
+
+  .ec-ff-link__text span {
+    display: none;
+  }
+}
