@@ -37,6 +37,20 @@
   const statAvgLoss = document.getElementById("statAvgLoss");
   const statProfitFactor = document.getElementById("statProfitFactor");
 
+  const statWinCounts = document.getElementById("statWinCounts");
+  const statWinrateArc = document.getElementById("statWinrateArc");
+  const statPfRing = document.getElementById("statPfRing");
+  const statDayWinArc = document.getElementById("statDayWinArc");
+  const statDayWinPct = document.getElementById("statDayWinPct");
+  const statDayWinCounts = document.getElementById("statDayWinCounts");
+  const statSplitWin = document.getElementById("statSplitWin");
+  const statSplitLoss = document.getElementById("statSplitLoss");
+  const statSplitBar = statSplitWin ? statSplitWin.closest(".dash-stat-split-bar") : null;
+
+  const dashEdgeRadar = document.getElementById("dashEdgeRadar");
+  const dashEdgeScoreValue = document.getElementById("dashEdgeScoreValue");
+  const dashEdgeScoreFill = document.getElementById("dashEdgeScoreFill");
+
   const dashPieStage = document.getElementById("dashPieStage");
   const dashPieSvg = document.getElementById("dashPieSvg");
   const dashPieCallouts = document.getElementById("dashPieCallouts");
@@ -266,6 +280,379 @@
     statAvgLoss.className = "is-negative";
 
     statProfitFactor.textContent = isFinite(profitFactor) ? profitFactor.toFixed(2) : "∞";
+
+    // ---- Nouvelles cartes v2 (comptes, jours gagnants, gauges) ----
+    if (statWinCounts) {
+      statWinCounts.textContent = `${wins.length}G / ${losses.length}P`;
+    }
+
+    const dayEntries = Object.values(dailyMap);
+    const winningDays = dayEntries.filter((d) => d.total > 0).length;
+    const losingDays = dayEntries.filter((d) => d.total < 0).length;
+    const dayWinPct = dayEntries.length ? (winningDays / dayEntries.length) * 100 : 0;
+
+    if (statDayWinPct) statDayWinPct.textContent = `${dayWinPct.toFixed(0)}%`;
+    if (statDayWinCounts) statDayWinCounts.textContent = `${winningDays}G / ${losingDays}P`;
+
+    drawArcGauge(statWinrateArc, winrate);
+    drawArcGauge(statDayWinArc, dayWinPct);
+    drawRingGauge(statPfRing, isFinite(profitFactor) ? Math.min(profitFactor, 3) / 3 * 100 : 100);
+
+    if (statSplitBar) {
+      const winAbs = Math.abs(avgWin);
+      const lossAbs = Math.abs(avgLoss);
+      const splitTotal = winAbs + lossAbs;
+      const winShare = splitTotal > 0 ? (winAbs / splitTotal) * 100 : 50;
+      // Zone de fondu centrée sur la frontière win/loss, plutôt qu'une
+      // ligne nette entre les deux couleurs.
+      const feather = 18;
+      const from = Math.max(0, winShare - feather / 2);
+      const to = Math.min(100, winShare + feather / 2);
+      statSplitBar.style.background =
+        `linear-gradient(to right, var(--dash-win) 0%, var(--dash-win) ${from.toFixed(1)}%, ` +
+        `var(--dash-loss) ${to.toFixed(1)}%, var(--dash-loss) 100%)`;
+    }
+
+    renderEdgeScore(list, dailyMap, { winrate, profitFactor, avgWin, avgLoss, dayWinPct, totalPnl });
+  }
+
+  // Lit une custom property CSS déjà résolue (couleur littérale, pas
+  // "var(...)") sur l'élément donné.
+  function resolveColorVar(el, name, fallback) {
+    const val = getComputedStyle(el).getPropertyValue(name).trim();
+    return val || fallback;
+  }
+
+  // Convertit n'importe quelle couleur CSS valide (hex, rgb, nommée...) en
+  // triplet [r,g,b] en laissant le navigateur faire la résolution — plus
+  // fiable que de parser la chaîne à la main.
+  function toRgbTriplet(colorStr) {
+    const probe = document.createElement("span");
+    probe.style.color = colorStr;
+    // Hors écran plutôt que display:none : certains navigateurs ne
+    // recalculent pas correctement le style calculé (getComputedStyle)
+    // d'un élément display:none, ce qui faussait la couleur lue.
+    probe.style.position = "absolute";
+    probe.style.left = "-9999px";
+    probe.style.top = "-9999px";
+    document.body.appendChild(probe);
+    const resolved = getComputedStyle(probe).color;
+    document.body.removeChild(probe);
+    const nums = resolved.match(/[\d.]+/g);
+    return nums ? nums.slice(0, 3).map(Number) : [63, 143, 129];
+  }
+
+  // Éclaircit une couleur en la mélangeant avec du blanc (ratio 0-1 = part
+  // de blanc). Calcul fait en JS avec des rgb() littéraux pour éviter tout
+  // souci de support de color-mix()/var() dans les attributs SVG.
+  function lightenColor(colorStr, whiteRatio) {
+    const [r, g, b] = toRgbTriplet(colorStr);
+    const mix = (c) => Math.round(c + (255 - c) * whiteRatio);
+    return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`;
+  }
+
+  // Point sur le cercle (cx,cy,r) pour un angle en degrés, 0° = 12h,
+  // sens horaire (comme une jauge classique).
+  function pointOnCircle(cx, cy, r, deg) {
+    const rad = ((deg - 90) * Math.PI) / 180;
+    return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+  }
+
+  // Chemin d'arc (SVG path "d") de startDeg à endDeg sur le cercle donné.
+  function describeArcPath(cx, cy, r, startDeg, endDeg) {
+    const start = pointOnCircle(cx, cy, r, startDeg);
+    const end = pointOnCircle(cx, cy, r, endDeg);
+    const largeArc = endDeg - startDeg > 180 ? 1 : 0;
+    return {
+      d: `M ${start.x.toFixed(2)} ${start.y.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${end.x.toFixed(2)} ${end.y.toFixed(2)}`,
+      start,
+      end,
+    };
+  }
+
+  // Dégradé placé exactement le long de l'arc dessiné (userSpaceOnUse, du
+  // point de départ au point d'arrivée) : la transition claire → foncée
+  // reste toujours bien visible, quelle que soit la longueur de l'arc —
+  // contrairement à un dégradé diagonal fixe qui se voit à peine sur un
+  // petit pourcentage. colorHex/inkHex doivent être des couleurs déjà
+  // résolues (hex/rgb), jamais des chaînes contenant var().
+  function addGaugeGradient(svgEl, gradientId, colorHex, inkHex, start, end) {
+    const svgNS = "http://www.w3.org/2000/svg";
+    const defs = document.createElementNS(svgNS, "defs");
+    const grad = document.createElementNS(svgNS, "linearGradient");
+    grad.setAttribute("id", gradientId);
+    grad.setAttribute("gradientUnits", "userSpaceOnUse");
+    grad.setAttribute("x1", start.x.toFixed(2));
+    grad.setAttribute("y1", start.y.toFixed(2));
+    grad.setAttribute("x2", end.x.toFixed(2));
+    grad.setAttribute("y2", end.y.toFixed(2));
+    const stop1 = document.createElementNS(svgNS, "stop");
+    stop1.setAttribute("offset", "0%");
+    stop1.setAttribute("stop-color", lightenColor(colorHex, 0.35));
+    const stop2 = document.createElementNS(svgNS, "stop");
+    stop2.setAttribute("offset", "100%");
+    stop2.setAttribute("stop-color", inkHex);
+    grad.appendChild(stop1);
+    grad.appendChild(stop2);
+    defs.appendChild(grad);
+    svgEl.appendChild(defs);
+  }
+
+  // Petite gauge en arc utilisée pour le winrate et le % de jours
+  // gagnants. pct est un nombre 0-100. Dessinée comme un vrai <path>
+  // d'arc (et non un cercle complet tronqué au dasharray) pour que le
+  // dégradé colle exactement au tracé visible.
+  function drawArcGauge(svgEl, pct) {
+    if (!svgEl) return;
+    const svgNS = "http://www.w3.org/2000/svg";
+    svgEl.innerHTML = "";
+    svgEl.setAttribute("viewBox", "0 0 64 64");
+
+    const cx = 32;
+    const cy = 32;
+    const r = 26;
+    const clamped = Math.max(0, Math.min(99.9, pct || 0));
+
+    const track = document.createElementNS(svgNS, "circle");
+    track.setAttribute("class", "dash-stat-arc-track");
+    track.setAttribute("cx", cx);
+    track.setAttribute("cy", cy);
+    track.setAttribute("r", r);
+    track.setAttribute("fill", "none");
+    track.setAttribute("stroke-width", "6");
+    svgEl.appendChild(track);
+
+    if (clamped <= 0) return;
+
+    const endDeg = (clamped / 100) * 360;
+    const { d, start, end } = describeArcPath(cx, cy, r, 0, endDeg);
+
+    const gradientId = `arcGrad-${Math.random().toString(36).slice(2, 8)}`;
+    const winColor = resolveColorVar(svgEl, "--dash-win", "#3f8f81");
+    const winInk = resolveColorVar(svgEl, "--dash-win-ink", "#2f6b53");
+    addGaugeGradient(svgEl, gradientId, winColor, winInk, start, end);
+
+    const fill = document.createElementNS(svgNS, "path");
+    fill.setAttribute("class", "dash-stat-arc-fill");
+    fill.setAttribute("d", d);
+    fill.setAttribute("fill", "none");
+    fill.setAttribute("stroke", `url(#${gradientId})`);
+    fill.setAttribute("stroke-width", "6");
+    fill.setAttribute("stroke-linecap", "round");
+    svgEl.appendChild(fill);
+  }
+
+  // Anneau simple (0-100%) utilisé pour le profit factor (capé à 3 = 100%).
+  // Même logique de tracé/dégradé que drawArcGauge.
+  function drawRingGauge(svgEl, pct) {
+    if (!svgEl) return;
+    const svgNS = "http://www.w3.org/2000/svg";
+    svgEl.innerHTML = "";
+    svgEl.setAttribute("viewBox", "0 0 64 64");
+
+    const cx = 32;
+    const cy = 32;
+    const r = 26;
+    const clamped = Math.max(0, Math.min(99.9, pct || 0));
+
+    const track = document.createElementNS(svgNS, "circle");
+    track.setAttribute("class", "dash-stat-ring-track");
+    track.setAttribute("cx", cx);
+    track.setAttribute("cy", cy);
+    track.setAttribute("r", r);
+    track.setAttribute("fill", "none");
+    track.setAttribute("stroke-width", "6");
+    svgEl.appendChild(track);
+
+    if (clamped <= 0) return;
+
+    const endDeg = (clamped / 100) * 360;
+    const { d, start, end } = describeArcPath(cx, cy, r, 0, endDeg);
+
+    const gradientId = `ringGrad-${Math.random().toString(36).slice(2, 8)}`;
+    const winColor = resolveColorVar(svgEl, "--dash-win", "#3f8f81");
+    const winInk = resolveColorVar(svgEl, "--dash-win-ink", "#2f6b53");
+    addGaugeGradient(svgEl, gradientId, winColor, winInk, start, end);
+
+    const fill = document.createElementNS(svgNS, "path");
+    fill.setAttribute("class", "dash-stat-ring-fill");
+    fill.setAttribute("d", d);
+    fill.setAttribute("fill", "none");
+    fill.setAttribute("stroke", `url(#${gradientId})`);
+    fill.setAttribute("stroke-width", "6");
+    fill.setAttribute("stroke-linecap", "round");
+    svgEl.appendChild(fill);
+  }
+
+  /* =====================================================
+     6ter. EDGE SCORE — indicateur maison (heuristique, pas une
+     norme du secteur). Combine 6 axes en un score sur 100 pour
+     donner un repère visuel rapide de l'edge global.
+  ===================================================== */
+
+  function computeMaxDrawdown(list) {
+    if (!list.length) return 0;
+    let cumulative = 0;
+    let peak = 0;
+    let maxDD = 0;
+    list.forEach((t) => {
+      cumulative += t.pnl;
+      if (cumulative > peak) peak = cumulative;
+      const dd = peak - cumulative;
+      if (dd > maxDD) maxDD = dd;
+    });
+    return maxDD;
+  }
+
+  function computeEdgeScore(list, dailyMap, stats) {
+    const { winrate, profitFactor, avgWin, avgLoss, dayWinPct, totalPnl } = stats;
+
+    const winPctScore = Math.max(0, Math.min(100, winrate));
+
+    const pfCapped = isFinite(profitFactor) ? profitFactor : 2.5;
+    const pfScore = Math.max(0, Math.min(100, (pfCapped / 2.5) * 100));
+
+    const ratio = avgLoss !== 0 ? Math.abs(avgWin / avgLoss) : avgWin > 0 ? 2.5 : 0;
+    const avgWinLossScore = Math.max(0, Math.min(100, (ratio / 2.5) * 100));
+
+    const consistencyScore = Math.max(0, Math.min(100, dayWinPct));
+
+    const maxDD = computeMaxDrawdown(list);
+    const drawdownScore = Math.max(0, Math.min(100, 100 - maxDD * 4));
+
+    const recoveryRaw = maxDD > 0 ? (totalPnl / maxDD) : totalPnl > 0 ? 4 : 0;
+    const recoveryScore = Math.max(0, Math.min(100, (recoveryRaw / 4) * 100));
+
+    const edgeScore = (
+      winPctScore + pfScore + avgWinLossScore + consistencyScore + drawdownScore + recoveryScore
+    ) / 6;
+
+    return {
+      edgeScore: Math.round(edgeScore * 10) / 10,
+      axes: [
+        { label: "Winrate", value: winPctScore },
+        { label: "Profit factor", value: pfScore },
+        { label: "Gain/perte", value: avgWinLossScore },
+        { label: "Régularité", value: consistencyScore },
+        { label: "Drawdown", value: drawdownScore },
+        { label: "Récupération", value: recoveryScore },
+      ],
+    };
+  }
+
+  function renderEdgeScore(list, dailyMap, stats) {
+    if (!dashEdgeRadar && !dashEdgeScoreValue) return;
+    const { edgeScore, axes } = computeEdgeScore(list, dailyMap, stats);
+
+    if (dashEdgeScoreValue) dashEdgeScoreValue.textContent = `${edgeScore.toFixed(1)}/100`;
+    if (dashEdgeScoreFill) {
+      const clamped = Math.max(0, Math.min(100, edgeScore));
+      dashEdgeScoreFill.style.width = `${clamped}%`;
+      dashEdgeScoreFill.style.background = clamped >= 60
+        ? "var(--dash-win)"
+        : clamped >= 35
+          ? "var(--dash-neutral)"
+          : "var(--dash-loss)";
+    }
+
+    renderEdgeRadar(axes);
+  }
+
+  // Étiquettes trop longues pour tenir sur une ligne sans déborder du
+  // canevas (ex. "Profit factor", "Récupération") : coupées en 2 lignes
+  // courtes plutôt que rognées par le bord du SVG.
+  const RADAR_LABEL_LINES = {
+    "Winrate": ["Winrate"],
+    "Profit factor": ["Profit", "factor"],
+    "Gain/perte": ["Gain/", "perte"],
+    "Régularité": ["Régularité"],
+    "Drawdown": ["Drawdown"],
+    "Récupération": ["Récupé-", "ration"],
+  };
+
+  function renderEdgeRadar(axes) {
+    if (!dashEdgeRadar) return;
+    const svgNS = "http://www.w3.org/2000/svg";
+    dashEdgeRadar.innerHTML = "";
+    // Canevas plus large que le radar lui-même : les libellés ont besoin
+    // de marge de part et d'autre pour ne pas être coupés par le bord.
+    dashEdgeRadar.setAttribute("viewBox", "0 0 260 260");
+
+    const addEl = (parent, tag, attrs) => {
+      const el = document.createElementNS(svgNS, tag);
+      Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+      parent.appendChild(el);
+      return el;
+    };
+
+    const cx = 130;
+    const cy = 130;
+    const maxR = 78;
+    const count = axes.length;
+    const angleFor = (i) => -Math.PI / 2 + (i * 2 * Math.PI) / count;
+    const pointAt = (i, r) => {
+      const angle = angleFor(i);
+      return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)];
+    };
+
+    // Grille de fond (anneaux concentriques hexagonaux)
+    [0.25, 0.5, 0.75, 1].forEach((frac) => {
+      const pts = axes.map((_, i) => pointAt(i, maxR * frac).join(",")).join(" ");
+      addEl(dashEdgeRadar, "polygon", {
+        class: "dash-edge-radar-grid",
+        points: pts,
+      });
+    });
+
+    // Axes
+    axes.forEach((_, i) => {
+      const [x, y] = pointAt(i, maxR);
+      addEl(dashEdgeRadar, "line", {
+        class: "dash-edge-radar-axis",
+        x1: cx, y1: cy, x2: x.toFixed(2), y2: y.toFixed(2),
+      });
+    });
+
+    // Forme du score
+    const shapePts = axes
+      .map((a, i) => pointAt(i, (Math.max(0, Math.min(100, a.value)) / 100) * maxR).join(","))
+      .join(" ");
+    addEl(dashEdgeRadar, "polygon", {
+      class: "dash-edge-radar-shape",
+      points: shapePts,
+    });
+
+    // Points sur chaque axe
+    axes.forEach((a, i) => {
+      const [x, y] = pointAt(i, (Math.max(0, Math.min(100, a.value)) / 100) * maxR);
+      addEl(dashEdgeRadar, "circle", {
+        class: "dash-edge-radar-dot",
+        cx: x.toFixed(2), cy: y.toFixed(2), r: 3,
+      });
+    });
+
+    // Libellés — toujours centrés (middle) sur leur point d'ancrage et
+    // coupés en plusieurs lignes courtes si besoin, pour ne jamais
+    // déborder du canevas quelle que soit la position sur le cercle.
+    axes.forEach((a, i) => {
+      const [x, y] = pointAt(i, maxR + 16);
+      const lines = RADAR_LABEL_LINES[a.label] || [a.label];
+      const text = addEl(dashEdgeRadar, "text", {
+        class: "dash-edge-radar-label",
+        x: x.toFixed(2), y: y.toFixed(2),
+        "text-anchor": "middle",
+        "dominant-baseline": "middle",
+      });
+      const lineHeight = 11;
+      const startDy = -((lines.length - 1) * lineHeight) / 2;
+      lines.forEach((line, li) => {
+        const tspan = document.createElementNS(svgNS, "tspan");
+        tspan.setAttribute("x", x.toFixed(2));
+        tspan.setAttribute("dy", li === 0 ? startDy : lineHeight);
+        tspan.textContent = line;
+        text.appendChild(tspan);
+      });
+    });
   }
 
   /* =====================================================

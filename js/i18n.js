@@ -4370,6 +4370,34 @@
     "fr": "Contact",
     "en": "Contact"
   },
+  "dashboard_46": {
+    "fr": "Jours gagnants",
+    "en": "Winning days"
+  },
+  "dashboard_47": {
+    "fr": "Gain / perte moyens",
+    "en": "Avg win / loss"
+  },
+  "dashboard_48": {
+    "fr": "· ton edge",
+    "en": "· your edge"
+  },
+  "dashboard_49": {
+    "fr": "Synthèse ",
+    "en": "Summary "
+  },
+  "dashboard_50": {
+    "fr": "Edge Score",
+    "en": "Edge Score"
+  },
+  "dashboard_51": {
+    "fr": "Winrate, profit factor, régularité, risque : condensés en un seul chiffre sur 100. Un repère pour suivre ton edge, pas une vérité absolue.",
+    "en": "Winrate, profit factor, consistency, risk — condensed into one number out of 100. A benchmark to track your edge, not an absolute truth."
+  },
+  "dashboard_52": {
+    "fr": "Ton Edge Score",
+    "en": "Your Edge Score"
+  },
   "fondation_1": {
     "fr": "Chapitre 1 — Fondation",
     "en": "Chapter 1 — Foundation"
