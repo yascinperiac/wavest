@@ -1643,3 +1643,4 @@ body.dark .tool-shot .shot-dark{display:block}
 .toc-btn[aria-expanded="true"] .toc-icon i:nth-child(3){transform:translate(4.5px,9.5px) rotate(60.95deg) scaleX(.572)}
 .toc-btn[aria-expanded="true"] .toc-icon i:nth-child(4){transform:translate(9.5px,8px) rotate(-67.38deg) scaleX(.722)}
 @media (prefers-reduced-motion:reduce){ .toc-icon i{transition:none} }
+.philo-sign img{object-position:50% 45%}
