@@ -33,7 +33,7 @@
   <meta property="og:locale" content="fr_FR" /><link rel="icon" type="image/png" href="/assets/images/apple-touch-icon.png?v=3">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico?v=3">
-  <link rel="stylesheet" href="/css/styles.css?v=9" />
+  <link rel="stylesheet" href="/css/styles.css?v=36" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,11 +125,33 @@
 
   <!-- HEADER -->
   <header class="site-header">
-    <button id="langToggle" type="button" class="lang-toggle" role="switch" aria-checked="false" aria-label="Changer la langue du site" data-i18n-aria-label="langToggleAria">
-      <span class="lang-toggle-thumb" aria-hidden="true"></span>
-      <span class="lang-toggle-opt lang-toggle-fr">FR</span>
-      <span class="lang-toggle-opt lang-toggle-en">EN</span>
-    </button>
+    <div class="toc">
+      <button id="tocBtn" type="button" class="toc-btn" aria-expanded="false" aria-controls="tocPanel" aria-label="Sommaire" data-i18n-aria-label="tocBtn">
+        <span class="toc-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      </button>
+      <div id="tocPanel" class="toc-panel" hidden>
+        <nav aria-label="Sommaire">
+          <ol class="toc-list">
+          <li><a href="#avis" data-i18n="tocAvis">Avis</a></li>
+          <li><a href="#trades" data-i18n="tocTrades">Trades réels</a></li>
+          <li><a href="#tools" data-i18n="tocTools">Outils</a></li>
+          <li><a href="#methode" data-i18n="tocMethode">La méthode en image</a></li>
+          <li><a href="#philosophie" data-i18n="tocPhilo">Philosophie</a></li>
+          <li><a href="#coaching" data-i18n="tocCoach">Coaching</a></li>
+          <li><a href="#chapters" data-i18n="tocProgram">Programme</a></li>
+          <li><a href="#blog" data-i18n="tocBlog">Blog</a></li>
+          </ol>
+        </nav>
+        <div class="toc-lang">
+          <span data-i18n="tocLang">Langue</span>
+          <button id="langToggle" type="button" class="lang-toggle" role="switch" aria-checked="false" aria-label="Changer la langue du site" data-i18n-aria-label="langToggleAria">
+            <span class="lang-toggle-thumb" aria-hidden="true"></span>
+            <span class="lang-toggle-opt lang-toggle-fr">FR</span>
+            <span class="lang-toggle-opt lang-toggle-en">EN</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <a href="/index.html" class="brand" aria-label="Wavest">
       <img src="/assets/images/logowavest1.png" alt="Wavest" class="brand-logo logo--light" width="280" height="84">
@@ -153,49 +175,61 @@
   <main class="container" id="content">
 
     <!-- HERO -->
-    <section class="hero hero--image reveal" aria-labelledby="heroTitle">
+    <section class="hero hero--image hero--split reveal" aria-labelledby="heroTitle">
       <div class="hero-inner">
-        <h2 id="heroTitle" data-i18n="heroTitle">800+ trades backtestés. Zéro promesse de gains. Une méthode.</h2>
+        <div class="hero-copy">
+        <h2 id="heroTitle" data-i18n-html="heroTitle"><span class="hero-l1">800+ trades backtestés.</span> <span class="hero-l2">Zéro promesse.</span></h2>
         <p id="heroText" data-i18n="heroText">Analyse technique pure, gestion du risque, discipline — celle que j'utilise moi-même depuis 3 ans.</p>
         <div class="hero-cta">
           <a href="https://go.wavest.fr" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-i18n="ctaOffer">Découvrir l'offre →</a>
-          <a href="#chapters" class="btn btn-ghost" data-i18n="ctaStart">Commencer</a>
+          <a href="#chapters" class="btn btn-ghost" data-i18n="ctaStart">Voir le programme</a>
         </div>
+      </div>
+        <figure class="hero-shot">
+          <img data-lightbox src="/assets/images/home/hero-nzdusd.jpg" alt="Analyse réelle de Yascin sur TradingView : NZD/USD en 4H, zone de vente, checklist multi-timeframe et niveaux de Fibonacci" width="1400" height="731" fetchpriority="high">
+          <figcaption><span data-i18n="heroShotCaption">Une vraie analyse · NZD/USD en 4H, juin 2026</span> <span class="zoom-hint" aria-hidden="true">· <span data-i18n="zoomHint">Clique pour agrandir</span></span></figcaption>
+        </figure>
       </div>
     </section>
 
     <!-- TEMOIGNAGE -->
-    <section class="testimonial reveal" aria-label="Témoignages">
+    <section id="avis" class="testimonial reveal" aria-label="Témoignages">
       <p class="about-eyebrow testimonial-eyebrow" data-i18n="testimonialEyebrow">Peu d'élèves, mais un suivi individuel pour chacun</p>
       <div class="testimonial-track-wrap">
         <div class="testimonial-track">
-        <div class="testimonial-card">
-          <p class="testimonial-quote" data-i18n-html="testimonial1">&laquo;&nbsp;Le coaching fut hyper enrichissant. Toutes mes questions ont &eacute;t&eacute; lev&eacute;es. Merci beaucoup Yascin, je recommande &agrave; 1000%.&nbsp;&raquo;</p>
-          <p class="testimonial-author">&mdash; Marvyn <span class="testimonial-src"><svg class="src-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.7 19.7 0 0 0 15.4 3c-.2.4-.5.9-.6 1.3a18.3 18.3 0 0 0-5.6 0A9 9 0 0 0 8.6 3a19.6 19.6 0 0 0-4.9 1.5C1 8.9.3 13.2.6 17.5A19.8 19.8 0 0 0 6.6 20c.5-.7.9-1.4 1.3-2.2-.7-.3-1.4-.6-2-1l.5-.4c3.9 1.8 8.1 1.8 12 0l.5.4c-.6.4-1.3.7-2 1 .4.8.8 1.5 1.3 2.2a19.7 19.7 0 0 0 6-2.5c.4-5-.9-9.2-3.9-13.1zM9.7 15c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4zm6.6 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4z"></path></svg> Discord</span></p>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-quote" data-i18n-html="testimonial2">&laquo;&nbsp;Franchement, juste avec la configuration TradingView, &ccedil;a m'a montr&eacute; que c'est vraiment s&eacute;rieux ce que tu proposes.&nbsp;&raquo;</p>
-          <p class="testimonial-author">&mdash; Amine <span class="testimonial-src"><svg class="src-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.7 19.7 0 0 0 15.4 3c-.2.4-.5.9-.6 1.3a18.3 18.3 0 0 0-5.6 0A9 9 0 0 0 8.6 3a19.6 19.6 0 0 0-4.9 1.5C1 8.9.3 13.2.6 17.5A19.8 19.8 0 0 0 6.6 20c.5-.7.9-1.4 1.3-2.2-.7-.3-1.4-.6-2-1l.5-.4c3.9 1.8 8.1 1.8 12 0l.5.4c-.6.4-1.3.7-2 1 .4.8.8 1.5 1.3 2.2a19.7 19.7 0 0 0 6-2.5c.4-5-.9-9.2-3.9-13.1zM9.7 15c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4zm6.6 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4z"></path></svg> Discord</span></p>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-quote" data-i18n-html="testimonial3">&laquo;&nbsp;Excellent professeur de trading, p&eacute;dagogue, disponible et surtout tr&egrave;s &agrave; l'&eacute;coute. Je recommande fortement !&nbsp;&raquo;</p>
+        <a class="testimonial-card testimonial-card--link" href="https://www.superprof.fr/fondateur-wavest-coaching-trading-forex-promesses-bidon-methode-gestion-risque.html#reviews" target="_blank" rel="noopener noreferrer" aria-label="Lire l'avis de Marvyn sur Superprof">
+          <p class="testimonial-quote" data-i18n-html="testimonial1">« Son approche du trading est claire et structurée, avec des analyses graphiques précises et une méthode logique, qu'il sait expliquer de façon simple et compréhensible. »</p>
+          <p class="testimonial-author">&mdash; Marvyn <span class="testimonial-src"><img class="src-icon src-icon--superprof" src="/assets/images/superprof-logo.png" alt="" aria-hidden="true"> Superprof</span></p>
+          <span class="testimonial-verify"><span data-i18n="testimonialVerify">Avis vérifié · voir sur Superprof</span> <span aria-hidden="true">&#8599;</span></span>
+        </a>
+        <a class="testimonial-card testimonial-card--link" href="https://www.superprof.fr/fondateur-wavest-coaching-trading-forex-promesses-bidon-methode-gestion-risque.html#reviews" target="_blank" rel="noopener noreferrer" aria-label="Lire l'avis de Amine sur Superprof">
+          <p class="testimonial-quote" data-i18n-html="testimonial2">« Ses explications sont claires et accessibles, même lorsqu'on débute en trading. Il prend le temps de répondre aux questions et de transmettre ses connaissances avec sérieux. »</p>
+          <p class="testimonial-author">&mdash; Amine <span class="testimonial-src"><img class="src-icon src-icon--superprof" src="/assets/images/superprof-logo.png" alt="" aria-hidden="true"> Superprof</span></p>
+          <span class="testimonial-verify"><span data-i18n="testimonialVerify">Avis vérifié · voir sur Superprof</span> <span aria-hidden="true">&#8599;</span></span>
+        </a>
+        <a class="testimonial-card testimonial-card--link" href="https://www.superprof.fr/fondateur-wavest-coaching-trading-forex-promesses-bidon-methode-gestion-risque.html#reviews" target="_blank" rel="noopener noreferrer" aria-label="Lire l'avis de Amir sur Superprof">
+          <p class="testimonial-quote" data-i18n-html="testimonial3">« Yascin est un excellent professeur de trading, pédagogue, disponible et surtout très à l'écoute. (…) Je recommande fortement ! »</p>
           <p class="testimonial-author">&mdash; Amir <span class="testimonial-src"><img class="src-icon src-icon--superprof" src="/assets/images/superprof-logo.png" alt="" aria-hidden="true"> Superprof</span></p>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-quote" data-i18n-html="testimonial1">&laquo;&nbsp;Le coaching fut hyper enrichissant. Toutes mes questions ont &eacute;t&eacute; lev&eacute;es. Merci beaucoup Yascin, je recommande &agrave; 1000%.&nbsp;&raquo;</p>
-          <p class="testimonial-author">&mdash; Marvyn <span class="testimonial-src"><svg class="src-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.7 19.7 0 0 0 15.4 3c-.2.4-.5.9-.6 1.3a18.3 18.3 0 0 0-5.6 0A9 9 0 0 0 8.6 3a19.6 19.6 0 0 0-4.9 1.5C1 8.9.3 13.2.6 17.5A19.8 19.8 0 0 0 6.6 20c.5-.7.9-1.4 1.3-2.2-.7-.3-1.4-.6-2-1l.5-.4c3.9 1.8 8.1 1.8 12 0l.5.4c-.6.4-1.3.7-2 1 .4.8.8 1.5 1.3 2.2a19.7 19.7 0 0 0 6-2.5c.4-5-.9-9.2-3.9-13.1zM9.7 15c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4zm6.6 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4z"></path></svg> Discord</span></p>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-quote" data-i18n-html="testimonial2">&laquo;&nbsp;Franchement, juste avec la configuration TradingView, &ccedil;a m'a montr&eacute; que c'est vraiment s&eacute;rieux ce que tu proposes.&nbsp;&raquo;</p>
-          <p class="testimonial-author">&mdash; Amine <span class="testimonial-src"><svg class="src-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.7 19.7 0 0 0 15.4 3c-.2.4-.5.9-.6 1.3a18.3 18.3 0 0 0-5.6 0A9 9 0 0 0 8.6 3a19.6 19.6 0 0 0-4.9 1.5C1 8.9.3 13.2.6 17.5A19.8 19.8 0 0 0 6.6 20c.5-.7.9-1.4 1.3-2.2-.7-.3-1.4-.6-2-1l.5-.4c3.9 1.8 8.1 1.8 12 0l.5.4c-.6.4-1.3.7-2 1 .4.8.8 1.5 1.3 2.2a19.7 19.7 0 0 0 6-2.5c.4-5-.9-9.2-3.9-13.1zM9.7 15c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4zm6.6 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4z"></path></svg> Discord</span></p>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-quote" data-i18n-html="testimonial3">&laquo;&nbsp;Excellent professeur de trading, p&eacute;dagogue, disponible et surtout tr&egrave;s &agrave; l'&eacute;coute. Je recommande fortement !&nbsp;&raquo;</p>
+          <span class="testimonial-verify"><span data-i18n="testimonialVerify">Avis vérifié · voir sur Superprof</span> <span aria-hidden="true">&#8599;</span></span>
+        </a>
+        <a class="testimonial-card testimonial-card--link" href="https://www.superprof.fr/fondateur-wavest-coaching-trading-forex-promesses-bidon-methode-gestion-risque.html#reviews" target="_blank" rel="noopener noreferrer" aria-label="Lire l'avis de Marvyn sur Superprof" aria-hidden="true" tabindex="-1">
+          <p class="testimonial-quote" data-i18n-html="testimonial1">« Son approche du trading est claire et structurée, avec des analyses graphiques précises et une méthode logique, qu'il sait expliquer de façon simple et compréhensible. »</p>
+          <p class="testimonial-author">&mdash; Marvyn <span class="testimonial-src"><img class="src-icon src-icon--superprof" src="/assets/images/superprof-logo.png" alt="" aria-hidden="true"> Superprof</span></p>
+          <span class="testimonial-verify"><span data-i18n="testimonialVerify">Avis vérifié · voir sur Superprof</span> <span aria-hidden="true">&#8599;</span></span>
+        </a>
+        <a class="testimonial-card testimonial-card--link" href="https://www.superprof.fr/fondateur-wavest-coaching-trading-forex-promesses-bidon-methode-gestion-risque.html#reviews" target="_blank" rel="noopener noreferrer" aria-label="Lire l'avis de Amine sur Superprof" aria-hidden="true" tabindex="-1">
+          <p class="testimonial-quote" data-i18n-html="testimonial2">« Ses explications sont claires et accessibles, même lorsqu'on débute en trading. Il prend le temps de répondre aux questions et de transmettre ses connaissances avec sérieux. »</p>
+          <p class="testimonial-author">&mdash; Amine <span class="testimonial-src"><img class="src-icon src-icon--superprof" src="/assets/images/superprof-logo.png" alt="" aria-hidden="true"> Superprof</span></p>
+          <span class="testimonial-verify"><span data-i18n="testimonialVerify">Avis vérifié · voir sur Superprof</span> <span aria-hidden="true">&#8599;</span></span>
+        </a>
+        <a class="testimonial-card testimonial-card--link" href="https://www.superprof.fr/fondateur-wavest-coaching-trading-forex-promesses-bidon-methode-gestion-risque.html#reviews" target="_blank" rel="noopener noreferrer" aria-label="Lire l'avis de Amir sur Superprof" aria-hidden="true" tabindex="-1">
+          <p class="testimonial-quote" data-i18n-html="testimonial3">« Yascin est un excellent professeur de trading, pédagogue, disponible et surtout très à l'écoute. (…) Je recommande fortement ! »</p>
           <p class="testimonial-author">&mdash; Amir <span class="testimonial-src"><img class="src-icon src-icon--superprof" src="/assets/images/superprof-logo.png" alt="" aria-hidden="true"> Superprof</span></p>
-        </div>
+          <span class="testimonial-verify"><span data-i18n="testimonialVerify">Avis vérifié · voir sur Superprof</span> <span aria-hidden="true">&#8599;</span></span>
+        </a>
         </div>
       </div>
-      <a href="https://discord.gg/kau6xC8nJ" target="_blank" rel="noopener noreferrer" class="testimonial-link" data-i18n="testimonialLink">Voir la communaut&eacute; &rarr;</a>
+      <a href="https://discord.gg/sVRvS8dbr" target="_blank" rel="noopener noreferrer" class="testimonial-link"><svg class="testimonial-link-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.7 19.7 0 0 0 15.4 3c-.2.4-.5.9-.6 1.3a18.3 18.3 0 0 0-5.6 0A9 9 0 0 0 8.6 3a19.6 19.6 0 0 0-4.9 1.5C1 8.9.3 13.2.6 17.5A19.8 19.8 0 0 0 6.6 20c.5-.7.9-1.4 1.3-2.2-.7-.3-1.4-.6-2-1l.5-.4c3.9 1.8 8.1 1.8 12 0l.5.4c-.6.4-1.3.7-2 1 .4.8.8 1.5 1.3 2.2a19.7 19.7 0 0 0 6-2.5c.4-5-.9-9.2-3.9-13.1zM9.7 15c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4zm6.6 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4z"/></svg><span data-i18n="testimonialLink">Rejoindre la communaut&eacute; &rarr;</span></a>
 
       <div class="about-card premium-metrics testimonial-stats">
         <div class="about-metric">
@@ -210,6 +244,130 @@
           <span class="num">1</span>
           <span class="label" data-i18n="metric3Label">méthode cohérente et transparente</span>
         </div>
+      </div>
+
+      <!-- TRADES RÉELS (gagnants et perdants) -->
+      <div id="trades" class="trades">
+        <span class="about-eyebrow" data-i18n="tradesEyebrow">Trades réels</span>
+        <h3 class="trades-title" data-i18n="tradesTitle">Gagnants et perdants. Sans filtre.</h3>
+        <p class="trades-text" data-i18n="tradesText">Une sélection de trades récents, pertes comprises. Chaque capture montre l'analyse complète : checklist, zone, entrée, stop et objectif.</p>
+        <div class="trades-wrap">
+          <div class="trades-track">
+          <figure class="trade-card">
+            <img data-lightbox data-caption="USD/CHF · 4H · Long · 07/2026" src="/assets/images/trades/usdchf-07.jpg" alt="Trade USD/CHF en 4H (Long), 07/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">USD/CHF</span>
+              <span class="trade-meta">4H · Long · 07/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card">
+            <img data-lightbox data-caption="GBP/CHF · 4H · Long · 09/2026" src="/assets/images/trades/gbpchf-09.jpg" alt="Trade GBP/CHF en 4H (Long), 09/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">GBP/CHF</span>
+              <span class="trade-meta">4H · Long · 09/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card">
+            <img data-lightbox data-caption="GBP/JPY · 4H · Long · 07/2026" src="/assets/images/trades/gbpjpy-07.jpg" alt="Trade GBP/JPY en 4H (Long), 07/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">GBP/JPY</span>
+              <span class="trade-meta">4H · Long · 07/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card">
+            <img data-lightbox data-caption="USD/CAD · 4H · Long · 08/2026" src="/assets/images/trades/usdcad-08.jpg" alt="Trade USD/CAD en 4H (Long), 08/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">USD/CAD</span>
+              <span class="trade-meta">4H · Long · 08/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card">
+            <img data-lightbox data-caption="EUR/CAD · 4H · Long · 09/2026" src="/assets/images/trades/eurcad-09.jpg" alt="Trade EUR/CAD en 4H (Long), 09/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">EUR/CAD</span>
+              <span class="trade-meta">4H · Long · 09/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card">
+            <img data-lightbox data-caption="AUD/CHF · 4H · Short · 07/2026" src="/assets/images/trades/audchf-07.jpg" alt="Trade AUD/CHF en 4H (Short), 07/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">AUD/CHF</span>
+              <span class="trade-meta">4H · Short · 07/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card">
+            <img data-lightbox data-caption="GBP/AUD · 4H · Long · 09/2026" src="/assets/images/trades/gbpaud-09.jpg" alt="Trade GBP/AUD en 4H (Long), 09/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">GBP/AUD</span>
+              <span class="trade-meta">4H · Long · 09/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card">
+            <img data-lightbox data-caption="AUD/CHF · 4H · Long · 08/2026" src="/assets/images/trades/audchf-08.jpg" alt="Trade AUD/CHF en 4H (Long), 08/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">AUD/CHF</span>
+              <span class="trade-meta">4H · Long · 08/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card" aria-hidden="true">
+            <img data-lightbox data-caption="USD/CHF · 4H · Long · 07/2026" src="/assets/images/trades/usdchf-07.jpg" alt="Trade USD/CHF en 4H (Long), 07/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">USD/CHF</span>
+              <span class="trade-meta">4H · Long · 07/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card" aria-hidden="true">
+            <img data-lightbox data-caption="GBP/CHF · 4H · Long · 09/2026" src="/assets/images/trades/gbpchf-09.jpg" alt="Trade GBP/CHF en 4H (Long), 09/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">GBP/CHF</span>
+              <span class="trade-meta">4H · Long · 09/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card" aria-hidden="true">
+            <img data-lightbox data-caption="GBP/JPY · 4H · Long · 07/2026" src="/assets/images/trades/gbpjpy-07.jpg" alt="Trade GBP/JPY en 4H (Long), 07/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">GBP/JPY</span>
+              <span class="trade-meta">4H · Long · 07/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card" aria-hidden="true">
+            <img data-lightbox data-caption="USD/CAD · 4H · Long · 08/2026" src="/assets/images/trades/usdcad-08.jpg" alt="Trade USD/CAD en 4H (Long), 08/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">USD/CAD</span>
+              <span class="trade-meta">4H · Long · 08/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card" aria-hidden="true">
+            <img data-lightbox data-caption="EUR/CAD · 4H · Long · 09/2026" src="/assets/images/trades/eurcad-09.jpg" alt="Trade EUR/CAD en 4H (Long), 09/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">EUR/CAD</span>
+              <span class="trade-meta">4H · Long · 09/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card" aria-hidden="true">
+            <img data-lightbox data-caption="AUD/CHF · 4H · Short · 07/2026" src="/assets/images/trades/audchf-07.jpg" alt="Trade AUD/CHF en 4H (Short), 07/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">AUD/CHF</span>
+              <span class="trade-meta">4H · Short · 07/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card" aria-hidden="true">
+            <img data-lightbox data-caption="GBP/AUD · 4H · Long · 09/2026" src="/assets/images/trades/gbpaud-09.jpg" alt="Trade GBP/AUD en 4H (Long), 09/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">GBP/AUD</span>
+              <span class="trade-meta">4H · Long · 09/2026</span>
+            </figcaption>
+          </figure>
+          <figure class="trade-card" aria-hidden="true">
+            <img data-lightbox data-caption="AUD/CHF · 4H · Long · 08/2026" src="/assets/images/trades/audchf-08.jpg" alt="Trade AUD/CHF en 4H (Long), 08/2026" width="1400" height="836" loading="lazy">
+            <figcaption>
+              <span class="trade-pair">AUD/CHF</span>
+              <span class="trade-meta">4H · Long · 08/2026</span>
+            </figcaption>
+          </figure>
+          </div>
+        </div>
+        <p class="trades-note" data-i18n="tradesNote">Performances passées, pas une garantie. Le trading comporte un risque de perte en capital.</p>
       </div>
 
       <div class="proof-card reveal">
@@ -230,92 +388,250 @@
     </section>
 
     <!-- POINTS CLÉS -->
-    <section class="keypoints" aria-label="Points clés">
-      <div class="keypoint reveal">
-        <div class="icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <polyline points="3 12 9 6 13 10 21 2"></polyline>
-            <polyline points="21 8 21 2 15 2"></polyline>
-          </svg>
-        </div>
-        <h3 data-i18n="keypoint1Title">Analyse technique</h3>
-        <p data-i18n="keypoint1Text">Comprends les bases des marchés et les patterns utilisés par les traders pros.</p>
+    <!-- OUTILS -->
+    <section id="tools" class="toolbox reveal" aria-labelledby="toolboxTitle">
+      <div class="toolbox-head">
+        <span class="about-eyebrow" data-i18n="toolboxEyebrow">Outils Wavest</span>
+        <h3 id="toolboxTitle" class="toolbox-title" data-i18n="toolboxTitle">Conçus pour appliquer la méthode.</h3>
       </div>
-
-      <div class="keypoint reveal">
-        <div class="icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <path d="M12 3c-1.5 0-3 1.2-3 2.8V7a2 2 0 0 0 2 2h2c1.1 0 2-.9 2-2V5.8C15 4.2 13.5 3 12 3z"></path>
-            <path d="M6 8c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2"></path>
-            <path d="M18 8c1.1 0 2 .9 2 2v3c0 1.1-.9 2-2 2"></path>
-          </svg>
-        </div>
-        <h3 data-i18n="keypoint2Title">Psychologie & Discipline</h3>
-        <p data-i18n="keypoint2Text">Maîtrise tes émotions, gère ton risque et respecte ton plan de trading.</p>
+      <div class="toolbox-grid">
+        <a class="tool-card" href="/pages/trade-checker.html">
+          <span class="tool-shot">
+            <img class="shot-light" src="/assets/images/tools/trade-checker-light.jpg" alt="Trade Checker : setup ETE + FC-27 validé, avec les statistiques du backtest" width="880" height="550" loading="lazy">
+            <img class="shot-dark" src="/assets/images/tools/trade-checker-dark.jpg" alt="" aria-hidden="true" width="880" height="550" loading="lazy">
+          </span>
+          <span class="tool-card-top">
+            <span class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+            <span class="tool-badge tool-badge--member" data-i18n="memberBadge">Membres</span>
+          </span>
+          <span class="tool-name" data-i18n="toolCardTC">Trade Checker</span>
+          <span class="tool-desc" data-i18n="toolCardTCText">Valide ton setup point par point avant d'entrer en position.</span>
+        </a>
+        <a class="tool-card" href="/pages/calculateur-lot.html">
+          <span class="tool-shot">
+            <img class="shot-light" src="/assets/images/tools/calculateur-lot-light.jpg" alt="Calculateur de lot : 10 000 €, 1 % de risque, stop de 25 pips" width="880" height="550" loading="lazy">
+            <img class="shot-dark" src="/assets/images/tools/calculateur-lot-dark.jpg" alt="" aria-hidden="true" width="880" height="550" loading="lazy">
+          </span>
+          <span class="tool-card-top">
+            <span class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg></span>
+            <span class="tool-badge" data-i18n="freeBadge">Gratuit</span>
+          </span>
+          <span class="tool-name" data-i18n="toolCardLot">Calculateur de lot</span>
+          <span class="tool-desc" data-i18n="toolCardLotText">La bonne taille de position selon ton capital, ton risque et ton stop.</span>
+        </a>
+        <a class="tool-card" href="/pages/horloge-sessions.html">
+          <span class="tool-shot">
+            <img class="shot-light" src="/assets/images/tools/horloge-sessions-v2-light.jpg" alt="Horloge des sessions : sessions asiatique, européenne et américaine" width="880" height="550" loading="lazy">
+            <img class="shot-dark" src="/assets/images/tools/horloge-sessions-v2-dark.jpg" alt="" aria-hidden="true" width="880" height="550" loading="lazy">
+          </span>
+          <span class="tool-card-top">
+            <span class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span>
+            <span class="tool-badge" data-i18n="freeBadge">Gratuit</span>
+          </span>
+          <span class="tool-name" data-i18n="toolCardClock">Horloge des sessions</span>
+          <span class="tool-desc" data-i18n="toolCardClockText">Tokyo, Londres, New York : vois en un coup d'œil ce qui est ouvert.</span>
+        </a>
+        <a class="tool-card" href="/pages/dashboard.html">
+          <span class="tool-shot">
+            <img class="shot-light" src="/assets/images/tools/dashboard-light.jpg" alt="Dashboard de progression : calendrier des trades de septembre 2026" width="760" height="474" loading="lazy">
+            <img class="shot-dark" src="/assets/images/tools/dashboard-dark.jpg" alt="" aria-hidden="true" width="760" height="474" loading="lazy">
+          </span>
+          <span class="tool-card-top">
+            <span class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
+            <span class="tool-badge tool-badge--member" data-i18n="memberBadge">Membres</span>
+          </span>
+          <span class="tool-name" data-i18n="toolCardDash">Dashboard de progression</span>
+          <span class="tool-desc" data-i18n="toolCardDashText">Suis tes trades et ta progression dans le temps.</span>
+        </a>
       </div>
-
-      <div class="keypoint reveal">
-        <div class="icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="9"></circle>
-            <circle cx="12" cy="12" r="5"></circle>
-            <circle cx="12" cy="12" r="1"></circle>
-          </svg>
-        </div>
-        <h3 data-i18n="keypoint3Title">Études de cas</h3>
-        <p data-i18n="keypoint3Text">Exemples concrets et backtests pour progresser avec méthode.</p>
-      </div>
-
-      <div class="keypoint reveal">
-        <div class="icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <path d="M14.7 6.3a4 4 0 1 0-5.4 5.4L2 19l3 3 7.3-7.3a4 4 0 0 0 5.4-5.4l-2.1 2.1-2-2z"></path>
-          </svg>
-        </div>
-        <h3 data-i18n="keypoint4Title">Outils gratuits</h3>
-        <p data-i18n="keypoint4Text">Trade Checker, calculateur de lot, dashboard de progression et plus, prêts à l'emploi.</p>
+      <div class="tool-mini-grid">
+        <a class="tool-mini" href="/pages/calendrier-economique.html">
+          <span class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></span>
+          <span class="tool-mini-body">
+            <span class="tool-badge" data-i18n="freeBadge">Gratuit</span>
+            <span class="tool-mini-name" data-i18n="tool7">Calendrier économique</span>
+            <span class="tool-mini-desc" data-i18n="toolMiniCal">Les annonces qui font bouger le marché.</span>
+          </span>
+        </a>
+        <a class="tool-mini" href="/pages/simulateur-croissance.html">
+          <span class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
+          <span class="tool-mini-body">
+            <span class="tool-badge tool-badge--member" data-i18n="memberBadge">Membres</span>
+            <span class="tool-mini-name" data-i18n="tool5">Simulateur de croissance de capital</span>
+            <span class="tool-mini-desc" data-i18n="toolMiniSim">Projette ton capital selon ton risque et ta régularité.</span>
+          </span>
+        </a>
+        <a class="tool-mini" href="/pages/performance-patterns.html">
+          <span class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="6" y2="12"/><line x1="12" y1="20" x2="12" y2="6"/><line x1="18" y1="20" x2="18" y2="9"/></svg></span>
+          <span class="tool-mini-body">
+            <span class="tool-badge tool-badge--member" data-i18n="memberBadge">Membres</span>
+            <span class="tool-mini-name" data-i18n="tool6">Performance Patterns</span>
+            <span class="tool-mini-desc" data-i18n="toolMiniPerf">Les stats de chaque pattern, issues du backtest.</span>
+          </span>
+        </a>
       </div>
     </section>
 
-    <!-- À PROPOS -->
-    <section class="about reveal" aria-labelledby="aboutTitle">
-      <div class="about-inner">
-        <div class="about-text">
-          <span class="about-eyebrow" data-i18n="aboutEyebrow">Notre philosophie</span>
-          <h3 id="aboutTitle" data-i18n="aboutTitle">À propos</h3>
-          <p data-i18n-html="aboutParagraph">
-            Je ne vends pas de rêve. Mon approche du trading repose sur la rigueur,
-            l'analyse et la discipline. Chaque élément de ma méthode a été testé
-            et validé avant d'être appliqué. Mon objectif : partager un chemin
-            <strong>réaliste et durable</strong> pour progresser pas à pas.
-          </p>
-          <ul class="about-bullets">
-            <li>
-              <svg class="bullet-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="9"></circle>
-                <circle cx="12" cy="12" r="5"></circle>
-                <circle cx="12" cy="12" r="1"></circle>
-              </svg>
-              <span data-i18n="aboutBullet1">Méthode claire, structurée et sans promesses irréalistes</span>
-            </li>
-            <li>
-              <svg class="bullet-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="3 12 9 6 13 10 21 2"></polyline>
-                <polyline points="21 8 21 2 15 2"></polyline>
-              </svg>
-              <span data-i18n="aboutBullet2">Analyses basées sur l'étude de centaines de trades</span>
-            </li>
-            <li>
-              <svg class="bullet-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 3c-1.5 0-3 1.2-3 2.8V7a2 2 0 0 0 2 2h2c1.1 0 2-.9 2-2V5.8C15 4.2 13.5 3 12 3z"></path>
-                <path d="M6 8c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2"></path>
-                <path d="M18 8c1.1 0 2 .9 2 2v3c0 1.1-.9 2-2 2"></path>
-              </svg>
-              <span data-i18n="aboutBullet3">Discipline et psychologie au cœur du processus</span>
-            </li>
+    <!-- AVANT / APRES -->
+    <section id="methode" class="beforeafter reveal" aria-labelledby="baTitle">
+      <span class="about-eyebrow" data-i18n="baEyebrow">La méthode en image</span>
+      <h3 id="baTitle" data-i18n="baTitle">Une zone Weekly, avant et après</h3>
+      <p class="ba-text" data-i18n="baText">Zone S&amp;D respectée trois fois, pattern en formation. Regarde la suite.</p>
+      <div class="ba-toggle" role="group" aria-label="Avant / Après">
+        <button type="button" class="ba-btn is-active" data-ba="before" aria-pressed="true" data-i18n="baBefore">Avant</button>
+        <button type="button" class="ba-btn" data-ba="after" aria-pressed="false" data-i18n="baAfter">Après</button>
+      </div>
+      <div class="ba-frame">
+        <img src="/assets/images/home/zone-avant.jpg" alt="Graphique Weekly avant : zone de demande respectée trois fois et pattern en formation" width="1400" height="610" loading="lazy">
+        <img class="ba-after" src="/assets/images/home/zone-apres.jpg" alt="Graphique Weekly après : le prix rebondit sur la zone et casse le pattern à la hausse" width="1400" height="610" loading="lazy">
+      </div>
+      <p class="ba-note" data-i18n="baNote">Exemple pédagogique, pas une promesse de résultat. Le trading comporte un risque de perte en capital.</p>
+      <script>
+        (function(){
+          var s=document.currentScript.parentNode, f=s.querySelector('.ba-frame'), b=s.querySelectorAll('.ba-btn');
+          function set(after){f.classList.toggle('show-after',after);b.forEach(function(x){var on=(x.dataset.ba==='after')===after;x.classList.toggle('is-active',on);x.setAttribute('aria-pressed',on)});}
+          b.forEach(function(x){x.addEventListener('click',function(){set(x.dataset.ba==='after')})});
+          f.addEventListener('click',function(){set(!f.classList.contains('show-after'))});
+        })();
+      </script>
+    </section>
+
+    <!-- À PROPOS / PHILOSOPHIE -->
+    <section id="philosophie" class="about philo reveal" aria-labelledby="philoTitle">
+      <div class="philo-card">
+        <div class="philo-main">
+          <span class="about-eyebrow" data-i18n="philoEyebrow">Ma philosophie</span>
+          <h3 id="philoTitle" class="philo-title">
+            <span data-i18n="philoTitle1">Je ne vends pas de rêve.</span>
+            <span class="philo-title-muted" data-i18n="philoTitle2">Je transmets une méthode.</span>
+          </h3>
+          <p class="philo-lead" data-i18n="philoLead">J'ai commencé en 2020 avec les signaux et les robots. Sans résultat, parce que je ne comprenais pas ce que je faisais. Il m'a fallu un an et demi de travail encadré pour devenir autonome. Wavest, c'est ce chemin-là : réaliste, structuré, sans raccourci.</p>
+          <div class="philo-sign">
+            <img src="/assets/images/home/yascin-portrait.jpg" alt="Yascin, fondateur de Wavest" width="720" height="900" loading="lazy">
+            <div>
+              <span class="philo-sign-name">Yascin</span>
+              <span class="philo-sign-role" data-i18n="aboutPhotoCaption">Fondateur de Wavest</span>
+            </div>
+          </div>
+        </div>
+        <ol class="philo-principles">
+          <li>
+            <span class="philo-num">01</span>
+            <div>
+              <h4 data-i18n="philoP1Title">Tester avant d'appliquer</h4>
+              <p data-i18n="philoP1Text">Chaque règle de la méthode a été backtestée sur plus de 800 trades, entre 2022 et 2025.</p>
+            </div>
+          </li>
+          <li>
+            <span class="philo-num">02</span>
+            <div>
+              <h4 data-i18n="philoP2Title">Le risque d'abord</h4>
+              <p data-i18n="philoP2Text">On définit ce qu'on accepte de perdre avant de penser au reste. Le trading comporte un risque de perte en capital.</p>
+            </div>
+          </li>
+          <li>
+            <span class="philo-num">03</span>
+            <div>
+              <h4 data-i18n="philoP3Title">La discipline avant l'intuition</h4>
+              <p data-i18n="philoP3Text">Un plan clair, une checklist, et le même process à chaque trade.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- COACHING INDIVIDUEL -->
+    <section id="coaching" class="coach reveal" aria-labelledby="coachTitle">
+      <div class="coach-card">
+        <div class="coach-main">
+          <span class="about-eyebrow" data-i18n="coachEyebrow">Coaching individuel</span>
+          <h3 id="coachTitle" class="coach-title" data-i18n="coachTitle">Un call en visio, sur ton cas précis.</h3>
+          <p class="coach-text" data-i18n="coachText">On regarde ensemble tes analyses, ta gestion du risque et tes erreurs. Tu repars avec un plan clair pour la suite.</p>
+          <ul class="coach-facts">
+            <li><span data-i18n="coachFact1">40 min</span></li>
+            <li><span data-i18n="coachFact2">En visio</span></li>
+            <li><span data-i18n="coachFact3">30 €</span></li>
           </ul>
         </div>
+        <div class="coach-side">
+          <a href="https://calendar.notion.so/meet/yascin/8odn3e45" target="_blank" rel="noopener noreferrer" class="btn btn-primary coach-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="3"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span data-i18n="coachBtn">Choisir un créneau</span>
+          </a>
+          <span class="coach-note" data-i18n="coachNote">Tu choisis directement dans mon agenda.</span>
+        </div>
       </div>
+    </section>
+
+    <!-- PROGRAMME -->
+    <section id="chapters" class="program reveal" aria-labelledby="programTitle">
+      <div class="section-head">
+        <span class="about-eyebrow" data-i18n="programEyebrow">Le programme</span>
+        <h3 id="programTitle" class="section-title" data-i18n="programTitle">Des bases au setup complet.</h3>
+      </div>
+      <ol class="prog-grid">
+        <li>
+          <a class="prog-item" href="/pages/fondation.html">
+            <span class="prog-num">01</span>
+            <span class="prog-body">
+              <span class="prog-name" data-i18n="chap1">Fondation</span>
+              <span class="prog-desc" data-i18n="chapD1">Le Forex, les paires et les horaires : des bases solides.</span>
+            </span>
+            <span class="prog-lock" title="Membres"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          </a>
+        </li>
+        <li>
+          <a class="prog-item" href="/pages/tradingview.html">
+            <span class="prog-num">02</span>
+            <span class="prog-body">
+              <span class="prog-name" data-i18n="chap2">Configuration TradingView</span>
+              <span class="prog-desc" data-i18n="chapD2">Ma configuration exacte : zones, couleurs et outils.</span>
+            </span>
+            <span class="prog-lock" title="Membres"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          </a>
+        </li>
+        <li>
+          <a class="prog-item" href="/pages/analyse-technique.html">
+            <span class="prog-num">03</span>
+            <span class="prog-body">
+              <span class="prog-name" data-i18n="chap3">Analyse technique</span>
+              <span class="prog-desc" data-i18n="chapD3">Tendance, patterns, Weekly et entrées en 4H.</span>
+            </span>
+            <span class="prog-lock" title="Membres"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          </a>
+        </li>
+        <li>
+          <a class="prog-item" href="/pages/money-management.html">
+            <span class="prog-num">04</span>
+            <span class="prog-body">
+              <span class="prog-name" data-i18n="chap4">Money management</span>
+              <span class="prog-desc" data-i18n="chapD4">Des règles de risque claires et reproductibles.</span>
+            </span>
+            <span class="prog-lock" title="Membres"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          </a>
+        </li>
+        <li>
+          <a class="prog-item" href="/pages/setup.html">
+            <span class="prog-num">05</span>
+            <span class="prog-body">
+              <span class="prog-name" data-i18n="chap5">Setup</span>
+              <span class="prog-desc" data-i18n="chapD5">Trois setups complets, illustrés, avec leurs règles.</span>
+            </span>
+            <span class="prog-lock" title="Membres"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          </a>
+        </li>
+        <li>
+          <a class="prog-item" href="/pages/psychologie-discipline.html">
+            <span class="prog-num">06</span>
+            <span class="prog-body">
+              <span class="prog-name" data-i18n="chap6">Psychologie &amp; Discipline</span>
+              <span class="prog-desc" data-i18n="chapD6">Tenir ses règles quand les émotions s'en mêlent.</span>
+            </span>
+            <span class="prog-lock" title="Membres"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          </a>
+        </li>
+      </ol>
     </section>
 
     <!-- BANDEAU VERS GO.WAVEST.FR -->
@@ -331,371 +647,51 @@
       </div>
     </section>
 
-    <!-- ACCORDÉON CHAPITRES -->
-    <section id="chapters" class="accordion reveal" aria-labelledby="chapTitle">
-      <div class="card">
-        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="chaptersPanel">
-          <span id="chapTitle" data-i18n="chapTitle">Chapitres</span>
-          <span class="chev" aria-hidden="true"></span>
-        </button>
-
-        <div id="chaptersPanel" class="acc-panel" hidden>
-          <ul class="sub-list">
-            <li>
-              <a href="/pages/fondation.html" id="chap1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <rect x="3" y="11" width="18" height="7" rx="1"></rect>
-                  <path d="M3 11V7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4"></path>
-                </svg>
-                <span data-i18n="chap1">Fondation</span>
-                <span class="member-badge">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="5" y="11" width="14" height="9" rx="2"></rect>
-                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
-                  </svg>
-                  <span data-i18n="memberBadge">Membres</span>
-                </span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/pages/tradingview.html" id="chap2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                  <line x1="8" y1="21" x2="16" y2="21"></line>
-                  <line x1="12" y1="17" x2="12" y2="21"></line>
-                </svg>
-                <span data-i18n="chap2">Configuration TradingView</span>
-                <span class="member-badge">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="5" y="11" width="14" height="9" rx="2"></rect>
-                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
-                  </svg>
-                  <span data-i18n="memberBadge">Membres</span>
-                </span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/pages/analyse-technique.html" id="chap3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <polyline points="3 12 9 6 13 10 21 2"></polyline>
-                  <polyline points="21 8 21 2 15 2"></polyline>
-                </svg>
-                <span data-i18n="chap3">Analyse technique</span>
-                <span class="member-badge">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="5" y="11" width="14" height="9" rx="2"></rect>
-                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
-                  </svg>
-                  <span data-i18n="memberBadge">Membres</span>
-                </span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/pages/money-management.html" id="chap4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <rect x="2" y="6" width="20" height="12" rx="2"></rect>
-                  <circle cx="12" cy="12" r="3"></circle>
-                  <path d="M18 12h2M4 12h2"></path>
-                </svg>
-                <span data-i18n="chap4">Money management</span>
-                <span class="member-badge">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="5" y="11" width="14" height="9" rx="2"></rect>
-                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
-                  </svg>
-                  <span data-i18n="memberBadge">Membres</span>
-                </span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/pages/setup.html" id="chap5">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M12 20v-4m0-4V4m0 8h8M4 12h8"></path>
-                </svg>
-                <span data-i18n="chap5">Setup</span>
-                <span class="member-badge">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="5" y="11" width="14" height="9" rx="2"></rect>
-                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
-                  </svg>
-                  <span data-i18n="memberBadge">Membres</span>
-                </span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/pages/psychologie-discipline.html" id="chap6">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M12 3c-1.5 0-3 1.2-3 2.8V7a2 2 0 0 0 2 2h2c1.1 0 2-.9 2-2V5.8C15 4.2 13.5 3 12 3z"></path>
-                  <path d="M6 8c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2"></path>
-                  <path d="M18 8c1.1 0 2 .9 2 2v3c0 1.1-.9 2-2 2"></path>
-                </svg>
-                <span data-i18n="chap6">Psychologie & Discipline</span>
-                <span class="member-badge">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="5" y="11" width="14" height="9" rx="2"></rect>
-                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
-                  </svg>
-                  <span data-i18n="memberBadge">Membres</span>
-                </span>
-              </a>
-            </li>
-          </ul>
-        </div>
+    <!-- BLOG -->
+    <section id="blog" class="blogs reveal" aria-labelledby="blogsTitle">
+      <div class="section-head">
+        <span class="about-eyebrow" data-i18n="blogsEyebrow">Blog</span>
+        <h3 id="blogsTitle" class="section-title" data-i18n="blogsTitle">À lire pour bien démarrer.</h3>
       </div>
+      <div class="post-grid">
+        <a class="post-card" href="/pages/blog/guide-debutant-trading-forex.html">
+          <span class="post-title" data-i18n="blog1">Apprendre le trading Forex en débutant : le guide complet</span>
+          <span class="post-desc" data-i18n="blogD1">Comment ça marche, les erreurs à éviter, et une méthode simple pour progresser.</span>
+          <span class="post-meta">3 min <span data-i18n="readLabel">de lecture</span></span>
+        </a>
+        <a class="post-card" href="/pages/blog/money-management-forex.html">
+          <span class="post-title" data-i18n="blog3">Money management : combien risquer par trade ?</span>
+          <span class="post-desc" data-i18n="blogD3">Les bases pour protéger ton capital et durer, sans formule magique.</span>
+          <span class="post-meta">3 min <span data-i18n="readLabel">de lecture</span></span>
+        </a>
+        <a class="post-card" href="/pages/blog/backtest-trading-methode.html">
+          <span class="post-title" data-i18n="blog5">Backtest : tester une méthode avant de trader en réel</span>
+          <span class="post-desc" data-i18n="blogD5">Quoi mesurer, comment faire, et les erreurs d'un backtest mal fait.</span>
+          <span class="post-meta">2 min <span data-i18n="readLabel">de lecture</span></span>
+        </a>
+      </div>
+      <details class="post-all">
+        <summary><span data-i18n="blogsAll">Voir les 10 articles</span></summary>
+        <ul>
+          <li><a href="/pages/blog/guide-debutant-trading-forex.html" data-i18n="blog1">Apprendre le trading Forex en débutant : le guide complet</a></li>
+          <li><a href="/pages/blog/analyse-technique-forex-debutant.html" data-i18n="blog2">Analyse technique Forex : les bases pour lire un graphique</a></li>
+          <li><a href="/pages/blog/money-management-forex.html" data-i18n="blog3">Money management : combien risquer par trade ?</a></li>
+          <li><a href="/pages/blog/psychologie-discipline-trading.html" data-i18n="blog4">Psychologie du trading : discipline avant stratégie</a></li>
+          <li><a href="/pages/blog/backtest-trading-methode.html" data-i18n="blog5">Backtest : tester une méthode avant de trader en réel</a></li>
+          <li><a href="/pages/blog/signaux-trading-forex.html" data-i18n="blog6">Signaux de trading : pourquoi ils ne suffisent pas</a></li>
+          <li><a href="/pages/blog/devenir-rentable-trading-forex.html" data-i18n="blog7">Combien de temps pour devenir rentable ?</a></li>
+          <li><a href="/pages/blog/calculateur-lot-forex.html" data-i18n="blog8">Calculateur de lot : bien dimensionner ses positions</a></li>
+          <li><a href="/pages/blog/checklist-trading-avant-trade.html" data-i18n="blog9">Checklist : ce qu'il faut valider avant un trade</a></li>
+          <li><a href="/pages/blog/choisir-formation-trading-forex.html" data-i18n="blog10">Formation trading Forex : comment bien choisir</a></li>
+        </ul>
+      </details>
     </section>
 
-    <!-- ACCORDÉON OUTILS WAVEST -->
-    <section id="tools" class="accordion reveal" aria-labelledby="toolsTitle">
-      <div class="card">
-        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="toolsPanel">
-          <span id="toolsTitle"><span data-i18n="toolsTitle">Outils Wavest</span></span>
-          <span class="chev" aria-hidden="true"></span>
-        </button>
 
-        <div id="toolsPanel" class="acc-panel" hidden>
-          <ul class="sub-list">
-            <li>
-              <a href="/pages/trade-checker.html" id="tool1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M9 11l3 3L22 4"></path>
-                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                </svg>
-                <span data-i18n="tool1">Trade Checker</span>
-                <span class="member-badge">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="5" y="11" width="14" height="9" rx="2"></rect>
-                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
-                  </svg>
-                  <span data-i18n="memberBadge">Membres</span>
-                </span>
-              </a>
-            </li>
 
-            <li>
-              <a href="/pages/calculateur-lot.html" id="tool2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <rect x="4" y="2" width="16" height="20" rx="2"></rect>
-                  <line x1="8" y1="6" x2="16" y2="6"></line>
-                  <path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"></path>
-                  <line x1="16" y1="14" x2="16" y2="18"></line>
-                </svg>
-                <span data-i18n="tool2">Calculateur de lot</span>
-              </a>
-            </li>
 
-            <li>
-              <a href="/pages/horloge-sessions.html" id="tool3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-                <span data-i18n="tool3">Horloge des sessions</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/pages/calendrier-economique.html" id="tool7">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <rect x="3" y="4" width="18" height="18" rx="2"></rect>
-                  <line x1="16" y1="2" x2="16" y2="6"></line>
-                  <line x1="8" y1="2" x2="8" y2="6"></line>
-                  <line x1="3" y1="10" x2="21" y2="10"></line>
-                  <circle cx="8" cy="15" r="1.5" fill="currentColor" stroke="none"></circle>
-                  <circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"></circle>
-                  <circle cx="16" cy="15" r="1.5" fill="currentColor" stroke="none"></circle>
-                </svg>
-                <span data-i18n="tool7">Calendrier économique</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/pages/simulateur-croissance.html" id="tool5">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <line x1="18" y1="20" x2="18" y2="10"></line>
-                  <line x1="12" y1="20" x2="12" y2="4"></line>
-                  <line x1="6" y1="20" x2="6" y2="14"></line>
-                </svg>
-                <span data-i18n="tool5">Simulateur de croissance de capital</span>
-                <span class="member-badge">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="5" y="11" width="14" height="9" rx="2"></rect>
-                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
-                  </svg>
-                  <span data-i18n="memberBadge">Membres</span>
-                </span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/pages/dashboard.html" id="tool4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                  <polyline points="17 6 23 6 23 12"></polyline>
-                </svg>
-                <span data-i18n="tool4">Dashboard de progression</span>
-                <span class="member-badge">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="5" y="11" width="14" height="9" rx="2"></rect>
-                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
-                  </svg>
-                  <span data-i18n="memberBadge">Membres</span>
-                </span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/pages/performance-patterns.html" id="tool6">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <rect x="3" y="3" width="7" height="7"></rect>
-                  <rect x="14" y="3" width="7" height="7"></rect>
-                  <rect x="3" y="14" width="7" height="7"></rect>
-                  <rect x="14" y="14" width="7" height="7"></rect>
-                </svg>
-                <span data-i18n="tool6">Performance des patterns</span>
-                <span class="member-badge">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="5" y="11" width="14" height="9" rx="2"></rect>
-                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
-                  </svg>
-                  <span data-i18n="memberBadge">Membres</span>
-                </span>
-              </a>
-            </li>
-          </ul>
-
-          <p class="tools-note" data-i18n="toolsNote">
-            💡 Le Trade Checker, le Simulateur de croissance de capital, le Dashboard de progression
-            et la Performance des patterns s'utilisent avec la méthode enseignée dans la formation —
-            c'est pour ça qu'ils sont réservés aux membres.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ACCORDÉON BLOG -->
-    <section id="blog" class="accordion reveal" aria-labelledby="blogTitle">
-      <div class="card">
-        <button class="acc-btn" type="button" aria-expanded="false" aria-controls="blogPanel">
-          <span id="blogTitle">Blog</span>
-          <span class="chev" aria-hidden="true"></span>
-        </button>
-
-        <div id="blogPanel" class="acc-panel" hidden>
-          <ul class="sub-list">
-            <li>
-              <a href="/pages/blog/guide-debutant-trading-forex.html" id="blog1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-                <span data-i18n="blog1">Apprendre le trading Forex en débutant : le guide complet</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/pages/blog/analyse-technique-forex-debutant.html" id="blog2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-                <span data-i18n="blog2">Analyse technique Forex : les bases pour lire un graphique</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/pages/blog/money-management-forex.html" id="blog3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-                <span data-i18n="blog3">Money management : combien risquer par trade ?</span>
-              </a>
-            </li>
-            <li>
-              <a href="/pages/blog/psychologie-discipline-trading.html" id="blog4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-                <span data-i18n="blog4">Psychologie du trading : discipline avant stratégie</span>
-              </a>
-            </li>
-            <li>
-              <a href="/pages/blog/backtest-trading-methode.html" id="blog5">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-                <span data-i18n="blog5">Backtest : tester une méthode avant de trader en réel</span>
-              </a>
-            </li>
-            <li>
-              <a href="/pages/blog/signaux-trading-forex.html" id="blog6">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-                <span data-i18n="blog6">Signaux de trading : pourquoi ils ne suffisent pas</span>
-              </a>
-            </li>
-            <li>
-              <a href="/pages/blog/devenir-rentable-trading-forex.html" id="blog7">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-                <span data-i18n="blog7">Combien de temps pour devenir rentable ?</span>
-              </a>
-            </li>
-            <li>
-              <a href="/pages/blog/calculateur-lot-forex.html" id="blog8">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-                <span data-i18n="blog8">Calculateur de lot : bien dimensionner ses positions</span>
-              </a>
-            </li>
-            <li>
-              <a href="/pages/blog/checklist-trading-avant-trade.html" id="blog9">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-                <span data-i18n="blog9">Checklist : ce qu'il faut valider avant un trade</span>
-              </a>
-            </li>
-            <li>
-              <a href="/pages/blog/choisir-formation-trading-forex.html" id="blog10">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-                <span data-i18n="blog10">Formation trading Forex : comment bien choisir</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
 
     <!-- CALL INDIVIDUEL -->
-    <section class="call-cta reveal" aria-label="Call individuel">
-      <a href="https://calendar.notion.so/meet/yascin/8odn3e45" target="_blank" rel="noopener noreferrer" class="call-cta-link">
-        <svg class="call-cta-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="4" width="18" height="18" rx="3" ry="3"></rect>
-          <line x1="16" y1="2" x2="16" y2="6"></line>
-          <line x1="8" y1="2" x2="8" y2="6"></line>
-          <line x1="3" y1="10" x2="21" y2="10"></line>
-        </svg>
-        <span class="call-cta-title" data-i18n="callCtaTitle">R&eacute;server un coaching individuel</span>
-      </a>
-    </section>
   </main>
 
   <!-- FOOTER -->
@@ -781,7 +777,46 @@
   </div>
 
   <!-- SCRIPTS -->
+  <script>
+    (function(){
+      var btn=document.getElementById('tocBtn'), panel=document.getElementById('tocPanel'); if(!btn||!panel) return;
+      function set(open){ panel.hidden=!open; btn.setAttribute('aria-expanded',open); }
+      btn.addEventListener('click',function(e){ e.stopPropagation(); set(panel.hidden); });
+      panel.addEventListener('click',function(e){ if(e.target.closest('a')) set(false); e.stopPropagation(); });
+      document.addEventListener('click',function(){ if(!panel.hidden) set(false); });
+      document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!panel.hidden){ set(false); btn.focus(); } });
+    })();
+  </script>
+  <!-- LIGHTBOX (agrandir une image) -->
+  <dialog class="lightbox" id="lightbox" aria-label="Image agrandie">
+    <div class="lightbox-inner">
+      <button type="button" class="lightbox-close" aria-label="Fermer">&times;</button>
+      <img alt="">
+      <p class="lightbox-caption"></p>
+    </div>
+  </dialog>
+  <script>
+    (function(){
+      var d=document.getElementById('lightbox'); if(!d||!d.showModal) return;
+      var im=d.querySelector('img'), cap=d.querySelector('.lightbox-caption');
+      document.querySelectorAll('img[data-lightbox]').forEach(function(img){
+        var hidden=img.closest('[aria-hidden="true"]');
+        img.setAttribute('tabindex',hidden?'-1':'0'); img.setAttribute('role','button');
+        function open(){
+          im.src=img.currentSrc||img.src; im.alt=img.alt;
+          var fc=img.closest('figure'); var c=fc&&(fc.querySelector('figcaption [data-i18n]')||fc.querySelector('figcaption'));
+          cap.textContent=img.dataset.caption||(c?c.textContent:''); d.showModal(); document.documentElement.classList.add('lb-open');
+        }
+        img.addEventListener('click',open);
+        img.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+      });
+      function close(){d.close();}
+      d.addEventListener('close',function(){document.documentElement.classList.remove('lb-open'); if(document.activeElement) document.activeElement.blur();});
+      d.querySelector('.lightbox-close').addEventListener('click',close);
+      d.addEventListener('click',function(e){if(e.target===d||e.target===im||e.target.classList.contains('lightbox-inner')) close();});
+    })();
+  </script>
   <script src="/js/app.js?v=6" defer></script>
-  <script src="/js/i18n.js?v=1" defer></script>
+  <script src="/js/i18n.js?v=17" defer></script>
 </body>
 </html>

@@ -75,8 +75,8 @@
     "en": "Home — Wavest"
   },
   "heroTitle": {
-    "fr": "800+ trades backtestés. Zéro promesse de gains. Une méthode.",
-    "en": "800+ backtested trades. Zero profit promises. One method."
+    "fr": "<span class=\"hero-l1\">800+ trades backtestés.</span> <span class=\"hero-l2\">Zéro promesse.</span>",
+    "en": "<span class=\"hero-l1\">800+ backtested trades.</span> <span class=\"hero-l2\">Zero promises.</span>"
   },
   "heroText": {
     "fr": "Analyse technique pure, gestion du risque, discipline — celle que j'utilise moi-même depuis 3 ans.",
@@ -87,24 +87,320 @@
     "en": "See the offer →"
   },
   "ctaStart": {
-    "fr": "Commencer",
-    "en": "Get started"
+    "fr": "Voir le programme",
+    "en": "See the program"
   },
   "testimonial1": {
-    "fr": "« Le coaching fut hyper enrichissant. Toutes mes questions ont été levées. Merci beaucoup Yascin, je recommande à 1000%. »",
-    "en": "“The coaching was incredibly valuable. All my questions were answered. Thank you so much Yascin, I recommend it 1000%.”"
+    "fr": "« Son approche du trading est claire et structurée, avec des analyses graphiques précises et une méthode logique, qu'il sait expliquer de façon simple et compréhensible. »",
+    "en": "“His approach to trading is clear and structured, with precise chart analysis and a logical method that he explains in a simple, easy-to-understand way.”"
   },
   "testimonial2": {
-    "fr": "« Franchement, juste avec la configuration TradingView, ça m'a montré que c'est vraiment sérieux ce que tu proposes. »",
-    "en": "“Honestly, just with the TradingView setup alone, I could tell this was the real deal.”"
+    "fr": "« Ses explications sont claires et accessibles, même lorsqu'on débute en trading. Il prend le temps de répondre aux questions et de transmettre ses connaissances avec sérieux. »",
+    "en": "“His explanations are clear and accessible, even for trading beginners. He takes the time to answer questions and shares his knowledge seriously.”"
   },
   "testimonial3": {
-    "fr": "« Excellent professeur de trading, pédagogue, disponible et surtout très à l'écoute. Je recommande fortement ! »",
-    "en": "“Excellent trading teacher, great at explaining things, available and above all a great listener. Highly recommend!”"
+    "fr": "« Yascin est un excellent professeur de trading, pédagogue, disponible et surtout très à l'écoute. (…) Je recommande fortement ! »",
+    "en": "“Yascin is an excellent trading teacher: clear, available and above all a great listener. (…) Highly recommend!”"
+  },
+  "heroShotCaption": {
+    "fr": "Une vraie analyse · NZD/USD en 4H, juin 2026",
+    "en": "A real analysis · NZD/USD 4H, June 2026"
+  },
+  "philoEyebrow": {
+    "fr": "Ma philosophie",
+    "en": "My philosophy"
+  },
+  "philoTitle1": {
+    "fr": "Je ne vends pas de rêve.",
+    "en": "I don't sell dreams."
+  },
+  "philoTitle2": {
+    "fr": "Je transmets une méthode.",
+    "en": "I teach a method."
+  },
+  "philoLead": {
+    "fr": "J'ai commencé en 2020 avec les signaux et les robots. Sans résultat, parce que je ne comprenais pas ce que je faisais. Il m'a fallu un an et demi de travail encadré pour devenir autonome. Wavest, c'est ce chemin-là : réaliste, structuré, sans raccourci.",
+    "en": "I started in 2020 with signals and trading bots. No results, because I didn't understand what I was doing. It took me a year and a half of mentored work to become independent. Wavest is that path: realistic, structured, no shortcuts."
+  },
+  "philoP1Title": {
+    "fr": "Tester avant d'appliquer",
+    "en": "Test before you apply"
+  },
+  "philoP1Text": {
+    "fr": "Chaque règle de la méthode a été backtestée sur plus de 800 trades, entre 2022 et 2025.",
+    "en": "Every rule of the method was backtested on more than 800 trades, between 2022 and 2025."
+  },
+  "philoP2Title": {
+    "fr": "Le risque d'abord",
+    "en": "Risk first"
+  },
+  "philoP2Text": {
+    "fr": "On définit ce qu'on accepte de perdre avant de penser au reste. Le trading comporte un risque de perte en capital.",
+    "en": "You define what you're willing to lose before thinking about anything else. Trading involves a risk of capital loss."
+  },
+  "philoP3Title": {
+    "fr": "La discipline avant l'intuition",
+    "en": "Discipline over intuition"
+  },
+  "philoP3Text": {
+    "fr": "Un plan clair, une checklist, et le même process à chaque trade.",
+    "en": "A clear plan, a checklist, and the same process on every trade."
+  },
+  "tradesEyebrow": {
+    "fr": "Trades réels",
+    "en": "Real trades"
+  },
+  "tradesTitle": {
+    "fr": "Gagnants et perdants. Sans filtre.",
+    "en": "Winners and losers. No filter."
+  },
+  "tradesText": {
+    "fr": "Une sélection de trades récents, pertes comprises. Chaque capture montre l'analyse complète : checklist, zone, entrée, stop et objectif.",
+    "en": "A selection of recent trades, losses included. Each screenshot shows the full analysis: checklist, zone, entry, stop and target."
+  },
+  "tradesNote": {
+    "fr": "Performances passées, pas une garantie. Le trading comporte un risque de perte en capital.",
+    "en": "Past performance is no guarantee. Trading involves a risk of capital loss."
+  },
+  "coachEyebrow": {
+    "fr": "Coaching individuel",
+    "en": "1-on-1 coaching"
+  },
+  "coachTitle": {
+    "fr": "Un call en visio, sur ton cas précis.",
+    "en": "A video call, on your specific case."
+  },
+  "coachText": {
+    "fr": "On regarde ensemble tes analyses, ta gestion du risque et tes erreurs. Tu repars avec un plan clair pour la suite.",
+    "en": "We go through your analyses, your risk management and your mistakes together. You leave with a clear plan for what's next."
+  },
+  "coachFact1": {
+    "fr": "40 min",
+    "en": "40 min"
+  },
+  "coachFact2": {
+    "fr": "En visio",
+    "en": "Video call"
+  },
+  "coachFact3": {
+    "fr": "30 €",
+    "en": "€30"
+  },
+  "coachBtn": {
+    "fr": "Choisir un créneau",
+    "en": "Pick a time slot"
+  },
+  "coachNote": {
+    "fr": "Tu choisis directement dans mon agenda.",
+    "en": "Book directly in my calendar."
+  },
+  "toolboxEyebrow": {
+    "fr": "Outils Wavest",
+    "en": "Wavest tools"
+  },
+  "toolboxTitle": {
+    "fr": "Conçus pour appliquer la méthode.",
+    "en": "Built to apply the method."
+  },
+  "toolboxAll": {
+    "fr": "Voir tous les outils",
+    "en": "See all tools"
+  },
+  "toolOpen": {
+    "fr": "Ouvrir",
+    "en": "Open"
+  },
+  "freeBadge": {
+    "fr": "Gratuit",
+    "en": "Free"
+  },
+  "toolCardTC": {
+    "fr": "Trade Checker",
+    "en": "Trade Checker"
+  },
+  "toolCardTCText": {
+    "fr": "Valide ton setup point par point avant d'entrer en position.",
+    "en": "Check your setup point by point before entering a trade."
+  },
+  "toolCardLot": {
+    "fr": "Calculateur de lot",
+    "en": "Lot size calculator"
+  },
+  "toolCardLotText": {
+    "fr": "La bonne taille de position selon ton capital, ton risque et ton stop.",
+    "en": "The right position size for your capital, risk and stop."
+  },
+  "toolCardClock": {
+    "fr": "Horloge des sessions",
+    "en": "Market sessions clock"
+  },
+  "toolCardClockText": {
+    "fr": "Tokyo, Londres, New York : vois en un coup d'œil ce qui est ouvert.",
+    "en": "Tokyo, London, New York: see at a glance what's open."
+  },
+  "toolCardDash": {
+    "fr": "Dashboard de progression",
+    "en": "Progress dashboard"
+  },
+  "toolCardDashText": {
+    "fr": "Suis tes trades et ta progression dans le temps.",
+    "en": "Track your trades and your progress over time."
+  },
+  "toolboxMore": {
+    "fr": "Aussi :",
+    "en": "Also:"
+  },
+  "programEyebrow": {
+    "fr": "Le programme",
+    "en": "The program"
+  },
+  "programTitle": {
+    "fr": "Des bases au setup complet.",
+    "en": "From the basics to a complete setup."
+  },
+  "chapD1": {
+    "fr": "Le Forex, les paires et les horaires : des bases solides.",
+    "en": "Forex, pairs and trading hours: solid foundations."
+  },
+  "chapD2": {
+    "fr": "Ma configuration exacte : zones, couleurs et outils.",
+    "en": "My exact setup: zones, colors and tools."
+  },
+  "chapD3": {
+    "fr": "Tendance, patterns, Weekly et entrées en 4H.",
+    "en": "Trend, patterns, Weekly and 4H entries."
+  },
+  "chapD4": {
+    "fr": "Des règles de risque claires et reproductibles.",
+    "en": "Clear, repeatable risk rules."
+  },
+  "chapD5": {
+    "fr": "Trois setups complets, illustrés, avec leurs règles.",
+    "en": "Three complete, illustrated setups with their rules."
+  },
+  "chapD6": {
+    "fr": "Tenir ses règles quand les émotions s'en mêlent.",
+    "en": "Sticking to your rules when emotions kick in."
+  },
+  "blogsEyebrow": {
+    "fr": "Blog",
+    "en": "Blog"
+  },
+  "blogsTitle": {
+    "fr": "À lire pour bien démarrer.",
+    "en": "Start here."
+  },
+  "blogD1": {
+    "fr": "Comment ça marche, les erreurs à éviter, et une méthode simple pour progresser.",
+    "en": "How it works, mistakes to avoid, and a simple way to improve."
+  },
+  "blogD3": {
+    "fr": "Les bases pour protéger ton capital et durer, sans formule magique.",
+    "en": "The basics to protect your capital and last, no magic formula."
+  },
+  "blogD5": {
+    "fr": "Quoi mesurer, comment faire, et les erreurs d'un backtest mal fait.",
+    "en": "What to measure, how to do it, and the mistakes of a bad backtest."
+  },
+  "readLabel": {
+    "fr": "de lecture",
+    "en": "read"
+  },
+  "blogsAll": {
+    "fr": "Voir les 10 articles",
+    "en": "See all 10 articles"
+  },
+  "toolMiniCal": {
+    "fr": "Les annonces qui font bouger le marché.",
+    "en": "The announcements that move the market."
+  },
+  "toolMiniSim": {
+    "fr": "Projette ton capital selon ton risque et ta régularité.",
+    "en": "Project your capital based on your risk and consistency."
+  },
+  "toolMiniPerf": {
+    "fr": "Les stats de chaque pattern, issues du backtest.",
+    "en": "Stats for each pattern, from the backtest."
+  },
+  "tocBtn": {
+    "fr": "Sommaire",
+    "en": "Contents"
+  },
+  "tocLang": {
+    "fr": "Langue",
+    "en": "Language"
+  },
+  "tocAvis": {
+    "fr": "Avis",
+    "en": "Reviews"
+  },
+  "tocTrades": {
+    "fr": "Trades réels",
+    "en": "Real trades"
+  },
+  "tocTools": {
+    "fr": "Outils",
+    "en": "Tools"
+  },
+  "tocMethode": {
+    "fr": "La méthode en image",
+    "en": "The method in pictures"
+  },
+  "tocPhilo": {
+    "fr": "Philosophie",
+    "en": "Philosophy"
+  },
+  "tocCoach": {
+    "fr": "Coaching",
+    "en": "Coaching"
+  },
+  "tocProgram": {
+    "fr": "Programme",
+    "en": "Program"
+  },
+  "tocBlog": {
+    "fr": "Blog",
+    "en": "Blog"
+  },
+  "zoomHint": {
+    "fr": "Clique pour agrandir",
+    "en": "Click to enlarge"
+  },
+  "baEyebrow": {
+    "fr": "La méthode en image",
+    "en": "The method in pictures"
+  },
+  "baTitle": {
+    "fr": "Une zone Weekly, avant et après",
+    "en": "A Weekly zone, before and after"
+  },
+  "baText": {
+    "fr": "Zone S&D respectée trois fois, pattern en formation. Regarde la suite.",
+    "en": "S&D zone respected three times, pattern forming. See what happened next."
+  },
+  "baBefore": {
+    "fr": "Avant",
+    "en": "Before"
+  },
+  "baAfter": {
+    "fr": "Après",
+    "en": "After"
+  },
+  "baNote": {
+    "fr": "Exemple pédagogique, pas une promesse de résultat. Le trading comporte un risque de perte en capital.",
+    "en": "Educational example, not a promise of results. Trading involves a risk of capital loss."
+  },
+  "aboutPhotoCaption": {
+    "fr": "Fondateur de Wavest",
+    "en": "Founder of Wavest"
+  },
+  "testimonialVerify": {
+    "fr": "Avis vérifié · voir sur Superprof",
+    "en": "Verified review · see on Superprof"
   },
   "testimonialLink": {
-    "fr": "Voir la communauté →",
-    "en": "See the community →"
+    "fr": "Rejoindre la communauté →",
+    "en": "Join the community →"
   },
   "keypoint1Title": {
     "fr": "Analyse technique",
@@ -6211,7 +6507,7 @@
     "en": "Reverse Fibonacci setup mastered"
   },
   "setup_170": {
-    "fr": "Tu maîtrises la structure complète : tendance, ZOI, entrée et gestion du risque. Place à la pratique.",
+    "fr": "Tu maîtrises la structure complète : tendance, ZOI, entrée et gestion du risque. Place à la pratique.",
     "en": "You've got the full structure down: trend, ZOI, entry and risk management. Time to practice."
   },
   "setup_171": {
