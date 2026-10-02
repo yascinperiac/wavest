@@ -1486,6 +1486,9 @@ body.dark .tool-shot .shot-dark{display:block}
 
 .tool-card .tool-icon{display:none}
 .tool-card .tool-card-top{justify-content:flex-start; margin-bottom:2px}
+.toolbox-grid--3{grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:16px}
+@media (max-width:960px){ .toolbox-grid--3{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:560px){ .toolbox-grid--3{margin-top:10px} }
 
 /* Titres de section communs */
 .section-head{text-align:center; margin-bottom:24px}

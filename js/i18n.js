@@ -5527,8 +5527,8 @@
     "en": "The highlighted cell shows the best pattern in each row."
   },
   "performancePatterns_24": {
-    "fr": "⚠️ Données issues d'un backtest interne à but pédagogique, mises à jour manuellement. Les performances passées ne préjugent pas des performances futures. Le trading comporte des risques de perte en capital.",
-    "en": "⚠️ Data from an internal, manually updated backtest for educational purposes. Past performance does not guarantee future results. Trading involves risk of capital loss."
+    "fr": "⚠️ Données issues d'un backtest interne à but pédagogique, mises à jour automatiquement. Les performances passées ne préjugent pas des performances futures. Le trading comporte des risques de perte en capital.",
+    "en": "⚠️ Data from an internal, automatically updated backtest for educational purposes. Past performance does not guarantee future results. Trading involves risk of capital loss."
   },
   "performancePatterns_25": {
     "fr": "← Trade Checker",
@@ -7272,6 +7272,11 @@
   "performancePatterns_45": { "fr": "Gain moyen encaissé par trade, en multiple du risque pris (1€ risqué → x€ gagné en moyenne).", "en": "Average gain per trade, as a multiple of the risk taken (1€ risked → x€ won on average)." },
   "performancePatterns_46": { "fr": "Score", "en": "Score" },
   "performancePatterns_47": { "fr": "Note globale qui combine winrate, RR et nombre de trades : plus il est haut, plus la combo est fiable.", "en": "Overall rating combining winrate, RR and sample size: the higher it is, the more reliable the combo." },
+  "performancePatterns_48": { "fr": "Fiable : plus de 50 %", "en": "Reliable: above 50%" },
+  "performancePatterns_49": { "fr": "Fiable : positif, idéalement plus de 0,5 %", "en": "Reliable: positive, ideally above 0.5%" },
+  "performancePatterns_50": { "fr": "Fiable : plus de 5 %", "en": "Reliable: above 5%" },
+  "performancePatterns_51": { "fr": "✓ Combo fiable = au moins 10 trades, un RR moyen positif et un score au-dessus de 5 %.", "en": "✓ Reliable combo = at least 10 trades, a positive average RR and a score above 5%." },
+  "performancePatterns_52": { "fr": "✕ En rouge = combo à éviter : elle a fait perdre de l'argent sur au moins 5 trades.", "en": "✕ In red = combo to avoid: it lost money over at least 5 trades." },
   "pageTitle_calendrierEconomique": {
     "fr": "Calendrier économique — Wavest",
     "en": "Economic Calendar — Wavest"

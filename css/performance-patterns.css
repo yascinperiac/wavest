@@ -662,3 +662,289 @@ body.combo-modal-open{
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ---------- Statut données en direct ---------- */
+.perf-live-status{
+  margin: 14px 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.perf-live-status:empty{ display: none; }
+.perf-live-status .dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--perf-good);
+  box-shadow: 0 0 0 0 var(--perf-good);
+  animation: perfLivePulse 2s ease-out infinite;
+}
+@keyframes perfLivePulse{
+  0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.45); }
+  70%  { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+@media (prefers-reduced-motion: reduce){
+  .perf-live-status .dot{ animation: none; }
+}
+
+/* ---------- Repères de fiabilité (légende) ---------- */
+.combo-legend-target{
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--perf-good);
+}
+.combo-legend-rule{
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ---------- Combos à éviter ---------- */
+.combo-legend-rule--avoid{
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+  color: color-mix(in oklab, var(--perf-bad) 75%, var(--text));
+}
+.combo-modal-table tr.is-avoid td{
+  background: color-mix(in oklab, var(--perf-bad) 16%, transparent);
+  color: color-mix(in oklab, var(--perf-bad) 75%, var(--text));
+}
+.combo-avoid-tag{
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  background: color-mix(in oklab, var(--perf-bad) 28%, transparent);
+  color: color-mix(in oklab, var(--perf-bad) 60%, var(--text));
+  vertical-align: middle;
+}
+
+/* =====================================================
+   VISUELS : anneaux, jauge d'échantillon, hexagone
+===================================================== */
+.perf-app{ --perf-mid: #e6bb79; }
+
+.perf-rings{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 14px;
+}
+.perf-rings--lg{
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 6px;
+}
+
+.perf-ring{
+  --tone: var(--muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+.perf-ring--good{ --tone: var(--perf-good); }
+.perf-ring--mid { --tone: var(--perf-mid); }
+.perf-ring--bad { --tone: var(--perf-bad); }
+
+.perf-ring-dial{
+  position: relative;
+  width: 68px;
+  height: 68px;
+}
+.perf-ring--lg .perf-ring-dial{ width: 96px; height: 96px; }
+
+.perf-ring-dial svg{
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.perf-ring-track{
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 6;
+}
+.perf-ring-bar{
+  fill: none;
+  stroke: var(--tone);
+  stroke-width: 6;
+  stroke-linecap: round;
+  animation: perfRingIn 1s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes perfRingIn{
+  from{ stroke-dasharray: 0 100; }
+}
+.perf-ring-v{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.perf-ring--lg .perf-ring-v{ font-size: 16px; }
+.perf-ring-l{
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+.perf-ring--lg .perf-ring-l{ font-size: 10.5px; }
+
+/* Jauge d'échantillon */
+.combo-sample{
+  --tone: var(--perf-mid);
+  margin-top: 12px;
+}
+.combo-sample--good{ --tone: var(--perf-good); }
+.combo-sample--bad { --tone: var(--perf-bad); }
+.combo-sample-head{
+  display: flex;
+  justify-content: space-between;
+  font-size: 10.5px;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+.combo-sample-head span:last-child{
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.combo-sample-track{
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+.combo-sample-track span{
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--tone);
+  animation: perfBarIn .9s cubic-bezier(.2,.8,.2,1) both;
+  transform-origin: left center;
+}
+@keyframes perfBarIn{
+  from{ transform: scaleX(0); }
+}
+
+/* Hexagone */
+.combo-radar,
+.combo-modal-radar{
+  display: flex;
+  justify-content: center;
+}
+.combo-radar{ margin: 6px auto 4px; max-width: 360px; }
+.combo-modal-radar{ margin: 0 auto 10px; max-width: 320px; }
+.combo-radar-svg{
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.radar-grid{
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.radar-spoke{
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.radar-shape{
+  fill: color-mix(in oklab, var(--perf-accent) 26%, transparent);
+  stroke: var(--perf-accent);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transform-origin: 150px 130px;
+  animation: perfRadarIn .9s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes perfRadarIn{
+  from{ transform: scale(.2); opacity: 0; }
+}
+.radar-dot{
+  fill: var(--perf-accent-deep);
+}
+.radar-label{
+  font-size: 10.5px;
+  fill: var(--muted);
+}
+.radar-label-name{
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.radar-label-value{
+  font-size: 11.5px;
+  font-weight: 800;
+  fill: var(--text);
+}
+
+/* Barres de score dans le tableau */
+.combo-modal-table td.score-cell{
+  min-width: 56px;
+}
+.combo-modal-table td:first-child{
+  white-space: normal;
+}
+.score-num{
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+.score-track{
+  display: block;
+  width: 48px;
+  height: 4px;
+  margin-top: 5px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+.score-bar{
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+.score-bar--good{ background: var(--perf-good); }
+.score-bar--mid { background: var(--perf-mid); }
+.score-bar--bad { background: var(--perf-bad); }
+
+@media (max-width: 420px){
+  .perf-rings--lg{ gap: 12px; }
+  .perf-ring--lg .perf-ring-dial{ width: 80px; height: 80px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .perf-ring-bar,
+  .combo-sample-track span,
+  .radar-shape{ animation: none; }
+}
+
+/* La modale est hors de .perf-app : on lui redonne les mêmes tokens */
+.combo-modal{
+  --perf-accent: var(--link);
+  --perf-accent-deep: var(--link-strong);
+  --perf-good: #7cc39a;
+  --perf-bad: #e4949a;
+  --perf-mid: #e6bb79;
+}

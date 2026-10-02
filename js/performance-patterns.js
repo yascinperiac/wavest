@@ -1,14 +1,22 @@
 /* ==========================================================
    Wavest — Meilleures combinaisons par pattern daily
-   Données reprises manuellement du Sheet "Trading 2026"
-   (onglet Combos stats), colonne "Best combo" — choix de
-   Yascin, pas un simple max automatique.
+   Données lues EN DIRECT depuis l'onglet "Combos stats" du
+   Sheet "Trading 2026", publié en lecture seule (CSV).
+   Seul cet onglet est publié : le reste du Sheet reste privé.
+   Si le Sheet est injoignable, FALLBACK_DATA est affiché.
 ========================================================== */
 
 (function () {
   "use strict";
 
-  var DATA = [
+  /* ----- CONFIG -----
+     Colle ici le lien CSV obtenu via :
+     Fichier → Partager → Publier sur le Web → onglet "Combos stats" → CSV
+     Laisse vide pour n'afficher que les données de secours ci-dessous. */
+  var SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRS8f3pckyq7CYSEsTDJhmfmBEAbZuG50RnSdZ2jxdvwc4w4X_IQqy4UCOsHbjJjXgHbY0PPlFXBSsG/pub?gid=631416664&single=true&output=csv";
+
+  /* Données de secours (snapshot statique) */
+  var FALLBACK_DATA = [
     {
       pattern: "ETE",
       best: "FC-27",
@@ -209,10 +217,16 @@
     }
   ];
 
+  var DATA = FALLBACK_DATA;
+  var DATA_SOURCE = "fallback"; // "live" | "fallback"
+  var DATA_UPDATED_AT = null;
+  var AVOID_MIN_TRADES = 5; // remplacé par la cellule J1 du Sheet quand il est chargé
+
   var LOW_SAMPLE_THRESHOLD = 10;
+  // Combo fiable = au moins 10 trades, RR moyen positif, score > 5 %
   var RELIABLE_MIN_TRADES = 10;
-  var RELIABLE_MIN_WINRATE = 50;
-  var RELIABLE_MIN_RR = 1;
+  var RELIABLE_MIN_RR = 0;
+  var RELIABLE_MIN_SCORE = 5;
 
   function fmtPct(n) {
     return n.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "%";
@@ -230,7 +244,16 @@
     lowSample: { fr: "Échantillon faible", en: "Small sample" },
     reliable: { fr: "Combo fiable", en: "Reliable combo" },
     details: { fr: "Voir les autres combos testées", en: "See other combos tested" },
-    context: { fr: "Contexte", en: "Context" }
+    context: { fr: "Contexte", en: "Context" },
+    avoid: { fr: "À éviter", en: "Avoid" },
+    sample: { fr: "Échantillon", en: "Sample" },
+    gain: { fr: "Gain total", en: "Total gain" },
+    consistency: { fr: "Régularité", en: "Consistency" },
+    sampleBar: { fr: "Échantillon", en: "Sample" },
+    live: { fr: "Données en direct depuis le backtest", en: "Live data from the backtest" },
+    updated: { fr: "actualisées à", en: "refreshed at" },
+    offline: { fr: "Données de la dernière version enregistrée", en: "Data from the last saved version" },
+    loading: { fr: "Chargement des données…", en: "Loading data…" }
   };
 
   function getLang() {
@@ -249,6 +272,104 @@
     return entry[lang] || entry.fr;
   }
 
+  /* ---------- Visuels : anneaux, jauge, hexagone ---------- */
+
+  function esc(v) {
+    return String(v).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function clamp01(n) { return Math.max(0, Math.min(1, n || 0)); }
+
+  function toneWinrate(w) { return w > 50 ? "good" : (w >= 40 ? "mid" : "bad"); }
+  function toneRR(r) { return r > 0.5 ? "good" : (r > 0 ? "mid" : "bad"); }
+  function toneScore(s) { return s > 5 ? "good" : (s > 0 ? "mid" : "bad"); }
+
+  function maxOf(key) {
+    return DATA.reduce(function (m, p) { return Math.max(m, p[key] || 0); }, 0) || 1;
+  }
+
+  function ring(valueText, fill, tone, label, size) {
+    var pct = Math.round(clamp01(fill) * 100);
+    return '<div class="perf-ring perf-ring--' + tone + (size ? ' perf-ring--' + size : '') + '">' +
+      '<div class="perf-ring-dial">' +
+        '<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">' +
+          '<circle class="perf-ring-track" cx="32" cy="32" r="27"></circle>' +
+          '<circle class="perf-ring-bar" cx="32" cy="32" r="27" pathLength="100" style="stroke-dasharray:' + pct + ' 100"></circle>' +
+        '</svg>' +
+        '<span class="perf-ring-v">' + valueText + '</span>' +
+      '</div>' +
+      '<span class="perf-ring-l">' + label + '</span>' +
+    '</div>';
+  }
+
+  function ringsFor(p, size) {
+    var maxScore = maxOf("score");
+    return ring(fmtPct(p.winrate), p.winrate / 100, toneWinrate(p.winrate), t("winrate"), size) +
+      ring(fmtPct(p.rr), p.rr / 2, toneRR(p.rr), t("rr"), size) +
+      ring(fmtPct(p.score), p.score / maxScore, toneScore(p.score), t("score"), size);
+  }
+
+  function sampleBar(trades) {
+    var fill = clamp01(trades / RELIABLE_MIN_TRADES);
+    var tone = trades >= RELIABLE_MIN_TRADES ? "good" : (trades >= AVOID_MIN_TRADES ? "mid" : "bad");
+    return '<div class="combo-sample combo-sample--' + tone + '">' +
+      '<div class="combo-sample-head"><span>' + t("sampleBar") + '</span><span>' + (trades >= RELIABLE_MIN_TRADES ? trades + ' ' + t("trades") + ' ✓' : trades + ' / ' + RELIABLE_MIN_TRADES + ' ' + t("trades")) + '</span></div>' +
+      '<div class="combo-sample-track"><span style="width:' + Math.round(fill * 100) + '%"></span></div>' +
+    '</div>';
+  }
+
+  // Hexagone : 6 axes, chaque valeur ramenée entre 0 et 1
+  function radar(p) {
+    var wl = (p.wins || 0) + (p.losses || 0);
+    var axes = [
+      { label: t("winrate"), value: fmtPct(p.winrate), v: p.winrate / 100 },
+      { label: t("rr"), value: fmtPct(p.rr), v: p.rr / maxOf("rr") },
+      { label: t("score"), value: fmtPct(p.score), v: p.score / maxOf("score") },
+      { label: t("sample"), value: p.trades + " " + t("trades"), v: p.trades / maxOf("trades") },
+      { label: t("gain"), value: fmtPct(p.gain || 0), v: (p.gain || 0) / maxOf("gain") },
+      { label: t("consistency"), value: wl ? Math.round(p.wins / wl * 100) + "%" : "–", v: wl ? p.wins / wl : 0 }
+    ];
+    var cx = 150, cy = 130, R = 88, n = axes.length;
+
+    function pt(i, r) {
+      var a = -Math.PI / 2 + i * 2 * Math.PI / n;
+      return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+    }
+    function poly(r) {
+      var out = [];
+      for (var i = 0; i < n; i++) { var q = pt(i, r); out.push(q[0].toFixed(1) + "," + q[1].toFixed(1)); }
+      return out.join(" ");
+    }
+
+    var grid = "";
+    [0.25, 0.5, 0.75, 1].forEach(function (k) {
+      grid += '<polygon class="radar-grid" points="' + poly(R * k) + '"></polygon>';
+    });
+    var spokes = "", labels = "", dots = "", shape = [];
+    axes.forEach(function (ax, i) {
+      var end = pt(i, R);
+      spokes += '<line class="radar-spoke" x1="' + cx + '" y1="' + cy + '" x2="' + end[0].toFixed(1) + '" y2="' + end[1].toFixed(1) + '"></line>';
+      var q = pt(i, R * Math.max(0.04, clamp01(ax.v)));
+      shape.push(q[0].toFixed(1) + "," + q[1].toFixed(1));
+      dots += '<circle class="radar-dot" cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="3.5"></circle>';
+      var l = pt(i, R + 22);
+      var anchor = Math.abs(l[0] - cx) < 4 ? "middle" : (l[0] > cx ? "start" : "end");
+      var dy = l[1] < cy - 10 ? -6 : (l[1] > cy + 10 ? 8 : 0);
+      labels += '<text class="radar-label" x="' + l[0].toFixed(1) + '" y="' + (l[1] + dy).toFixed(1) + '" text-anchor="' + anchor + '">' +
+        '<tspan class="radar-label-name">' + esc(ax.label) + '</tspan>' +
+        '<tspan class="radar-label-value" x="' + l[0].toFixed(1) + '" dy="13">' + esc(ax.value) + '</tspan>' +
+      '</text>';
+    });
+
+    return '<svg class="combo-radar-svg" viewBox="0 0 300 270" role="img" aria-label="' + esc(p.pattern + " → " + p.best) + '">' +
+      grid + spokes +
+      '<polygon class="radar-shape" points="' + shape.join(" ") + '"></polygon>' +
+      dots + labels +
+    '</svg>';
+  }
+
   function renderHighlight() {
     var best = DATA.reduce(function (acc, p) {
       return p.score > acc.score ? p : acc;
@@ -265,11 +386,10 @@
     var statScore = t("score");
     var tradesSuffix = t("trades");
 
-    statsEl.innerHTML =
-      '<div class="combo-stat-chip"><span class="v ' + cls(best.winrate - 50) + '">' + fmtPct(best.winrate) + '</span><span class="l">' + statWinrate + '</span></div>' +
-      '<div class="combo-stat-chip"><span class="v ' + cls(best.rr) + '">' + fmtPct(best.rr) + '</span><span class="l">' + statRR + '</span></div>' +
-      '<div class="combo-stat-chip"><span class="v ' + cls(best.score) + '">' + fmtPct(best.score) + '</span><span class="l">' + statScore + '</span></div>' +
-      '<div class="combo-stat-chip"><span class="v">' + best.trades + '</span><span class="l">' + tradesSuffix + '</span></div>';
+    var radarEl = document.getElementById("comboRadar");
+    if (radarEl) radarEl.innerHTML = radar(best);
+
+    statsEl.innerHTML = '<div class="perf-rings perf-rings--lg">' + ringsFor(best, "lg") + '</div>';
   }
 
   function renderGrid() {
@@ -286,22 +406,16 @@
 
     var html = DATA.map(function (p, idx) {
       var isLow = p.lowSample || p.trades < LOW_SAMPLE_THRESHOLD;
-      var isReliable = p.trades > RELIABLE_MIN_TRADES && p.winrate > RELIABLE_MIN_WINRATE && p.rr > RELIABLE_MIN_RR;
+      var isReliable = p.trades >= RELIABLE_MIN_TRADES && p.rr > RELIABLE_MIN_RR && p.score > RELIABLE_MIN_SCORE;
 
       return (
         '<div class="combo-card' + (isReliable ? ' combo-card--reliable' : '') + '">' +
           (isReliable ? '<span class="combo-card-ribbon">' + reliableLabel + '</span>' : '') +
           '<span class="combo-card-pattern">' + p.pattern + '</span>' +
           '<div class="combo-card-name"><span class="arrow">→</span>' + p.best + '</div>' +
-          '<div class="combo-card-stats">' +
-            '<div class="combo-card-stat"><span class="v ' + cls(p.winrate - 50) + '">' + fmtPct(p.winrate) + '</span><span class="l">' + statWinrate + '</span></div>' +
-            '<div class="combo-card-stat"><span class="v ' + cls(p.rr) + '">' + fmtPct(p.rr) + '</span><span class="l">' + statRR + '</span></div>' +
-            '<div class="combo-card-stat"><span class="v ' + cls(p.score) + '">' + fmtPct(p.score) + '</span><span class="l">' + statScore + '</span></div>' +
-          '</div>' +
-          '<div class="combo-card-meta">' +
-            '<span>' + p.trades + ' ' + tradesSuffix + '</span>' +
-            (isLow ? '<span class="combo-low-sample">⚠ ' + lowSampleLabel + '</span>' : '') +
-          '</div>' +
+          '<div class="perf-rings">' + ringsFor(p) + '</div>' +
+          sampleBar(p.trades) +
+          (isLow ? '<div class="combo-card-meta"><span class="combo-low-sample">⚠ ' + lowSampleLabel + '</span></div>' : '') +
           '<button type="button" class="combo-card-details-btn" data-combo-idx="' + idx + '">' +
             '<span>' + detailsLabel + '</span><span class="arrow">→</span>' +
           '</button>' +
@@ -340,6 +454,11 @@
     if (patternLabel) patternLabel.textContent = p.pattern;
     if (title) title.textContent = "→ " + p.best;
 
+    var modalRadar = document.getElementById("comboModalRadar");
+    if (modalRadar) modalRadar.innerHTML = radar(p);
+
+    var maxAbs = p.all.reduce(function (m, r) { return Math.max(m, Math.abs(r.score)); }, 0) || 1;
+
     if (thead) {
       thead.innerHTML =
         '<th>' + thContext + '</th><th>' + thTrades + '</th><th>' + statWinrate + '</th><th>' + statRR + '</th><th>' + statScore + '</th>';
@@ -350,12 +469,13 @@
       .sort(function (a, b) { return b.score - a.score; })
       .map(function (row) {
         var isBest = row.ctx === p.best;
-        return '<tr class="' + (isBest ? "is-best" : "") + '">' +
-          '<td>' + row.ctx + '</td>' +
+        var isAvoid = !isBest && row.score < 0 && row.trades >= AVOID_MIN_TRADES;
+        return '<tr class="' + (isBest ? "is-best" : (isAvoid ? "is-avoid" : "")) + '">' +
+          '<td>' + row.ctx + (isAvoid ? ' <span class="combo-avoid-tag">' + t("avoid") + '</span>' : '') + '</td>' +
           '<td>' + row.trades + '</td>' +
           '<td>' + fmtPct(row.winrate) + '</td>' +
           '<td>' + fmtPct(row.rr) + '</td>' +
-          '<td>' + fmtPct(row.score) + '</td>' +
+          '<td class="score-cell"><span class="score-num">' + fmtPct(row.score) + '</span><span class="score-track"><span class="score-bar score-bar--' + toneScore(row.score) + '" style="width:' + Math.max(4, Math.round(Math.abs(row.score) / maxAbs * 100)) + '%"></span></span></td>' +
           '</tr>';
       })
       .join("");
@@ -387,21 +507,182 @@
     });
   }
 
-  function bindLangToggle() {
-    var toggle = document.getElementById("langToggle");
-    if (toggle) {
-      toggle.addEventListener("click", function () {
-        renderHighlight();
-        renderGrid();
+
+  /* ---------- Lecture du Sheet publié ---------- */
+
+  function parseCSV(text) {
+    var rows = [], row = [], field = "", inQuotes = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (inQuotes) {
+        if (c === '"') {
+          if (text[i + 1] === '"') { field += '"'; i++; }
+          else inQuotes = false;
+        } else field += c;
+      } else if (c === '"') inQuotes = true;
+      else if (c === ",") { row.push(field); field = ""; }
+      else if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; }
+      else if (c !== "\r") field += c;
+    }
+    if (field !== "" || row.length) { row.push(field); rows.push(row); }
+    return rows;
+  }
+
+  function toNum(v) {
+    var s = String(v == null ? "" : v).replace(/[\s  %]/g, "").replace(",", ".").replace("−", "-");
+    var n = parseFloat(s);
+    return isNaN(n) ? 0 : n;
+  }
+
+  // Valeur en % : "44,44%" -> 44.44 ; 0.4444 (non formaté) -> 44.44
+  function toPct(v) {
+    var s = String(v == null ? "" : v);
+    var n = toNum(s);
+    return s.indexOf("%") >= 0 ? n : Math.round(n * 10000) / 100;
+  }
+
+  function buildDataFromCSV(text) {
+    var rows = parseCSV(text);
+    if (!rows.length) return null;
+
+    var minTrades = toNum(rows[0] && rows[0][9]) || 5; // cellule J1 du Sheet
+    AVOID_MIN_TRADES = minTrades;
+    var groups = [], byPattern = {};
+
+    for (var i = 1; i < rows.length; i++) {
+      var r = rows[i];
+      var combo = (r[0] || "").trim();
+      var sep = combo.indexOf(" | ");
+      if (sep < 0) continue;
+
+      var pattern = combo.slice(0, sep).trim();
+      var ctx = combo.slice(sep + 3).trim();
+      if (!pattern || !ctx) continue;
+
+      if (!byPattern[pattern]) {
+        byPattern[pattern] = { pattern: pattern, all: [], bestLabel: "" };
+        groups.push(byPattern[pattern]);
+      }
+      var g = byPattern[pattern];
+      g.all.push({
+        ctx: ctx,
+        trades: toNum(r[1]),
+        wins: toNum(r[2]),
+        losses: toNum(r[3]),
+        winrate: toPct(r[4]),
+        rr: toPct(r[5]),
+        gain: toPct(r[6]),
+        score: toPct(r[7])
       });
+      var bestCell = (r[8] || "").trim();
+      if (bestCell && !g.bestLabel) g.bestLabel = bestCell;
+    }
+
+    var data = groups.map(function (g) {
+      var best = null;
+
+      // 1. Le "Best combo" calculé dans le Sheet (colonne I)
+      if (g.bestLabel) {
+        var lbl = g.bestLabel;
+        var cut = lbl.indexOf(" | ");
+        var bestCtx = cut >= 0 ? lbl.slice(cut + 3).trim() : lbl;
+        for (var k = 0; k < g.all.length; k++) {
+          if (g.all[k].ctx === bestCtx) { best = g.all[k]; break; }
+        }
+      }
+
+      // 2. Sinon : meilleur score parmi les combos avec assez de trades
+      if (!best) {
+        var pool = g.all.filter(function (c) { return c.trades >= minTrades; });
+        if (!pool.length) pool = g.all;
+        best = pool.reduce(function (a, c) { return c.score > a.score ? c : a; }, pool[0]);
+      }
+
+      return {
+        pattern: g.pattern,
+        best: best.ctx,
+        trades: best.trades, wins: best.wins, losses: best.losses,
+        winrate: best.winrate, rr: best.rr, gain: best.gain, score: best.score,
+        lowSample: best.trades < LOW_SAMPLE_THRESHOLD,
+        all: g.all
+      };
+    });
+
+    return data.length ? data : null;
+  }
+
+  function renderStatus() {
+    var el = document.getElementById("perfLiveStatus");
+    if (!el) return;
+    if (DATA_SOURCE === "loading") {
+      el.className = "perf-live-status is-loading";
+      el.textContent = t("loading");
+    } else if (DATA_SOURCE === "live") {
+      var time = DATA_UPDATED_AT
+        ? DATA_UPDATED_AT.toLocaleTimeString(getLang() === "en" ? "en-GB" : "fr-FR", { hour: "2-digit", minute: "2-digit" })
+        : "";
+      el.className = "perf-live-status is-live";
+      el.innerHTML = '<span class="dot" aria-hidden="true"></span>' + t("live") + (time ? " · " + t("updated") + " " + time : "");
+    } else {
+      el.className = "perf-live-status is-offline";
+      el.textContent = t("offline");
+    }
+  }
+
+  function renderAll() {
+    renderHighlight();
+    renderGrid();
+    renderStatus();
+  }
+
+  function loadLiveData() {
+    if (!SHEET_CSV_URL || !window.fetch) {
+      DATA_SOURCE = "fallback";
+      renderStatus();
+      return;
+    }
+    DATA_SOURCE = "loading";
+    renderStatus();
+
+    fetch(SHEET_CSV_URL, { cache: "no-store" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.text();
+      })
+      .then(function (text) {
+        var live = buildDataFromCSV(text);
+        if (!live) throw new Error("CSV vide ou illisible");
+        DATA = live;
+        DATA_SOURCE = "live";
+        DATA_UPDATED_AT = new Date();
+        renderAll();
+      })
+      .catch(function (err) {
+        if (window.console) console.warn("[Wavest] Combos stats indisponibles, données de secours affichées.", err);
+        DATA = FALLBACK_DATA;
+        DATA_SOURCE = "fallback";
+        renderAll();
+      });
+  }
+
+  // Re-dessine après le changement de langue (i18n.js met à jour <html lang>)
+  function bindLangToggle() {
+    if (window.MutationObserver) {
+      new MutationObserver(renderAll).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["lang"]
+      });
+    } else {
+      var toggle = document.getElementById("langToggle");
+      if (toggle) toggle.addEventListener("click", function () { setTimeout(renderAll, 0); });
     }
   }
 
   function init() {
-    renderHighlight();
-    renderGrid();
+    renderAll();
     bindLangToggle();
     bindModal();
+    loadLiveData();
   }
 
   if (document.readyState === "loading") {
