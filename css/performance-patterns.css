@@ -855,8 +855,8 @@ body.combo-modal-open{
   display: flex;
   justify-content: center;
 }
-.combo-radar{ margin: 6px auto 4px; max-width: 360px; }
-.combo-modal-radar{ margin: 0 auto 10px; max-width: 320px; }
+.combo-radar{ margin: 6px auto 4px; max-width: 460px; }
+.combo-modal-radar{ margin: 0 auto 10px; max-width: 420px; }
 .combo-radar-svg{
   width: 100%;
   height: auto;
@@ -886,7 +886,7 @@ body.combo-modal-open{
   fill: var(--perf-accent-deep);
 }
 .radar-label{
-  font-size: 10.5px;
+  font-size: 12px;
   fill: var(--muted);
 }
 .radar-label-name{
@@ -895,7 +895,7 @@ body.combo-modal-open{
   letter-spacing: .03em;
 }
 .radar-label-value{
-  font-size: 11.5px;
+  font-size: 13px;
   font-weight: 800;
   fill: var(--text);
 }
@@ -947,4 +947,13 @@ body.combo-modal-open{
   --perf-good: #7cc39a;
   --perf-bad: #e4949a;
   --perf-mid: #e6bb79;
+}
+
+/* Tableau de la modale : tout tient sur petit écran */
+@media (max-width: 420px){
+  .combo-modal-table{ min-width: 0; font-size: 11.5px; }
+  .combo-modal-table th,
+  .combo-modal-table td{ padding: 9px 4px; }
+  .combo-modal-table th{ font-size: 9.5px; letter-spacing: 0; }
+  .score-track{ width: 40px; }
 }

@@ -363,7 +363,7 @@
       '</text>';
     });
 
-    return '<svg class="combo-radar-svg" viewBox="0 0 300 270" role="img" aria-label="' + esc(p.pattern + " → " + p.best) + '">' +
+    return '<svg class="combo-radar-svg" viewBox="-70 -6 440 282" role="img" aria-label="' + esc(p.pattern + " → " + p.best) + '">' +
       grid + spokes +
       '<polygon class="radar-shape" points="' + shape.join(" ") + '"></polygon>' +
       dots + labels +
