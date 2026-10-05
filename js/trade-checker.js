@@ -29,7 +29,11 @@ const patternsDatabase = {
   "W2": { sens: "Baissière", couleur: "Rouge" },
   "W3": { sens: "Baissière", couleur: "Rouge" },
   "W4": { sens: "Baissière", couleur: "Rouge" },
-  "W5": { sens: "Baissière", couleur: "Rouge" }
+  "W5": { sens: "Baissière", couleur: "Rouge" },
+
+  // EDGE = retournement : se prend CONTRE la tendance Daily
+  "EDGE BULLISH": { sens: "Haussière", couleur: "Vert", reversal: true },
+  "EDGE BEARISH": { sens: "Baissière", couleur: "Rouge", reversal: true }
 };
 
 
@@ -148,6 +152,20 @@ const confirmationsDatabase = {
     "W without bos",
     "ETE with bos",
     "ETE without bos"
+  ],
+
+  "EDGE BULLISH": [
+    "IETE with bos",
+    "IETE without bos",
+    "M with bos",
+    "M without bos"
+  ],
+
+  "EDGE BEARISH": [
+    "ETE with bos",
+    "ETE without bos",
+    "W with bos",
+    "W without bos"
   ]
 };
 
@@ -361,6 +379,19 @@ const readGain = document.getElementById("readGain");
 const readScore = document.getElementById("readScore");
 const readGlobal = document.getElementById("readGlobal");
 
+/* Ces cases sont remplies par le script : on retire leur traduction automatique,
+   sinon i18n.js les réécrit (« - », « En attente ») quand il se relance,
+   par exemple après le chargement du bandeau cookies. */
+["dailyValidation", "weeklyValidation", "validation4h", "rulesValidation", "finalVerdict",
+ "readNbTrades", "readWinrate", "readRR", "readGain", "readScore", "readGlobal"]
+  .forEach((id) => { const el = document.getElementById(id); if (el) el.removeAttribute("data-i18n"); });
+
+const comboAlerts = document.getElementById("comboAlerts");
+const probaBox = document.getElementById("probaBox");
+const probaRange = document.getElementById("probaRange");
+const probaFill = document.getElementById("probaFill");
+const probaMark = document.getElementById("probaMark");
+
 const resetBtn = document.getElementById("resetBtn");
 const resetModalOverlay = document.getElementById("resetModalOverlay");
 const resetCancelBtn = document.getElementById("resetCancelBtn");
@@ -408,7 +439,9 @@ function formatRR(value) {
 
 function getCombo() {
   if (!dailyPattern.value || !confirmation4h.value) return "";
-  return `${dailyPattern.value} | ${confirmation4h.value}`;
+  // Dans le journal, les deux EDGE sont notés « EDGE »
+  const pattern = dailyPattern.value.indexOf("EDGE") === 0 ? "EDGE" : dailyPattern.value;
+  return `${pattern} | ${confirmation4h.value}`;
 }
 
 function radarPoint(angleDeg, fraction) {
@@ -535,6 +568,15 @@ function updateDailyValidation() {
 
   if (!patternInfo) {
     setStatusBox(dailyValidation, "❌ Pattern inconnu", "danger");
+    return false;
+  }
+
+  if (patternInfo.reversal) {
+    if (trend !== patternInfo.sens) {
+      setStatusBox(dailyValidation, "✅ Retournement contre la tendance (EDGE)", "success");
+      return true;
+    }
+    setStatusBox(dailyValidation, "❌ EDGE dans le sens de la tendance", "danger");
     return false;
   }
 
@@ -740,6 +782,8 @@ function updateData() {
 
     resetReading();
     resetRadar();
+    resetProba();
+    updateComboAlerts();
     setReadingPill(readGlobal, "⚠️ Aucune data trouvée pour ce combo", "warning");
     return;
   }
@@ -752,9 +796,108 @@ function updateData() {
 
   updateRadar(stats);
   updateDataReading(stats);
+  updateProba(stats);
+  updateComboAlerts();
+}
+
+/* ---------- Chance de TP : fourchette de confiance (Wilson, 95 %) ---------- */
+
+function wilsonInterval(wins, n) {
+  if (!n) return null;
+  const z = 1.96;
+  const p = wins / n;
+  const denom = 1 + (z * z) / n;
+  const centre = (p + (z * z) / (2 * n)) / denom;
+  const half = (z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n))) / denom;
+  return { p: p, low: Math.max(0, centre - half), high: Math.min(1, centre + half) };
+}
+
+function resetProba() {
+  if (!probaBox) return;
+  probaBox.className = "proba-box";
+  probaRange.textContent = "-";
+  probaFill.style.left = "0%";
+  probaFill.style.width = "0%";
+  probaMark.style.left = "0%";
+  probaMark.style.opacity = "0";
+}
+
+function updateProba(stats) {
+  if (!probaBox) return;
+  const n = stats ? Number(stats.nbTrades) : 0;
+  if (!n) { resetProba(); return; }
+  const wins = Math.round((stats.winrate / 100) * n);
+  const ci = wilsonInterval(wins, n);
+  const pct = (x) => Math.round(x * 100) + " %";
+
+  probaRange.textContent = "entre " + pct(ci.low) + " et " + pct(ci.high);
+  probaFill.style.left = (ci.low * 100) + "%";
+  probaFill.style.width = ((ci.high - ci.low) * 100) + "%";
+  probaMark.style.left = (ci.p * 100) + "%";
+  probaMark.style.opacity = "1";
+
+  const tone = ci.low >= 0.5 ? "success" : (ci.high < 0.5 ? "danger" : "warning");
+  probaBox.className = "proba-box " + tone;
+}
+
+/* ---------- Alertes : combo à éviter + meilleur combo du pattern ---------- */
+
+const ALERT_MIN_TRADES = 5;
+
+function patternKey(pattern) {
+  return pattern.indexOf("EDGE") === 0 ? "EDGE" : pattern;
+}
+
+function updateComboAlerts() {
+  if (!comboAlerts) return;
+  comboAlerts.innerHTML = "";
+
+  const pattern = dailyPattern.value;
+  const confirmation = confirmation4h.value;
+  if (!pattern || !confirmation) return;
+
+  const key = patternKey(pattern);
+  const current = statsDatabase[key + " | " + confirmation];
+
+  if (current && current.score < 0 && current.nbTrades >= ALERT_MIN_TRADES) {
+    const box = document.createElement("div");
+    box.className = "combo-alert danger";
+    box.textContent = "⛔ Combo à éviter : " + current.nbTrades + " trades pour " +
+      formatPercent(current.gainTotal) + " de gain total. Même si les règles sont respectées, ce combo perd de l'argent.";
+    comboAlerts.appendChild(box);
+  }
+
+  let best = null;
+  (confirmationsDatabase[pattern] || []).forEach((conf) => {
+    const st = statsDatabase[key + " | " + conf];
+    if (!st || st.nbTrades < ALERT_MIN_TRADES || st.score <= 0) return;
+    if (!best || st.score > best.st.score) best = { conf: conf, st: st };
+  });
+
+  const currentScore = current ? current.score : -Infinity;
+  if (best && best.conf !== confirmation && best.st.score > currentScore) {
+    const box = document.createElement("div");
+    box.className = "combo-alert info";
+    const text = document.createElement("span");
+    text.textContent = "💡 Pour " + pattern + ", " + best.conf + " fait mieux : score " +
+      formatPercent(best.st.score) + " sur " + best.st.nbTrades + " trades (" + formatPercent(best.st.winrate) + " de winrate).";
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "combo-alert-btn";
+    btn.textContent = "Voir ce combo";
+    btn.addEventListener("click", () => {
+      confirmation4h.value = best.conf;
+      handleConfirmationChange();
+    });
+    box.appendChild(text);
+    box.appendChild(btn);
+    comboAlerts.appendChild(box);
+  }
 }
 
 function resetData() {
+  resetProba();
+  if (comboAlerts) comboAlerts.innerHTML = "";
   comboAnalyse.textContent = "-";
   nbTrades.textContent = "-";
   winrate.textContent = "-";
@@ -962,6 +1105,93 @@ document.addEventListener("keydown", (event) => {
 
 
 /* =====================================================
+   18. STATS EN DIRECT (onglet « Combos stats » publié)
+   Même source que la page Performance des patterns.
+   Si le Sheet ne répond pas, statsDatabase (ci-dessus) sert de secours.
+===================================================== */
+
+const STATS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRS8f3pckyq7CYSEsTDJhmfmBEAbZuG50RnSdZ2jxdvwc4w4X_IQqy4UCOsHbjJjXgHbY0PPlFXBSsG/pub?gid=631416664&single=true&output=csv";
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [], field = "", inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; } else inQuotes = false;
+      } else field += c;
+    } else if (c === '"') inQuotes = true;
+    else if (c === ",") { row.push(field); field = ""; }
+    else if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; }
+    else if (c !== "\r") field += c;
+  }
+  if (field !== "" || row.length) { row.push(field); rows.push(row); }
+  return rows;
+}
+
+function csvNum(v) {
+  const n = parseFloat(String(v == null ? "" : v).replace(/[\s\u00a0\u202f%]/g, "").replace("\u2212", "-").replace(",", "."));
+  return isNaN(n) ? 0 : n;
+}
+
+function csvPct(v) {
+  const s = String(v == null ? "" : v);
+  const n = csvNum(s);
+  return s.indexOf("%") >= 0 ? n : Math.round(n * 10000) / 100;
+}
+
+/* Arrivée depuis Performance des patterns : trade-checker.html?pattern=M5&conf=M%20without%20bos */
+function applyUrlPreset() {
+  let params;
+  try { params = new URLSearchParams(window.location.search); } catch (e) { return; }
+  const pattern = params.get("pattern");
+  const conf = params.get("conf");
+  if (!pattern || !patternsDatabase[pattern]) return;
+
+  dailyPattern.value = pattern;
+  updateConfirmationOptions();
+  if (conf && (confirmationsDatabase[pattern] || []).includes(conf)) {
+    confirmation4h.value = conf;
+  }
+  renderRules();
+  updateChecker();
+
+  const target = document.querySelector(".tc-app") || dailyPattern;
+  setTimeout(() => target.scrollIntoView({ behavior: "smooth", block: "start" }), 300);
+}
+
+function loadLiveStats() {
+  if (!window.fetch) return;
+  fetch(STATS_CSV_URL, { cache: "no-store" })
+    .then((res) => { if (!res.ok) throw new Error("HTTP " + res.status); return res.text(); })
+    .then((text) => {
+      const live = {};
+      parseCSV(text).slice(1).forEach((r) => {
+        const combo = (r[0] || "").trim();
+        if (combo.indexOf(" | ") < 0) return;
+        live[combo] = {
+          nbTrades: csvNum(r[1]),
+          wins: csvNum(r[2]),
+          loss: csvNum(r[3]),
+          winrate: csvPct(r[4]),
+          rrMoyen: csvPct(r[5]),
+          gainTotal: csvPct(r[6]),
+          score: csvPct(r[7])
+        };
+      });
+      if (!Object.keys(live).length) throw new Error("CSV vide");
+      Object.keys(statsDatabase).forEach((k) => { delete statsDatabase[k]; });
+      Object.assign(statsDatabase, live);
+      updateData();
+    })
+    .catch((err) => {
+      if (window.console) console.warn("[Wavest] Stats en direct indisponibles, données de secours utilisées.", err);
+    });
+}
+
+
+/* =====================================================
    19. INIT
 ===================================================== */
 
@@ -970,5 +1200,7 @@ updateConfirmationOptions();
 renderRules();
 resetData();
 updateChecker();
+applyUrlPreset();
+loadLiveStats();
 
 })();

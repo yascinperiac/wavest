@@ -789,16 +789,6 @@
   </div>
 
   <!-- SCRIPTS -->
-  <script>
-    (function(){
-      var btn=document.getElementById('tocBtn'), panel=document.getElementById('tocPanel'); if(!btn||!panel) return;
-      function set(open){ panel.hidden=!open; btn.setAttribute('aria-expanded',open); }
-      btn.addEventListener('click',function(e){ e.stopPropagation(); set(panel.hidden); });
-      panel.addEventListener('click',function(e){ if(e.target.closest('a')) set(false); e.stopPropagation(); });
-      document.addEventListener('click',function(){ if(!panel.hidden) set(false); });
-      document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!panel.hidden){ set(false); btn.focus(); } });
-    })();
-  </script>
   <!-- LIGHTBOX (agrandir une image) -->
   <dialog class="lightbox" id="lightbox" aria-label="Image agrandie">
     <div class="lightbox-inner">

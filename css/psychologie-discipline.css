@@ -522,3 +522,25 @@ video:-webkit-full-screen{
   line-height: 1.55;
   color: var(--psy-ink);
 }
+
+/* ===================== NOTE DU COACH : boutons + éditeur ===================== */
+#coach-note .coach-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 12px; border-radius:10px;
+  border:1px solid var(--glass-card-border);
+  background:var(--glass-soft); color:var(--text);
+  font:inherit; font-size:14px; font-weight:600; cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+#coach-note .coach-btn:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.10); border-color:var(--link); }
+#coach-note .coach-btn.ghost{ background:transparent; }
+#coach-note .coach-editor{ margin-top:10px; }
+#coach-note .coach-editor textarea{
+  width:100%; box-sizing:border-box; border-radius:12px; border:1px solid var(--glass-card-border);
+  background:var(--glass-soft); color:var(--text);
+  padding:12px 14px; font:inherit; resize:vertical; min-height:120px;
+}
+#coach-note .coach-bar{ margin-top:8px; display:flex; align-items:center; justify-content:space-between; }
+#coach-note .coach-actions{ display:flex; gap:8px; align-items:center; }
+#coach-note #coachCount{ font-size:.9rem; color:var(--muted); }
+#coach-note .hp{ position:absolute; left:-9999px; opacity:0; }

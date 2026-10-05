@@ -957,3 +957,61 @@ body.combo-modal-open{
   .combo-modal-table th{ font-size: 9.5px; letter-spacing: 0; }
   .score-track{ width: 40px; }
 }
+
+/* ---------- Liens vers le Trade Checker ---------- */
+.combo-card-check{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  margin-top:8px; padding:9px 12px; border-radius:10px;
+  border:1px solid var(--line); background:var(--glass-soft);
+  color:var(--text); font-size:12.5px; font-weight:700; text-decoration:none;
+  transition:border-color .2s ease, transform .2s ease;
+}
+.combo-card-check .arrow{ color:var(--perf-good); }
+.combo-card-check:hover{ border-color:var(--perf-good); transform:translateY(-1px); }
+.combo-modal-table td.check-cell{ text-align:right; }
+.combo-check-link{
+  font-size:11.5px; font-weight:700; color:var(--perf-accent-deep, var(--link));
+  text-decoration:none; white-space:nowrap;
+}
+.combo-check-link:hover{ text-decoration:underline; }
+
+/* ---------- Évolution d'un combo (modale) ---------- */
+.combo-evo:empty{ display:none; }
+.combo-evo{
+  margin:0 0 14px; padding:14px 14px 12px;
+  border:1px solid var(--line); border-radius:14px; background:var(--glass-soft);
+}
+.evo-head{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+.evo-head .mod-tag{ margin:0; }
+.evo-head strong{ font-size:13.5px; color:var(--text); }
+.evo-chart{ position:relative; margin-top:8px; }
+.evo-svg{ display:block; width:100%; height:auto; overflow:visible; --tone:var(--perf-good); }
+.evo-svg--bad{ --tone:var(--perf-bad); }
+.evo-zero{ stroke:var(--line); stroke-width:1; stroke-dasharray:3 3; }
+.evo-area{ fill:color-mix(in oklab, var(--tone) 18%, transparent); }
+.evo-line{ fill:none; stroke:var(--tone); stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
+.evo-dot{ fill:var(--tone); }
+.evo-axis{ font-size:10px; fill:var(--muted); }
+.evo-total{ position:absolute; top:0; left:8px; font-size:11.5px; font-weight:800; }
+.evo-total.is-positive{ color:var(--perf-good); }
+.evo-total.is-negative{ color:color-mix(in oklab, var(--perf-bad) 75%, var(--text)); }
+.evo-stats{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; margin-top:8px; }
+.evo-stats > div{ display:flex; flex-direction:column; gap:1px; }
+.evo-stats .l{ font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); }
+.evo-stats .v{ font-size:13.5px; font-weight:800; color:var(--text); font-variant-numeric:tabular-nums; }
+.evo-stats .v em{ font-style:normal; font-weight:600; font-size:11px; color:var(--muted); }
+.evo-badge{ margin-left:auto; padding:4px 10px; border-radius:999px; font-size:11.5px; font-weight:800; }
+.evo-badge--up{ background:color-mix(in oklab, var(--perf-good) 20%, transparent); color:var(--perf-good); }
+.evo-badge--down{ background:color-mix(in oklab, var(--perf-bad) 22%, transparent); color:color-mix(in oklab, var(--perf-bad) 75%, var(--text)); }
+.evo-badge--flat{ background:color-mix(in oklab, var(--perf-mid) 22%, transparent); color:color-mix(in oklab, var(--perf-mid) 70%, var(--text)); }
+.evo-badge--none{ background:var(--line); color:var(--muted); }
+.evo-note{ margin:10px 0 4px; font-size:12.5px; color:var(--muted); }
+.evo-hint{ margin:8px 0 0; font-size:11px; color:var(--muted); }
+.evo-ico{ font-weight:800; margin-left:4px; }
+.evo-ico--up{ color:var(--perf-good); }
+.evo-ico--down{ color:color-mix(in oklab, var(--perf-bad) 75%, var(--text)); }
+.evo-ico--flat{ color:var(--muted); }
+.combo-modal-table tbody tr[data-ctx]{ cursor:pointer; }
+.combo-modal-table tbody tr[data-ctx]:hover td{ background:color-mix(in oklab, var(--perf-accent) 6%, transparent); }
+.combo-modal-table tr.is-focus td{ box-shadow:inset 0 -2px 0 var(--perf-accent); }
+@media (max-width:420px){ .evo-badge{ margin-left:0; } }

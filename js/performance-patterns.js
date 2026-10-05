@@ -220,6 +220,12 @@
   var DATA = FALLBACK_DATA;
   var DATA_SOURCE = "fallback"; // "live" | "fallback"
   var DATA_UPDATED_AT = null;
+
+  /* Historique des trades (onglet « Historique » publié) : date | combo | gain */
+  var HISTORY_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRS8f3pckyq7CYSEsTDJhmfmBEAbZuG50RnSdZ2jxdvwc4w4X_IQqy4UCOsHbjJjXgHbY0PPlFXBSsG/pub?gid=422127762&single=true&output=csv";
+  var HISTORY = null;          // { "M5 | M without bos": [{ d: Date, g: 1.07 }, ...] }
+  var HISTORY_FAILED = false;
+  var CURRENT_MODAL = null;    // { p: pattern, ctx: combo affiché }
   var AVOID_MIN_TRADES = 5; // remplacé par la cellule J1 du Sheet quand il est chargé
 
   var LOW_SAMPLE_THRESHOLD = 10;
@@ -250,6 +256,19 @@
     gain: { fr: "Gain total", en: "Total gain" },
     consistency: { fr: "Régularité", en: "Consistency" },
     sampleBar: { fr: "Échantillon", en: "Sample" },
+    check: { fr: "Vérifier un setup", en: "Check a setup" },
+    checkShort: { fr: "Vérifier", en: "Check" },
+    evoTitle: { fr: "Évolution dans le temps", en: "Evolution over time" },
+    evoHint: { fr: "Clique sur une ligne du tableau pour voir sa courbe.", en: "Click a row in the table to see its curve." },
+    evoLoading: { fr: "Chargement de l'historique…", en: "Loading history…" },
+    evoFew: { fr: "Pas encore assez de trades pour tracer une courbe.", en: "Not enough trades yet to draw a curve." },
+    evoCum: { fr: "Gain cumulé", en: "Cumulative gain" },
+    evoRecent: { fr: "6 derniers mois", en: "Last 6 months" },
+    evoGlobal: { fr: "Depuis le début", en: "All time" },
+    evoUp: { fr: "↗ En progression", en: "↗ Improving" },
+    evoDown: { fr: "↘ En baisse", en: "↘ Declining" },
+    evoFlat: { fr: "→ Stable", en: "→ Stable" },
+    evoNone: { fr: "Pas assez de trades récents", en: "Not enough recent trades" },
     live: { fr: "Données en direct depuis le backtest", en: "Live data from the backtest" },
     updated: { fr: "actualisées à", en: "refreshed at" },
     offline: { fr: "Données de la dernière version enregistrée", en: "Data from the last saved version" },
@@ -370,6 +389,15 @@
     '</svg>';
   }
 
+  /* Lien vers le Trade Checker pré-rempli avec le pattern et la confirmation */
+  var BULLISH_CONFS = ["IETE with bos", "IETE without bos", "M with bos", "M without bos"];
+
+  function checkerUrl(pattern, ctx) {
+    var p = pattern;
+    if (pattern === "EDGE") p = BULLISH_CONFS.indexOf(ctx) >= 0 ? "EDGE BULLISH" : "EDGE BEARISH";
+    return "trade-checker.html?pattern=" + encodeURIComponent(p) + "&conf=" + encodeURIComponent(ctx);
+  }
+
   function renderHighlight() {
     var best = DATA.reduce(function (acc, p) {
       return p.score > acc.score ? p : acc;
@@ -419,6 +447,9 @@
           '<button type="button" class="combo-card-details-btn" data-combo-idx="' + idx + '">' +
             '<span>' + detailsLabel + '</span><span class="arrow">→</span>' +
           '</button>' +
+          '<a class="combo-card-check" href="' + checkerUrl(p.pattern, p.best) + '">' +
+            '<span>' + t("check") + '</span><span class="arrow">✓</span>' +
+          '</a>' +
         '</div>'
       );
     }).join("");
@@ -434,7 +465,116 @@
     }
   }
 
-  function openComboModal(p) {
+  /* ---------- Évolution d'un combo ---------- */
+
+  function trendOf(list) {
+    var cutoff = new Date();
+    cutoff.setMonth(cutoff.getMonth() - 6);
+    var recent = list.filter(function (x) { return x.d >= cutoff; });
+    var wr = function (a) { return a.length ? a.filter(function (x) { return x.g > 0; }).length / a.length * 100 : 0; };
+    var res = { global: wr(list), recent: wr(recent), nRecent: recent.length, nAll: list.length };
+    if (recent.length < 3) res.tone = "none";
+    else if (res.recent - res.global >= 10) res.tone = "up";
+    else if (res.global - res.recent >= 10) res.tone = "down";
+    else res.tone = "flat";
+    return res;
+  }
+
+  function trendBadge(tr) {
+    var key = { up: "evoUp", down: "evoDown", flat: "evoFlat", none: "evoNone" }[tr.tone];
+    return '<span class="evo-badge evo-badge--' + tr.tone + '">' + t(key) + '</span>';
+  }
+
+  function monthLabel(d) {
+    return d.toLocaleDateString(getLang() === "en" ? "en-GB" : "fr-FR", { month: "short", year: "numeric" });
+  }
+
+  function evoChart(list) {
+    var W = 320, H = 130, PX = 8, PT = 10, PB = 22;
+    var cum = [0], acc = 0;
+    list.forEach(function (x) { acc += x.g; cum.push(acc); });
+    var min = Math.min.apply(null, cum.concat([0])), max = Math.max.apply(null, cum.concat([0]));
+    if (max - min < 1) { max += 0.5; min -= 0.5; }
+    var n = cum.length - 1;
+    var X = function (i) { return PX + (i / n) * (W - 2 * PX); };
+    var Y = function (v) { return PT + (max - v) / (max - min) * (H - PT - PB); };
+    var pts = cum.map(function (v, i) { return X(i).toFixed(1) + "," + Y(v).toFixed(1); });
+    var zero = Y(0).toFixed(1);
+    var tone = acc >= 0 ? "good" : "bad";
+    var area = "M" + X(0).toFixed(1) + "," + zero + " L" + pts.join(" L") + " L" + X(n).toFixed(1) + "," + zero + " Z";
+    var last = pts[pts.length - 1].split(",");
+    return '<svg class="evo-svg evo-svg--' + tone + '" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + t("evoCum") + '">' +
+      '<line class="evo-zero" x1="' + PX + '" x2="' + (W - PX) + '" y1="' + zero + '" y2="' + zero + '"></line>' +
+      '<path class="evo-area" d="' + area + '"></path>' +
+      '<polyline class="evo-line" points="' + pts.join(" ") + '"></polyline>' +
+      '<circle class="evo-dot" cx="' + last[0] + '" cy="' + last[1] + '" r="3.5"></circle>' +
+      '<text class="evo-axis" x="' + PX + '" y="' + (H - 6) + '">' + esc(monthLabel(list[0].d)) + '</text>' +
+      '<text class="evo-axis" x="' + (W - PX) + '" y="' + (H - 6) + '" text-anchor="end">' + esc(monthLabel(list[list.length - 1].d)) + '</text>' +
+    '</svg>';
+  }
+
+  function renderEvo(pattern, ctx) {
+    var box = document.getElementById("comboModalEvo");
+    if (!box) return;
+    if (HISTORY_FAILED || !HISTORY_CSV_URL) { box.innerHTML = ""; return; }
+
+    var head = '<div class="evo-head"><p class="mod-tag">' + t("evoTitle") + '</p><strong>' + esc(ctx) + '</strong></div>';
+    if (!HISTORY) { box.innerHTML = head + '<p class="evo-note">' + t("evoLoading") + '</p>'; return; }
+
+    var list = HISTORY[pattern + " | " + ctx] || [];
+    if (list.length < 2) {
+      box.innerHTML = head + '<p class="evo-note">' + t("evoFew") + '</p><p class="evo-hint">' + t("evoHint") + '</p>';
+      return;
+    }
+    var tr = trendOf(list);
+    var total = list.reduce(function (a, x) { return a + x.g; }, 0);
+
+    box.innerHTML = head +
+      '<div class="evo-chart">' + evoChart(list) +
+        '<span class="evo-total ' + cls(total) + '">' + t("evoCum") + ' : ' + fmtPct(total) + '</span>' +
+      '</div>' +
+      '<div class="evo-stats">' +
+        '<div><span class="l">' + t("evoRecent") + '</span><span class="v">' + (tr.nRecent ? fmtPct(tr.recent) : "–") + ' <em>(' + tr.nRecent + ' ' + t("trades") + ')</em></span></div>' +
+        '<div><span class="l">' + t("evoGlobal") + '</span><span class="v">' + fmtPct(tr.global) + ' <em>(' + tr.nAll + ' ' + t("trades") + ')</em></span></div>' +
+        trendBadge(tr) +
+      '</div>' +
+      '<p class="evo-hint">' + t("evoHint") + '</p>';
+  }
+
+  function parseHistDate(s) {
+    s = String(s || "").trim();
+    var m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (m) return new Date(+m[1], +m[2] - 1, +m[3]);
+    m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+    if (m) return new Date(+m[3], +m[2] - 1, +m[1]);
+    return null;
+  }
+
+  function loadHistory() {
+    if (!HISTORY_CSV_URL || !window.fetch) { HISTORY_FAILED = true; return; }
+    fetch(HISTORY_CSV_URL, { cache: "no-store" })
+      .then(function (res) { if (!res.ok) throw new Error("HTTP " + res.status); return res.text(); })
+      .then(function (text) {
+        var rows = parseCSV(text), h = {};
+        for (var i = 1; i < rows.length; i++) {
+          var r = rows[i], d = parseHistDate(r[0]), combo = (r[1] || "").trim();
+          if (!d || combo.indexOf(" | ") < 0) continue;
+          var raw = String(r[2] == null ? "" : r[2]);
+          var g = raw.indexOf("%") >= 0 ? toNum(raw) : toNum(raw) * 100; // 0,0229 -> 2,29 %
+          (h[combo] = h[combo] || []).push({ d: d, g: g });
+        }
+        Object.keys(h).forEach(function (k) { h[k].sort(function (a, b) { return a.d - b.d; }); });
+        HISTORY = h;
+        if (CURRENT_MODAL) openComboModal(CURRENT_MODAL.p, CURRENT_MODAL.ctx);
+      })
+      .catch(function (err) {
+        HISTORY_FAILED = true;
+        if (window.console) console.warn("[Wavest] Historique indisponible.", err);
+        if (CURRENT_MODAL) renderEvo(CURRENT_MODAL.p.pattern, CURRENT_MODAL.ctx);
+      });
+  }
+
+  function openComboModal(p, focusCtx) {
     var modal = document.getElementById("comboModal");
     if (!modal || !p) return;
 
@@ -458,10 +598,12 @@
     if (modalRadar) modalRadar.innerHTML = radar(p);
 
     var maxAbs = p.all.reduce(function (m, r) { return Math.max(m, Math.abs(r.score)); }, 0) || 1;
+    var focus = focusCtx || p.best;
+    CURRENT_MODAL = { p: p, ctx: focus };
 
     if (thead) {
       thead.innerHTML =
-        '<th>' + thContext + '</th><th>' + thTrades + '</th><th>' + statWinrate + '</th><th>' + statRR + '</th><th>' + statScore + '</th>';
+        '<th>' + thContext + '</th><th>' + thTrades + '</th><th>' + statWinrate + '</th><th>' + statRR + '</th><th>' + statScore + '</th><th aria-hidden="true"></th>';
     }
 
     var rows = p.all
@@ -470,17 +612,37 @@
       .map(function (row) {
         var isBest = row.ctx === p.best;
         var isAvoid = !isBest && row.score < 0 && row.trades >= AVOID_MIN_TRADES;
-        return '<tr class="' + (isBest ? "is-best" : (isAvoid ? "is-avoid" : "")) + '">' +
-          '<td>' + row.ctx + (isAvoid ? ' <span class="combo-avoid-tag">' + t("avoid") + '</span>' : '') + '</td>' +
+        var hist = HISTORY && HISTORY[p.pattern + " | " + row.ctx];
+        var ico = "";
+        if (hist && hist.length >= 2) {
+          var tr = trendOf(hist);
+          ico = tr.tone === "none" ? "" : ' <span class="evo-ico evo-ico--' + tr.tone + '" title="' + t({ up: "evoUp", down: "evoDown", flat: "evoFlat" }[tr.tone]) + '">' + ({ up: "↗", down: "↘", flat: "→" }[tr.tone]) + '</span>';
+        }
+        var classes = [isBest ? "is-best" : (isAvoid ? "is-avoid" : ""), row.ctx === focus ? "is-focus" : ""].join(" ").trim();
+        return '<tr class="' + classes + '" data-ctx="' + esc(row.ctx) + '">' +
+          '<td>' + row.ctx + ico + (isAvoid ? ' <span class="combo-avoid-tag">' + t("avoid") + '</span>' : '') + '</td>' +
           '<td>' + row.trades + '</td>' +
           '<td>' + fmtPct(row.winrate) + '</td>' +
           '<td>' + fmtPct(row.rr) + '</td>' +
           '<td class="score-cell"><span class="score-num">' + fmtPct(row.score) + '</span><span class="score-track"><span class="score-bar score-bar--' + toneScore(row.score) + '" style="width:' + Math.max(4, Math.round(Math.abs(row.score) / maxAbs * 100)) + '%"></span></span></td>' +
+          '<td class="check-cell"><a class="combo-check-link" href="' + checkerUrl(p.pattern, row.ctx) + '" aria-label="' + t("check") + ' : ' + esc(p.pattern + ' | ' + row.ctx) + '">' + t("checkShort") + ' →</a></td>' +
           '</tr>';
       })
       .join("");
 
-    if (tbody) tbody.innerHTML = rows;
+    if (tbody) {
+      tbody.innerHTML = rows;
+      tbody.onclick = function (e) {
+        if (e.target.closest("a")) return;
+        var trEl = e.target.closest("tr[data-ctx]");
+        if (!trEl) return;
+        var ctx = trEl.getAttribute("data-ctx");
+        CURRENT_MODAL.ctx = ctx;
+        Array.prototype.forEach.call(tbody.querySelectorAll("tr"), function (x) { x.classList.toggle("is-focus", x === trEl); });
+        renderEvo(p.pattern, ctx);
+      };
+    }
+    renderEvo(p.pattern, focus);
 
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
@@ -490,6 +652,7 @@
   function closeComboModal() {
     var modal = document.getElementById("comboModal");
     if (!modal) return;
+    CURRENT_MODAL = null;
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("combo-modal-open");
@@ -683,6 +846,7 @@
     bindLangToggle();
     bindModal();
     loadLiveData();
+    loadHistory();
   }
 
   if (document.readyState === "loading") {

@@ -2587,8 +2587,8 @@
     "en": "Coach's note"
   },
   "analyseTechnique_219": {
-    "fr": "\n            ✏️ Éditer\n          ",
-    "en": "\n            ✏️ Edit\n          "
+    "fr": "Tu as maintenant toute la théorie de l'analyse technique. Place au concret : direction le Google Sheets, et commence à backtester chaque setup. C'est là que la théorie devient une vraie compétence.",
+    "en": "You now have all the theory of technical analysis. Time to get practical: head to the Google Sheet and start backtesting every setup. That's where theory becomes a real skill."
   },
   "analyseTechnique_220": {
     "fr": "Écrire le commentaire",
@@ -5775,8 +5775,8 @@
     "en": "Coach's note"
   },
   "psychologieDiscipline_54": {
-    "fr": "\n            ✏️ Éditer\n          ",
-    "en": "\n            ✏️ Edit\n          "
+    "fr": "Tu arrives au bout du programme, mais le vrai travail commence maintenant : appliquer ce que tu sais, sans céder à l'émotion. La psychologie, c'est 80% du jeu. Ne l'oublie jamais.",
+    "en": "You've reached the end of the program, but the real work starts now: applying what you know without giving in to emotion. Psychology is 80% of the game. Never forget it."
   },
   "psychologieDiscipline_55": {
     "fr": "Annuler",
@@ -7277,6 +7277,8 @@
   "performancePatterns_50": { "fr": "Fiable : plus de 5 %", "en": "Reliable: above 5%" },
   "performancePatterns_51": { "fr": "✓ Combo fiable = au moins 10 trades, un RR moyen positif et un score au-dessus de 5 %.", "en": "✓ Reliable combo = at least 10 trades, a positive average RR and a score above 5%." },
   "performancePatterns_52": { "fr": "✕ En rouge = combo à éviter : elle a fait perdre de l'argent sur au moins 5 trades.", "en": "✕ In red = combo to avoid: it lost money over at least 5 trades." },
+  "tradeChecker_proba1": { "fr": "Chance de TP", "en": "TP probability" },
+  "tradeChecker_proba2": { "fr": "Fourchette réaliste selon le nombre de trades : plus il y a de trades, plus elle est étroite.", "en": "Realistic range based on the number of trades: the more trades, the narrower it gets." },
   "pageTitle_calendrierEconomique": {
     "fr": "Calendrier économique — Wavest",
     "en": "Economic Calendar — Wavest"

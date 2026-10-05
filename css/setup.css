@@ -565,7 +565,8 @@ html.js .reveal.visible{
 
 /* Chapitre 5 : header non sticky (choix volontaire de cette page) */
 body.page-setup .site-header{
-  position: static !important;
+  position: relative !important;
+  z-index: 1000;
 }
 /* =========================================================
    AJOUTS — Progression, rail scrollspy, badges numérotés,

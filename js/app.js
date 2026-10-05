@@ -57,6 +57,32 @@
        - Icônes SVG (soleil/lune) gérées en CSS via body.dark,
          ce script ne fait que basculer la classe + mémoriser + a11y
     ============================================================ */
+    /* ============================================================
+       🧭 SOMMAIRE (bouton W en haut à gauche, toutes les pages)
+    ============================================================ */
+    (function initToc() {
+      var btn = document.getElementById("tocBtn");
+      var panel = document.getElementById("tocPanel");
+      if (!btn || !panel || btn.dataset.tocBound) return;
+      btn.dataset.tocBound = "1";
+      function set(open) {
+        // Sur mobile, le panneau s'ouvre juste sous le bouton (headers de hauteurs différentes)
+        if (open && window.matchMedia("(max-width:560px)").matches) {
+          panel.style.top = Math.round(btn.getBoundingClientRect().bottom + 10) + "px";
+        } else {
+          panel.style.top = "";
+        }
+        panel.hidden = !open;
+        btn.setAttribute("aria-expanded", open);
+      }
+      btn.addEventListener("click", function (e) { e.stopPropagation(); set(panel.hidden); });
+      panel.addEventListener("click", function (e) { if (e.target.closest("a")) set(false); e.stopPropagation(); });
+      document.addEventListener("click", function () { if (!panel.hidden) set(false); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !panel.hidden) { set(false); btn.focus(); }
+      });
+    })();
+
     (function initTheme() {
       const root = document.body;
       if (!root) return;

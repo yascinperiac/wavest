@@ -31,14 +31,44 @@
 
 <body data-i18n-title="pageTitle_cookies">
   <header class="site-header">
-    <button id="langToggle" type="button" class="lang-toggle" role="switch" aria-checked="false" aria-label="Changer la langue du site" data-i18n-aria-label="langToggleAria">
-      <span class="lang-toggle-thumb" aria-hidden="true"></span>
-      <span class="lang-toggle-opt lang-toggle-fr">FR</span>
-      <span class="lang-toggle-opt lang-toggle-en">EN</span>
-    </button>
+    <div class="toc">
+      <button id="tocBtn" type="button" class="toc-btn" aria-expanded="false" aria-controls="tocPanel" aria-label="Sommaire" data-i18n-aria-label="tocBtn">
+        <span class="toc-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      </button>
+      <div id="tocPanel" class="toc-panel" hidden>
+        <nav aria-label="Sommaire">
+          <ol class="toc-list">
+          <li><a href="/index.html#avis" data-i18n="tocAvis">Avis</a></li>
+          <li><a href="/index.html#trades" data-i18n="tocTrades">Trades réels</a></li>
+          <li><a href="/index.html#tools" data-i18n="tocTools">Outils</a></li>
+          <li><a href="/index.html#methode" data-i18n="tocMethode">La méthode en image</a></li>
+          <li><a href="/index.html#philosophie" data-i18n="tocPhilo">Philosophie</a></li>
+          <li><a href="/index.html#coaching" data-i18n="tocCoach">Coaching</a></li>
+          <li><a href="/index.html#chapters" data-i18n="tocProgram">Programme</a></li>
+          <li><a href="/index.html#blog" data-i18n="tocBlog">Blog</a></li>
+          </ol>
+        </nav>
+        <div class="toc-lang">
+          <span data-i18n="tocLang">Langue</span>
+          <button id="langToggle" type="button" class="lang-toggle" role="switch" aria-checked="false" aria-label="Changer la langue du site" data-i18n-aria-label="langToggleAria">
+            <span class="lang-toggle-thumb" aria-hidden="true"></span>
+            <span class="lang-toggle-opt lang-toggle-fr">FR</span>
+            <span class="lang-toggle-opt lang-toggle-en">EN</span>
+          </button>
+        </div>
+      </div>
+    </div>
     <h1 data-i18n="cookies_1">Cookies</h1>
     <div class="header-actions">
-      <a href="../index.html" class="btn btn-ghost" data-i18n="cookies_2">← Retour</a>
+      <button id="themeToggle" type="button" aria-label="Changer le thème" data-i18n-aria-label="themeToggleAria">
+        <svg class="theme-icon-morph" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <g class="sun-rays" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <path d="M12 2.8v2.6M12 18.6v2.6M4.7 4.7l1.8 1.8M17.5 17.5l1.8 1.8M2.8 12h2.6M18.6 12h2.6M4.7 19.3l1.8-1.8M17.5 6.5l1.8-1.8"></path>
+          </g>
+          <circle class="sun-core" cx="12" cy="12" r="4.6" fill="currentColor"></circle>
+          <circle class="moon-mask" cx="12" cy="12" r="5"></circle>
+        </svg>
+      </button>
     </div>
   </header>
 

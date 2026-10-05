@@ -926,3 +926,129 @@ body.dark .tc-app {
     justify-content: center;
   }
 }
+
+/* =========================
+   CHANCE DE TP (fourchette)
+========================= */
+.tc-app .proba-box {
+  padding: 13px 14px 12px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: var(--card);
+  --tone: var(--muted);
+  --tone-soft: var(--bg-soft);
+}
+.tc-app .proba-box.success { --tone: var(--accent-deep); --tone-soft: var(--accent-soft); }
+.tc-app .proba-box.warning { --tone: var(--warning-deep); --tone-soft: var(--warning-soft); }
+.tc-app .proba-box.danger  { --tone: var(--danger-deep);  --tone-soft: var(--danger-soft); }
+
+.tc-app .proba-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.tc-app .proba-head span {
+  color: var(--muted);
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.tc-app .proba-head strong {
+  color: var(--tone);
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.tc-app .proba-track {
+  position: relative;
+  height: 10px;
+  margin: 12px 0 8px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  overflow: visible;
+}
+.tc-app .proba-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  border-radius: 999px;
+  background: var(--tone-soft);
+  border: 1px solid var(--tone);
+  box-sizing: border-box;
+  transition: left .5s ease, width .5s ease;
+}
+.tc-app .proba-mark {
+  position: absolute;
+  top: -3px;
+  width: 4px;
+  height: 16px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: var(--tone);
+  opacity: 0;
+  transition: left .5s ease, opacity .3s ease;
+}
+.tc-app .proba-fifty {
+  position: absolute;
+  left: 50%;
+  top: -4px;
+  bottom: -4px;
+  border-left: 1px dashed var(--border-strong);
+}
+.tc-app .proba-note {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* =========================
+   ALERTES COMBO
+========================= */
+.tc-app .combo-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tc-app .combo-alerts:not(:empty) { margin-top: 14px; }
+.tc-app .combo-alert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.tc-app .combo-alert.danger {
+  background: var(--danger-soft);
+  color: var(--danger-deep);
+  border-color: rgba(240, 163, 168, 0.6);
+}
+.tc-app .combo-alert.info {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  border-color: rgba(143, 205, 182, 0.6);
+}
+.tc-app .combo-alert-btn {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.tc-app .combo-alert-btn:hover { background: rgba(255,255,255,.4); }
+
+@media (prefers-reduced-motion: reduce) {
+  .tc-app .proba-fill, .tc-app .proba-mark { transition: none; }
+}
