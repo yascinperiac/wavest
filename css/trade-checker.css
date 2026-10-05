@@ -1052,3 +1052,26 @@ body.dark .tc-app {
 @media (prefers-reduced-motion: reduce) {
   .tc-app .proba-fill, .tc-app .proba-mark { transition: none; }
 }
+
+/* =========================
+   LIEN VERS PERFORMANCE DES PATTERNS
+========================= */
+.tc-app .perf-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 13px 16px;
+  border: 1px solid rgba(143, 205, 182, 0.6);
+  border-radius: 14px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.tc-app .perf-link[hidden] { display: none; }
+.tc-app .perf-link:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(79, 154, 125, .15); }
+.tc-app .perf-link-arrow { font-size: 16px; }

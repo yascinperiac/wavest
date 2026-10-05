@@ -802,6 +802,7 @@
     if (!SHEET_CSV_URL || !window.fetch) {
       DATA_SOURCE = "fallback";
       renderStatus();
+      applyUrlPreset();
       return;
     }
     DATA_SOURCE = "loading";
@@ -819,13 +820,42 @@
         DATA_SOURCE = "live";
         DATA_UPDATED_AT = new Date();
         renderAll();
+        applyUrlPreset();
       })
       .catch(function (err) {
         if (window.console) console.warn("[Wavest] Combos stats indisponibles, données de secours affichées.", err);
         DATA = FALLBACK_DATA;
         DATA_SOURCE = "fallback";
         renderAll();
+        applyUrlPreset();
       });
+  }
+
+  /* Arrivée depuis le Trade Checker : performance-patterns.html?pattern=EDGE&ctx=IETE%20with%20bos */
+  var PRESET_DONE = false;
+  function applyUrlPreset() {
+    if (PRESET_DONE) return;
+    PRESET_DONE = true;
+    var params;
+    try { params = new URLSearchParams(window.location.search); } catch (e) { return; }
+    var wanted = (params.get("pattern") || "").trim().toLowerCase();
+    if (!wanted) return;
+    var ctx = params.get("ctx") || "";
+    var idx = -1;
+    for (var i = 0; i < DATA.length; i++) {
+      if (DATA[i].pattern.toLowerCase() === wanted) { idx = i; break; }
+    }
+    if (idx < 0) return;
+
+    var cards = document.querySelectorAll("#comboGrid .combo-card");
+    var card = cards[idx];
+    if (card) {
+      card.classList.add("is-target");
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    var p = DATA[idx];
+    var hasCtx = p.all.some(function (r) { return r.ctx === ctx; });
+    setTimeout(function () { openComboModal(p, hasCtx ? ctx : null); }, 450);
   }
 
   // Re-dessine après le changement de langue (i18n.js met à jour <html lang>)

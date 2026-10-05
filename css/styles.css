@@ -1646,4 +1646,130 @@ body.dark .tool-shot .shot-dark{display:block}
 .toc-btn[aria-expanded="true"] .toc-icon i:nth-child(3){transform:translate(4.5px,9.5px) rotate(60.95deg) scaleX(.572)}
 .toc-btn[aria-expanded="true"] .toc-icon i:nth-child(4){transform:translate(9.5px,8px) rotate(-67.38deg) scaleX(.722)}
 @media (prefers-reduced-motion:reduce){ .toc-icon i{transition:none} }
+
+/* Sommaire : entrées 01 → 08 (même style que le sous-menu Outils) */
+.toc-list > li > a{
+  transition:background-color .2s ease, color .2s ease, transform .2s ease;
+}
+.toc-list > li > a::before{
+  display:inline-flex; align-items:center; justify-content:center; flex:none;
+  width:26px; height:26px; border-radius:8px;
+  background:rgba(0,144,245,.08); font-variant-numeric:tabular-nums;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1), background-color .2s ease, color .2s ease;
+}
+.toc-list > li > a:hover{transform:translateX(3px)}
+.toc-list > li > a:hover::before{transform:scale(1.1); background:rgba(0,144,245,.14)}
+.toc-list > li.toc-has-sub.is-open > a::before{background:var(--link); color:#fff}
+
+/* entrée en cascade à l'ouverture du panneau */
+@keyframes toc-item-in{
+  from{opacity:0; transform:translateX(-8px)}
+  to{opacity:1; transform:none}
+}
+.toc-panel:not([hidden]) .toc-list > li,
+.toc-panel:not([hidden]) .toc-lang{
+  animation:toc-item-in .4s cubic-bezier(.22,1,.36,1) both;
+}
+.toc-panel:not([hidden]) .toc-list > li:nth-child(1){animation-delay:0.040s}
+.toc-panel:not([hidden]) .toc-list > li:nth-child(2){animation-delay:0.075s}
+.toc-panel:not([hidden]) .toc-list > li:nth-child(3){animation-delay:0.110s}
+.toc-panel:not([hidden]) .toc-list > li:nth-child(4){animation-delay:0.145s}
+.toc-panel:not([hidden]) .toc-list > li:nth-child(5){animation-delay:0.180s}
+.toc-panel:not([hidden]) .toc-list > li:nth-child(6){animation-delay:0.215s}
+.toc-panel:not([hidden]) .toc-list > li:nth-child(7){animation-delay:0.250s}
+.toc-panel:not([hidden]) .toc-list > li:nth-child(8){animation-delay:0.285s}
+.toc-panel:not([hidden]) .toc-list > li:nth-child(9){animation-delay:0.320s}
+.toc-panel:not([hidden]) .toc-list > li:nth-child(10){animation-delay:0.355s}
+.toc-panel:not([hidden]) .toc-list > li:nth-child(11){animation-delay:0.390s}
+.toc-panel:not([hidden]) .toc-list > li:nth-child(12){animation-delay:0.425s}
+.toc-panel:not([hidden]) .toc-lang{animation-delay:.34s}
+@media (prefers-reduced-motion:reduce){
+  .toc-panel:not([hidden]) .toc-list > li,
+  .toc-panel:not([hidden]) .toc-lang{animation:none}
+  .toc-list > li > a, .toc-list > li > a::before{transition:none}
+}
+
+/* Sommaire : sous-menu Outils (dépliage animé) */
+.toc-panel{max-height:calc(100vh - 100px); overflow-y:auto}
+.toc-list li.toc-has-sub{display:grid; grid-template-columns:1fr auto; align-items:center}
+.toc-sub-toggle{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:32px; height:32px; margin-right:4px; border:0; border-radius:8px;
+  background:transparent; color:var(--muted); cursor:pointer;
+  transition:background-color .2s ease, color .2s ease;
+}
+.toc-sub-toggle:hover{background:var(--glass-soft); color:var(--text)}
+.toc-sub-toggle svg{transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.toc-has-sub.is-open .toc-sub-toggle{color:var(--link); background:rgba(0,144,245,.08)}
+.toc-has-sub.is-open .toc-sub-toggle svg{transform:rotate(180deg)}
+.toc-has-sub > a{transition:color .25s ease}
+.toc-has-sub.is-open > a{color:var(--link)}
+
+/* hauteur animée : la grille passe de 0fr à 1fr */
+.toc-sub-wrap{
+  grid-column:1 / -1;
+  display:grid; grid-template-rows:0fr;
+  transition:grid-template-rows .45s cubic-bezier(.22,1,.36,1);
+}
+.toc-has-sub.is-open .toc-sub-wrap{grid-template-rows:1fr}
+.toc-sub{
+  position:relative; min-height:0; overflow:hidden;
+  list-style:none; margin:0 0 0 30px; padding:0 0 0 12px;
+}
+/* le rail vertical se dessine de haut en bas */
+.toc-sub::before{
+  content:""; position:absolute; left:0; top:4px; bottom:8px; width:2px; border-radius:2px;
+  background:linear-gradient(var(--link), rgba(0,144,245,.15));
+  transform:scaleY(0); transform-origin:top;
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.toc-has-sub.is-open .toc-sub::before{transform:scaleY(1); transition-delay:.08s}
+.toc-sub li{
+  counter-increment:none;
+  opacity:0; transform:translateX(-8px);
+  transition:opacity .25s ease, transform .35s cubic-bezier(.22,1,.36,1);
+}
+.toc-sub li:first-child{padding-top:4px}
+.toc-sub li:last-child{padding-bottom:6px}
+.toc-has-sub.is-open .toc-sub li{
+  opacity:1; transform:none;
+  transition-delay:calc(.06s + var(--i, 0) * .045s);
+}
+.toc-list .toc-sub a{
+  display:flex; align-items:center; gap:10px;
+  padding:7px 10px; border-radius:9px;
+  font-size:13.5px; color:var(--muted);
+  transition:background-color .2s ease, color .2s ease, transform .2s ease;
+}
+.toc-list .toc-sub a::before{content:none}
+.toc-sub-ico{
+  display:inline-flex; align-items:center; justify-content:center; flex:none;
+  width:26px; height:26px; border-radius:8px;
+  color:var(--link); background:rgba(0,144,245,.08);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1), background-color .2s ease;
+}
+.toc-list .toc-sub a:hover{background:var(--glass-soft); color:var(--text); transform:translateX(3px)}
+.toc-list .toc-sub a:hover .toc-sub-ico{transform:scale(1.1); background:rgba(0,144,245,.14)}
+.toc-list .toc-sub a[aria-current="page"]{color:var(--link); font-weight:700; background:rgba(0,144,245,.06)}
+.toc-list .toc-sub a[aria-current="page"] .toc-sub-ico{background:var(--link); color:#fff}
+
+@media (prefers-reduced-motion:reduce){
+  .toc-sub-wrap, .toc-sub::before, .toc-sub li, .toc-sub-toggle svg, .toc-list .toc-sub a, .toc-sub-ico{transition:none}
+}
 .philo-sign img{object-position:50% 45%}
+
+
+/* Logo centré sur toutes les pages : le titre de page ne doit pas passer dessous */
+.site-header h1{
+  max-width:calc(50% - 125px);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.site-header .brand{transition:opacity .2s ease, transform .2s ease}
+.site-header .brand:hover{opacity:.85; transform:translateX(-50%) scale(1.03)}
+@media (max-width:900px){
+  /* sur petit écran, le logo prend le centre : le titre reste lisible par les lecteurs d'écran */
+  .site-header h1{
+    position:absolute !important; width:1px; height:1px; margin:-1px; padding:0;
+    overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+  }
+}

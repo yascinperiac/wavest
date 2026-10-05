@@ -65,6 +65,79 @@
       var panel = document.getElementById("tocPanel");
       if (!btn || !panel || btn.dataset.tocBound) return;
       btn.dataset.tocBound = "1";
+
+      // Sous-menus « Outils » et « Programme » : accès direct depuis n'importe quelle page
+      var TOOLS = [
+        ["/pages/trade-checker.html", "toolCardTC", "Trade Checker", '<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>'],
+        ["/pages/performance-patterns.html", "tool6", "Performance Patterns", '<line x1="6" y1="20" x2="6" y2="12"/><line x1="12" y1="20" x2="12" y2="6"/><line x1="18" y1="20" x2="18" y2="9"/>'],
+        ["/pages/dashboard.html", "toolCardDash", "Dashboard de progression", '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>'],
+        ["/pages/calculateur-lot.html", "toolCardLot", "Calculateur de lot", '<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/>'],
+        ["/pages/simulateur-croissance.html", "tool5", "Simulateur de croissance de capital", '<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>'],
+        ["/pages/horloge-sessions.html", "toolCardClock", "Horloge des sessions", '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/>'],
+        ["/pages/calendrier-economique.html", "tool7", "Calendrier économique", '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>']
+      ];
+      var ICON_OPEN = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+      var CHAPTERS = [
+        ["/pages/fondation.html", "chap1", "Fondation", '<path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/>'],
+        ["/pages/tradingview.html", "chap2", "Configuration TradingView", '<rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 13l3-3 3 2 5-5"/>'],
+        ["/pages/analyse-technique.html", "chap3", "Analyse technique", '<path d="M8 4v16"/><rect x="5.5" y="8" width="5" height="7" rx="1"/><path d="M16 3v16"/><rect x="13.5" y="6" width="5" height="9" rx="1"/>'],
+        ["/pages/money-management.html", "chap4", "Money management", '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>'],
+        ["/pages/setup.html", "chap5", "Setup", '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>'],
+        ["/pages/psychologie-discipline.html", "chap6", "Psychologie & Discipline", '<path d="M9.5 2A3.5 3.5 0 0 0 6 5.5 3.5 3.5 0 0 0 3 9a3.5 3.5 0 0 0 1 2.5A3.5 3.5 0 0 0 6 18a3 3 0 0 0 6 0V2.5"/><path d="M14.5 2A3.5 3.5 0 0 1 18 5.5 3.5 3.5 0 0 1 21 9a3.5 3.5 0 0 1-1 2.5A3.5 3.5 0 0 1 18 18a3 3 0 0 1-6 0"/>']
+      ];
+      var here = location.pathname.replace(/\/+$/, "");
+
+      function addSubMenu(hash, items, ariaLabel) {
+        var anchor = panel.querySelector('.toc-list a[href$="' + hash + '"]');
+        if (!anchor || anchor.parentNode.classList.contains("toc-has-sub")) return;
+        var li = anchor.parentNode;
+        li.classList.add("toc-has-sub");
+        var toggle = document.createElement("button");
+        toggle.type = "button";
+        toggle.className = "toc-sub-toggle";
+        toggle.setAttribute("aria-label", ariaLabel);
+        toggle.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        var wrap = document.createElement("div");
+        wrap.className = "toc-sub-wrap";
+        var sub = document.createElement("ul");
+        sub.className = "toc-sub";
+        wrap.appendChild(sub);
+        items.forEach(function (it, i) {
+          var item = document.createElement("li");
+          item.style.setProperty("--i", i);
+          var link = document.createElement("a");
+          link.href = it[0];
+          var ico = document.createElement("span");
+          ico.className = "toc-sub-ico";
+          ico.innerHTML = ICON_OPEN + it[3] + "</svg>";
+          var label = document.createElement("span");
+          label.setAttribute("data-i18n", it[1]);
+          label.textContent = it[2];
+          link.appendChild(ico);
+          link.appendChild(label);
+          if (here.slice(-it[0].length) === it[0]) link.setAttribute("aria-current", "page");
+          item.appendChild(link);
+          sub.appendChild(item);
+        });
+        li.appendChild(toggle);
+        li.appendChild(wrap);
+        var isOpen = function () { return li.classList.contains("is-open"); };
+        var openSub = function (open) {
+          toggle.setAttribute("aria-expanded", open);
+          anchor.setAttribute("aria-expanded", open);
+          li.classList.toggle("is-open", open);
+          sub.inert = !open;
+        };
+        openSub(false);
+        // Le titre ouvre son sous-menu au lieu de renvoyer vers l'accueil
+        anchor.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); openSub(!isOpen()); });
+        toggle.addEventListener("click", function (e) { e.stopPropagation(); openSub(!isOpen()); });
+        // Sur une page de ce groupe, le sous-menu est déjà ouvert
+        if (sub.querySelector("[aria-current]")) openSub(true);
+      }
+
+      addSubMenu("#tools", TOOLS, "Afficher les outils");
+      addSubMenu("#chapters", CHAPTERS, "Afficher les chapitres");
       function set(open) {
         // Sur mobile, le panneau s'ouvre juste sous le bouton (headers de hauteurs différentes)
         if (open && window.matchMedia("(max-width:560px)").matches) {
@@ -213,6 +286,8 @@
         (e) => {
           const a = e.target.closest('a[href^="#"]:not([href="#"])');
           if (!a) return;
+          // « Outils » du sommaire ouvre son sous-menu, il ne fait pas défiler la page
+          if (a.parentNode && a.parentNode.classList && a.parentNode.classList.contains("toc-has-sub")) return;
           if (a.target === "_blank") return;
 
           const raw = a.getAttribute("href");

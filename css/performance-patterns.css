@@ -1015,3 +1015,6 @@ body.combo-modal-open{
 .combo-modal-table tbody tr[data-ctx]:hover td{ background:color-mix(in oklab, var(--perf-accent) 6%, transparent); }
 .combo-modal-table tr.is-focus td{ box-shadow:inset 0 -2px 0 var(--perf-accent); }
 @media (max-width:420px){ .evo-badge{ margin-left:0; } }
+
+/* Carte ciblée depuis le Trade Checker */
+.combo-card.is-target{ border-color:var(--perf-accent); box-shadow:0 0 0 2px color-mix(in oklab, var(--perf-accent) 35%, transparent); }

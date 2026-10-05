@@ -387,6 +387,20 @@ const readGlobal = document.getElementById("readGlobal");
   .forEach((id) => { const el = document.getElementById(id); if (el) el.removeAttribute("data-i18n"); });
 
 const comboAlerts = document.getElementById("comboAlerts");
+const perfLink = document.getElementById("perfLink");
+
+/* Lien vers Performance des patterns, ouvert directement sur le pattern choisi */
+function updatePerfLink() {
+  if (!perfLink) return;
+  const pattern = dailyPattern.value;
+  if (!pattern) { perfLink.hidden = true; return; }
+  const key = pattern.indexOf("EDGE") === 0 ? "EDGE" : pattern;
+  let url = "performance-patterns.html?pattern=" + encodeURIComponent(key);
+  if (confirmation4h.value) url += "&ctx=" + encodeURIComponent(confirmation4h.value);
+  perfLink.href = url;
+  perfLink.querySelector("span").textContent = "📊 Voir les data " + (key === "EDGE" ? "de l'EDGE" : "du " + key);
+  perfLink.hidden = false;
+}
 const probaBox = document.getElementById("probaBox");
 const probaRange = document.getElementById("probaRange");
 const probaFill = document.getElementById("probaFill");
@@ -1013,6 +1027,7 @@ function updateFinalVerdict() {
 ===================================================== */
 
 function updateChecker() {
+  updatePerfLink();
   updateDailyValidation();
   updateWeeklyValidation();
   update4HValidation();
