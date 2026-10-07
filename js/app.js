@@ -74,6 +74,7 @@
         ["/pages/calculateur-lot.html", "toolCardLot", "Calculateur de lot", '<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/>'],
         ["/pages/simulateur-croissance.html", "tool5", "Simulateur de croissance de capital", '<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>'],
         ["/pages/horloge-sessions.html", "toolCardClock", "Horloge des sessions", '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/>'],
+        ["/pages/exercices.html", "toolExercices", "Exercices Avant / Après", '<rect x="3" y="3" width="7" height="18" rx="1.5"/><rect x="14" y="3" width="7" height="18" rx="1.5"/><path d="M10 12h4"/><path d="M12.5 10.5L14 12l-1.5 1.5"/>'],
         ["/pages/calendrier-economique.html", "tool7", "Calendrier économique", '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>']
       ];
       var ICON_OPEN = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
@@ -154,6 +155,144 @@
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape" && !panel.hidden) { set(false); btn.focus(); }
       });
+    })();
+
+    /* ============================================================
+       ✅ PROGRESSION DU PROGRAMME (mémorisée dans le navigateur)
+       - bouton « Chapitre terminé » en bas de chaque chapitre
+       - coches dans le sous-menu Programme + barre de progression
+       - coches et barre sur la section Programme de l'accueil
+    ============================================================ */
+    (function initProgress() {
+      var CHAPS = [
+        ["/pages/fondation.html", "chap1"],
+        ["/pages/tradingview.html", "chap2"],
+        ["/pages/analyse-technique.html", "chap3"],
+        ["/pages/money-management.html", "chap4"],
+        ["/pages/setup.html", "chap5"],
+        ["/pages/psychologie-discipline.html", "chap6"]
+      ];
+      var KEY = "wavest-progress-v1";
+      var T = {
+        fr: { mark: "Marquer ce chapitre comme terminé", done: "Chapitre terminé", undo: "Annuler", of: "chapitres terminés sur", next: "Chapitre suivant", all: "Programme terminé ! Passe à la pratique avec les exercices.", drills: "Faire un exercice", prog: "Ta progression", tag: "Progression" },
+        en: { mark: "Mark this chapter as completed", done: "Chapter completed", undo: "Undo", of: "chapters completed out of", next: "Next chapter", all: "Programme completed! Now practise with the drills.", drills: "Do a drill", prog: "Your progress", tag: "Progress" }
+      };
+      function lang() { try { return (window.WavestI18n && window.WavestI18n.getLang()) || "fr"; } catch (e) { return "fr"; } }
+      function t(k) { return (T[lang()] || T.fr)[k]; }
+      function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+      function save(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
+      function chapName(i) {
+        var k = CHAPS[i][1];
+        try { var tr = window.WavestI18n && window.WavestI18n.t && window.WavestI18n.t(k); if (tr) return tr; } catch (e) {}
+        var el = document.querySelector('[data-i18n="' + k + '"]');
+        return el ? el.textContent : ["Fondation", "Configuration TradingView", "Analyse technique", "Money management", "Setup", "Psychologie & Discipline"][i];
+      }
+      var here = location.pathname.replace(/\/+$/, "");
+      var current = -1;
+      CHAPS.forEach(function (c, i) { if (here.slice(-c[0].length) === c[0]) current = i; });
+
+      function count(d) { return CHAPS.filter(function (c) { return d[c[0]]; }).length; }
+      function bar(n) {
+        var pct = Math.round(n / CHAPS.length * 100);
+        return '<div class="prog-meter" role="progressbar" aria-valuemin="0" aria-valuemax="' + CHAPS.length + '" aria-valuenow="' + n + '">' +
+          '<span style="width:' + pct + '%"></span></div>';
+      }
+
+      /* --- carte en bas d'un chapitre --- */
+      var card = null;
+      if (current >= 0) {
+        var main = document.querySelector("main");
+        if (main) {
+          // une <div> (et non <section>) : certains chapitres stylent toutes les sections
+          card = document.createElement("div");
+          card.className = "chap-progress";
+          card.setAttribute("role", "region");
+          card.setAttribute("aria-label", "Progression");
+          var navs = main.querySelectorAll(":scope > .hero-cta, :scope > .chapter-cta");
+          var lastNav = navs.length ? navs[navs.length - 1] : null;
+          if (lastNav) main.insertBefore(card, lastNav); else main.appendChild(card);
+          card.addEventListener("click", function (e) {
+            var b = e.target.closest("[data-prog]");
+            if (!b) return;
+            var d = load();
+            if (b.dataset.prog === "done") d[CHAPS[current][0]] = Date.now(); else delete d[CHAPS[current][0]];
+            save(d);
+            renderAll(b.dataset.prog === "done");
+          });
+        }
+      }
+
+      function renderCard(justDone) {
+        if (!card) return;
+        var d = load(), n = count(d), isDone = !!d[CHAPS[current][0]];
+        var next = null;
+        for (var k = 1; k <= CHAPS.length; k++) {
+          var j = (current + k) % CHAPS.length;
+          if (!d[CHAPS[j][0]]) { next = j; break; }
+        }
+        var action = isDone
+          ? '<div class="chap-progress-done' + (justDone ? " is-pop" : "") + '"><span class="chap-check" aria-hidden="true">✓</span><strong>' + t("done") + '</strong><button type="button" class="chap-undo" data-prog="undo">' + t("undo") + '</button></div>'
+          : '<button type="button" class="chap-mark" data-prog="done"><span class="chap-check" aria-hidden="true">✓</span>' + t("mark") + '</button>';
+        var nextHtml = "";
+        if (isDone) {
+          nextHtml = next === null
+            ? '<p class="chap-all">🎉 ' + t("all") + '</p><a class="chap-next" href="/pages/exercices.html">' + t("drills") + ' →</a>'
+            : '<a class="chap-next" href="' + CHAPS[next][0] + '">' + t("next") + ' : ' + chapName(next) + ' →</a>';
+        }
+        card.innerHTML =
+          '<p class="chap-progress-tag">' + t("prog") + '</p>' +
+          action +
+          '<div class="chap-progress-meta"><span>' + n + ' ' + t("of") + ' ' + CHAPS.length + '</span>' + bar(n) + '</div>' +
+          nextHtml;
+      }
+
+      /* --- sous-menu Programme du sommaire --- */
+      function renderToc() {
+        var d = load(), n = count(d);
+        CHAPS.forEach(function (c) {
+          var link = document.querySelector('.toc-sub a[href="' + c[0] + '"]');
+          if (link) link.classList.toggle("is-done", !!d[c[0]]);
+        });
+        var progLink = document.querySelector('.toc-list a[href$="#chapters"]');
+        if (progLink) {
+          var badge = progLink.querySelector(".toc-prog");
+          if (!badge) { badge = document.createElement("span"); badge.className = "toc-prog"; progLink.appendChild(badge); }
+          badge.textContent = n + "/" + CHAPS.length;
+          badge.classList.toggle("is-full", n === CHAPS.length);
+          badge.hidden = n === 0;
+        }
+      }
+
+      /* --- section Programme de l'accueil --- */
+      function renderHome() {
+        var sec = document.getElementById("chapters");
+        if (!sec) return;
+        var d = load(), n = count(d);
+        CHAPS.forEach(function (c) {
+          var item = sec.querySelector('.prog-item[href="' + c[0] + '"]');
+          if (item) item.classList.toggle("is-done", !!d[c[0]]);
+        });
+        var box = sec.querySelector(".home-progress");
+        var first = sec.querySelector(".prog-item");
+        if (!box && first) {
+          box = document.createElement("div");
+          box.className = "home-progress";
+          var list = first.closest("ol, ul") || first.parentNode;
+          list.parentNode.insertBefore(box, list);
+        }
+        if (box) {
+          box.hidden = n === 0;
+          box.innerHTML = '<span class="home-progress-label">' + t("tag") + ' : <strong>' + n + '/' + CHAPS.length + '</strong></span>' + bar(n);
+        }
+      }
+
+      function renderAll(justDone) { renderCard(justDone); renderToc(); renderHome(); }
+      renderAll(false);
+      // la langue est appliquée par i18n.js après ce script : on redessine quand elle change
+      if (window.MutationObserver) {
+        new MutationObserver(function () { renderAll(false); })
+          .observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+      }
     })();
 
     (function initTheme() {

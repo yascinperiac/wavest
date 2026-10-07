@@ -7277,6 +7277,15 @@
   "performancePatterns_50": { "fr": "Fiable : plus de 5 %", "en": "Reliable: above 5%" },
   "performancePatterns_51": { "fr": "✓ Combo fiable = au moins 10 trades, un RR moyen positif et un score au-dessus de 5 %.", "en": "✓ Reliable combo = at least 10 trades, a positive average RR and a score above 5%." },
   "performancePatterns_52": { "fr": "✕ En rouge = combo à éviter : elle a fait perdre de l'argent sur au moins 5 trades.", "en": "✕ In red = combo to avoid: it lost money over at least 5 trades." },
+  "pageTitle_exercices": { "fr": "Exercices Avant / Après — Wavest", "en": "Before / After drills — Wavest" },
+  "exercices_intro": {
+    "fr": "Analyse un vrai setup comme je le fais : d'abord le <strong>Daily</strong>, puis la validation <strong>Weekly</strong>, et enfin la confirmation <strong>4H</strong>. À chaque étape, réponds puis compare avec ma correction.",
+    "en": "Analyse a real setup the way I do: first the <strong>Daily</strong>, then the <strong>Weekly</strong> validation, and finally the <strong>4H</strong> confirmation. At each step, answer, then compare with my correction."
+  },
+  "toolExercicesText": { "fr": "Analyse un vrai setup étape par étape, puis compare avec la correction.", "en": "Analyse a real setup step by step, then compare with the correction." },
+  "practiceTitle": { "fr": "Entraîne-toi sur un vrai setup", "en": "Practise on a real setup" },
+  "practiceText": { "fr": "Analyse un trade réel comme je le fais, Daily, Weekly puis 4H, et compare ta lecture avec ma correction.", "en": "Analyse a real trade the way I do, Daily, Weekly then 4H, and compare your read with my correction." },
+  "toolExercices": { "fr": "Exercices Avant / Après", "en": "Before / After drills" },
   "tradeChecker_proba1": { "fr": "Chance de TP", "en": "TP probability" },
   "tradeChecker_proba2": { "fr": "Fourchette réaliste selon le nombre de trades : plus il y a de trades, plus elle est étroite.", "en": "Realistic range based on the number of trades: the more trades, the narrower it gets." },
   "pageTitle_calendrierEconomique": {
