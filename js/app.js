@@ -236,7 +236,7 @@
         var nextHtml = "";
         if (isDone) {
           nextHtml = next === null
-            ? '<p class="chap-all">🎉 ' + t("all") + '</p><a class="chap-next" href="/pages/exercices.html">' + t("drills") + ' →</a>'
+            ? (CHAPS[current][0] !== "/pages/setup.html" ? "" : '<p class="chap-all">🎉 ' + t("all") + '</p><a class="chap-next" href="/pages/exercices.html">' + t("drills") + ' →</a>')
             : '<a class="chap-next" href="' + CHAPS[next][0] + '">' + t("next") + ' : ' + chapName(next) + ' →</a>';
         }
         card.innerHTML =
