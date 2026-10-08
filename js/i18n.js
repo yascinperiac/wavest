@@ -79,8 +79,8 @@
     "en": "<span class=\"hero-l1\">800+ backtested trades.</span> <span class=\"hero-l2\">Zero promises.</span>"
   },
   "heroText": {
-    "fr": "Analyse technique pure, gestion du risque, discipline — celle que j'utilise moi-même depuis 3 ans.",
-    "en": "Pure technical analysis, risk management, discipline — the same one I've used myself for 3 years."
+    "fr": "La méthode Forex que j'applique moi-même depuis 3 ans : analyse technique, gestion du risque et discipline. Tu apprends à lire un setup, pas à copier des signaux.",
+    "en": "The Forex method I've applied myself for 3 years: technical analysis, risk management and discipline. You learn to read a setup, not to copy signals."
   },
   "ctaOffer": {
     "fr": "Découvrir l'offre →",
@@ -102,6 +102,9 @@
     "fr": "« Yascin est un excellent professeur de trading, pédagogue, disponible et surtout très à l'écoute. (…) Je recommande fortement ! »",
     "en": "“Yascin is an excellent trading teacher: clear, available and above all a great listener. (…) Highly recommend!”"
   },
+  "heroVideoCaption": { "fr": "▶ Regarde une analyse complète, du début à la fin", "en": "▶ Watch a full analysis, from start to finish" },
+  "heroVideoAria": { "fr": "Regarder une analyse complète en vidéo", "en": "Watch a full analysis on video" },
+  "heroVideoClose": { "fr": "Fermer la vidéo", "en": "Close the video" },
   "heroShotCaption": {
     "fr": "Une vraie analyse · NZD/USD en 4H, juin 2026",
     "en": "A real analysis · NZD/USD 4H, June 2026"

@@ -33,7 +33,7 @@
   <meta property="og:locale" content="fr_FR" /><link rel="icon" type="image/png" href="/assets/images/apple-touch-icon.png?v=3">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico?v=3">
-  <link rel="stylesheet" href="/css/styles.css?v=41" />
+  <link rel="stylesheet" href="/css/styles.css?v=44" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -178,16 +178,19 @@
     <section class="hero hero--image hero--split reveal" aria-labelledby="heroTitle">
       <div class="hero-inner">
         <div class="hero-copy">
-        <h2 id="heroTitle" data-i18n-html="heroTitle"><span class="hero-l1">800+ trades backtestés.</span> <span class="hero-l2">Zéro promesse.</span></h2>
-        <p id="heroText" data-i18n="heroText">Analyse technique pure, gestion du risque, discipline — celle que j'utilise moi-même depuis 3 ans.</p>
+        <h1 id="heroTitle" data-i18n-html="heroTitle"><span class="hero-l1">800+ trades backtestés.</span> <span class="hero-l2">Zéro promesse.</span></h1>
+        <p id="heroText" data-i18n="heroText">La méthode Forex que j'applique moi-même depuis 3 ans : analyse technique, gestion du risque et discipline. Tu apprends à lire un setup, pas à copier des signaux.</p>
         <div class="hero-cta">
           <a href="https://go.wavest.fr" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-i18n="ctaOffer">Découvrir l'offre →</a>
           <a href="#chapters" class="btn btn-ghost" data-i18n="ctaStart">Voir le programme</a>
         </div>
       </div>
-        <figure class="hero-shot">
-          <img data-lightbox src="/assets/images/home/hero-nzdusd.jpg" alt="Analyse réelle de Yascin sur TradingView : NZD/USD en 4H, zone de vente, checklist multi-timeframe et niveaux de Fibonacci" width="1400" height="731" fetchpriority="high">
-          <figcaption><span data-i18n="heroShotCaption">Une vraie analyse · NZD/USD en 4H, juin 2026</span> <span class="zoom-hint" aria-hidden="true">· <span data-i18n="zoomHint">Clique pour agrandir</span></span></figcaption>
+        <figure class="hero-shot hero-video">
+          <button type="button" class="hero-play" data-yt="Ib-InUxESE4" aria-label="Regarder une analyse complète en vidéo" data-i18n-aria-label="heroVideoAria">
+            <img src="/assets/images/home/hero-nzdusd.jpg" alt="Analyse réelle de Yascin sur TradingView : NZD/USD en 4H, zone de vente, checklist multi-timeframe et niveaux de Fibonacci" width="1400" height="731" fetchpriority="high">
+            <span class="hero-play-btn" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></span>
+          </button>
+          <figcaption><span data-i18n="heroVideoCaption">▶ Regarde une analyse complète, du début à la fin</span></figcaption>
         </figure>
       </div>
     </section>
@@ -602,7 +605,8 @@
         </a>
         <a class="tool-card" href="/pages/exercices.html">
           <span class="tool-shot">
-            <img src="https://s3.tradingview.com/snapshots/1/1AAyM6N2.png" alt="Graphique Daily réel utilisé dans l'exercice Avant / Après" width="880" height="550" loading="lazy" onerror="this.style.display='none'; this.parentNode.classList.add('tool-shot--empty')">
+            <img class="shot-light" src="/assets/images/tools/exercices-light.jpg" alt="Exercice Avant / Après : question sur le pattern Daily, bonne réponse M4 validée" width="880" height="550" loading="lazy">
+            <img class="shot-dark" src="/assets/images/tools/exercices-dark.jpg" alt="" aria-hidden="true" width="880" height="550" loading="lazy">
           </span>
           <span class="tool-card-top">
             <span class="tool-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="18" rx="1.5"/><rect x="14" y="3" width="7" height="18" rx="1.5"/></svg></span>
@@ -846,7 +850,8 @@
     })();
   </script>
   <script src="/js/app.js?v=6" defer></script>
-  <script src="/js/i18n.js?v=18" defer></script>
+  <script src="/js/i18n.js?v=20" defer></script>
   <script src="/js/trade-week.js?v=3" defer></script>
+  <script src="/js/hero-video.js?v=1" defer></script>
 </body>
 </html>
