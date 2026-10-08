@@ -151,3 +151,21 @@
   font-weight:700; font-size:15px; text-decoration:none; transition:transform .15s ease, box-shadow .15s ease;
 }
 .ex-cta-btn:hover{transform:translateY(-1px); box-shadow:0 10px 24px -10px rgba(0,144,245,.6)}
+
+/* Partage du score */
+.ex-share{margin:0 auto 22px; max-width:520px}
+.ex-share-title{margin:0 0 10px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--muted)}
+.ex-share-btns{display:flex; justify-content:center; gap:8px; flex-wrap:wrap}
+.ex-share-btn{display:inline-flex; align-items:center; gap:7px; padding:9px 14px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--text); font:inherit; font-size:13.5px; font-weight:600; text-decoration:none; cursor:pointer; transition:transform .15s ease, border-color .15s ease, background .15s ease}
+.ex-share-btn svg{width:16px; height:16px; flex:none}
+.ex-share-btn:hover{transform:translateY(-1px); border-color:var(--link)}
+.ex-share-btn--main{background:var(--link); border-color:var(--link); color:#fff}
+.ex-share-btn--wa svg{color:#25d366}
+.ex-share-btn.is-done{border-color:var(--ex-good); color:var(--ex-good)}
+
+/* Loupe + pop-up des graphiques */
+.ex-img-link{position:relative; cursor:zoom-in}
+.ex-zoomhint{position:absolute; right:10px; bottom:10px; width:34px; height:34px; border-radius:10px; display:grid; place-items:center; font-size:18px; color:#fff; background:rgba(0,0,0,.55); opacity:.85; transition:opacity .2s, transform .2s; pointer-events:none}
+.ex-img-link:hover .ex-zoomhint{opacity:1; transform:scale(1.08)}
+.ex-img-link.is-broken{cursor:pointer}
+.ex-img-link.is-broken .ex-zoomhint{display:none}

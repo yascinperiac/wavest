@@ -7283,6 +7283,9 @@
     "en": "Analyse a real setup the way I do: first the <strong>Daily</strong>, then the <strong>Weekly</strong> validation, and finally the <strong>4H</strong> confirmation. At each step, answer, then compare with my correction."
   },
   "toolExercicesText": { "fr": "Analyse un vrai setup étape par étape, puis compare avec la correction.", "en": "Analyse a real setup step by step, then compare with the correction." },
+  "homePracticeTitle": { "fr": "À toi : sauras-tu lire ce setup ?", "en": "Your turn: can you read this setup?" },
+  "homePracticeBadge": { "fr": "Gratuit", "en": "Free" },
+  "homePracticeText": { "fr": "Un vrai trade à analyser étape par étape, Daily, Weekly puis 4H, avec ma correction à chaque étape. 2 minutes.", "en": "A real trade to analyse step by step, Daily, Weekly then 4H, with my correction at each step. 2 minutes." },
   "practiceTitle": { "fr": "Entraîne-toi sur un vrai setup", "en": "Practise on a real setup" },
   "practiceText": { "fr": "Analyse un trade réel comme je le fais, Daily, Weekly puis 4H, et compare ta lecture avec ma correction.", "en": "Analyse a real trade the way I do, Daily, Weekly then 4H, and compare your read with my correction." },
   "toolExercices": { "fr": "Exercices Avant / Après", "en": "Before / After drills" },

@@ -243,6 +243,9 @@
   }
 
   var LABELS = {
+    bestTip: { fr: "Meilleur combo de ce pattern", en: "Best combo for this pattern" },
+    noCtx: { fr: "Pas encore de stats pour ce combo : il n'apparaît pas encore dans le tableau Combos stats.", en: "No stats yet for this combo: it is not in the Combos stats table yet." },
+    noCtxBtn: { fr: "Voir les autres combos du pattern", en: "See this pattern's other combos" },
     winrate: { fr: "Winrate", en: "Winrate" },
     rr: { fr: "RR moyen", en: "Avg RR" },
     score: { fr: "Score", en: "Score" },
@@ -592,14 +595,21 @@
 
     if (patternBadge) patternBadge.textContent = p.pattern.slice(0, 2);
     if (patternLabel) patternLabel.textContent = p.pattern;
-    if (title) title.textContent = "→ " + p.best;
-
     var modalRadar = document.getElementById("comboModalRadar");
-    if (modalRadar) modalRadar.innerHTML = radar(p);
-
-    var maxAbs = p.all.reduce(function (m, r) { return Math.max(m, Math.abs(r.score)); }, 0) || 1;
     var focus = focusCtx || p.best;
     CURRENT_MODAL = { p: p, ctx: focus };
+
+    // Le titre et l'hexagone montrent TOUJOURS le combo affiché (jamais un autre)
+    function setHead(ctx) {
+      var row = null;
+      for (var i = 0; i < p.all.length; i++) { if (p.all[i].ctx === ctx) { row = p.all[i]; break; } }
+      if (title) title.textContent = "→ " + ctx + (ctx === p.best ? " ★" : "");
+      if (title) title.title = ctx === p.best ? t("bestTip") : "";
+      if (modalRadar) modalRadar.innerHTML = radar(row && ctx !== p.best ? row : p);
+    }
+    setHead(focus);
+
+    var maxAbs = p.all.reduce(function (m, r) { return Math.max(m, Math.abs(r.score)); }, 0) || 1;
 
     if (thead) {
       thead.innerHTML =
@@ -639,6 +649,7 @@
         var ctx = trEl.getAttribute("data-ctx");
         CURRENT_MODAL.ctx = ctx;
         Array.prototype.forEach.call(tbody.querySelectorAll("tr"), function (x) { x.classList.toggle("is-focus", x === trEl); });
+        setHead(ctx);
         renderEvo(p.pattern, ctx);
       };
     }
@@ -714,7 +725,7 @@
 
     for (var i = 1; i < rows.length; i++) {
       var r = rows[i];
-      var combo = (r[0] || "").trim();
+      var combo = (r[0] || "").replace(/[\s\u00a0]+/g, " ").trim();
       var sep = combo.indexOf(" | ");
       if (sep < 0) continue;
 
@@ -845,7 +856,10 @@
     for (var i = 0; i < DATA.length; i++) {
       if (DATA[i].pattern.toLowerCase() === wanted) { idx = i; break; }
     }
-    if (idx < 0) return;
+    if (idx < 0) {
+      showNoCtx({ pattern: params.get("pattern").trim(), missing: true }, ctx);
+      return;
+    }
 
     var cards = document.querySelectorAll("#comboGrid .combo-card");
     var card = cards[idx];
@@ -854,8 +868,40 @@
       card.scrollIntoView({ behavior: "smooth", block: "center" });
     }
     var p = DATA[idx];
-    var hasCtx = p.all.some(function (r) { return r.ctx === ctx; });
-    setTimeout(function () { openComboModal(p, hasCtx ? ctx : null); }, 450);
+    // comparaison tolérante (majuscules, espaces doubles / insécables)
+    var nk = function (v) { return String(v || "").replace(/[\s\u00a0]+/g, " ").trim().toLowerCase(); };
+    var match = null;
+    p.all.forEach(function (r) { if (!match && nk(r.ctx) === nk(ctx)) match = r.ctx; });
+    if (ctx && !match) {
+      // Ne JAMAIS afficher un autre combo à la place : on prévient clairement.
+      if (window.console) console.warn("[Wavest] Combo introuvable dans Combos stats :", p.pattern + " | " + ctx);
+      showNoCtx(p, ctx);
+      return;
+    }
+    setTimeout(function () { openComboModal(p, match); }, 450);
+  }
+
+  function showNoCtx(p, ctx) {
+    var old = document.getElementById("perfNoCtx");
+    if (old) old.remove();
+    var el = document.createElement("div");
+    el.id = "perfNoCtx";
+    el.className = "perf-noctx";
+    el.setAttribute("role", "status");
+    el.innerHTML =
+      '<strong>' + esc(p.pattern) + (ctx ? ' → ' + esc(ctx) : '') + '</strong>' +
+      '<p>' + t("noCtx") + '</p>' +
+      '<div class="perf-noctx-actions">' +
+        (p.missing ? '' : '<button type="button" data-noctx="open">' + t("noCtxBtn") + '</button>') +
+        '<button type="button" data-noctx="close" aria-label="OK">OK</button>' +
+      '</div>';
+    document.body.appendChild(el);
+    el.addEventListener("click", function (e) {
+      var a = e.target.getAttribute && e.target.getAttribute("data-noctx");
+      if (!a) return;
+      el.remove();
+      if (a === "open") openComboModal(p, null);
+    });
   }
 
   // Re-dessine après le changement de langue (i18n.js met à jour <html lang>)

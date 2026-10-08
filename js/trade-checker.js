@@ -1183,7 +1183,8 @@ function loadLiveStats() {
     .then((text) => {
       const live = {};
       parseCSV(text).slice(1).forEach((r) => {
-        const combo = (r[0] || "").trim();
+        // espaces doubles / insécables normalisés : "EDGE |  M without bos" = "EDGE | M without bos"
+        const combo = (r[0] || "").replace(/[\s\u00a0]+/g, " ").trim();
         if (combo.indexOf(" | ") < 0) return;
         live[combo] = {
           nbTrades: csvNum(r[1]),
