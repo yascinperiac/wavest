@@ -3,8 +3,10 @@
    Au clic : pop-up avec la vidéo (youtube-nocookie = pas de cookie YouTube avant lecture). */
 (function () {
   "use strict";
-  var btn = document.querySelector(".hero-play[data-yt]");
-  if (!btn) return;
+  // Tous les boutons vidéo de la page (hero + "Ce que tu reçois")
+  var btns = document.querySelectorAll("[data-yt]");
+  if (!btns.length) return;
+  var btn = null;
 
   var LB = null, last = null;
   function lang() {
@@ -13,7 +15,8 @@
   }
   function closeLabel() { return lang() === "en" ? "Close the video" : "Fermer la vidéo"; }
 
-  function open() {
+  function open(e) {
+    btn = e.currentTarget;
     var id = btn.getAttribute("data-yt");
     last = document.activeElement;
     if (!LB) {
@@ -34,8 +37,9 @@
     document.documentElement.classList.add("tw-lb-open");
     requestAnimationFrame(function () { LB.classList.add("is-open"); });
     var c = LB.querySelector("[data-lbclose]"); if (c) c.focus();
-    try { if (typeof window.gtag === "function") window.gtag("event", "hero_video_play", { video_id: id }); } catch (e) {}
-    try { if (typeof window.clarity === "function") window.clarity("event", "hero_video_play"); } catch (e) {}
+    var ev = btn.getAttribute("data-yt-event") || "hero_video_play";
+    try { if (typeof window.gtag === "function") window.gtag("event", ev, { video_id: id }); } catch (e) {}
+    try { if (typeof window.clarity === "function") window.clarity("event", ev); } catch (e) {}
   }
   function close() {
     if (!LB || !LB.classList.contains("is-open")) return;
@@ -46,6 +50,6 @@
     if (last && last.focus) last.focus();
   }
 
-  btn.addEventListener("click", open);
+  Array.prototype.forEach.call(btns, function (b) { b.addEventListener("click", open); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
 })();

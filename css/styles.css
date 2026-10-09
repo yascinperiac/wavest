@@ -1953,3 +1953,14 @@ html.tw-lb-open{overflow:hidden}
 .hero-video-close{position:absolute; top:10px; right:10px; z-index:2; background:rgba(0,0,0,.55); border-color:rgba(255,255,255,.25); color:#fff}
 .hero-video-close:hover{background:rgba(0,0,0,.8)}
 @media (prefers-reduced-motion:reduce){ .hero-play-btn::before{animation:none} }
+
+/* ===== Visite guidée (vidéo "Ce que tu reçois") ===== */
+.tour-video{max-width:860px; margin:64px auto 20px; text-align:center}
+.tour-text{margin:8px auto 22px; max-width:560px; font-size:14.5px; line-height:1.6; color:var(--muted)}
+.tour-play{position:relative; display:block; width:100%; padding:0; border:0; background:#000; cursor:pointer; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow); aspect-ratio:16/9}
+.tour-play img{display:block; width:100%; height:100%; object-fit:cover; transition:transform .5s ease}
+.tour-play:hover img{transform:scale(1.015)}
+.tour-play:focus-visible{outline:var(--focus); outline-offset:4px}
+/* le ▶ en bas à droite : l'image contient déjà le titre et le bouton "Voir les offres" */
+.tour-play .tour-play-btn{left:auto; top:auto; right:18px; bottom:18px; margin:0}
+@media (max-width:640px){ .tour-video{margin:44px auto 12px} .tour-play .tour-play-btn{right:10px; bottom:10px; width:40px; height:40px} .tour-play .tour-play-btn svg{width:16px; height:16px} }

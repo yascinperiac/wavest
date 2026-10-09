@@ -102,6 +102,10 @@
     "fr": "« Yascin est un excellent professeur de trading, pédagogue, disponible et surtout très à l'écoute. (…) Je recommande fortement ! »",
     "en": "“Yascin is an excellent trading teacher: clear, available and above all a great listener. (…) Highly recommend!”"
   },
+  "tourEyebrow": { "fr": "Visite guidée", "en": "Guided tour" },
+  "tourTitle": { "fr": "Ce que tu reçois vraiment avec Wavest.", "en": "What you actually get with Wavest." },
+  "tourText": { "fr": "L'espace membre, les outils, le suivi et la communauté, en vidéo. Avant de te décider, regarde ce qu'il y a à l'intérieur.", "en": "The members' area, the tools, the follow-up and the community, on video. Before you decide, see what's inside." },
+  "tourAria": { "fr": "Regarder la visite guidée de l'espace membre", "en": "Watch the guided tour of the members' area" },
   "heroVideoCaption": { "fr": "▶ Regarde une analyse complète, du début à la fin", "en": "▶ Watch a full analysis, from start to finish" },
   "heroVideoAria": { "fr": "Regarder une analyse complète en vidéo", "en": "Watch a full analysis on video" },
   "heroVideoClose": { "fr": "Fermer la vidéo", "en": "Close the video" },
